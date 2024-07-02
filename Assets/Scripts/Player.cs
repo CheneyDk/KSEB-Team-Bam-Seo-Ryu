@@ -5,10 +5,10 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    // 플레이어 변수
-    // 모두 { get; }을 달아서 읽기 전용으로 변경
+    // Player Variances
+    // readonly.
     
-    // 플레이어 스탯
+    // Player Stats
     [Header("- Player")]
     public float playerMaxHp;
     public float playerCurHp { get; }
@@ -32,10 +32,9 @@ public class Player : MonoBehaviour
 
     public void playerMove(InputAction.CallbackContext context)
     {
-        if (context.started)
-        {
-            playerMoveVector = context.ReadValue<Vector2>();
-        }
+       
+        playerMoveVector = context.ReadValue<Vector2>();
+        
 
         if (context.canceled)
         {

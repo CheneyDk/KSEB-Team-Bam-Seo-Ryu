@@ -7,12 +7,12 @@
             "actions": [
                 {
                     "name": "WASD",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "3ec0c3ab-7967-4a9e-ab88-467bfd2ee8eb",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
