@@ -178,6 +178,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &502587861 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5955887904906186891, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
+  m_PrefabInstance: {fileID: 8766426790022767645}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &502587863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502587861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e542dee4722a96d408dda79dc744da1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponDamageRate: 0
+  weaponBulletSpeed: 0
+  muzzle: {fileID: 1984492731}
+  bullet: {fileID: 2809112993671874965, guid: 945e39b3b33adf9429e032e850a7e54f, type: 3}
+--- !u!114 &502587865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502587861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: ad0e8c16f7cc5784fb4a62fb8ce40784, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3ec0c3ab-7967-4a9e-ab88-467bfd2ee8eb
+    m_ActionName: playerMove/WASD[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 502587863}
+        m_TargetAssemblyTypeName: Weapon, Assembly-CSharp
+        m_MethodName: Fire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 027c5c04-48e2-4da6-8b62-60483060664e
+    m_ActionName: playerMove/Fire[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 55688457-b630-4d0f-9dee-e283f8c23f6d
+    m_ActionName: playerMove/Sprint[/Keyboard/space]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: playerMove
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &996812866
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,6 +503,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1984492731 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6251437387262647915, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
+  m_PrefabInstance: {fileID: 8766426790022767645}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2081913072
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,7 +814,7 @@ PrefabInstance:
     - target: {fileID: 404201160916649962, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
       propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 11500000, guid: 75491408f29ca9f4ab4882f9700df418, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 404201160916649962, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -784,6 +864,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8766426790022767655}
     - target: {fileID: 6260638533341849288, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 502587861}
+    - target: {fileID: 6260638533341849288, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
       propertyPath: playerAccelerate
       value: 3
       objectReference: {fileID: 0}
@@ -830,7 +914,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5955887904906186891, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 502587863}
+    - targetCorrespondingSourceObject: {fileID: 5955887904906186891, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 502587865}
   m_SourcePrefab: {fileID: 100100000, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
 --- !u!114 &8766426790022767648 stripped
 MonoBehaviour:

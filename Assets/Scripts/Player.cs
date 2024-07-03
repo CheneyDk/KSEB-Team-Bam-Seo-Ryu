@@ -32,11 +32,14 @@ public class Player : MonoBehaviour
     // GameObjects
     [Header("- GameObjects")]
     public Transform playerArm;
+    public GameObject weapon;
 
 
     private void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
+        // weapon init need;
+
     }
 
     private void Update()
