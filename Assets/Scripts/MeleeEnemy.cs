@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeEnemy : MonoBehaviour
+public class MeleeEnemy : Enemy
 {
     [SerializeField]
     private float MeleeEnemyMaxHp = 20f;
@@ -23,6 +23,11 @@ public class MeleeEnemy : MonoBehaviour
 
     private void Update()
     {
+        EnemyMovement();
+    }
+
+    public override void EnemyMovement()
+    {
         if (player != null)
         {
             Vector2 direction = (player.position - transform.position).normalized;
@@ -30,7 +35,7 @@ public class MeleeEnemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    public override void TakeDamage(float damage)
     {
         MeleeEnemyCurtHP -= damage;
         if (MeleeEnemyCurtHP <= 0)
