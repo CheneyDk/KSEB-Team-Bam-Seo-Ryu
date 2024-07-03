@@ -146,4 +146,4 @@ MonoBehaviour:
   MeleeEnemyMaxHp: 20
   MeleeEnemyCurtHP: 0
   MeleeEnemyAtk: 5
-  MeleeEnemyMoveSpeed: 10
+  MeleeEnemyMoveSpeed: 5

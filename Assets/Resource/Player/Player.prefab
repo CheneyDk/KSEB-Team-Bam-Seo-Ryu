@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMaxHp: 100
-  playerMoveSpeed: 5
+  playerMoveSpeed: 10
 --- !u!114 &404201160916649962
 MonoBehaviour:
   m_ObjectHideFlags: 0

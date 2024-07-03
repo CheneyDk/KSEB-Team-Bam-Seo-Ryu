@@ -122,6 +122,57 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &65655186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 65655188}
+  - component: {fileID: 65655187}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &65655187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65655186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8d063ccd5d43f45accab8abe354ea7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MeleeEnemyPrefab: {fileID: 4256284729351784842, guid: ba08024792f69f84ea79b19600248c7d, type: 3}
+  MeleeEnemySpawnRange: 10
+  MeleeEnemySpawnRate: 1
+  MeleeEnemySpawnStartTime: 1
+  noSpawnRange: 2
+  MeleeEnemySpawnNumber: 3
+  MeleeEnemySpawnGroupRadius: 1
+--- !u!4 &65655188
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65655186}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.524078, y: 0.6766411, z: -0.0486095}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &996812866
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,3 +836,4 @@ SceneRoots:
   - {fileID: 996812868}
   - {fileID: 1863907881}
   - {fileID: 8766426790022767645}
+  - {fileID: 65655188}
