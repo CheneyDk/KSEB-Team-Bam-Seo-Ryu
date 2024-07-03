@@ -1,19 +1,19 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class PlayerBullet : MonoBehaviour
 {
     // bullet stats / initialize needed
     public float bulletDamage = 2f;
     public float bulletSpeed = 5f;
     
     // direction
-    public Vector2 bulletVector = Vector2.up;
+    private Vector2 bulletVector = Vector2.up;
 
     // delete
     private float timeCounter = 0f;
-    private const float bulletMaxTime = 5f;
+    private const float bulletLifeTime = 5f;
 
     // Init , Start
 
@@ -23,19 +23,18 @@ public class Bullet : MonoBehaviour
         transform.Translate(bulletVector * (bulletSpeed * Time.deltaTime));
 
         timeCounter += Time.deltaTime;
-        if (timeCounter > bulletMaxTime)
+        if (timeCounter > bulletLifeTime)
         {
             Destroy(gameObject);
         }
     }
-    
-    // Damage - fixflag - YH still on Task
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Enemy"))
-        {
 
-            collision.GetComponent<MeleeEnemy>().TakeDamage(bulletDamage);
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Enemy"))
+        {
+            var enemy = collision.collider.GetComponent<Enemy>();
+            enemy.TakeDamage(bulletDamage);
             Destroy(gameObject);
         }
     }
