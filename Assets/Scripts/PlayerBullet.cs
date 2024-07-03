@@ -9,7 +9,7 @@ public class PlayerBullet : MonoBehaviour
     public float bulletSpeed = 5f;
     
     // direction
-    private Vector2 bulletVector = Vector2.up;
+    private Vector2 bulletVector = Vector2.right;
 
     // delete
     private float timeCounter = 0f;
