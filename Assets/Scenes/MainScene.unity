@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &65655187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Follow: {fileID: 8766426790022767652}
   m_Lens:
     FieldOfView: 104.90715
-    OrthographicSize: 5
+    OrthographicSize: 15
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -484,8 +484,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 104.90715
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -763,6 +763,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6260638533341849288, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
+      propertyPath: playerArm
+      value: 
+      objectReference: {fileID: 8766426790022767646}
+    - target: {fileID: 6260638533341849288, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
       propertyPath: playerMoveSpeed
       value: 10
       objectReference: {fileID: 0}
@@ -811,6 +815,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
+--- !u!4 &8766426790022767646 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6251437387262647915, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
+  m_PrefabInstance: {fileID: 8766426790022767645}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8766426790022767648 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6260638533341849288, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}

@@ -19,27 +19,44 @@ public class Player : MonoBehaviour
     public float playerCritDmg { get; }
     private float playerInvincibleTime;
 
-    // 플레이어 상태 (방향 등)
+    // Player Directions
     private Vector2 playerMoveVector;
-    private Vector2 playerDir;
+
+    // GameObjects
+    public Transform playerArm;
+
 
     private void Update()
     {
+        // playerMove
         var player2DDir = playerMoveVector;
         player2DDir.Normalize();
         transform.Translate(player2DDir * playerMoveSpeed * Time.deltaTime, Space.World);
+
+        // playerArmMove
+        playerArmRotate();
     }
 
-    public void playerMove(InputAction.CallbackContext context)
+    private void playerMove(InputAction.CallbackContext context)
     {
-       
         playerMoveVector = context.ReadValue<Vector2>();
         
-
         if (context.canceled)
         {
             playerMoveVector = Vector2.zero;
         }
     }
 
+    private void playerArmRotate()
+    {
+        // 마우스 위치
+        Vector2 mousePosition = Mouse.current.position.ReadValue();
+        Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane)); ;
+        
+
+        Vector3 direction = worldMousePosition - playerArm.transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        playerArm.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+    }
 }
