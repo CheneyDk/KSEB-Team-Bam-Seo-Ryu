@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    private SpriteRenderer sprite;
+
     // Player Variances
     // readonly.
     
@@ -17,14 +19,25 @@ public class Player : MonoBehaviour
     public float playerMoveSpeed;
     public float playerCritPer { get; }
     public float playerCritDmg { get; }
-    private float playerInvincibleTime;
+    private float invincibleTime = 1f;
+    public float playerAccelerate = 3f;
+
 
     // Player Directions
     private Vector2 playerMoveVector;
 
+    // flags
+    private bool isInvincible = false;
+
     // GameObjects
+    [Header("- GameObjects")]
     public Transform playerArm;
 
+
+    private void Awake()
+    {
+        sprite = GetComponent<SpriteRenderer>();
+    }
 
     private void Update()
     {
@@ -35,9 +48,11 @@ public class Player : MonoBehaviour
 
         // playerArmMove
         playerArmRotate();
+
+
     }
 
-    private void playerMove(InputAction.CallbackContext context)
+    public void playerMove(InputAction.CallbackContext context)
     {
         playerMoveVector = context.ReadValue<Vector2>();
         
@@ -45,6 +60,34 @@ public class Player : MonoBehaviour
         {
             playerMoveVector = Vector2.zero;
         }
+    }
+
+    public void Sprint(InputAction.CallbackContext context)
+    {
+        // while stop state, player can't rollin'
+        if (playerMoveVector == Vector2.zero) return;
+
+        if (!context.started) return;
+
+        Debug.Log("sprint");
+
+        // temp sprint visual effects
+        var tempColor = sprite.color;
+        sprite.color = Color.red;
+        isInvincible = true;
+        playerMoveSpeed *= playerAccelerate;
+        StartCoroutine(SprintTimer(tempColor));
+    }
+
+
+    private IEnumerator SprintTimer(Color color)
+    {
+        yield return new WaitForSeconds(invincibleTime);
+        isInvincible = false;
+        playerMoveSpeed /= playerAccelerate;
+
+        // flag -- YH: for test
+        sprite.color = color;
     }
 
     private void playerArmRotate()
@@ -59,4 +102,7 @@ public class Player : MonoBehaviour
 
         playerArm.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
     }
+
+    // GetDamage
+    // invincibleTimer
 }
