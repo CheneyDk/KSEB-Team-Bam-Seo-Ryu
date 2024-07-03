@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6828638612726947353}
   - component: {fileID: 5906367373118103066}
   m_Layer: 0
-  m_Name: Circle (1)
+  m_Name: Reye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,6 +223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMaxHp: 100
   playerMoveSpeed: 10
+  playerArm: {fileID: 6251437387262647915}
 --- !u!114 &404201160916649962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,7 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: ad0e8c16f7cc5784fb4a62fb8ce40784, type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -247,7 +248,23 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6260638533341849288}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: playerMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3ec0c3ab-7967-4a9e-ab88-467bfd2ee8eb
+    m_ActionName: playerMove/WASD[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: playerMove
@@ -296,7 +313,7 @@ GameObject:
   - component: {fileID: 5726631777974254321}
   - component: {fileID: 2948646887720673855}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Leye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
