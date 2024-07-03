@@ -4,43 +4,56 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private bool GameOver = false;
+
     public GameObject MeleeEnemyPrefab;
-    public float MeleeEnemySpawnRange = 10f;
-    public float MeleeEnemySpawnRate = 1f;
-    public float MeleeEnemySpawnStartTime = 1f;
-    public float noSpawnRange = 2f;
-    public int MeleeEnemySpawnNumber = 3;
-    public float MeleeEnemySpawnGroupRadius = 1f;
+    public GameObject RangeEnemyPrefab;
+
+    [Header("Melee Enemy")]
+    public float MESpawnRate = 1f;
+    public float MESpawnStartTime = 1f;
+    public int MESpawnNumber = 3;
+    public float MESpawnGroupRadius = 1f;
+
+    [Header("Range Enemy")]
+    public float RESpawnRate = 1f;
+    public float RESpawnStartTime = 1f;
+    public int RESpawnNumber = 3;
+    public float RESpawnGroupRadius = 1f;
+
+    [Header("Spawn Range")]
+    public float noSpawnRange = 5f;
+    public float EnemySpawnRange = 10f;
 
     private void Start()
     {
-        InvokeRepeating(nameof(MeleeEnemiesSpawn), MeleeEnemySpawnStartTime, MeleeEnemySpawnRate);
+        StartCoroutine(EnemiesSpawn(MeleeEnemyPrefab, MESpawnStartTime, MESpawnRate, MESpawnNumber, MESpawnGroupRadius));
+        StartCoroutine(EnemiesSpawn(RangeEnemyPrefab, RESpawnStartTime, RESpawnRate, RESpawnNumber, RESpawnGroupRadius));
     }
-
-    //private void SpawnEnemy()
-    //{
-    //    Vector2 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
-    //    Vector2 spawnPosition = playerPosition + (Vector2)Random.insideUnitCircle * MeleeEnemySpawnRange;
-    //    Instantiate(MeleeEnemyPrefab, spawnPosition, Quaternion.identity);
-    //}
 
 
     // 적 랜덤 위치 생성
-    private void MeleeEnemiesSpawn()
+    private IEnumerator EnemiesSpawn(GameObject EnemyPrefab, float SpawnTime, float SpawnRate, int SpawnNumber, float SpawnGroupRadius)
     {
-        Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
-        Vector3 spawnPosition;
-
-        for (int i = 0; i < MeleeEnemySpawnNumber; i++)
+        yield return new WaitForSeconds(SpawnTime);
+        while (!GameOver)
         {
-            do
-            {
-                spawnPosition = playerPosition + (Vector3)Random.insideUnitCircle * MeleeEnemySpawnRange;
-            }
-            while (Vector3.Distance(spawnPosition, playerPosition) < noSpawnRange);
+            Vector2 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+            Vector2 spawnPosition;
 
-            Vector3 groupOffset = Random.insideUnitCircle * MeleeEnemySpawnGroupRadius;
-            Instantiate(MeleeEnemyPrefab, spawnPosition + groupOffset, Quaternion.identity);
+            for (int i = 0; i < SpawnNumber; i++)
+            {
+                do
+                {
+                    spawnPosition = playerPosition + (Vector2)Random.insideUnitCircle * EnemySpawnRange;
+                }
+                while (Vector2.Distance(spawnPosition, playerPosition) < noSpawnRange);
+
+                Vector2 groupOffset = Random.insideUnitCircle * SpawnGroupRadius;
+                Instantiate(EnemyPrefab, spawnPosition + groupOffset, Quaternion.identity);
+            }
+            yield return new WaitForSeconds(SpawnRate);
         }
+
     }
 }
