@@ -11,10 +11,11 @@ public class GameManager : MonoBehaviour
     // UI
     [Header("- UI")]
     public GameObject GameoverUI;
-    // esc menua
+    public GameObject PauseUI;
 
     [Header("- System")]
     // public GameObject WaveManager;
+    private float timeScaleProduct = 1f;
 
     // flags
     private bool isPlayerAlive;
@@ -25,6 +26,13 @@ public class GameManager : MonoBehaviour
         Instance = this; // singleton?
         isPlayerAlive = true;
         GameoverUI.SetActive(false);
+        PauseUI.SetActive(false);
+        // time scale = 1 init need // YH
+    }
+
+    private void Update()
+    {
+        Time.timeScale = timeScaleProduct;
     }
 
     public void SetPlayerDead()
@@ -38,5 +46,29 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-    
+
+    public void PauseGame()
+    {
+        // 1. pause menu on
+        PauseUI.gameObject.SetActive(true);
+
+        // 2. TimeScale 0
+        timeScaleProduct = 0f;
+
+        // 3. acition map toggle
+
+    }
+
+    public void ContinueGame()
+    {
+        // 1. pause menu off
+        PauseUI.gameObject.SetActive(false);
+
+        // 2. TimeScale 1
+        timeScaleProduct = 0f;
+
+        // 3. acition map toggle
+
+    }
+
 }

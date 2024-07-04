@@ -53,6 +53,15 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EscPause"",
+                    ""type"": ""Button"",
+                    ""id"": ""28990204-c331-40c9-8427-f6610637ea11"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +141,45 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""38f23c94-aecd-491c-9e2b-57064f8aad4c"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EscPause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UiControl"",
+            ""id"": ""7c216aae-b570-45f7-8661-f6cfef9c0b01"",
+            ""actions"": [
+                {
+                    ""name"": ""EscContinue"",
+                    ""type"": ""Button"",
+                    ""id"": ""e28728ac-bb2f-4bed-b98e-edb2a175e6b3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b2e9ca75-b52f-4c87-aaf0-2fe2995ac771"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EscContinue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -143,6 +191,10 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         m_playerMove_WASD = m_playerMove.FindAction("WASD", throwIfNotFound: true);
         m_playerMove_Fire = m_playerMove.FindAction("Fire", throwIfNotFound: true);
         m_playerMove_Sprint = m_playerMove.FindAction("Sprint", throwIfNotFound: true);
+        m_playerMove_EscPause = m_playerMove.FindAction("EscPause", throwIfNotFound: true);
+        // UiControl
+        m_UiControl = asset.FindActionMap("UiControl", throwIfNotFound: true);
+        m_UiControl_EscContinue = m_UiControl.FindAction("EscContinue", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -207,6 +259,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_playerMove_WASD;
     private readonly InputAction m_playerMove_Fire;
     private readonly InputAction m_playerMove_Sprint;
+    private readonly InputAction m_playerMove_EscPause;
     public struct PlayerMoveActions
     {
         private @PlayerControl m_Wrapper;
@@ -214,6 +267,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         public InputAction @WASD => m_Wrapper.m_playerMove_WASD;
         public InputAction @Fire => m_Wrapper.m_playerMove_Fire;
         public InputAction @Sprint => m_Wrapper.m_playerMove_Sprint;
+        public InputAction @EscPause => m_Wrapper.m_playerMove_EscPause;
         public InputActionMap Get() { return m_Wrapper.m_playerMove; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -232,6 +286,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
+            @EscPause.started += instance.OnEscPause;
+            @EscPause.performed += instance.OnEscPause;
+            @EscPause.canceled += instance.OnEscPause;
         }
 
         private void UnregisterCallbacks(IPlayerMoveActions instance)
@@ -245,6 +302,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
+            @EscPause.started -= instance.OnEscPause;
+            @EscPause.performed -= instance.OnEscPause;
+            @EscPause.canceled -= instance.OnEscPause;
         }
 
         public void RemoveCallbacks(IPlayerMoveActions instance)
@@ -262,10 +322,61 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         }
     }
     public PlayerMoveActions @playerMove => new PlayerMoveActions(this);
+
+    // UiControl
+    private readonly InputActionMap m_UiControl;
+    private List<IUiControlActions> m_UiControlActionsCallbackInterfaces = new List<IUiControlActions>();
+    private readonly InputAction m_UiControl_EscContinue;
+    public struct UiControlActions
+    {
+        private @PlayerControl m_Wrapper;
+        public UiControlActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
+        public InputAction @EscContinue => m_Wrapper.m_UiControl_EscContinue;
+        public InputActionMap Get() { return m_Wrapper.m_UiControl; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UiControlActions set) { return set.Get(); }
+        public void AddCallbacks(IUiControlActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UiControlActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UiControlActionsCallbackInterfaces.Add(instance);
+            @EscContinue.started += instance.OnEscContinue;
+            @EscContinue.performed += instance.OnEscContinue;
+            @EscContinue.canceled += instance.OnEscContinue;
+        }
+
+        private void UnregisterCallbacks(IUiControlActions instance)
+        {
+            @EscContinue.started -= instance.OnEscContinue;
+            @EscContinue.performed -= instance.OnEscContinue;
+            @EscContinue.canceled -= instance.OnEscContinue;
+        }
+
+        public void RemoveCallbacks(IUiControlActions instance)
+        {
+            if (m_Wrapper.m_UiControlActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUiControlActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UiControlActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UiControlActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UiControlActions @UiControl => new UiControlActions(this);
     public interface IPlayerMoveActions
     {
         void OnWASD(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnEscPause(InputAction.CallbackContext context);
+    }
+    public interface IUiControlActions
+    {
+        void OnEscContinue(InputAction.CallbackContext context);
     }
 }
