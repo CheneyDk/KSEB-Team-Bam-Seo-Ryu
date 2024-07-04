@@ -9,9 +9,11 @@ public class RangeEnemy : Enemy
     [SerializeField]
     private float RangeEnemyCurtHP;
     [SerializeField]
-    private float RangeEnemyAtk = 5f;
+    private float RangeEnemyAtk = 3f;
     [SerializeField]
     private float RangeEnemyMoveSpeed = 7f;
+
+
     private float playerEnemyRange = 5f;
     private float attackCooldown = 1f;
     private float bulletSpeed = 5f;

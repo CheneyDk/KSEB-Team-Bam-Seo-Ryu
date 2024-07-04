@@ -37,7 +37,7 @@ public class MeleeEnemy : Enemy
 
     public override void TakeDamage(float damage)
     {
-        MeleeEnemyCurtHP -= damage;
+        MeleeEnemyCurtHP -= damage; 
         if (MeleeEnemyCurtHP <= 0)
         {
             Destroy(gameObject);
