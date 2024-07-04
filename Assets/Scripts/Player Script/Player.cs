@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     public float sprintTime = 1f; // need private after balancing
     public float playerAccelerate = 3f;
 
-    private WaitForSeconds invincibleWait = new WaitForSeconds(1f);
+    private WaitForSeconds invincibleWait = new WaitForSeconds(0.1f);
 
 
     // Player Directions

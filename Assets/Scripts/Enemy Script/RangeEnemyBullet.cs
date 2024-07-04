@@ -6,11 +6,12 @@ public class RangeEnemyBullet : MonoBehaviour
 {
     public float bulletDamage = 5f;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            var enemy = collision.collider.GetComponent<Player>();
+            var enemy = collision.GetComponent<Player>();
             enemy.TakeDamage(bulletDamage);
             Destroy(gameObject);
         }

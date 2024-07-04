@@ -222,8 +222,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMaxHp: 100
+  playerCurHp: 0
   playerMoveSpeed: 10
+  sprintTime: 1
+  playerAccelerate: 3
   playerArm: {fileID: 6251437387262647915}
+  weapon: {fileID: 0}
 --- !u!114 &404201160916649962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,6 +269,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3ec0c3ab-7967-4a9e-ab88-467bfd2ee8eb
     m_ActionName: playerMove/WASD[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 027c5c04-48e2-4da6-8b62-60483060664e
+    m_ActionName: playerMove/Fire[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 55688457-b630-4d0f-9dee-e283f8c23f6d
+    m_ActionName: playerMove/Sprint[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: playerMove
