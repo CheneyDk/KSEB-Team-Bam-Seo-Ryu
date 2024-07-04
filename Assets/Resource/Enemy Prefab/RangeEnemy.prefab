@@ -178,4 +178,4 @@ MonoBehaviour:
   RangeEnemyCurtHP: 0
   RangeEnemyAtk: 5
   RangeEnemyMoveSpeed: 7
-  bulletPrefab: {fileID: 1705467497018486139, guid: cf48486fe1ab76f4aabf487bcc29d642, type: 3}
+  bulletPrefab: {fileID: 4296012918434823456, guid: efb09630e56b75d4d9ed06da5e657f34, type: 3}

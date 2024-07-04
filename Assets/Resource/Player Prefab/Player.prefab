@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 8100203599619735773}
   - component: {fileID: 4308183405267347774}
   - component: {fileID: 1157829956514501359}
+  - component: {fileID: 3038370426694825143}
   - component: {fileID: 6260638533341849288}
   - component: {fileID: 404201160916649962}
   m_Layer: 0
@@ -203,12 +204,39 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!50 &3038370426694825143
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944808390979848710}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!114 &6260638533341849288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,10 +252,10 @@ MonoBehaviour:
   playerMaxHp: 100
   playerCurHp: 0
   playerMoveSpeed: 10
-  sprintTime: 1
-  playerAccelerate: 3
+  sprintTime: 0.5
+  playerAccelerate: 2.5
   playerArm: {fileID: 6251437387262647915}
-  weapon: {fileID: 0}
+  weapon: {fileID: 5955887904906186891}
 --- !u!114 &404201160916649962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,9 +302,21 @@ MonoBehaviour:
     m_ActionId: 027c5c04-48e2-4da6-8b62-60483060664e
     m_ActionName: playerMove/Fire[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6260638533341849288}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: Sprint
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 55688457-b630-4d0f-9dee-e283f8c23f6d
-    m_ActionName: playerMove/Sprint[/Keyboard/space]
+    m_ActionName: playerMove/Rolling[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: playerMove
@@ -408,6 +448,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1468798476126147472}
   - component: {fileID: 8568103285300378644}
+  - component: {fileID: 2904590463656883913}
+  - component: {fileID: 5565588815690838870}
   m_Layer: 0
   m_Name: weapon
   m_TagString: Untagged
@@ -482,3 +524,73 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2904590463656883913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5955887904906186891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e542dee4722a96d408dda79dc744da1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponDamageRate: 0
+  weaponBulletSpeed: 0
+  muzzle: {fileID: 6251437387262647915}
+  bullet: {fileID: 2809112993671874965, guid: 945e39b3b33adf9429e032e850a7e54f, type: 3}
+--- !u!114 &5565588815690838870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5955887904906186891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: ad0e8c16f7cc5784fb4a62fb8ce40784, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3ec0c3ab-7967-4a9e-ab88-467bfd2ee8eb
+    m_ActionName: playerMove/WASD[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2904590463656883913}
+        m_TargetAssemblyTypeName: Weapon, Assembly-CSharp
+        m_MethodName: Fire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 027c5c04-48e2-4da6-8b62-60483060664e
+    m_ActionName: playerMove/Fire[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 55688457-b630-4d0f-9dee-e283f8c23f6d
+    m_ActionName: playerMove/Sprint[/Keyboard/space]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: playerMove
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
