@@ -121,6 +121,7 @@ public class Player : MonoBehaviour
         {
             Destroy(gameObject); // player destroy
             gameObject.SetActive(false); // player obj disable
+            GameManager.Instance.SetPlayerDead();
             return; // safe return ; not to activate Coroutine
         }
 
