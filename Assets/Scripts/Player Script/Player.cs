@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
     public Transform playerArm;
     public GameObject weapon; // list needed
 
+    // Input System - YH 7/5 이어서 작업할 것
+    // public InputAction playerMove
+
     // upgrades
 
 
