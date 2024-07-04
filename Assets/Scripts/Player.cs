@@ -13,14 +13,17 @@ public class Player : MonoBehaviour
     // Player Stats
     [Header("- Player")]
     public float playerMaxHp;
-    public float playerCurHp { get; }
+    public float playerCurHp;
     public float playerAtk { get; }
     public float playerAtkSpeed { get; }
     public float playerMoveSpeed;
     public float playerCritPer { get; }
     public float playerCritDmg { get; }
-    private float invincibleTime = 1f;
+
+    public float sprintTime = 1f; // need private after balancing
     public float playerAccelerate = 3f;
+
+    private WaitForSeconds invincibleWait = new WaitForSeconds(1f);
 
 
     // Player Directions
@@ -38,6 +41,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
+        playerCurHp = playerMaxHp; // make current hp max
         // weapon init need;
 
     }
@@ -85,7 +89,7 @@ public class Player : MonoBehaviour
 
     private IEnumerator SprintTimer(Color color)
     {
-        yield return new WaitForSeconds(invincibleTime);
+        yield return new WaitForSeconds(sprintTime);
         isInvincible = false;
         playerMoveSpeed /= playerAccelerate;
 
@@ -106,6 +110,28 @@ public class Player : MonoBehaviour
         playerArm.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
     }
 
-    // GetDamage
-    // invincibleTimer
+    // playerTakeDamage
+    public void TakeDamage(float damage)
+    {
+        if (isInvincible) return; // if invincible -> do not take any damage
+
+        // game over: destroy
+        playerCurHp -= damage;
+        if (playerCurHp <= 0)
+        {
+            Destroy(gameObject); // player destroy
+            gameObject.SetActive(false); // player obj disable
+            return; // safe return ; not to activate Coroutine
+        }
+
+        // invincible Time
+        isInvincible = true;
+        StartCoroutine(invincibleTimer());
+    }
+    
+    private IEnumerator invincibleTimer()
+    {
+        yield return invincibleWait;
+        isInvincible = false;
+    }
 }
