@@ -11,7 +11,7 @@ public class RangeEnemyBullet : MonoBehaviour
         if (collision.collider.CompareTag("Player"))
         {
             var enemy = collision.collider.GetComponent<Player>();
-            //enemy.TakeDamage(bulletDamage);
+            enemy.TakeDamage(bulletDamage);
             Destroy(gameObject);
         }
     }
