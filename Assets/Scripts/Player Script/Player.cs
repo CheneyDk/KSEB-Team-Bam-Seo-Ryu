@@ -35,7 +35,9 @@ public class Player : MonoBehaviour
     // GameObjects
     [Header("- GameObjects")]
     public Transform playerArm;
-    public GameObject weapon;
+    public GameObject weapon; // list needed
+
+    // upgrades
 
 
     private void Awake()
