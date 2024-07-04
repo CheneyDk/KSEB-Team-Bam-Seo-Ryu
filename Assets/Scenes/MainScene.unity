@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &65655187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &158310856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1384,7 +1384,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1987470287}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a602fd176f0e89044a52416ed076bb93, type: 3}
   m_Name: 
@@ -1394,15 +1394,15 @@ MonoBehaviour:
   HeavyEnemyPrefab: {fileID: 3150408344018027885, guid: 66b84effa70df994bba48d0cbf7dba35, type: 3}
   MESpawnRate: 1
   MESpawnStartTime: 1
-  MESpawnNumber: 3
+  MESpawnNumber: 0
   MESpawnGroupRadius: 1
   RESpawnRate: 1
   RESpawnStartTime: 1
-  RESpawnNumber: 3
+  RESpawnNumber: 0
   RESpawnGroupRadius: 1
-  HESpawnRate: 1
+  HESpawnRate: 999
   HESpawnStartTime: 1
-  HESpawnNumber: 3
+  HESpawnNumber: 1
   HESpawnGroupRadius: 1
   noSpawnRange: 5
   EnemySpawnRange: 10

@@ -1,15 +1,16 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Analytics;
 
 public class EnemySpawner : MonoBehaviour
 {
     private bool GameOver = false;
+    private bool Spawning = false;
 
     public GameObject MeleeEnemyPrefab;
     public GameObject RangeEnemyPrefab;
     public GameObject HeavyEnemyPrefab;
+    public GameObject WarningPrefab;
 
     [Header("Melee Enemy")]
     public float MESpawnRate = 1f;
@@ -33,36 +34,60 @@ public class EnemySpawner : MonoBehaviour
     public float noSpawnRange = 5f;
     public float EnemySpawnRange = 10f;
 
-    private void Start()
+    [Header("Warning Settings")]
+    public float warningDuration = 1f;
+
+    public void StartSpawning()
     {
-        StartCoroutine(EnemiesSpawn(MeleeEnemyPrefab, MESpawnStartTime, MESpawnRate, MESpawnNumber, MESpawnGroupRadius));
-        StartCoroutine(EnemiesSpawn(RangeEnemyPrefab, RESpawnStartTime, RESpawnRate, RESpawnNumber, RESpawnGroupRadius));
-        StartCoroutine(EnemiesSpawn(HeavyEnemyPrefab, HESpawnStartTime, HESpawnRate, HESpawnNumber, HESpawnGroupRadius));
+        if (!Spawning)
+        {
+            Spawning = true;
+            StartCoroutine(EnemiesSpawn(MeleeEnemyPrefab, MESpawnStartTime, MESpawnRate, MESpawnNumber, MESpawnGroupRadius));
+            StartCoroutine(EnemiesSpawn(RangeEnemyPrefab, RESpawnStartTime, RESpawnRate, RESpawnNumber, RESpawnGroupRadius));
+            StartCoroutine(EnemiesSpawn(HeavyEnemyPrefab, HESpawnStartTime, HESpawnRate, HESpawnNumber, HESpawnGroupRadius));
+        }
     }
 
-
-    // Àû ·£´ý À§Ä¡ »ý¼º
-    private IEnumerator EnemiesSpawn(GameObject EnemyPrefab, float SpawnTime, float SpawnRate, int SpawnNumber, float SpawnGroupRadius)
+    public void StopSpawning()
     {
-        yield return new WaitForSeconds(SpawnTime);
-        while (!GameOver)
-        {
-            Vector2 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
-            Vector2 spawnPosition;
+        Spawning = false;
+        StopAllCoroutines();
+    }
 
-            for (int i = 0; i < SpawnNumber; i++)
+    private IEnumerator EnemiesSpawn(GameObject enemyPrefab, float spawnStartTime, float spawnRate, int spawnNumber, float spawnGroupRadius)
+    {
+        yield return new WaitForSeconds(spawnStartTime);
+        while (Spawning && !GameOver)
+        {
+            List<Vector2> spawnPositions = new List<Vector2>();
+            Vector2 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+
+            for (int i = 0; i < spawnNumber; i++)
             {
+                Vector2 spawnPosition;
                 do
                 {
                     spawnPosition = playerPosition + (Vector2)Random.insideUnitCircle * EnemySpawnRange;
                 }
                 while (Vector2.Distance(spawnPosition, playerPosition) < noSpawnRange);
 
-                Vector2 groupOffset = Random.insideUnitCircle * SpawnGroupRadius;
-                Instantiate(EnemyPrefab, spawnPosition + groupOffset, Quaternion.identity);
-            }
-            yield return new WaitForSeconds(SpawnRate);
-        }
+                Vector2 groupOffset = Random.insideUnitCircle * spawnGroupRadius;
+                Vector2 finalSpawnPosition = spawnPosition + groupOffset;
+                spawnPositions.Add(finalSpawnPosition);
 
+                // ê²½ê³  í‘œì‹œ ìƒì„±
+                GameObject warning = Instantiate(WarningPrefab, finalSpawnPosition, Quaternion.identity);
+                Destroy(warning, warningDuration);
+            }
+
+            yield return new WaitForSeconds(warningDuration);
+
+            foreach (var position in spawnPositions)
+            {
+                Instantiate(enemyPrefab, position, Quaternion.identity);
+            }
+
+            yield return new WaitForSeconds(spawnRate);
+        }
     }
 }
