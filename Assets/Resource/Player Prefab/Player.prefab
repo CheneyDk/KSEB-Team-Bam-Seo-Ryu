@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8100203599619735773}
   - component: {fileID: 4308183405267347774}
   - component: {fileID: 1157829956514501359}
-  - component: {fileID: 3038370426694825143}
+  - component: {fileID: 7508109349755562331}
   - component: {fileID: 6260638533341849288}
   - component: {fileID: 404201160916649962}
   m_Layer: 0
@@ -210,7 +210,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!50 &3038370426694825143
+--- !u!50 &7508109349755562331
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -449,7 +449,8 @@ GameObject:
   - component: {fileID: 1468798476126147472}
   - component: {fileID: 8568103285300378644}
   - component: {fileID: 2904590463656883913}
-  - component: {fileID: 5565588815690838870}
+  - component: {fileID: 3685845206780279772}
+  - component: {fileID: 2211498174244557219}
   m_Layer: 0
   m_Name: weapon
   m_TagString: Untagged
@@ -540,7 +541,23 @@ MonoBehaviour:
   weaponBulletSpeed: 0
   muzzle: {fileID: 6251437387262647915}
   bullet: {fileID: 2809112993671874965, guid: 945e39b3b33adf9429e032e850a7e54f, type: 3}
---- !u!114 &5565588815690838870
+--- !u!114 &3685845206780279772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5955887904906186891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e542dee4722a96d408dda79dc744da1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponDamageRate: 0
+  weaponBulletSpeed: 0
+  muzzle: {fileID: 6251437387262647915}
+  bullet: {fileID: 2809112993671874965, guid: 945e39b3b33adf9429e032e850a7e54f, type: 3}
+--- !u!114 &2211498174244557219
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -571,7 +588,7 @@ MonoBehaviour:
     m_ActionName: playerMove/WASD[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2904590463656883913}
+      - m_Target: {fileID: 3685845206780279772}
         m_TargetAssemblyTypeName: Weapon, Assembly-CSharp
         m_MethodName: Fire
         m_Mode: 0

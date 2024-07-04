@@ -9,6 +9,7 @@ public class EnemySpawner : MonoBehaviour
 
     public GameObject MeleeEnemyPrefab;
     public GameObject RangeEnemyPrefab;
+    public GameObject HeavyEnemyPrefab;
 
     [Header("Melee Enemy")]
     public float MESpawnRate = 1f;
@@ -22,6 +23,12 @@ public class EnemySpawner : MonoBehaviour
     public int RESpawnNumber = 3;
     public float RESpawnGroupRadius = 1f;
 
+    [Header("Heavy Enemy")]
+    public float HESpawnRate = 1f;
+    public float HESpawnStartTime = 1f;
+    public int HESpawnNumber = 3;
+    public float HESpawnGroupRadius = 1f;
+
     [Header("Spawn Range")]
     public float noSpawnRange = 5f;
     public float EnemySpawnRange = 10f;
@@ -30,6 +37,7 @@ public class EnemySpawner : MonoBehaviour
     {
         StartCoroutine(EnemiesSpawn(MeleeEnemyPrefab, MESpawnStartTime, MESpawnRate, MESpawnNumber, MESpawnGroupRadius));
         StartCoroutine(EnemiesSpawn(RangeEnemyPrefab, RESpawnStartTime, RESpawnRate, RESpawnNumber, RESpawnGroupRadius));
+        StartCoroutine(EnemiesSpawn(HeavyEnemyPrefab, HESpawnStartTime, HESpawnRate, HESpawnNumber, HESpawnGroupRadius));
     }
 
 

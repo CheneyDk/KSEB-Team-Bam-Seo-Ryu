@@ -12,27 +12,33 @@ public class HeavyEnemy : Enemy
     private float HeavyEnemyAtk = 10f;
     [SerializeField]
     private float HeavyEnemyMoveSpeed = 5f;
-    [SerializeField]
-    private float dashSpeed = 15f;
-    [SerializeField]
-    private float dashRange = 15f;
+
+    [Header("Dash")]
+    public float dashSpeed = 15f;
+    public float dashRange = 15f;
+    public float dashDelay = 1f;
 
 
     private float playerEnemyRange = 8f;
 
-    private bool canDash = true;
+    private bool canDash = false;
+
     private Transform player;
 
     private void Awake()
     {
         HeavyEnemyCurtHP = HeavyEnemyMaxHp;
+
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
 
     private void Update()
     {
-        EnemyMovement();
+        if (!canDash)
+        {
+            EnemyMovement();
+        }
     }
 
     public override void EnemyMovement()
@@ -42,15 +48,36 @@ public class HeavyEnemy : Enemy
             float distanceToPlayer = Vector2.Distance(transform.position, player.position);
             if (distanceToPlayer > playerEnemyRange)
             {
-                canDash = true;
-                DashAtk(dashSpeed, dashRange);
+                Vector2 direction = (player.position - transform.position).normalized;
+                transform.Translate(direction * HeavyEnemyMoveSpeed * Time.deltaTime);
+            }
+            else
+            {
+                StartCoroutine(Dash());
             }
         }
     }
 
-    private void DashAtk(float dashSpeed, float dashRange)
+    private IEnumerator Dash()
     {
+        canDash = true;
+        yield return new WaitForSeconds(dashDelay);
+        Vector3 dashTarget = player.position;
 
+        Vector3 startPosition = transform.position;
+        Vector3 direction = (dashTarget - startPosition).normalized;
+        float dashDistance = 0f;
+
+        while (dashDistance < dashRange)
+        {
+            float dashStep = dashSpeed * Time.deltaTime;
+            transform.Translate(direction * dashStep, Space.World);
+            dashDistance += dashStep;
+            yield return null;
+        }
+
+        canDash = false;
+        EnemyMovement();
     }
 
     public override void TakeDamage(float damage)
@@ -59,6 +86,15 @@ public class HeavyEnemy : Enemy
         if (HeavyEnemyCurtHP <= 0)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            var player = collision.GetComponent<Player>();
+            player.TakeDamage(HeavyEnemyAtk);
         }
     }
 }
