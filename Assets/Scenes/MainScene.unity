@@ -1657,7 +1657,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 429567121}
   m_CullTransparentMesh: 1
-=======
 --- !u!1 &502587861 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5955887904906186891, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
@@ -2648,7 +2647,6 @@ Transform:
   - {fileID: 2091528954}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-=======
 --- !u!1 &1027488518
 GameObject:
   m_ObjectHideFlags: 0
@@ -5217,7 +5215,6 @@ GameObject:
   - component: {fileID: 1987470288}
   m_Layer: 0
   m_Name: WaveManager
-=======
 --- !u!1 &2030385428
 GameObject:
   m_ObjectHideFlags: 0
@@ -5237,7 +5234,6 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!114 &1987470288
-=======
 --- !u!224 &2030385429
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5291,7 +5287,6 @@ MonoBehaviour:
   EnemySpawnRange: 10
 --- !u!4 &1987470289
 Transform:
-=======
   m_GameObject: {fileID: 2030385428}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -5331,7 +5326,6 @@ CanvasRenderer:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-=======
   m_GameObject: {fileID: 2030385428}
   m_CullTransparentMesh: 1
 --- !u!1 &2057391295
@@ -5856,7 +5850,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-=======
     - target: {fileID: 404201160916649962, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
       propertyPath: m_DefaultActionMap
       value: 0ce76398-f43c-4f6d-9d8e-24334aea2b73
