@@ -57,7 +57,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""EscPause"",
                     ""type"": ""Button"",
-                    ""id"": ""28990204-c331-40c9-8427-f6610637ea11"",
+                    ""id"": ""09e42433-5f7a-48c7-b79a-de2c72600009"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -144,7 +144,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""38f23c94-aecd-491c-9e2b-57064f8aad4c"",
+                    ""id"": ""164d8a6f-39cd-4f13-9702-c7b52c80a313"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",

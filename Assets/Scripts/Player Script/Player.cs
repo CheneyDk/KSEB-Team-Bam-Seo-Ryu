@@ -37,8 +37,9 @@ public class Player : MonoBehaviour
     public Transform playerArm;
     public GameObject weapon; // list needed
 
-    // Input System - YH 7/5 이어서 작업할 것
-    // public InputAction playerMove
+    // Input System
+    private PlayerInput playerInput;
+    private PlayerInput weaponInput;
 
     // upgrades
 
@@ -49,6 +50,9 @@ public class Player : MonoBehaviour
         playerCurHp = playerMaxHp; // make current hp max
         // weapon init need;
 
+        // input system init
+        playerInput = GetComponent<PlayerInput>();
+        weaponInput = weapon.GetComponent<PlayerInput>();
     }
 
     private void Update()
@@ -60,10 +64,9 @@ public class Player : MonoBehaviour
 
         // playerArmMove
         playerArmRotate();
-
-
     }
 
+    // Input system Funcs.
     public void playerMove(InputAction.CallbackContext context)
     {
         playerMoveVector = context.ReadValue<Vector2>();
@@ -91,6 +94,26 @@ public class Player : MonoBehaviour
         StartCoroutine(SprintTimer(tempColor));
     }
 
+
+    // open pause window
+    public void OnEscEnter(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            GameManager.Instance.PauseGame();
+            SwitchToUIControl();
+        }
+    }
+
+    // close pause window
+    public void OnEscExit(InputAction.CallbackContext context)
+    {
+        if (context.canceled && this.enabled == true)
+        {
+            GameManager.Instance.ContinueGame();
+            SwitchToPlayerControl();
+        }
+    }
 
     private IEnumerator SprintTimer(Color color)
     {
@@ -140,4 +163,17 @@ public class Player : MonoBehaviour
         yield return invincibleWait;
         isInvincible = false;
     }
+
+    private void SwitchToPlayerControl()
+    {
+        playerInput.SwitchCurrentActionMap("playerMove");
+        weaponInput.SwitchCurrentActionMap("playerMove");
+    }
+
+    private void SwitchToUIControl()
+    {
+        playerInput.SwitchCurrentActionMap("UIControl");
+        weaponInput.SwitchCurrentActionMap("UIControl");
+    }
+
 }

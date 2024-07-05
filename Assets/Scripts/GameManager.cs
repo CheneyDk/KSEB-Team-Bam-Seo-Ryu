@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -18,16 +19,20 @@ public class GameManager : MonoBehaviour
     private float timeScaleProduct = 1f;
 
     // flags
-    private bool isPlayerAlive;
+    private bool isPlayerAlive; // still not used
 
+    
 
     private void Awake()
     {
-        Instance = this; // singleton?
+        Instance = this; // singleton
+
         isPlayerAlive = true;
         GameoverUI.SetActive(false);
         PauseUI.SetActive(false);
-        // time scale = 1 init need // YH
+        Time.timeScale = 1f; // init
+
+        
     }
 
     private void Update()
@@ -55,7 +60,7 @@ public class GameManager : MonoBehaviour
         // 2. TimeScale 0
         timeScaleProduct = 0f;
 
-        // 3. acition map toggle
+        // 3. acition map toggle -> before call this func
 
     }
 
@@ -65,10 +70,8 @@ public class GameManager : MonoBehaviour
         PauseUI.gameObject.SetActive(false);
 
         // 2. TimeScale 1
-        timeScaleProduct = 0f;
-
-        // 3. acition map toggle
-
+        timeScaleProduct = 1f;
     }
 
+    
 }
