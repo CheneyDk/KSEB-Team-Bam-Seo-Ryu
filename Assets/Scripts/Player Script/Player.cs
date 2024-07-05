@@ -14,13 +14,15 @@ public class Player : MonoBehaviour
     [Header("- Player")]
     public float playerMaxHp;
     public float playerCurHp;
-    public float playerAtk { get; }
-    public float playerAtkSpeed { get; }
+    public float playerAtk { get; set; }
+    public float playerAtkSpeed { get; set; }
     public float playerMoveSpeed;
-    public float playerCritPer { get; }
-    public float playerCritDmg { get; }
+    public float playerCritPer { get; set; }
+    public float playerCritDmg { get; set; }
 
     public float sprintTime = 1f; // need private after balancing
+    public float sprintCoolDown = 2f;
+    private float sprintCoolDownTimer = 2f;
     public float playerAccelerate = 3f;
 
     private WaitForSeconds invincibleWait = new WaitForSeconds(0.1f);
@@ -47,7 +49,16 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
+
+        // player stat init
         playerCurHp = playerMaxHp; // make current hp max
+        playerAtk = 1f;
+        playerAtkSpeed = 1f;
+        playerMoveSpeed = 10f;
+        playerCritPer = 0f;
+        playerCritDmg = 2f;
+
+
         // weapon init need;
 
         // input system init
@@ -60,10 +71,12 @@ public class Player : MonoBehaviour
         // playerMove
         var player2DDir = playerMoveVector;
         player2DDir.Normalize();
-        transform.Translate(player2DDir * playerMoveSpeed * Time.deltaTime, Space.World);
+        transform.Translate(player2DDir * playerMoveSpeed * Time.deltaTime, Space.World); // YH
 
         // playerArmMove
         playerArmRotate();
+
+        sprintCoolDownTimer += Time.deltaTime;
     }
 
     // Input system Funcs.
@@ -81,6 +94,10 @@ public class Player : MonoBehaviour
     {
         // while stop state, player can't rollin'
         if (playerMoveVector == Vector2.zero) return;
+
+        // if still CoolDown
+        if (sprintCoolDown > sprintCoolDownTimer) return;
+        sprintCoolDownTimer = 0f;
 
         if (!context.started) return;
 
@@ -120,6 +137,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(sprintTime);
         isInvincible = false;
         playerMoveSpeed /= playerAccelerate;
+        
 
         // flag -- YH: for test
         sprite.color = color;

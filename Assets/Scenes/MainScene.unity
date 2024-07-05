@@ -287,6 +287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameoverUI: {fileID: 158310855}
   PauseUI: {fileID: 955154994}
+  player: {fileID: 8766426790022767654}
 --- !u!4 &65655188
 Transform:
   m_ObjectHideFlags: 0
@@ -533,8 +534,8 @@ RectTransform:
   m_Children:
   - {fileID: 1665986618}
   - {fileID: 805191540}
-  - {fileID: 694702015}
   - {fileID: 429567122}
+  - {fileID: 694702015}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1710,7 +1711,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1, y: -142}
+  m_AnchoredPosition: {x: -1, y: -100}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &429567123
@@ -2586,7 +2587,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -100}
+  m_AnchoredPosition: {x: 0, y: -140}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &694702016
@@ -3140,6 +3141,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a772eb84e5b94846a42d9c8970f61d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpVal: {fileID: 1615540105}
+  atkVal: {fileID: 1273449028}
+  atkSpeedVal: {fileID: 1618090820}
+  critPerVal: {fileID: 141434619}
+  critDamageVal: {fileID: 1155394372}
+  moveSpeedVal: {fileID: 56953711}
 --- !u!1 &996812866
 GameObject:
   m_ObjectHideFlags: 0
