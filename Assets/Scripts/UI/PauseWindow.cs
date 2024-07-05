@@ -12,22 +12,5 @@ public class PauseWindow : MonoBehaviour
         
     }
 
-    // open pause window
-    public void OnEscEnter(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            
-
-        }
-    }
-
-    // close pause window
-    public void OnEscExit(InputAction.CallbackContext context)
-    {
-        if (context.canceled)
-        {
-
-        }
-    }
+    
 }
