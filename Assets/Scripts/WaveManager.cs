@@ -13,6 +13,19 @@ public class WaveManager : MonoBehaviour
 
     private EnemySpawner enemySpawner;
 
+
+
+    private int Test;
+    public int numbertest
+    {
+        get => Test;
+        set
+        {
+
+            Test = value;
+        }
+    }
+
     private void Start()
     {
         time = waveTime;

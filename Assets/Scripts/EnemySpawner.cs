@@ -11,6 +11,12 @@ public class EnemySpawner : MonoBehaviour
     public GameObject RangeEnemyPrefab;
     public GameObject HeavyEnemyPrefab;
     public GameObject WarningPrefab;
+    private WaveManager waveManager;
+
+    [Header("Max Enemy Number")]
+    public int MaxMeleeEnemy = 3;
+    public int MaxRangeEnemy = 3;
+    public int MaxHeavyEnemy = 3;
 
     [Header("Melee Enemy")]
     public float MESpawnRate = 1f;
@@ -37,11 +43,35 @@ public class EnemySpawner : MonoBehaviour
     [Header("Warning Settings")]
     public float warningDuration = 1f;
 
+    private int nowWave;
+
+    private void Awake()
+    {
+        waveManager = GetComponent<WaveManager>();
+        nowWave = waveManager.curWave;
+    }
+
     public void StartSpawning()
     {
         if (!Spawning)
         {
             Spawning = true;
+            if(waveManager.curWave != nowWave)
+            {
+                if (MESpawnNumber < MaxMeleeEnemy)
+                {
+                    MESpawnNumber++;
+                }
+                if (RESpawnNumber < MaxRangeEnemy)
+                {
+                    RESpawnNumber++;
+                }
+                if (HESpawnNumber < MaxHeavyEnemy)
+                {
+                    HESpawnNumber++;
+                }
+                nowWave = waveManager.curWave;
+            }
             StartCoroutine(EnemiesSpawn(MeleeEnemyPrefab, MESpawnStartTime, MESpawnRate, MESpawnNumber, MESpawnGroupRadius));
             StartCoroutine(EnemiesSpawn(RangeEnemyPrefab, RESpawnStartTime, RESpawnRate, RESpawnNumber, RESpawnGroupRadius));
             StartCoroutine(EnemiesSpawn(HeavyEnemyPrefab, HESpawnStartTime, HESpawnRate, HESpawnNumber, HESpawnGroupRadius));
