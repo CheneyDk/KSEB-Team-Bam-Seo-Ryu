@@ -35,6 +35,7 @@ public class HeavyEnemy : Enemy
 
     private void Update()
     {
+        if (player == null) { return; }
         if (!canDash)
         {
             EnemyMovement();
@@ -93,8 +94,16 @@ public class HeavyEnemy : Enemy
     {
         if (collision.CompareTag("Player"))
         {
-            var player = collision.GetComponent<Player>();
-            player.TakeDamage(HeavyEnemyAtk);
+            var playerComponent = collision.GetComponent<Player>();
+            if (playerComponent != null)
+            {
+                playerComponent.TakeDamage(HeavyEnemyAtk);
+
+                if (playerComponent.playerCurHp <= 0)
+                {
+                    player = null;
+                }
+            }
         }
     }
 }

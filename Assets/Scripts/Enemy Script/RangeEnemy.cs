@@ -32,6 +32,7 @@ public class RangeEnemy : Enemy
 
     private void Update()
     {
+        if(player == null) { return; }
         EnemyMovement();
     }
 
@@ -82,8 +83,16 @@ public class RangeEnemy : Enemy
     {
         if (collision.CompareTag("Player"))
         {
-            var player = collision.GetComponent<Player>();
-            player.TakeDamage(RangeEnemyAtk);
+            var playerComponent = collision.GetComponent<Player>();
+            if (playerComponent != null)
+            {
+                playerComponent.TakeDamage(RangeEnemyAtk);
+
+                if (playerComponent.playerCurHp <= 0)
+                {
+                    player = null;
+                }
+            }
         }
     }
 }

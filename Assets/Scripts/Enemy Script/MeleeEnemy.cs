@@ -23,6 +23,7 @@ public class MeleeEnemy : Enemy
 
     private void Update()
     {
+        if (player == null) { return; }
         EnemyMovement();
     }
 
@@ -48,8 +49,16 @@ public class MeleeEnemy : Enemy
     {
         if (collision.CompareTag("Player"))
         {
-            var player = collision.GetComponent<Player>();
-            player.TakeDamage(MeleeEnemyAtk);
+            var playerComponent = collision.GetComponent<Player>();
+            if (playerComponent != null)
+            {
+                playerComponent.TakeDamage(MeleeEnemyAtk);
+
+                if (playerComponent.playerCurHp <= 0)
+                {
+                    player = null;
+                }
+            }
         }
     }
 }
