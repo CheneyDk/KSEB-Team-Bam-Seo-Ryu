@@ -13,11 +13,5 @@ public class PauseWindow : MonoBehaviour
     public TextMeshProUGUI critPerVal;
     public TextMeshProUGUI critDamageVal;
     public TextMeshProUGUI moveSpeedVal;
-    
-    private void Awake()
-    {
-        
-    }
 
-    
 }
