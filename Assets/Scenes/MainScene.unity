@@ -2490,7 +2490,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &955154995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2586,6 +2586,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a772eb84e5b94846a42d9c8970f61d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpVal: {fileID: 1615540105}
+  atkVal: {fileID: 1273449028}
+  atkSpeedVal: {fileID: 1618090820}
+  critPerVal: {fileID: 141434619}
+  critDamageVal: {fileID: 1155394372}
+  moveSpeedVal: {fileID: 56953711}
 --- !u!1 &996812866
 GameObject:
   m_ObjectHideFlags: 0
@@ -5299,7 +5305,10 @@ MonoBehaviour:
   MeleeEnemyPrefab: {fileID: 4256284729351784842, guid: ba08024792f69f84ea79b19600248c7d, type: 3}
   RangeEnemyPrefab: {fileID: 2360296499876324244, guid: 41887659ad3be2749b0d51806e13d085, type: 3}
   HeavyEnemyPrefab: {fileID: 3150408344018027885, guid: 66b84effa70df994bba48d0cbf7dba35, type: 3}
-  WarningPrefab: {fileID: 0}
+  WarningPrefab: {fileID: 5580843737553246376, guid: b823dbc49d3e44d4e8c8fe859c42b447, type: 3}
+  MaxMeleeEnemy: 3
+  MaxRangeEnemy: 3
+  MaxHeavyEnemy: 3
   MESpawnRate: 1
   MESpawnStartTime: 1
   MESpawnNumber: 3
