@@ -1657,7 +1657,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 429567121}
   m_CullTransparentMesh: 1
-<<<<<<< HEAD
 =======
 --- !u!1 &502587861 stripped
 GameObject:
@@ -1996,7 +1995,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593985030}
   m_CullTransparentMesh: 1
->>>>>>> origin/YH
 --- !u!1 &694702014
 GameObject:
   m_ObjectHideFlags: 0
@@ -2650,7 +2648,6 @@ Transform:
   - {fileID: 2091528954}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
 =======
 --- !u!1 &1027488518
 GameObject:
@@ -3510,7 +3507,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1563635163}
   m_CullTransparentMesh: 1
->>>>>>> origin/YH
 --- !u!1 &1568521295
 GameObject:
   m_ObjectHideFlags: 0
@@ -5215,7 +5211,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1987470289}
@@ -5236,13 +5231,11 @@ GameObject:
   - component: {fileID: 2030385430}
   m_Layer: 5
   m_Name: Pause Menu
->>>>>>> origin/YH
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
 --- !u!114 &1987470288
 =======
 --- !u!224 &2030385429
@@ -5268,13 +5261,11 @@ RectTransform:
   m_SizeDelta: {x: 661.9826, y: 441.2049}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2030385430
->>>>>>> origin/YH
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
   m_GameObject: {fileID: 1987470287}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -5327,12 +5318,10 @@ Transform:
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &2030385431
 CanvasRenderer:
->>>>>>> origin/YH
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
   m_GameObject: {fileID: 1987470287}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -5482,7 +5471,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2057391295}
   m_CullTransparentMesh: 1
->>>>>>> origin/YH
 --- !u!1 &2081913072
 GameObject:
   m_ObjectHideFlags: 0
@@ -5868,7 +5856,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-<<<<<<< HEAD
 =======
     - target: {fileID: 404201160916649962, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
       propertyPath: m_DefaultActionMap
@@ -5982,7 +5969,6 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
->>>>>>> origin/YH
     - target: {fileID: 944808390979848710, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
       propertyPath: m_Name
       value: Player
