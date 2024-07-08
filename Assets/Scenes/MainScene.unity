@@ -287,6 +287,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameoverUI: {fileID: 158310855}
   PauseUI: {fileID: 955154994}
+  LevelUpUI: {fileID: 0}
+  EndWaveUI: {fileID: 0}
   player: {fileID: 8766426790022767654}
 --- !u!4 &65655188
 Transform:
@@ -1324,7 +1326,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 283899588}
         m_TargetAssemblyTypeName: LevelUpWindow, Assembly-CSharp
-        m_MethodName: ChooseWeapon
+        m_MethodName: NextButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

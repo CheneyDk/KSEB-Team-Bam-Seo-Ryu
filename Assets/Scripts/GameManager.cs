@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     [Header("- UI")]
     public GameObject GameoverUI;
     public GameObject PauseUI;
+    public GameObject LevelUpUI;
+    public GameObject EndWaveUI;
 
     [Header("- System")]
     // public GameObject WaveManager;
@@ -31,6 +33,8 @@ public class GameManager : MonoBehaviour
 
         GameoverUI.SetActive(false);
         PauseUI.SetActive(false);
+        LevelUpUI.SetActive(false);
+        EndWaveUI.SetActive(false);
         Time.timeScale = 1f; // init
     }
 
@@ -81,5 +85,15 @@ public class GameManager : MonoBehaviour
         pauseWindow.critPerVal.text = player.playerCritPer.ToString();
         pauseWindow.critDamageVal.text = player.playerCritDmg.ToString();
         pauseWindow.moveSpeedVal.text = player.playerMoveSpeed.ToString();
+    }
+
+    public void PlayerLevelUp()
+    {
+        LevelUpUI.SetActive(true);
+    }
+
+    public void EndOfWave()
+    {
+        EndWaveUI.SetActive(true);
     }
 }
