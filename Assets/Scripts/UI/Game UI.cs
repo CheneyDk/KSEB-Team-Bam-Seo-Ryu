@@ -32,8 +32,6 @@ public class GameUI : MonoBehaviour
     {
         waveNumber.text = "WAVE : " + waveManager.curWave.ToString();
         waveTimer.text = waveManager.time.ToString("N0");
-        healthText.text = player.playerCurHp.ToString("N0") + " / " + player.playerMaxHp.ToString("N0");
-        expText.text = player.playerCurExp.ToString("N0") + " / " + player.playerMaxExp.ToString("N0");
         healthBar.value = healthBar.maxValue;
     }
 
@@ -41,6 +39,8 @@ public class GameUI : MonoBehaviour
     {
         waveNumber.text = "WAVE : " + waveManager.curWave.ToString();
         waveTimer.text = waveManager.time.ToString("N0");
+        healthText.text = player.playerCurHp.ToString("N0") + " / " + player.playerMaxHp.ToString("N0");
+        expText.text = player.playerCurExp.ToString("N0") + " / " + player.playerMaxExp.ToString("N0");
         healthBar.value = healthBar.maxValue * (player.playerCurHp / player.playerMaxHp);
         expBar.value = expBar.maxValue * (player.playerCurExp / player.playerMaxExp);
     }
