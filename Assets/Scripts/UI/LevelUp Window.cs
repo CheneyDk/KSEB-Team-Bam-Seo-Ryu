@@ -27,7 +27,7 @@ public class LevelUpWindow : MonoBehaviour
         }
     }
 
-    private void ChooseWeapon()
+    public void ChooseWeapon()
     {
         // iteam animation
         gameObject.SetActive(false);
