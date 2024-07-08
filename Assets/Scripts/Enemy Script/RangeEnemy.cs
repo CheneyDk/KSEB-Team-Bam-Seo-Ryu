@@ -23,6 +23,11 @@ public class RangeEnemy : Enemy
     private bool canAttack = true;
     private Transform player;
 
+    [SerializeField]
+    private GameObject Exp;
+    public int dropNumber = 3;
+    private float spawnGroupRadius = 1f;
+
     private void Awake()
     {
         RangeEnemyCurtHP = RangeEnemyMaxHp;
@@ -76,6 +81,7 @@ public class RangeEnemy : Enemy
         if (RangeEnemyCurtHP <= 0)
         {
             Destroy(gameObject);
+            Drop(dropNumber);
         }
     }
 
@@ -93,6 +99,15 @@ public class RangeEnemy : Enemy
                     player = null;
                 }
             }
+        }
+    }
+
+    public override void Drop(int itemNumber)
+    {
+        for (int i = 0; i < itemNumber; i++)
+        {
+            Vector2 spawnPlace = (Vector2)transform.position + (Vector2)Random.insideUnitCircle * spawnGroupRadius;
+            Instantiate(Exp, spawnPlace, Quaternion.identity);
         }
     }
 }

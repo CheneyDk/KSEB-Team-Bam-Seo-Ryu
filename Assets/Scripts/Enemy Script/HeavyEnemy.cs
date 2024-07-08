@@ -25,6 +25,11 @@ public class HeavyEnemy : Enemy
 
     private Transform player;
 
+    [SerializeField]
+    private GameObject Exp;
+    public int dropNumber = 3;
+    private float spawnGroupRadius = 1f;
+
     private void Awake()
     {
         HeavyEnemyCurtHP = HeavyEnemyMaxHp;
@@ -87,6 +92,7 @@ public class HeavyEnemy : Enemy
         if (HeavyEnemyCurtHP <= 0)
         {
             Destroy(gameObject);
+            Drop(dropNumber);
         }
     }
 
@@ -104,6 +110,15 @@ public class HeavyEnemy : Enemy
                     player = null;
                 }
             }
+        }
+    }
+
+    public override void Drop(int itemNumber)
+    {
+        for (int i = 0; i < itemNumber; i++)
+        {
+            Vector2 spawnPlace = (Vector2)transform.position + (Vector2)Random.insideUnitCircle * spawnGroupRadius;
+            Instantiate(Exp, spawnPlace, Quaternion.identity);
         }
     }
 }

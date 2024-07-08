@@ -175,3 +175,5 @@ MonoBehaviour:
   MeleeEnemyCurtHP: 0
   MeleeEnemyAtk: 5
   MeleeEnemyMoveSpeed: 3
+  Exp: {fileID: 2828242351688375285, guid: 9f21b77202f043d45a40df1d9c28c4d8, type: 3}
+  dropNumber: 3

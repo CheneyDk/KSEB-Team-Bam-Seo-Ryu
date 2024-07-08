@@ -6144,7 +6144,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1987470288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6356,15 +6356,15 @@ MonoBehaviour:
   MaxHeavyEnemy: 3
   MESpawnRate: 1
   MESpawnStartTime: 1
-  MESpawnNumber: 3
+  MESpawnNumber: 0
   MESpawnGroupRadius: 1
   RESpawnRate: 1
   RESpawnStartTime: 1
-  RESpawnNumber: 0
+  RESpawnNumber: 3
   RESpawnGroupRadius: 1
   HESpawnRate: 1
   HESpawnStartTime: 1
-  HESpawnNumber: 0
+  HESpawnNumber: 3
   HESpawnGroupRadius: 1
   noSpawnRange: 5
   EnemySpawnRange: 10
@@ -7122,6 +7122,10 @@ PrefabInstance:
     - target: {fileID: 1157829956514501359, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
       propertyPath: m_IsTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508109349755562331, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7508109349755562331, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
       propertyPath: m_CollisionDetection

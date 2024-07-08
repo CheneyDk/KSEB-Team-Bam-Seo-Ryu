@@ -13,6 +13,11 @@ public class MeleeEnemy : Enemy
     [SerializeField]
     private float MeleeEnemyMoveSpeed =10f;
 
+    [SerializeField]
+    private GameObject Exp;
+    public int dropNumber = 3;
+    private float spawnGroupRadius = 1f;
+
     private Transform player;
 
     private void Awake()
@@ -42,6 +47,7 @@ public class MeleeEnemy : Enemy
         if (MeleeEnemyCurtHP <= 0)
         {
             Destroy(gameObject);
+            Drop(dropNumber);
         }
     }
 
@@ -59,6 +65,15 @@ public class MeleeEnemy : Enemy
                     player = null;
                 }
             }
+        }
+    }
+
+    public override void Drop(int itemNumber)
+    {
+        for (int i = 0; i < itemNumber; i++)
+        {
+            Vector2 spawnPlace = (Vector2)transform.position + (Vector2)Random.insideUnitCircle * spawnGroupRadius;
+            Instantiate(Exp, spawnPlace, Quaternion.identity);
         }
     }
 }
