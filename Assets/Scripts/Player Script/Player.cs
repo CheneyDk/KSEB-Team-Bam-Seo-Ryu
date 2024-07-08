@@ -201,11 +201,25 @@ public class Player : MonoBehaviour
         playerCurExp += expAmount;
         if (playerCurExp >= playerMaxExp)
         {
-            playerLevel += 1;
-            // LevelUp func needed // from GM
-            playerCurExp -= playerMaxExp;
+            PlayerLevelUp();
         }
     }
+
+    public void PlayerLevelUp()
+    {
+        playerLevel += 1;
+        // LevelUp func needed // from GM
+        playerCurExp -= playerMaxExp;
+        GameManager.Instance.PlayerLevelUp();
+        SwitchToPlayerControlStop();
+    }
+
+    public void LevelUpToContinue()
+    {
+        GameManager.Instance.ContinueGame();
+        SwitchToPlayerControl();
+    }
+
 
     // GetHpPotion() - YH add this func later.
     // GetRedBull()

@@ -90,6 +90,16 @@ public class GameManager : MonoBehaviour
     public void PlayerLevelUp()
     {
         LevelUpUI.SetActive(true);
+        timeScaleProduct = 0f;
+    }
+
+    public void LevelUpContinueGame()
+    {
+        // 1. pause menu off
+        LevelUpUI.gameObject.SetActive(false);
+
+        // 2. TimeScale 1
+        timeScaleProduct = 1f;
     }
 
     public void EndOfWave()
