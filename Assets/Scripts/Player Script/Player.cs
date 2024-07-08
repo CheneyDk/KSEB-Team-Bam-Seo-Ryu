@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
     [Header("- Player")]
     public float playerMaxHp;
     public float playerCurHp;
+    public float playerLevel;
+    public float playerMaxExp;
+    public float playerCurExp = 0f;
     public float playerAtk { get; set; }
     public float playerAtkSpeed { get; set; }
     public float playerMoveSpeed;
@@ -52,12 +55,12 @@ public class Player : MonoBehaviour
 
         // player stat init
         playerCurHp = playerMaxHp; // make current hp max
+        playerLevel = 1f; 
         playerAtk = 1f;
         playerAtkSpeed = 1f;
         playerMoveSpeed = 10f;
         playerCritPer = 0f;
         playerCritDmg = 2f;
-
 
         // weapon init need;
 
@@ -182,6 +185,23 @@ public class Player : MonoBehaviour
         isInvincible = false;
     }
 
+    // player get EXP
+    public void GetExp(float expAmount)
+    {
+        playerCurExp += expAmount;
+        if (playerCurExp >= playerMaxExp)
+        {
+            playerLevel += 1;
+            // LevelUp func needed // from GM
+            playerCurExp -= playerMaxExp;
+        }
+    }
+
+    // GetHpPotion() - YH add this func later.
+    // GetRedBull()
+
+
+    // player keyboard input system toggle
     private void SwitchToPlayerControl()
     {
         playerInput.SwitchCurrentActionMap("playerMove");
