@@ -120,9 +120,14 @@ public class Player : MonoBehaviour
     {
         if (context.started)
         {
-            GameManager.Instance.PauseGame();
-            SwitchToUIControl();
+            ContinueToPause();
         }
+    }
+
+    public void ContinueToPause()
+    {
+        GameManager.Instance.PauseGame();
+        SwitchToUIControl();
     }
 
     // close pause window
@@ -130,9 +135,14 @@ public class Player : MonoBehaviour
     {
         if (context.canceled && this.enabled == true)
         {
-            GameManager.Instance.ContinueGame();
-            SwitchToPlayerControl();
+            PauseToContinue();
         }
+    }
+
+    public void PauseToContinue()
+    {
+        GameManager.Instance.ContinueGame();
+        SwitchToPlayerControl();
     }
 
     private IEnumerator SprintTimer(Color color)
@@ -214,4 +224,9 @@ public class Player : MonoBehaviour
         weaponInput.SwitchCurrentActionMap("UIControl");
     }
 
+    private void SwitchToPlayerControlStop()
+    {
+        playerInput.SwitchCurrentActionMap("playerStop");
+        weaponInput.SwitchCurrentActionMap("playerStop");
+    }
 }

@@ -160,6 +160,12 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "playerStop",
+            "id": "e27dbb9f-c5bd-444d-b6ef-76ed3b49c34c",
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": []

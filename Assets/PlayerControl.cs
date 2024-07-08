@@ -182,6 +182,12 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""playerStop"",
+            ""id"": ""e27dbb9f-c5bd-444d-b6ef-76ed3b49c34c"",
+            ""actions"": [],
+            ""bindings"": []
         }
     ],
     ""controlSchemes"": []
@@ -195,6 +201,8 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         // UiControl
         m_UiControl = asset.FindActionMap("UiControl", throwIfNotFound: true);
         m_UiControl_EscContinue = m_UiControl.FindAction("EscContinue", throwIfNotFound: true);
+        // playerStop
+        m_playerStop = asset.FindActionMap("playerStop", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -368,6 +376,44 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         }
     }
     public UiControlActions @UiControl => new UiControlActions(this);
+
+    // playerStop
+    private readonly InputActionMap m_playerStop;
+    private List<IPlayerStopActions> m_PlayerStopActionsCallbackInterfaces = new List<IPlayerStopActions>();
+    public struct PlayerStopActions
+    {
+        private @PlayerControl m_Wrapper;
+        public PlayerStopActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
+        public InputActionMap Get() { return m_Wrapper.m_playerStop; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerStopActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerStopActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PlayerStopActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerStopActionsCallbackInterfaces.Add(instance);
+        }
+
+        private void UnregisterCallbacks(IPlayerStopActions instance)
+        {
+        }
+
+        public void RemoveCallbacks(IPlayerStopActions instance)
+        {
+            if (m_Wrapper.m_PlayerStopActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPlayerStopActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PlayerStopActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PlayerStopActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PlayerStopActions @playerStop => new PlayerStopActions(this);
     public interface IPlayerMoveActions
     {
         void OnWASD(InputAction.CallbackContext context);
@@ -378,5 +424,8 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     public interface IUiControlActions
     {
         void OnEscContinue(InputAction.CallbackContext context);
+    }
+    public interface IPlayerStopActions
+    {
     }
 }

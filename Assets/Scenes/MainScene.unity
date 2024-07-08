@@ -5017,7 +5017,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1557405965}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 65655187}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ResetGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1557405965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5138,7 +5150,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1563635166}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8766426790022767654}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: PauseToContinue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1563635166
 MonoBehaviour:
   m_ObjectHideFlags: 0
