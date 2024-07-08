@@ -29,13 +29,16 @@ public class PlayerBullet : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.collider.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy"))
         {
-            var enemy = collision.collider.GetComponent<Enemy>();
-            enemy.TakeDamage(bulletDamage);
-            Destroy(gameObject);
+            var EnemyComponent = collision.GetComponent<Enemy>();
+            if (EnemyComponent != null)
+            {
+                EnemyComponent.TakeDamage(bulletDamage);
+                Destroy(gameObject);
+            }
         }
     }
 }
