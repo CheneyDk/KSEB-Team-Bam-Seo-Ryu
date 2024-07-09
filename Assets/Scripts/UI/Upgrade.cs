@@ -13,30 +13,23 @@ public class Upgrade : MonoBehaviour
     public Image[] optionImages;
 
     public bool isLevelUp = false;
-    public bool isWaveEnd = false;
 
     public List<WeaponData> weaponDataList;
     public List<WeaponData> itemDataList;
 
-    private void Start()
-    {
-        UpgradeUI.SetActive(false);
 
-        OnUpgrade(WeaponType.Weapon);
-    }
-
-    public void OnUpgrade(WeaponType type)
+    public void OnUpgrade(WeaponType type, bool levelup)
     {
         UpgradeUI.SetActive(true);
 
         List<WeaponData> selectedItems = new List<WeaponData>();
         List<WeaponData> sourceList = null;
 
-        if (isLevelUp == true)
+        if (levelup == true)
         {
             sourceList = weaponDataList;
         }
-        else if (isWaveEnd == true)
+        else if (levelup == false)
         {
             sourceList = itemDataList;
         }
@@ -78,7 +71,7 @@ public class Upgrade : MonoBehaviour
     {
         Debug.Log($"{item.weaponName} 아이템 선택.");
 
-        UpgradeUI.SetActive(false);
+        GameManager.Instance.EndUpgrade();
 
         // 선택된 아이템에 대한 추가 로직
     }

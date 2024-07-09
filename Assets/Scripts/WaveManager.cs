@@ -57,6 +57,7 @@ public class WaveManager : MonoBehaviour
 
             enemySpawner.StopSpawning();
             DestroyAllEnemies();
+            GameManager.Instance.WaveEnd();
 
             curWave++;
             if (curWave <= waveNumber)

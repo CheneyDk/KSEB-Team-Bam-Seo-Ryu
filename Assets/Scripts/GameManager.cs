@@ -13,8 +13,7 @@ public class GameManager : MonoBehaviour
     [Header("- UI")]
     public GameObject GameoverUI;
     public GameObject PauseUI;
-    public GameObject LevelUpUI;
-    public GameObject EndWaveUI;
+    public GameObject UpgradeUI;
 
     [Header("- System")]
     // public GameObject WaveManager;
@@ -33,8 +32,7 @@ public class GameManager : MonoBehaviour
 
         GameoverUI.SetActive(false);
         PauseUI.SetActive(false);
-        LevelUpUI.SetActive(false);
-        EndWaveUI.SetActive(false);
+        UpgradeUI.SetActive(false);
         Time.timeScale = 1f; // init
     }
 
@@ -87,23 +85,24 @@ public class GameManager : MonoBehaviour
         pauseWindow.moveSpeedVal.text = player.playerMoveSpeed.ToString();
     }
 
-    public void PlayerLevelUp()
+    public void LevelUp()
     {
-        LevelUpUI.SetActive(true);
+        UpgradeUI.SetActive(true);
+        UpgradeUI.GetComponent<Upgrade>().OnUpgrade(WeaponType.Weapon, true);
         timeScaleProduct = 0f;
     }
 
-    public void LevelUpContinueGame()
+    public void WaveEnd()
     {
-        // 1. pause menu off
-        LevelUpUI.gameObject.SetActive(false);
-
-        // 2. TimeScale 1
-        timeScaleProduct = 1f;
+        UpgradeUI.SetActive(true);
+        UpgradeUI.GetComponent<Upgrade>().OnUpgrade(WeaponType.Weapon, false);
+        timeScaleProduct = 0f;
     }
 
-    public void EndOfWave()
+    public void EndUpgrade()
     {
-        EndWaveUI.SetActive(true);
+        UpgradeUI.gameObject.SetActive(false);
+        player.SwitchToPlayerControl();
+        timeScaleProduct = 1f;
     }
 }

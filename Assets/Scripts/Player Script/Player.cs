@@ -212,9 +212,11 @@ public class Player : MonoBehaviour
         playerLevel += 1;
         // LevelUp func needed // from GM
         playerCurExp -= playerMaxExp;
-        GameManager.Instance.PlayerLevelUp();
+        playerMaxExp += 5;
+        GameManager.Instance.LevelUp();
         SwitchToPlayerControlStop();
     }
+
 
     // GetHpPotion() - YH add this func later.
     // GetRedBull()
@@ -234,16 +236,16 @@ public class Player : MonoBehaviour
         SwitchToPlayerControl();
     }
 
-    public void LevelUpToContinue()
+    public void WaveEndToContinue()
     {
         GameManager.Instance.ContinueGame();
         SwitchToPlayerControl();
     }
 
 
-    
+
     // player keyboard input system toggles
-    private void SwitchToPlayerControl()
+    public void SwitchToPlayerControl()
     {
         playerInput.SwitchCurrentActionMap("playerMove");
         weaponInput.SwitchCurrentActionMap("playerMove");
