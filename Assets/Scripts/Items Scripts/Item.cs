@@ -9,7 +9,7 @@ public abstract class Item : MonoBehaviour
     
     // magnetic system
     private float itemMagneticRange;
-    private float itemMagneticMoveSpeed = 10f;
+    private float itemMagneticMoveSpeed = 30f;
 
     private Transform playerTrans;
 
