@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1334602240962679416}
   - component: {fileID: 3480318047543023342}
   - component: {fileID: 3305071902314848842}
-  - component: {fileID: 4912760409046131456}
+  - component: {fileID: 667853444648742633}
   m_Layer: 0
-  m_Name: PlayerBullet
+  m_Name: BulletSharp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,7 +121,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5000001
---- !u!114 &4912760409046131456
+--- !u!114 &667853444648742633
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,8 +130,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2809112993671874965}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df524f8771c34564fa9990d8f691c860, type: 3}
+  m_Script: {fileID: 11500000, guid: ab5abf87063876e4cb9e5077f39e989a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bulletDamage: 10
   bulletSpeed: 5
+  bulletNum: 1

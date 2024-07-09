@@ -117,6 +117,8 @@ public class Player : MonoBehaviour
         // temp sprint visual effects
         var tempColor = sprite.color;
         sprite.color = Color.red;
+
+        // invincible & move speed
         isInvincible = true;
         playerMoveSpeed *= playerAccelerate;
         StartCoroutine(SprintTimer(tempColor));
