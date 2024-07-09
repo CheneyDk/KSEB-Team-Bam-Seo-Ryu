@@ -23,11 +23,16 @@ public class Player : MonoBehaviour
     public float playerCritPer { get; set; }
     public float playerCritDmg { get; set; }
 
+    // magnetic range
+    public float playerMagneticRange = 1f; // default: 1
+    
+    // sprint
     public float sprintTime = 1f; // need private after balancing
     public float sprintCoolDown = 2f;
     private float sprintCoolDownTimer = 2f;
     public float playerAccelerate = 3f;
 
+    // invincible time
     private WaitForSeconds invincibleWait = new WaitForSeconds(0.1f);
 
 
@@ -82,6 +87,9 @@ public class Player : MonoBehaviour
         sprintCoolDownTimer += Time.deltaTime;
     }
 
+
+
+
     // Input system Funcs.
     public void playerMove(InputAction.CallbackContext context)
     {
@@ -114,7 +122,6 @@ public class Player : MonoBehaviour
         StartCoroutine(SprintTimer(tempColor));
     }
 
-
     // open pause window
     public void OnEscEnter(InputAction.CallbackContext context)
     {
@@ -122,12 +129,6 @@ public class Player : MonoBehaviour
         {
             ContinueToPause();
         }
-    }
-
-    public void ContinueToPause()
-    {
-        GameManager.Instance.PauseGame();
-        SwitchToUIControl();
     }
 
     // close pause window
@@ -139,11 +140,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void PauseToContinue()
-    {
-        GameManager.Instance.ContinueGame();
-        SwitchToPlayerControl();
-    }
+    
 
     private IEnumerator SprintTimer(Color color)
     {
@@ -195,6 +192,9 @@ public class Player : MonoBehaviour
         isInvincible = false;
     }
 
+
+
+    // Get Items & Effects
     // player get EXP
     public void GetExp(float expAmount)
     {
@@ -214,6 +214,24 @@ public class Player : MonoBehaviour
         SwitchToPlayerControlStop();
     }
 
+    // GetHpPotion() - YH add this func later.
+    // GetRedBull()
+
+
+    // System Control
+
+    public void ContinueToPause()
+    {
+        GameManager.Instance.PauseGame();
+        SwitchToUIControl();
+    }
+
+    public void PauseToContinue()
+    {
+        GameManager.Instance.ContinueGame();
+        SwitchToPlayerControl();
+    }
+
     public void LevelUpToContinue()
     {
         GameManager.Instance.ContinueGame();
@@ -221,11 +239,8 @@ public class Player : MonoBehaviour
     }
 
 
-    // GetHpPotion() - YH add this func later.
-    // GetRedBull()
-
-
-    // player keyboard input system toggle
+    
+    // player keyboard input system toggles
     private void SwitchToPlayerControl()
     {
         playerInput.SwitchCurrentActionMap("playerMove");
