@@ -78,12 +78,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1fa072355a82028458231e3727e8dfe8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eb44092c6d42c1c4f88020fa42f0a133, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -361,14 +361,10 @@ PrefabInstance:
       propertyPath: muzzle
       value: 
       objectReference: {fileID: 6251437387262647915}
-    - target: {fileID: 8044904013109887788, guid: 6d00445b44043c94fbe2d2c545b404aa, type: 3}
-      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+    - target: {fileID: 5557456599801796052, guid: 6d00445b44043c94fbe2d2c545b404aa, type: 3}
+      propertyPath: player
       value: 
-      objectReference: {fileID: 6395288554825539790}
-    - target: {fileID: 8044904013109887788, guid: 6d00445b44043c94fbe2d2c545b404aa, type: 3}
-      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: WeaponSharp, Assembly-CSharp
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6260638533341849288}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -384,14 +380,3 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5136140033045292433, guid: 6d00445b44043c94fbe2d2c545b404aa, type: 3}
   m_PrefabInstance: {fileID: 1576449379234575642}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6395288554825539790 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5557456599801796052, guid: 6d00445b44043c94fbe2d2c545b404aa, type: 3}
-  m_PrefabInstance: {fileID: 1576449379234575642}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5955887904906186891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce309d97acf40af438509dd9e3890b47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

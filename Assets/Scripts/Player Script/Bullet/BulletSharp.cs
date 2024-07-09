@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class BulletSharp : PlayerBullet
 {
-    // direction
-    private Vector2 bulletVector = Vector2.right;
+    private void Start()
+    {
+        // go straight
+        bulletVector = Vector2.right;
+    }
 
     private void Update()
     {
@@ -15,7 +18,7 @@ public class BulletSharp : PlayerBullet
         timeCounter += Time.deltaTime;
         if (timeCounter > bulletLifeTime)
         {
-            Destroy(gameObject);
+            Destroy(gameObject); 
         }
     }
 }

@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 108812297430574730}
   - component: {fileID: 7136139226923845902}
-  - component: {fileID: 8044904013109887788}
   - component: {fileID: 5557456599801796052}
+  - component: {fileID: 859745783196303825}
   m_Layer: 0
   m_Name: Sharp
   m_TagString: Untagged
@@ -86,7 +86,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8044904013109887788
+--- !u!114 &5557456599801796052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5136140033045292433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce309d97acf40af438509dd9e3890b47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponDamageRate: 1
+  weaponFireRate: 1
+  bulletNum: 0
+  muzzle: {fileID: 0}
+  bullet: {fileID: 2809112993671874965, guid: 945e39b3b33adf9429e032e850a7e54f, type: 3}
+  player: {fileID: 0}
+--- !u!114 &859745783196303825
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,8 +135,8 @@ MonoBehaviour:
     m_ActionName: playerMove/WASD[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerWeapon, Assembly-CSharp
+      - m_Target: {fileID: 5557456599801796052}
+        m_TargetAssemblyTypeName: WeaponSharp, Assembly-CSharp
         m_MethodName: Fire
         m_Mode: 0
         m_Arguments:
@@ -148,19 +166,3 @@ MonoBehaviour:
   m_DefaultActionMap: playerMove
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &5557456599801796052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5136140033045292433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce309d97acf40af438509dd9e3890b47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponDamageRate: 1
-  weaponFireRate: 1
-  muzzle: {fileID: 0}
-  bullet: {fileID: 2809112993671874965, guid: 945e39b3b33adf9429e032e850a7e54f, type: 3}

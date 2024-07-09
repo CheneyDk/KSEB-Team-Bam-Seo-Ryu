@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class WeaponSharp : PlayerWeapon
 {
     private float sharpFireRateTimer;
+    private PlayerBullet bulletComponent;
 
     private void Start()
     {
@@ -15,7 +16,11 @@ public class WeaponSharp : PlayerWeapon
         // init stats
         weaponDamageRate = 1f;
         weaponFireRate = 0.25f;
+        bulletNum = 1;
         weaponLevel = 1;
+
+        // bullet class call
+        bulletComponent = bullet.GetComponent<PlayerBullet>();
     }
     private void Update()
     {
@@ -23,14 +28,21 @@ public class WeaponSharp : PlayerWeapon
     }
 
 
-    public override void Fire(InputAction.CallbackContext context)
+    protected override void Fire(InputAction.CallbackContext context)
     {
         // when click
         if (context.started && sharpFireRateTimer > weaponFireRate)
         {
             sharpFireRateTimer = 0f;
+            bulletComponent.Init(player.playerAtk * weaponDamageRate);
             var tempBullet = Instantiate(bullet, muzzle.position, muzzle.rotation);
-            // YH - flag: need bullet Init func
+            
         }
+    }
+
+    // dummy override
+    protected override void Fire()
+    {
+
     }
 }

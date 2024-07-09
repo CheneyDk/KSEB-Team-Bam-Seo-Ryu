@@ -8,7 +8,9 @@ public abstract class PlayerWeapon : MonoBehaviour // abstract class·Î ÀüÈ¯! + ¾
     // weapon stats
     public float weaponDamageRate;
     public float weaponFireRate;
+    public int bulletNum; // Ex ) shotgun
     protected int weaponLevel = 1;
+
 
     // muzzle position
     public Transform muzzle;
@@ -18,6 +20,11 @@ public abstract class PlayerWeapon : MonoBehaviour // abstract class·Î ÀüÈ¯! + ¾
     public GameObject bullet;
     private Transform bulletRotation; // temp
 
+    // Weapon Description
+
+
+    // Player class
+    public Player player;
 
     // YH - flag
     // Weapon class Init func
@@ -29,5 +36,8 @@ public abstract class PlayerWeapon : MonoBehaviour // abstract class·Î ÀüÈ¯! + ¾
     //    muzzle = muzzlePos;
     //}
 
-    public abstract void Fire(InputAction.CallbackContext context);
+    // auto fire
+    protected abstract void Fire();
+    // need to click
+    protected abstract void Fire(InputAction.CallbackContext context);
 }
