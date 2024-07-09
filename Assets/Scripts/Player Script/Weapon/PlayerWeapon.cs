@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerWeapon : MonoBehaviour
+public abstract class PlayerWeapon : MonoBehaviour // abstract class로 전환! + 업그레이드DB화
 {
     // weapon stats
     public float weaponDamageRate;
-    public float weaponBulletSpeed;
+    public float weaponFireRate;
+    protected int weaponLevel = 1;
 
     // muzzle position
     public Transform muzzle;
@@ -15,25 +16,18 @@ public class PlayerWeapon : MonoBehaviour
 
     // weapon's bullet
     public GameObject bullet;
-    private Transform bulletRot; // temp
+    private Transform bulletRotation; // temp
 
-    
+
     // YH - flag
     // Weapon class Init func
     // called by Player - Awake(or Start)
+    // or just connect on Unity.
+
     //public void Init(Transform muzzlePos)
     //{
     //    muzzle = muzzlePos;
     //}
 
-    public void Fire(InputAction.CallbackContext context)
-    {
-        // when click
-        if (context.started)
-        {
-            var tempBullet = Instantiate(bullet, muzzle.position, muzzle.rotation);
-            // YH - flag: need bullet Init func
-        }
-
-    }
+    public abstract void Fire(InputAction.CallbackContext context);
 }
