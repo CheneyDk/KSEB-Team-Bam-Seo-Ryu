@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +25,7 @@ public class Player : MonoBehaviour
     public float playerCritDmg { get; set; }
 
     // magnetic range
-    public float playerMagneticRange = 1f; // default: 1
+    public float playerMagneticRange; // default: 5f
     
     // sprint
     public float sprintTime = 1f; // need private after balancing
@@ -61,14 +62,15 @@ public class Player : MonoBehaviour
         // player stat init
         playerCurHp = playerMaxHp; // make current hp max
         playerLevel = 1f; 
-        playerAtk = 1f;
+        playerAtk = 10f;
         playerAtkSpeed = 1f;
         playerMoveSpeed = 10f;
         playerCritPer = 0f;
         playerCritDmg = 2f;
 
-        // weapon init need;
-
+        // player Magnetic Range
+        playerMagneticRange = 5f;
+        
         // input system init
         playerInput = GetComponent<PlayerInput>();
         weaponInput = weapon.GetComponent<PlayerInput>();
@@ -84,11 +86,24 @@ public class Player : MonoBehaviour
         // playerArmMove
         playerArmRotate();
 
+        // Item Magnetic func
+        CheckItemInRange();
+
         sprintCoolDownTimer += Time.deltaTime;
     }
 
+    // magnetic item check
+    private void CheckItemInRange()
+    {
+        var items = Physics2D.OverlapCircleAll(transform.position, playerMagneticRange, 1 << 6);
 
+        if (items.Length < 1) return;
 
+        foreach (var item in items)
+        {
+            item.GetComponent<Item>().ItemMagnetic().Forget();
+        }
+    }
 
     // Input system Funcs.
     public void playerMove(InputAction.CallbackContext context)

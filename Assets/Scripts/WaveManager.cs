@@ -57,6 +57,11 @@ public class WaveManager : MonoBehaviour
 
             enemySpawner.StopSpawning();
             DestroyAllEnemies();
+
+            GameManager.Instance.player.playerMagneticRange = 100f;
+            yield return new WaitForSeconds(3f);
+            GameManager.Instance.player.playerMagneticRange = 5f;
+
             GameManager.Instance.WaveEnd();
 
             curWave++;

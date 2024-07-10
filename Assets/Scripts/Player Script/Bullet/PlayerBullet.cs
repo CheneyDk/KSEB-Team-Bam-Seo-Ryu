@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class PlayerBullet : MonoBehaviour
 {
     // bullet stats / initialize needed
+    
     private float bulletDamage;
     public float bulletSpeed;
 
@@ -22,7 +23,7 @@ public abstract class PlayerBullet : MonoBehaviour
     }
 
     // if stay triggered, give damage
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
         {

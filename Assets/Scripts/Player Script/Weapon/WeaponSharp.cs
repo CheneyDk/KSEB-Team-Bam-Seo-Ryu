@@ -6,37 +6,35 @@ using UnityEngine.InputSystem;
 public class WeaponSharp : PlayerWeapon
 {
     private float sharpFireRateTimer;
-    private PlayerBullet bulletComponent;
 
     private void Start()
     {
-        // player can fire imediately
-        sharpFireRateTimer = weaponFireRate;
-
         // init stats
-        weaponDamageRate = 1f;
+        weaponDamageRate = 1.5f;
         weaponFireRate = 0.25f;
         bulletNum = 1;
         weaponLevel = 1;
 
-        // bullet class call
-        bulletComponent = bullet.GetComponent<PlayerBullet>();
+        // player can fire imediately
+        sharpFireRateTimer = weaponFireRate;
     }
+
     private void Update()
     {
         sharpFireRateTimer += Time.deltaTime;
     }
 
-
+    
     protected override void Fire(InputAction.CallbackContext context)
     {
         // when click
-        if (context.started && sharpFireRateTimer > weaponFireRate)
+        if (context.started && sharpFireRateTimer > weaponFireRate / player.playerAtkSpeed)
         {
             sharpFireRateTimer = 0f;
-            bulletComponent.Init(player.playerAtk * weaponDamageRate);
-            var tempBullet = Instantiate(bullet, muzzle.position, muzzle.rotation);
             
+            // Debug.Log(bullet.GetComponent<PlayerBullet>().bulletDamage);
+            var tempBullet = Instantiate(bullet, muzzle.position, muzzle.rotation);
+            tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
         }
     }
 

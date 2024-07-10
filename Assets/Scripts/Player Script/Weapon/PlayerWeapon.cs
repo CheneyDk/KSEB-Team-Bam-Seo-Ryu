@@ -7,7 +7,7 @@ public abstract class PlayerWeapon : MonoBehaviour // abstract class·Î ÀüÈ¯! + ¾
 {
     // weapon stats
     public float weaponDamageRate;
-    public float weaponFireRate;
+    public float weaponFireRate; // weapon it's own stat
     public int bulletNum; // Ex ) shotgun
     protected int weaponLevel = 1;
 
@@ -35,6 +35,10 @@ public abstract class PlayerWeapon : MonoBehaviour // abstract class·Î ÀüÈ¯! + ¾
     //{
     //    muzzle = muzzlePos;
     //}
+
+    // live player Attack Speed apply func.
+    // if player Attack Speed is changed, plz call this func.
+
 
     // auto fire
     protected abstract void Fire();
