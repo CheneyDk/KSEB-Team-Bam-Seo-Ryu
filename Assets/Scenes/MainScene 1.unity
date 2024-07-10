@@ -1208,21 +1208,9 @@ MonoBehaviour:
   - {fileID: 1061011219}
   - {fileID: 1026908566}
   - {fileID: 214618438}
-  isLevelUp: 0
-  weaponDataList:
-  - {fileID: 11400000, guid: e5b18c6f5617be843a9268bc415424d7, type: 2}
-  - {fileID: 11400000, guid: 3ee98229c68a2bf4cb1d765a4e720f74, type: 2}
-  - {fileID: 11400000, guid: 82c01517ed2fe224f9fba5ffe233793b, type: 2}
-  - {fileID: 11400000, guid: e2ca484c3012f5d47a8ecaccac8fde41, type: 2}
-  - {fileID: 11400000, guid: bb76124ff3f39df4cb769b747c4a4628, type: 2}
-  - {fileID: 11400000, guid: f7f4c28a377a47f46830cceef3d1772e, type: 2}
-  itemDataList:
-  - {fileID: 11400000, guid: bf27f4b7d137e2547badad8dfcbe3e09, type: 2}
-  - {fileID: 11400000, guid: 13adf7aa9830564439ca00fd6997293f, type: 2}
-  - {fileID: 11400000, guid: 5132c6530c67aaf43935e08a758b0882, type: 2}
-  - {fileID: 11400000, guid: 4b34eb5a4d08bdd4d9afc435f3ef0c44, type: 2}
-  - {fileID: 11400000, guid: e65068d2ee758074f89a22b8fcc44984, type: 2}
-  - {fileID: 11400000, guid: df894a11d49451e47ae7752a547654f1, type: 2}
+  playerWeaponList: []
+  playerItemList: []
+  maxItemNumber: 4
 --- !u!1 &310989112
 GameObject:
   m_ObjectHideFlags: 0
@@ -8338,7 +8326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1987470288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8351,10 +8339,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08184e53d739a014c9edea96d9dd32e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveNumber: 5
+  waveNumber: 10
   curWave: 1
-  waveTime: 10
-  waveInterval: 3
+  waveTime: 2
+  waveInterval: 2
   time: 0
 --- !u!1 &2012950541
 GameObject:
@@ -8545,16 +8533,16 @@ MonoBehaviour:
   RangeEnemyPrefab: {fileID: 2360296499876324244, guid: 41887659ad3be2749b0d51806e13d085, type: 3}
   HeavyEnemyPrefab: {fileID: 3150408344018027885, guid: 66b84effa70df994bba48d0cbf7dba35, type: 3}
   WarningPrefab: {fileID: 5580843737553246376, guid: b823dbc49d3e44d4e8c8fe859c42b447, type: 3}
-  MaxMeleeEnemy: 3
-  MaxRangeEnemy: 3
-  MaxHeavyEnemy: 3
+  MaxMeleeEnemy: 0
+  MaxRangeEnemy: 0
+  MaxHeavyEnemy: 0
   MESpawnRate: 1
   MESpawnStartTime: 1
   MESpawnNumber: 3
   MESpawnGroupRadius: 1
   RESpawnRate: 1
   RESpawnStartTime: 1
-  RESpawnNumber: 0
+  RESpawnNumber: 3
   RESpawnGroupRadius: 1
   HESpawnRate: 1
   HESpawnStartTime: 1

@@ -88,14 +88,14 @@ public class GameManager : MonoBehaviour
     public void LevelUp()
     {
         UpgradeUI.SetActive(true);
-        UpgradeUI.GetComponent<Upgrade>().OnUpgrade(WeaponType.Weapon, true);
+        UpgradeUI.GetComponent<UpgradeManager>().OnUpgrade(true);
         timeScaleProduct = 0f;
     }
 
     public void WaveEnd()
     {
         UpgradeUI.SetActive(true);
-        UpgradeUI.GetComponent<Upgrade>().OnUpgrade(WeaponType.Weapon, false);
+        UpgradeUI.GetComponent<UpgradeManager>().OnUpgrade(false);
         timeScaleProduct = 0f;
     }
 
