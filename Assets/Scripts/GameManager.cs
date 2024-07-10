@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     // class import
     [SerializeField]
-    private Player player;
+    public Player player;
     private PauseWindow pauseWindow;
 
     private void Awake()
