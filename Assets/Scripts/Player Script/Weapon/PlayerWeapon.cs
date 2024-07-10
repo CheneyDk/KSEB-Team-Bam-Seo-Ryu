@@ -8,6 +8,7 @@ public abstract class PlayerWeapon : MonoBehaviour // abstract class·Î ÀüÈ¯! + ¾
     // weapon stats
     public float weaponDamageRate;
     public float weaponFireRate;
+    public float weaponCurFireRate;
     public int bulletNum; // Ex ) shotgun
     protected int weaponLevel = 1;
 

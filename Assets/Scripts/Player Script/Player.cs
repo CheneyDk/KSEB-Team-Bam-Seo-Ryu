@@ -61,8 +61,8 @@ public class Player : MonoBehaviour
         // player stat init
         playerCurHp = playerMaxHp; // make current hp max
         playerLevel = 1f; 
-        playerAtk = 1f;
-        playerAtkSpeed = 1f;
+        playerAtk = 10f;
+        playerAtkSpeed = 2f;
         playerMoveSpeed = 10f;
         playerCritPer = 0f;
         playerCritDmg = 2f;
