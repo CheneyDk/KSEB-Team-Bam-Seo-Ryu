@@ -8,21 +8,24 @@ using static Cinemachine.DocumentationSortingAttribute;
 
 public class UpgradeManager : MonoBehaviour
 {
+    [Header("Upgrade UI")]
     public GameObject UpgradeUI;
     public Button[] optionButtons;
     public TextMeshProUGUI[] optionNameTexts;
     public TextMeshProUGUI[] optionDescTexts;
     public Image[] optionImages;
 
-    private List<WeaponData> weaponDataList;
-    private List<WeaponData> itemDataList;
+    [Header("Weapon and Item")]
+    public List<WeaponData> weaponDataList;
+    public List<WeaponData> itemDataList;
 
-    private bool isLevelUp = false;
 
+    [Header("Player Weapon & Item Slot")]
     public List<WeaponData> playerWeaponList = new List<WeaponData>();
     public List<WeaponData> playerItemList = new List<WeaponData>();
-
     public int maxItemNumber = 4;
+
+    private bool isLevelUp = false;
 
     public void OnUpgrade(bool levelup)
     {
@@ -34,7 +37,7 @@ public class UpgradeManager : MonoBehaviour
 
         if (levelup == true)
         {
-            isLevelUp = true;
+            isLevelUp = levelup;
             sourceList = weaponDataList;
             itemList = playerWeaponList;
             if (itemList.Count != maxItemNumber)
@@ -62,7 +65,7 @@ public class UpgradeManager : MonoBehaviour
         }
         else if (levelup == false)
         {
-            isLevelUp = false;
+            isLevelUp = levelup;
             sourceList = itemDataList;
             itemList = playerItemList;
             if (itemList.Count != maxItemNumber)
@@ -89,7 +92,7 @@ public class UpgradeManager : MonoBehaviour
             }
         }
 
-        if (sourceList != null)
+        if (sourceList != null && itemList != null)
         {
             for (int i = 0; i < optionButtons.Length; i++)
             {
