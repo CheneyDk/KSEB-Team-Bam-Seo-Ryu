@@ -6,18 +6,14 @@ using UnityEngine.InputSystem;
 public class WeaponSharp : PlayerWeapon
 {
     private float sharpFireRateTimer;
-    private PlayerBullet bulletComponent;
 
     private void Start()
     {
         // init stats
-        weaponDamageRate = 1f;
-        weaponFireRate = 1f;
+        weaponDamageRate = 1.5f;
+        weaponFireRate = 0.25f;
         bulletNum = 1;
         weaponLevel = 1;
-
-        
-        weaponFireRate /= player.playerAtkSpeed;
 
         // player can fire imediately
         sharpFireRateTimer = weaponFireRate;
@@ -28,11 +24,11 @@ public class WeaponSharp : PlayerWeapon
         sharpFireRateTimer += Time.deltaTime;
     }
 
-
+    
     protected override void Fire(InputAction.CallbackContext context)
     {
         // when click
-        if (context.started && sharpFireRateTimer > weaponFireRate)
+        if (context.started && sharpFireRateTimer > weaponFireRate / player.playerAtkSpeed)
         {
             sharpFireRateTimer = 0f;
             
