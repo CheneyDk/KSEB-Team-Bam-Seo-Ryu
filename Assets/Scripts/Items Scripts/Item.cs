@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public abstract class Item : MonoBehaviour
 {
@@ -8,7 +9,6 @@ public abstract class Item : MonoBehaviour
     protected float value;
     
     // magnetic system
-    private float itemMagneticRange;
     private float itemMagneticMoveSpeed = 30f;
 
     private Transform playerTrans;
@@ -17,12 +17,6 @@ public abstract class Item : MonoBehaviour
     {
         // Init
         playerTrans = GameObject.FindGameObjectWithTag("Player").transform;
-        itemMagneticRange = 5f; // YH - test
-    }
-
-    private void Update()
-    {
-        ItemMagnetic();
     }
 
 
@@ -33,21 +27,21 @@ public abstract class Item : MonoBehaviour
     // Hp potion and Red Bool have their' own const value.
     // Init on Awake and make this func null return or something.
 
-
-    public void SetMagneticRange(float range)
+    // actual magnetic effects
+    // 비동기 + 한 번 걸리면 따라가도록 변경
+    // 획득 범위는 플레이어 내 스탯으로 하고
+    // 시뮬레이션에서 했던 physics overlay 함수로 탐지
+    // 객체가 걸리면 자석 함수를 실행하도록 변경
+    public async UniTask ItemMagnetic()
     {
-        itemMagneticRange = range;
-    }
+        gameObject.layer = 0;
 
-
-    private void ItemMagnetic()
-    {
         // distance calculate
-        var distance = Vector3.Distance(transform.position, playerTrans.position);
-
-        if (distance < itemMagneticRange)
+        // var distance = Vector3.Distance(transform.position, playerTrans.position);
+        while (gameObject != null)
         {
+            await UniTask.NextFrame();
             transform.position = Vector3.MoveTowards(transform.position, playerTrans.position, itemMagneticMoveSpeed * Time.deltaTime);
-        } 
+        }
     }
 }
