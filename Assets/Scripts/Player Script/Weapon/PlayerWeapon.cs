@@ -6,11 +6,14 @@ using UnityEngine.InputSystem;
 public abstract class PlayerWeapon : MonoBehaviour // abstract class로 전환! + 업그레이드DB화
 {
     // weapon stats
-    public float weaponDamageRate;
-    public float weaponFireRate; // weapon it's own stat
-    public int bulletNum; // Ex ) shotgun
+    protected float weaponDamageRate;
+    protected float weaponFireRate; // weapon it's own stat
+    protected float fireRateTimer;
+    protected int bulletNum; // Ex ) shotgun
     protected int weaponLevel = 1;
 
+    // weapon description
+    public WeaponData weaponData;
 
     // muzzle position
     public Transform muzzle;
