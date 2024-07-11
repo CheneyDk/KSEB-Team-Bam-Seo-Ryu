@@ -15,18 +15,19 @@ public abstract class PlayerWeapon : MonoBehaviour // abstract class·Î ÀüÈ¯! + ¾
     // muzzle position
     public Transform muzzle;
 
-
     // weapon's bullet
     public GameObject bullet;
 
-    // Weapon Description
-
-
     // Player class
-    public Player player;
+    protected Player player;
+
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
 
     // auto fire
     protected abstract void Fire();
     // need to click
-    protected abstract void Fire(InputAction.CallbackContext context);
+    public abstract void Fire(InputAction.CallbackContext context);
 }

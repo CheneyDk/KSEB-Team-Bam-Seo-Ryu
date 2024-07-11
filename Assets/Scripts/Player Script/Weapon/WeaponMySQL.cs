@@ -43,7 +43,7 @@ public class WeaponMySQL : PlayerWeapon
     }
 
     // not player control weapon. So, not gonna use this Func.
-    protected override void Fire(InputAction.CallbackContext context)
+    public override void Fire(InputAction.CallbackContext context)
     {
         
     }

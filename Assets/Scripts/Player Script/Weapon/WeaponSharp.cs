@@ -23,7 +23,7 @@ public class WeaponSharp : PlayerWeapon
     }
 
     
-    protected override void Fire(InputAction.CallbackContext context)
+    public override void Fire(InputAction.CallbackContext context)
     {
         // when click
         if (context.started && fireRateTimer > weaponFireRate / player.playerAtkSpeed)

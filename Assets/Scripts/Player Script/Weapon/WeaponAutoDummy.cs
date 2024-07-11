@@ -36,7 +36,7 @@ public class WeaponAutoDummy : PlayerWeapon
     }
 
     // not player control weapon
-    protected override void Fire(InputAction.CallbackContext context)
+    public override void Fire(InputAction.CallbackContext context)
     {
         
     }

@@ -21,4 +21,19 @@ public class BulletSharp : PlayerBullet
             Destroy(gameObject); 
         }
     }
+
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            var EnemyComponent = collision.GetComponent<Enemy>();
+            if (EnemyComponent != null)
+            {
+                EnemyComponent.TakeDamage(bulletDamage);
+                Destroy(gameObject);
+            }
+        }
+    }
 }
+
+
