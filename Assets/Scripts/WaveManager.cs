@@ -10,6 +10,7 @@ public class WaveManager : MonoBehaviour
     public float waveTime = 60f;
     public float waveInterval = 3f;
     public float time;
+    public float magneticTime = 3f;
 
     private EnemySpawner enemySpawner;
 
@@ -28,7 +29,7 @@ public class WaveManager : MonoBehaviour
 
     private void Start()
     {
-        time = waveTime;
+        time = waveTime + magneticTime;
         enemySpawner = GetComponent<EnemySpawner>();
         if (enemySpawner == null)
         {
@@ -43,7 +44,7 @@ public class WaveManager : MonoBehaviour
         time -= Time.deltaTime;
         if (time < 0)
         {
-            time = waveTime + waveInterval;
+            time = waveTime + waveInterval + magneticTime;
         }
     }
 
@@ -59,7 +60,7 @@ public class WaveManager : MonoBehaviour
             DestroyAllEnemies();
 
             GameManager.Instance.player.playerMagneticRange = 100f;
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(magneticTime);
             GameManager.Instance.player.playerMagneticRange = 5f;
 
             GameManager.Instance.WaveEnd();
