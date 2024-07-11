@@ -12,36 +12,18 @@ public abstract class PlayerWeapon : MonoBehaviour // abstract class·Î ÀüÈ¯! + ¾
     protected int bulletNum; // Ex ) shotgun
     protected int weaponLevel = 1;
 
-    // weapon description
-    public WeaponData weaponData;
-
     // muzzle position
     public Transform muzzle;
 
 
     // weapon's bullet
     public GameObject bullet;
-    private Transform bulletRotation; // temp
 
     // Weapon Description
 
 
     // Player class
     public Player player;
-
-    // YH - flag
-    // Weapon class Init func
-    // called by Player - Awake(or Start)
-    // or just connect on Unity.
-
-    //public void Init(Transform muzzlePos)
-    //{
-    //    muzzle = muzzlePos;
-    //}
-
-    // live player Attack Speed apply func.
-    // if player Attack Speed is changed, plz call this func.
-
 
     // auto fire
     protected abstract void Fire();
