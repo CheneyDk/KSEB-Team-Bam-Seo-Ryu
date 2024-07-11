@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class WeaponSharp : PlayerWeapon
+public class WeaponAutoDummy : PlayerWeapon
 {
+
+
     private void Start()
     {
         // init stats
@@ -16,29 +18,28 @@ public class WeaponSharp : PlayerWeapon
         // player can fire imediately
         fireRateTimer = weaponFireRate;
     }
-
     private void Update()
     {
         fireRateTimer += Time.deltaTime;
+
+        // Auto Fire
+        Fire();
     }
 
-    
-    protected override void Fire(InputAction.CallbackContext context)
+    protected override void Fire()
     {
-        // when click
-        if (context.started && fireRateTimer > weaponFireRate / player.playerAtkSpeed)
+        if (fireRateTimer > weaponFireRate / player.playerAtkSpeed)
         {
             fireRateTimer = 0f;
             
-            // Debug.Log(bullet.GetComponent<PlayerBullet>().bulletDamage);
-            var tempBullet = Instantiate(bullet, muzzle.position, muzzle.rotation);
+            var tempBullet = Instantiate(bullet, muzzle.position, Quaternion.identity);
             tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
         }
     }
 
-    // dummy override
-    protected override void Fire()
+    // not player control weapon
+    protected override void Fire(InputAction.CallbackContext context)
     {
-
+        
     }
 }
