@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Services.Analytics.Internal;
 using UnityEngine;
 
 public class MeleeEnemy : Enemy
 {
+    [Header("Enemy Information")]
     [SerializeField]
     private float MeleeEnemyMaxHp = 20f;
     [SerializeField]
@@ -13,12 +15,14 @@ public class MeleeEnemy : Enemy
     [SerializeField]
     private float MeleeEnemyMoveSpeed =10f;
 
+    [Header("Exp")]
     [SerializeField]
     private GameObject Exp;
-    public int dropNumber = 3;
+    public int dropExpNumber = 3;
     private float spawnGroupRadius = 1f;
 
     private Transform player;
+    private float rotationSpeed = 10f;
 
     private void Awake()
     {
@@ -30,15 +34,23 @@ public class MeleeEnemy : Enemy
     {
         if (player == null) { return; }
         EnemyMovement();
+        Rotation();
     }
 
     public override void EnemyMovement()
     {
         if (player != null)
         {
-            Vector2 direction = (player.position - transform.position).normalized;
-            transform.Translate(direction * MeleeEnemyMoveSpeed * Time.deltaTime);
+            transform.Translate(Vector2.up * MeleeEnemyMoveSpeed * Time.deltaTime);
         }
+    }
+
+    private void Rotation()
+    {
+        Vector2 direction = (player.position - transform.position).normalized;
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+        float angle = Mathf.LerpAngle(transform.eulerAngles.z, targetAngle, Time.deltaTime * rotationSpeed);
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     public override void TakeDamage(float damage)
@@ -47,7 +59,7 @@ public class MeleeEnemy : Enemy
         if (MeleeEnemyCurtHP <= 0)
         {
             Destroy(gameObject);
-            Drop(dropNumber);
+            Drop(dropExpNumber);
         }
     }
 

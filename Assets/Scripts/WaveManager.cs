@@ -14,22 +14,9 @@ public class WaveManager : MonoBehaviour
 
     private EnemySpawner enemySpawner;
 
-
-
-    private int Test;
-    public int numbertest
-    {
-        get => Test;
-        set
-        {
-
-            Test = value;
-        }
-    }
-
     private void Start()
     {
-        time = waveTime + magneticTime;
+        time = waveTime;
         enemySpawner = GetComponent<EnemySpawner>();
         if (enemySpawner == null)
         {
@@ -41,10 +28,9 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
-        time -= Time.deltaTime;
-        if (time < 0)
+        if (time > 0)
         {
-            time = waveTime + waveInterval + magneticTime;
+            time -= Time.deltaTime;
         }
     }
 
@@ -70,6 +56,7 @@ public class WaveManager : MonoBehaviour
             {
                 Debug.Log($"Wave {curWave} Loading...");
                 yield return new WaitForSeconds(waveInterval);
+                time = waveTime;
             }
         }
         Debug.Log("All Wave Clear!");

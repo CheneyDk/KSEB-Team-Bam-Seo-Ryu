@@ -8358,6 +8358,7 @@ MonoBehaviour:
   waveTime: 10
   waveInterval: 2
   time: 0
+  magneticTime: 3
 --- !u!1 &2012950541
 GameObject:
   m_ObjectHideFlags: 0

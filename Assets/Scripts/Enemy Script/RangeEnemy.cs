@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RangeEnemy : Enemy
 {
+    [Header("Enemy Information")]
     [SerializeField]
     private float RangeEnemyMaxHp = 10f;
     [SerializeField]
@@ -13,8 +14,8 @@ public class RangeEnemy : Enemy
     [SerializeField]
     private float RangeEnemyMoveSpeed = 7f;
 
-
-    private float playerEnemyRange = 5f;
+    private float rotationSpeed = 10f;
+    private float playerEnemyRange = 15f;
     private float attackCooldown = 1f;
     private float bulletSpeed = 5f;
 
@@ -23,9 +24,10 @@ public class RangeEnemy : Enemy
     private bool canAttack = true;
     private Transform player;
 
+    [Header("Exp")]
     [SerializeField]
     private GameObject Exp;
-    public int dropNumber = 3;
+    public int dropExpNumber = 3;
     private float spawnGroupRadius = 1f;
 
     private void Awake()
@@ -39,6 +41,7 @@ public class RangeEnemy : Enemy
     {
         if(player == null) { return; }
         EnemyMovement();
+        Rotation();
     }
 
     public override void EnemyMovement()
@@ -48,8 +51,7 @@ public class RangeEnemy : Enemy
             float distanceToPlayer = Vector2.Distance(transform.position, player.position);
             if (distanceToPlayer > playerEnemyRange)
             {
-                Vector2 direction = (player.position - transform.position).normalized;
-                transform.Translate(direction * RangeEnemyMoveSpeed * Time.deltaTime);
+                transform.Translate(Vector2.up * RangeEnemyMoveSpeed * Time.deltaTime);
             }
             else
             {
@@ -59,6 +61,14 @@ public class RangeEnemy : Enemy
                 }
             }
         }
+    }
+
+    private void Rotation()
+    {
+        Vector2 direction = (player.position - transform.position).normalized;
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+        float angle = Mathf.LerpAngle(transform.eulerAngles.z, targetAngle, Time.deltaTime * rotationSpeed);
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     private IEnumerator RangeAtk()
@@ -81,7 +91,7 @@ public class RangeEnemy : Enemy
         if (RangeEnemyCurtHP <= 0)
         {
             Destroy(gameObject);
-            Drop(dropNumber);
+            Drop(dropExpNumber);
         }
     }
 

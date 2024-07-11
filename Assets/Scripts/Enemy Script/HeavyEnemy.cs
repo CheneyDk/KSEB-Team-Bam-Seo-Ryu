@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HeavyEnemy : Enemy
 {
+    [Header("Enemy Information")]
     [SerializeField]
     private float HeavyEnemyMaxHp = 40f;
     [SerializeField]
@@ -18,16 +19,15 @@ public class HeavyEnemy : Enemy
     public float dashRange = 15f;
     public float dashDelay = 1f;
 
-
     private float playerEnemyRange = 8f;
-
     private bool canDash = false;
 
     private Transform player;
 
+    [Header("Exp")]
     [SerializeField]
     private GameObject Exp;
-    public int dropNumber = 3;
+    public int dropExpNumber = 3;
     private float spawnGroupRadius = 1f;
 
     private void Awake()
@@ -92,7 +92,7 @@ public class HeavyEnemy : Enemy
         if (HeavyEnemyCurtHP <= 0)
         {
             Destroy(gameObject);
-            Drop(dropNumber);
+            Drop(dropExpNumber);
         }
     }
 
