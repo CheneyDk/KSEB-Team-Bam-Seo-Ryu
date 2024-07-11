@@ -13,7 +13,7 @@ public abstract class PlayerBullet : MonoBehaviour
 
     // delete
     protected float timeCounter = 0f;
-    public const float bulletLifeTime = 5f;
+    protected float bulletLifeTime = 5f;
 
     // YH - call Init func in Start func
 
