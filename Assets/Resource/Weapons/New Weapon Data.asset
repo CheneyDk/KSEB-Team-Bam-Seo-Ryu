@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponImage: {fileID: 21300000, guid: ef16f83ad6ca57b49abf47f8e3a8be0c, type: 3}
   weaponName: test item 1
+  weapon: {fileID: 1530383843510635486, guid: 4573d9f425d75b246b130f0df5ddd51f, type: 3}
   weaponDesc: this is a test for weapon 1
-  type: 0

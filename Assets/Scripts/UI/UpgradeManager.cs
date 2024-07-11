@@ -27,6 +27,9 @@ public class UpgradeManager : MonoBehaviour
 
     private bool isLevelUp = false;
 
+    [Header("Player Weapon")]
+    public Transform playerWeaponParent;
+
     public void OnUpgrade(bool levelup)
     {
         UpgradeUI.SetActive(true);
@@ -144,7 +147,15 @@ public class UpgradeManager : MonoBehaviour
         else
         {
             itemList.Add(item);
+            AddItemToPlayer(item.weapon);
             Debug.Log($"{item.weaponName} added.");
         }
+    }
+
+    private void AddItemToPlayer(GameObject item)
+    {
+        Instantiate(item, playerWeaponParent);
+        //GameObject newItem = Instantiate(item, playerWeaponParent);
+        //newItem.transform.localPosition = Vector3.zero;
     }
 }
