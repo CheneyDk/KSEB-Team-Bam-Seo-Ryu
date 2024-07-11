@@ -7,7 +7,10 @@ public abstract class Item : MonoBehaviour
 {
     // item values
     protected float value;
-    
+
+    // flags
+    protected bool isDestroyed = false;
+
     // magnetic system
     private float itemMagneticMoveSpeed = 30f;
 
@@ -38,9 +41,10 @@ public abstract class Item : MonoBehaviour
 
         // distance calculate
         // var distance = Vector3.Distance(transform.position, playerTrans.position);
-        while (gameObject != null)
+        while (true)
         {
             await UniTask.NextFrame();
+            if (isDestroyed) return;
             transform.position = Vector3.MoveTowards(transform.position, playerTrans.position, itemMagneticMoveSpeed * Time.deltaTime);
         }
     }
