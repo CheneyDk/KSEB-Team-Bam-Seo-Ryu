@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,16 +6,22 @@ using UnityEngine.InputSystem;
 
 public class WeaponMySQL : PlayerWeapon
 {
+    private float bulletFireInterval = 0.5f;
+    private Quaternion rotateRight = new(0f, 180f, 0f, 1f);
+    private Quaternion rotateLeft = new(0f, 0f, 0f, 1f); 
+
     private void Start()
     {
         // init stats
         weaponDamageRate = 3.5f;
-        weaponFireRate = 0.1f;
+        weaponFireRate = 3f;
         bulletNum = 1;
         weaponLevel = 1;
 
         // player can fire imediately
         fireRateTimer = weaponFireRate;
+
+        muzzle = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void Update()
@@ -31,15 +38,21 @@ public class WeaponMySQL : PlayerWeapon
         if (fireRateTimer > weaponFireRate / player.playerAtkSpeed)
         {
             fireRateTimer = 0f;
-
-            // left side
-            var tempBulletLeft = Instantiate(bullet, muzzle.position, Quaternion.identity);
-            
-            // right side
-            var tempBulletRight = Instantiate(bullet, muzzle.position, Quaternion.identity);
-            tempBulletLeft.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
-            tempBulletLeft.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+            ThrowSQL().Forget();
         }
+    }
+
+    private async UniTask ThrowSQL()
+    {
+        // right side
+        var tempBulletRight = Instantiate(bullet, muzzle.position, rotateRight);
+        tempBulletRight.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+
+        await UniTask.WaitForSeconds(bulletFireInterval); // 0.5f
+
+        // left side
+        var tempBulletLeft = Instantiate(bullet, muzzle.position, rotateLeft);
+        tempBulletLeft.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
     }
 
     // not player control weapon. So, not gonna use this Func.
