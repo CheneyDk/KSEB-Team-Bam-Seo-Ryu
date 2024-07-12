@@ -6,7 +6,7 @@ public abstract class PlayerBullet : MonoBehaviour
 {
     // bullet stats / initialize needed
     
-    private float bulletDamage;
+    protected float bulletDamage;
     public float bulletSpeed;
 
     protected Vector2 bulletVector;
@@ -23,16 +23,5 @@ public abstract class PlayerBullet : MonoBehaviour
     }
 
     // if stay triggered, give damage
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Enemy"))
-        {
-            var EnemyComponent = collision.GetComponent<Enemy>();
-            if (EnemyComponent != null)
-            {
-                EnemyComponent.TakeDamage(bulletDamage);
-                Destroy(gameObject);
-            }
-        }
-    }
+    protected abstract void OnTriggerEnter2D(Collider2D collision);
 }
