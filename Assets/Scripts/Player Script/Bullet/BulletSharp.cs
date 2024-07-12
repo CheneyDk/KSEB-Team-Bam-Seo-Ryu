@@ -18,7 +18,7 @@ public class BulletSharp : PlayerBullet
         timeCounter += Time.deltaTime;
         if (timeCounter > bulletLifeTime)
         {
-            Destroy(gameObject); 
+            Destroy(gameObject);
         }
     }
 
