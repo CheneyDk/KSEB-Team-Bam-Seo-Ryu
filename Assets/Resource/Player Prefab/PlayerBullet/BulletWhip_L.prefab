@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6398188270244243918}
   - component: {fileID: 335976810723247266}
-  - component: {fileID: 5167862967308975693}
   - component: {fileID: 1493943391571368378}
+  - component: {fileID: -2883697371620557882}
   m_Layer: 0
   m_Name: BulletWhip_L
   m_TagString: Untagged
@@ -86,8 +86,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &5167862967308975693
-CircleCollider2D:
+--- !u!114 &1493943391571368378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3675868750621725284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23fc4ada99cacee469fd41afa6e3b8c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpeed: -0.0005
+  fadeDuration: 0.3
+--- !u!61 &-2883697371620557882
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -118,19 +132,16 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.075, y: 0.01}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.64, y: 0.64}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.5
---- !u!114 &1493943391571368378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3675868750621725284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23fc4ada99cacee469fd41afa6e3b8c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletSpeed: -0.0005
+  m_Size: {x: 0.45, y: 0.15}
+  m_EdgeRadius: 0
