@@ -6,32 +6,38 @@ using UnityEngine.UIElements;
 
 public class BulletMySQL : PlayerBullet
 {
+    // transform
     private Vector2 SQLVector = new(-1f, 3f);
+    private float rotateSpeed = 1f;
+
+    // components
     private Rigidbody2D rigid;
+
+    // flags
+    private bool isExist = true;
 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         bulletVector = transform.TransformDirection(SQLVector);
+
     }
 
     private void Start()
     {
         // throw in parabola (포물선)
         
-        bulletLifeTime = 10f;
+        bulletLifeTime = 7f;
 
         // bullet move
         rigid.AddForce(bulletVector * bulletSpeed, ForceMode2D.Impulse);
 
+        // rotation
+        DolpineRotate().Forget();
+
         // Destroy
         ObjDestroyTimer().Forget();
     }
-
-    //private void Update()
-    //{
-    //    // rotation - 시계? 반시계?
-    //}
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
@@ -45,9 +51,20 @@ public class BulletMySQL : PlayerBullet
         }
     }
 
+    private async UniTask DolpineRotate()
+    {
+        while (isExist)
+        {
+            await UniTask.NextFrame();
+            await UniTask.WaitUntil(() => GameManager.Instance.isGameContinue);
+            transform.Rotate(Vector3.forward, rotateSpeed);
+        }
+    }
+
     private async UniTask ObjDestroyTimer()
     {
         await UniTask.WaitForSeconds(bulletLifeTime);
+        isExist = false;
         Destroy(gameObject);
     }
 }

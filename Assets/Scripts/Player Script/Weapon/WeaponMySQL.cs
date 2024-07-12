@@ -7,9 +7,8 @@ using UnityEngine.InputSystem;
 public class WeaponMySQL : PlayerWeapon
 {
     private float bulletFireInterval = 0.5f;
-    private Quaternion rotateRight;
-    private Quaternion rotateLeft; 
-
+    private Quaternion rotateRight = new(0f, 180f, 0f, 1f);
+    private Quaternion rotateLeft = new(0f, 0f, 0f, 1f); 
 
     private void Start()
     {
@@ -22,9 +21,7 @@ public class WeaponMySQL : PlayerWeapon
         // player can fire imediately
         fireRateTimer = weaponFireRate;
 
-        // rotate
-        rotateRight = transform.rotation;
-        rotateLeft = new Quaternion (rotateRight.x, 0f, rotateRight.z, rotateRight.w);
+        muzzle = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void Update()

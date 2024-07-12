@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [Header("- System")]
     // public GameObject WaveManager;
     private float timeScaleProduct = 1f;
+    public bool isGameContinue = true;
 
     // class import
     [SerializeField]
@@ -50,6 +51,7 @@ public class GameManager : MonoBehaviour
     public void ResetGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        isGameContinue = true;
     }
 
     public void PauseGame()
@@ -59,6 +61,7 @@ public class GameManager : MonoBehaviour
 
         // 2. TimeScale 0
         timeScaleProduct = 0f;
+        isGameContinue = false;
 
         // 3. acition map toggle -> before call this func
         // 4. Setting Stats texts
@@ -72,6 +75,7 @@ public class GameManager : MonoBehaviour
 
         // 2. TimeScale 1
         timeScaleProduct = 1f;
+        isGameContinue = true;
     }
 
     public void InitStatsText()
@@ -90,6 +94,7 @@ public class GameManager : MonoBehaviour
         UpgradeUI.SetActive(true);
         UpgradeUI.GetComponent<UpgradeManager>().OnUpgrade(true);
         timeScaleProduct = 0f;
+        isGameContinue = false;
     }
 
     public void WaveEnd()
@@ -97,6 +102,7 @@ public class GameManager : MonoBehaviour
         UpgradeUI.SetActive(true);
         UpgradeUI.GetComponent<UpgradeManager>().OnUpgrade(false);
         timeScaleProduct = 0f;
+        isGameContinue = false;
     }
 
     public void EndUpgrade()
@@ -104,5 +110,6 @@ public class GameManager : MonoBehaviour
         UpgradeUI.gameObject.SetActive(false);
         player.SwitchToPlayerControl();
         timeScaleProduct = 1f;
+        isGameContinue = true;
     }
 }
