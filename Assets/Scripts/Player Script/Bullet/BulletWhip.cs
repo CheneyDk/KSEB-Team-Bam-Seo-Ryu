@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletSharp : PlayerBullet
+public class BulletWhip : PlayerBullet
 {
     private void Start()
     {
-        // go straight
-        bulletVector = Vector2.right;
+        
+        bulletLifeTime = 0.3f;
     }
 
     private void Update()
@@ -30,7 +30,6 @@ public class BulletSharp : PlayerBullet
             if (EnemyComponent != null)
             {
                 EnemyComponent.TakeDamage(bulletDamage);
-                Destroy(gameObject);
             }
         }
     }
