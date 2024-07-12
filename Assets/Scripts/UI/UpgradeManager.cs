@@ -155,7 +155,5 @@ public class UpgradeManager : MonoBehaviour
     private void AddItemToPlayer(GameObject item)
     {
         Instantiate(item, playerWeaponParent);
-        //GameObject newItem = Instantiate(item, playerWeaponParent);
-        //newItem.transform.localPosition = Vector3.zero;
     }
 }

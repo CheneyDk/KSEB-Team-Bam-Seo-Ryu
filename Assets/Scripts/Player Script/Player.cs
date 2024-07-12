@@ -174,7 +174,7 @@ public class Player : MonoBehaviour
     {
         // 마우스 위치
         Vector2 mousePosition = Mouse.current.position.ReadValue();
-        Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane)); ;
+        Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane));
         
 
         Vector3 direction = worldMousePosition - playerArm.transform.position;

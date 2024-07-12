@@ -12,6 +12,8 @@ public class WaveManager : MonoBehaviour
     public float time;
     public float magneticTime = 3f;
 
+    public static bool waveIsStarted = false;
+
     private EnemySpawner enemySpawner;
 
     private void Start()
@@ -40,8 +42,9 @@ public class WaveManager : MonoBehaviour
         {
             Debug.Log($"Wave {curWave} Start!");
             enemySpawner.StartSpawning();
+            waveIsStarted = true;
             yield return new WaitForSeconds(waveTime);
-
+            waveIsStarted = false;
             enemySpawner.StopSpawning();
             DestroyAllEnemies();
 

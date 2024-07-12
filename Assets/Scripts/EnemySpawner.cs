@@ -103,10 +103,13 @@ public class EnemySpawner : MonoBehaviour
 
                 Vector2 groupOffset = Random.insideUnitCircle * spawnGroupRadius;
                 Vector2 finalSpawnPosition = spawnPosition + groupOffset;
-                spawnPositions.Add(finalSpawnPosition);
+                finalSpawnPosition.x = Mathf.Clamp(finalSpawnPosition.x, -28f, 28f);
+                finalSpawnPosition.y = Mathf.Clamp(finalSpawnPosition.y, -28f, 28f);
+                Vector2 limitSpawnPosition = new Vector2(finalSpawnPosition.x, finalSpawnPosition.y);
+                spawnPositions.Add(limitSpawnPosition);
 
                 // 경고 표시 생성
-                GameObject warning = Instantiate(WarningPrefab, finalSpawnPosition, Quaternion.identity);
+                GameObject warning = Instantiate(WarningPrefab, limitSpawnPosition, Quaternion.identity);
                 Destroy(warning, warningDuration);
             }
 
