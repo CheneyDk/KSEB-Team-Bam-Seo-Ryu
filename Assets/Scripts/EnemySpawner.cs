@@ -103,8 +103,8 @@ public class EnemySpawner : MonoBehaviour
 
                 Vector2 groupOffset = Random.insideUnitCircle * spawnGroupRadius;
                 Vector2 finalSpawnPosition = spawnPosition + groupOffset;
-                finalSpawnPosition.x = Mathf.Clamp(finalSpawnPosition.x, -28f, 28f);
-                finalSpawnPosition.y = Mathf.Clamp(finalSpawnPosition.y, -28f, 28f);
+                finalSpawnPosition.x = Mathf.Clamp(finalSpawnPosition.x, -25f, 25f);
+                finalSpawnPosition.y = Mathf.Clamp(finalSpawnPosition.y, -25f, 25f);
                 Vector2 limitSpawnPosition = new Vector2(finalSpawnPosition.x, finalSpawnPosition.y);
                 spawnPositions.Add(limitSpawnPosition);
 
