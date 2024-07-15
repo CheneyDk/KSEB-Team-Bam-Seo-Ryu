@@ -9535,11 +9535,11 @@ MonoBehaviour:
   MESpawnGroupRadius: 1
   RESpawnRate: 1
   RESpawnStartTime: 1
-  RESpawnNumber: 0
+  RESpawnNumber: 3
   RESpawnGroupRadius: 1
   HESpawnRate: 1
   HESpawnStartTime: 1
-  HESpawnNumber: 0
+  HESpawnNumber: 2
   HESpawnGroupRadius: 1
   noSpawnRange: 5
   EnemySpawnRange: 10

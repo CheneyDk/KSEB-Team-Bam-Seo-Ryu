@@ -19,7 +19,7 @@ public class WeaponSharp : PlayerWeapon
         // init stats
         weaponDamageRate = 1f;
         weaponFireRate = 1f;
-        bulletNum = 5;
+        bulletNum = 3;
         weaponLevel = 1;
 
         // player can fire imediately
@@ -31,7 +31,7 @@ public class WeaponSharp : PlayerWeapon
         fireRateTimer += Time.deltaTime;
     }
 
-    
+    // Fire - AutoFire - SharpFire Coroutine
     public override void Fire(InputAction.CallbackContext context)
     {
         // for debug
@@ -56,6 +56,7 @@ public class WeaponSharp : PlayerWeapon
         }
     }
 
+    // you can fire while hold gun
     private async UniTask AutoFire()
     {
         // cancel token
@@ -68,6 +69,7 @@ public class WeaponSharp : PlayerWeapon
         }
     }
 
+    // instantiate bullet for 3 ~ 8 times
     private async UniTask SharpFire()
     {
         for (int i = 0; i < bulletNum; i++)
@@ -88,6 +90,7 @@ public class WeaponSharp : PlayerWeapon
 
         // stat change - damage rate, fireRate, bulletNum, etc.
         weaponDamageRate += 0.1f;
+        weaponSharpFireInterval -= 0.004f;
         bulletNum += 1;
 
         if (weaponLevel > 4) isMaxLevel = true;
