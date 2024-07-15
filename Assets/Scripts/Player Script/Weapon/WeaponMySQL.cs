@@ -8,8 +8,7 @@ public class WeaponMySQL : PlayerWeapon
 {
     private float bulletFireInterval = 0.5f;
     private Quaternion rotateRight = new(0f, 180f, 0f, 1f);
-    private Quaternion rotateLeft = new(0f, 0f, 0f, 1f); 
-    private bool isDetroyed = false;
+    private Quaternion rotateLeft = new(0f, 0f, 0f, 1f);
 
     private void Start()
     {

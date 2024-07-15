@@ -18,7 +18,7 @@ public class WeaponSharp : PlayerWeapon
     {
         // init stats
         weaponDamageRate = 1f;
-        weaponFireRate = 0.5f;
+        weaponFireRate = 1f;
         bulletNum = 5;
         weaponLevel = 1;
 
@@ -40,8 +40,9 @@ public class WeaponSharp : PlayerWeapon
         // when hold canceled
         if (context.canceled)
         {
-            cancelFire.Cancel();
-            cancelFire.Dispose(); // memory disallocate
+            cancelFire?.Cancel();
+            cancelFire?.Dispose(); // memory disallocate
+            cancelFire = null;
         }
 
 
