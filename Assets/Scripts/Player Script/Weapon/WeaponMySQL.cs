@@ -9,6 +9,7 @@ public class WeaponMySQL : PlayerWeapon
     private float bulletFireInterval = 0.5f;
     private Quaternion rotateRight = new(0f, 180f, 0f, 1f);
     private Quaternion rotateLeft = new(0f, 0f, 0f, 1f); 
+    private bool isDetroyed = false;
 
     private void Start()
     {
@@ -35,6 +36,8 @@ public class WeaponMySQL : PlayerWeapon
     // Auto Fire
     protected override void Fire()
     {
+
+
         if (fireRateTimer > weaponFireRate / player.playerAtkSpeed)
         {
             fireRateTimer = 0f;
@@ -53,6 +56,11 @@ public class WeaponMySQL : PlayerWeapon
         // left side
         var tempBulletLeft = Instantiate(bullet, muzzle.position, rotateLeft);
         tempBulletLeft.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+    }
+
+    public override void Upgrade()
+    {
+
     }
 
     // not player control weapon. So, not gonna use this Func.

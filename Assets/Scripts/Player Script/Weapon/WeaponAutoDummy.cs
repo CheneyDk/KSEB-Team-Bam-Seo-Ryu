@@ -40,4 +40,9 @@ public class WeaponAutoDummy : PlayerWeapon
     {
         
     }
+
+    public override void Upgrade()
+    {
+        // just dummy
+    }
 }

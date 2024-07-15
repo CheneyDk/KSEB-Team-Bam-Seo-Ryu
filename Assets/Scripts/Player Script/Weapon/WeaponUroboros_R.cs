@@ -44,4 +44,9 @@ public class WeaponUroboros_R : PlayerWeapon
     {
 
     }
+
+    public override void Upgrade()
+    {
+        
+    }
 }

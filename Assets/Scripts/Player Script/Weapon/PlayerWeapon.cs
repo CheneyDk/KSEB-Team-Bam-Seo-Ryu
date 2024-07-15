@@ -11,6 +11,7 @@ public abstract class PlayerWeapon : MonoBehaviour // abstract class·Î ÀüÈ¯! + ¾
     protected float fireRateTimer;
     protected int bulletNum; // Ex ) shotgun
     protected int weaponLevel = 1;
+    public bool isMaxLevel = false;
 
     // muzzle position
     public Transform muzzle;
@@ -30,4 +31,7 @@ public abstract class PlayerWeapon : MonoBehaviour // abstract class·Î ÀüÈ¯! + ¾
     protected abstract void Fire();
     // need to click
     public abstract void Fire(InputAction.CallbackContext context);
+
+    // Upgrade func
+    public abstract void Upgrade();
 }
