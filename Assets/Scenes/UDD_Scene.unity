@@ -1356,7 +1356,7 @@ MonoBehaviour:
   playerWeaponList: []
   playerItemList: []
   maxItemNumber: 4
-  playerWeaponParent: {fileID: 1922405273}
+  playerWeaponParent: {fileID: 407124072}
 --- !u!1 &310989112
 GameObject:
   m_ObjectHideFlags: 0
@@ -2047,6 +2047,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 405437601}
   m_CullTransparentMesh: 1
+--- !u!4 &407124072 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7577071843501220398, guid: 5a3492f0c824ae54eb9f6b0206e183ab, type: 3}
+  m_PrefabInstance: {fileID: 2413117725714571240}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &422981371
 GameObject:
   m_ObjectHideFlags: 0
@@ -9500,6 +9505,7 @@ SceneRoots:
   - {fileID: 2081913075}
   - {fileID: 1620820857}
   - {fileID: 996812868}
+  - {fileID: 2413117725714571240}
   - {fileID: 65655188}
   - {fileID: 955154998}
   - {fileID: 158310859}
@@ -9507,4 +9513,3 @@ SceneRoots:
   - {fileID: 1852131536}
   - {fileID: 577996787}
   - {fileID: 2034099218}
-  - {fileID: 2413117725714571240}
