@@ -8,6 +8,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Hide Mouse Cursor")]
+    public bool hideMouse = false;
+
     public static GameManager Instance;
     // UI
     [Header("- UI")]
@@ -27,6 +30,15 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        //////////////////////
+
+        if (hideMouse)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
+        //////////////////////
         Instance = this; // singleton
 
         pauseWindow = PauseUI.GetComponent<PauseWindow>();

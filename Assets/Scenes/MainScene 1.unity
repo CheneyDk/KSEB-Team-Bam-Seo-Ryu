@@ -285,6 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc8d063ccd5d43f45accab8abe354ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hideMouse: 0
   GameoverUI: {fileID: 158310855}
   PauseUI: {fileID: 955154994}
   UpgradeUI: {fileID: 283899587}
@@ -9535,11 +9536,11 @@ MonoBehaviour:
   MESpawnGroupRadius: 1
   RESpawnRate: 1
   RESpawnStartTime: 1
-  RESpawnNumber: 0
+  RESpawnNumber: 1
   RESpawnGroupRadius: 1
   HESpawnRate: 1
   HESpawnStartTime: 1
-  HESpawnNumber: 0
+  HESpawnNumber: 1
   HESpawnGroupRadius: 1
   noSpawnRange: 5
   EnemySpawnRange: 10
