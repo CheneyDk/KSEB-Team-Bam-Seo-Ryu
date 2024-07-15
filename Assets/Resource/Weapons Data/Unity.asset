@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eca71ca24a078264b9780d1aee7c37ec, type: 3}
-  m_Name: MySQLData
+  m_Name: Unity
   m_EditorClassIdentifier: 
-  weaponImage: {fileID: 21300000, guid: 4d4e940847fdb2047aaf0ab2e7d1f132, type: 3}
-  weaponName: MyDolphine
-  weapon: {fileID: 1510536386484217596, guid: 05e319a9d203c45419ffec3f471dfc02, type: 3}
-  weaponDesc: This smart and data based dolphine will terminate all the bugs for
-    you
+  weaponImage: {fileID: 21300000, guid: ef16f83ad6ca57b49abf47f8e3a8be0c, type: 3}
+  weaponName: '{Unity}'
+  weapon: {fileID: 4635922784251638873, guid: a1e318e1ed7455349a78f8eeddaac44c, type: 3}
+  weaponDesc: "{\n\tAutoAim = true;\n\tDamge = 5;\n\tSpeed = 10;\n}"

@@ -47,6 +47,7 @@ public class Player : MonoBehaviour
     [Header("- GameObjects")]
     public Transform playerArm;
     public GameObject weapon; // list needed
+    public GameObject constText;
 
     // Input System
     private PlayerInput playerInput;
@@ -129,9 +130,11 @@ public class Player : MonoBehaviour
 
         Debug.Log("sprint");
 
+        constText.SetActive(true);
+
         // temp sprint visual effects
         var tempColor = sprite.color;
-        sprite.color = Color.red;
+        sprite.color = Color.yellow;
 
         // invincible & move speed
         isInvincible = true;
@@ -168,6 +171,7 @@ public class Player : MonoBehaviour
 
         // flag -- YH: for test
         sprite.color = color;
+        constText.SetActive(false);
     }
 
     private void playerArmRotate()

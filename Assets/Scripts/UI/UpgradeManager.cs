@@ -30,6 +30,8 @@ public class UpgradeManager : MonoBehaviour
     [Header("Player Weapon")]
     public Transform playerWeaponParent;
 
+    public GameUI gameUI;
+
     public void OnUpgrade(bool levelup)
     {
         UpgradeUI.SetActive(true);
@@ -136,7 +138,7 @@ public class UpgradeManager : MonoBehaviour
         isLevelUp = false;
     }
 
-    private void AddOrUpgradeItem(List<WeaponData> itemList, WeaponData item, int maxItems = int.MaxValue)
+    private void AddOrUpgradeItem(List<WeaponData> itemList, WeaponData item, int maxItems)
     {
         var existingItem = itemList.Find(i => i.weaponName == item.weaponName);
         if (existingItem != null)
@@ -147,10 +149,19 @@ public class UpgradeManager : MonoBehaviour
         else
         {
             itemList.Add(item);
+            if (itemList == playerWeaponList)
+            {
+                gameUI.WeaponIconList(itemList);
+            }
+            else if (itemList == playerItemList)
+            {
+                gameUI.ItemIconList(itemList);
+            }
             AddItemToPlayer(item.weapon);
             Debug.Log($"{item.weaponName} added.");
         }
     }
+
 
     private void AddItemToPlayer(GameObject item)
     {

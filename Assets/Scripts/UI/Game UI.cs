@@ -25,6 +25,11 @@ public class GameUI : MonoBehaviour
     [SerializeField]
     private WaveManager waveManager;
 
+    public Image[] weaponList;
+    public Image[] itemList;
+
+    private UpgradeManager upgradeManager;
+
     [SerializeField]
     private Player player;
 
@@ -44,4 +49,23 @@ public class GameUI : MonoBehaviour
         healthBar.value = healthBar.maxValue * (player.playerCurHp / player.playerMaxHp);
         expBar.value = expBar.maxValue * (player.playerCurExp / player.playerMaxExp);
     }
+
+    public void WeaponIconList(List<WeaponData> dataList)
+    {
+        for (int i = 0; i < dataList.Count; i++)
+        {
+            weaponList[i].sprite = dataList[i].weaponImage;
+            weaponList[i].gameObject.SetActive(true);
+        }
+    }
+
+    public void ItemIconList(List<WeaponData> dataList)
+    {
+        for (int i = 0; i < dataList.Count; i++)
+        {
+            itemList[i].sprite = dataList[i].weaponImage;
+            itemList[i].gameObject.SetActive(true);
+        }
+    }
+
 }
