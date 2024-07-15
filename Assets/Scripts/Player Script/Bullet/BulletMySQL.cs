@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public class BulletMySQL : PlayerBullet
 {
     // transform
-    private Vector2 SQLVector = new(-1f, 3f);
+    private Vector2 SQLVector; // new(-1f, 3f) - standard
     private float rotateSpeed = 1f;
 
     // components
@@ -18,6 +18,7 @@ public class BulletMySQL : PlayerBullet
 
     private void Awake()
     {
+        SQLVector = new Vector2(Random.Range(-0.5f, -3f), Random.Range(1.5f, 4f));
         rigid = GetComponent<Rigidbody2D>();
         bulletVector = transform.TransformDirection(SQLVector);
 

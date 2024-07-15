@@ -13,7 +13,7 @@ public class WeaponMySQL : PlayerWeapon
     private void Start()
     {
         // init stats
-        weaponDamageRate = 3.5f;
+        weaponDamageRate = 1.5f;
         weaponFireRate = 3f;
         bulletNum = 1;
         weaponLevel = 1;
@@ -35,8 +35,6 @@ public class WeaponMySQL : PlayerWeapon
     // Auto Fire
     protected override void Fire()
     {
-
-
         if (fireRateTimer > weaponFireRate / player.playerAtkSpeed)
         {
             fireRateTimer = 0f;
@@ -47,19 +45,33 @@ public class WeaponMySQL : PlayerWeapon
     private async UniTask ThrowSQL()
     {
         // right side
-        var tempBulletRight = Instantiate(bullet, muzzle.position, rotateRight);
-        tempBulletRight.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
-
+        for (int i = 0; i < bulletNum; i++)
+        {
+            var tempBulletRight = Instantiate(bullet, muzzle.position, rotateRight);
+            tempBulletRight.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+        }
+        
         await UniTask.WaitForSeconds(bulletFireInterval); // 0.5f
 
         // left side
-        var tempBulletLeft = Instantiate(bullet, muzzle.position, rotateLeft);
-        tempBulletLeft.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+        for (int i = 0;i < bulletNum;i++)
+        {
+            var tempBulletLeft = Instantiate(bullet, muzzle.position, rotateLeft);
+            tempBulletLeft.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+        }
     }
 
     public override void Upgrade()
     {
+        if (isMaxLevel) return;
 
+        weaponLevel += 1;
+        weaponDamageRate += 0.1f;
+
+        // when weapon Level 3, 5 => bulletNum++
+        if (weaponLevel % 2 == 1) bulletNum++;
+
+        if (weaponLevel > 4) isMaxLevel = true;
     }
 
     // not player control weapon. So, not gonna use this Func.
