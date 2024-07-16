@@ -7,6 +7,7 @@ public class WeaponInternet : PlayerWeapon
 {
     private float autoTargetRange = 15f;
     private Vector2 bulletVector;
+    private float bulletRadius;
 
     void Start()
     {
@@ -14,6 +15,7 @@ public class WeaponInternet : PlayerWeapon
         weaponDamageRate = 0.5f;
         weaponFireRate = 5f;
         weaponLevel = 1;
+        bulletRadius = 15f; // max 25
 
         // can fire imediately
         fireRateTimer = weaponFireRate;
@@ -30,6 +32,13 @@ public class WeaponInternet : PlayerWeapon
 
     public override void Upgrade()
     {
+        if (isMaxLevel) return;
+
+        weaponLevel++;
+        weaponDamageRate += 0.05f;
+        bulletRadius += 2f;
+
+        if (weaponLevel > 4) isMaxLevel = true;
 
     }
 
@@ -45,15 +54,12 @@ public class WeaponInternet : PlayerWeapon
 
             bulletVector = (targetPosition - (Vector2)transform.position).normalized;
 
-            
-            
-
             // reset Timer
             fireRateTimer = 0f;
 
             var tempBullet = Instantiate(bullet, transform.position, Quaternion.identity);
             tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
-            tempBullet.GetComponent<BulletInternet>().SetBulletWWW(bulletVector);
+            tempBullet.GetComponent<BulletInternet>().SetBulletInternet(bulletVector, bulletRadius);
 
         }
     }

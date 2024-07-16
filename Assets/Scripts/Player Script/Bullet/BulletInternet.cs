@@ -27,7 +27,7 @@ public class BulletInternet : PlayerBullet
         Destroy(gameObject, bulletLifeTime);
     }
 
-    public void SetBulletWWW(Vector2 bulletV)
+    public void SetBulletInternet(Vector2 bulletV, float radius)
     {
         bulletVector = bulletV;
     }
@@ -38,8 +38,6 @@ public class BulletInternet : PlayerBullet
         damageTimer += Time.deltaTime;
         LastingDamage();
     }
-
-    
 
     // if hit enemy, bullet get bigger
     protected override void OnTriggerEnter2D(Collider2D collision)
@@ -69,17 +67,5 @@ public class BulletInternet : PlayerBullet
         {
             enemy.GetComponent<Enemy>().TakeDamage(bulletDamage);
         }
-    }
-
-
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if (damageTimer < dotDamageTimeInterval) return;
-    //    damageTimer = 0f;
-
-    //    if (collision.CompareTag("Enemy"))
-    //    {
-    //        collision.GetComponent<Enemy>().TakeDamage(bulletDamage);
-    //    }
-    //}    
+    }  
 }
