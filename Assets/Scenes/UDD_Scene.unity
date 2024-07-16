@@ -4551,6 +4551,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Python
       objectReference: {fileID: 0}
+    - target: {fileID: 2615487855624723305, guid: 5a3492f0c824ae54eb9f6b0206e183ab, type: 3}
+      propertyPath: constText
+      value: 
+      objectReference: {fileID: 1008801079}
     - target: {fileID: 3275481477621040725, guid: 5a3492f0c824ae54eb9f6b0206e183ab, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4761,6 +4765,11 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 2034099219}
   m_ConfineScreenEdges: 1
   m_Damping: 0
+--- !u!1 &1008801079 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2799498921057286685, guid: 5a3492f0c824ae54eb9f6b0206e183ab, type: 3}
+  m_PrefabInstance: {fileID: 976632760}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1012691004
 GameObject:
   m_ObjectHideFlags: 0
