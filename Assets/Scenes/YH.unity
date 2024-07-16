@@ -285,6 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc8d063ccd5d43f45accab8abe354ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hideMouse: 0
   GameoverUI: {fileID: 158310855}
   PauseUI: {fileID: 955154994}
   UpgradeUI: {fileID: 283899587}

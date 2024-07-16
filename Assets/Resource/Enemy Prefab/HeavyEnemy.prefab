@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 859925285519221752}
   - component: {fileID: -6037840418375506076}
   - component: {fileID: -7363298584472636064}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HeavyEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}

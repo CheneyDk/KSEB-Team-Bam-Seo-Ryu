@@ -34,9 +34,6 @@ public class WeaponSharp : PlayerWeapon
     // Fire - AutoFire - SharpFire Coroutine
     public override void Fire(InputAction.CallbackContext context)
     {
-        // for debug
-        // Debug.Log("context: " + context.performed);
-
         // when hold canceled
         if (context.canceled)
         {
@@ -44,7 +41,6 @@ public class WeaponSharp : PlayerWeapon
             cancelFire?.Dispose(); // memory disallocate
             cancelFire = null;
         }
-
 
         // when hold click
         if (context.started && fireRateTimer > weaponFireRate / player.playerAtkSpeed)
