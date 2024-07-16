@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class WeaponWWW : PlayerWeapon
+public class WeaponInternet : PlayerWeapon
 {
-    private float autoTargetRange = 5f;
+    private float autoTargetRange = 15f;
     private Vector2 bulletVector;
 
     void Start()
@@ -16,17 +16,17 @@ public class WeaponWWW : PlayerWeapon
         weaponLevel = 1;
 
         // can fire imediately
-        fireRateTimer = weaponFireRate / player.playerAtkSpeed;
+        fireRateTimer = weaponFireRate;
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         fireRateTimer += Time.deltaTime;
+
+        Fire();
     }
 
-    
 
     public override void Upgrade()
     {
@@ -39,18 +39,26 @@ public class WeaponWWW : PlayerWeapon
         {
             // calc bullet Vector
             Vector2 targetPosition = FindNearestEnemy();
-            bulletVector = (targetPosition - (Vector2)transform.position).normalized;
 
             // if there are no target, do not shoot
-            if (bulletVector == Vector2.zero) return;
+            if (targetPosition == Vector2.zero) return;
+
+            bulletVector = (targetPosition - (Vector2)transform.position).normalized;
+
+            
+            
+
+            // reset Timer
+            fireRateTimer = 0f;
 
             var tempBullet = Instantiate(bullet, transform.position, Quaternion.identity);
             tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
-            tempBullet.GetComponent<BulletWWW>().SetBulletWWW(bulletVector);
+            tempBullet.GetComponent<BulletInternet>().SetBulletWWW(bulletVector);
 
         }
     }
 
+    // Find nearest enemy and pass vector value to bullet
     private Vector2 FindNearestEnemy()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
