@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6664159314784826935}
   - component: {fileID: 6675213409850912587}
   m_Layer: 0
-  m_Name: Unity
+  m_Name: WeaponUnity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,5 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c64b65ac77f95104aa03b4f3b659da67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1270477733814697342, guid: 3bf649b608aa53141be55314de6adf09, type: 3}
+  isMaxLevel: 0
+  muzzle: {fileID: 0}
+  bullet: {fileID: 1270477733814697342, guid: 3bf649b608aa53141be55314de6adf09, type: 3}
   fireRate: 1

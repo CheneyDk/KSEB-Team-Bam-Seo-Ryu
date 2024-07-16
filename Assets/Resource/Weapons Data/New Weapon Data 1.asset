@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca71ca24a078264b9780d1aee7c37ec, type: 3}
   m_Name: New Weapon Data 1
   m_EditorClassIdentifier: 
-  weaponImage: {fileID: 21300000, guid: 3e6a8885b6a16774c87f4210b88cdfcb, type: 3}
+  weaponImage: {fileID: 21300000, guid: cad34ea3f2ec59a489dc13e0b86dc970, type: 3}
   weaponName: test item 2
   weapon: {fileID: 4635922784251638873, guid: a1e318e1ed7455349a78f8eeddaac44c, type: 3}
   weaponDesc: this is a test for weapon 2

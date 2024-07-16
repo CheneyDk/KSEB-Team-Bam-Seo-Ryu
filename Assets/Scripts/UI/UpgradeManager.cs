@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.UI;
@@ -32,6 +33,11 @@ public class UpgradeManager : MonoBehaviour
 
     public GameUI gameUI;
 
+    [Header("Item for MaxLevel")]
+    public List<WeaponData> maxLevelItemList;
+    private List<WeaponData> randomItemList = new List<WeaponData>();
+
+    // Upgrade UI
     public void OnUpgrade(bool levelup)
     {
         UpgradeUI.SetActive(true);
@@ -58,13 +64,18 @@ public class UpgradeManager : MonoBehaviour
             }
             else
             {
-                while (selectedItems.Count < 3 && itemList.Count > 0)
+                while (randomItemList.Count > 0)
                 {
-                    WeaponData item = itemList[Random.Range(0, itemList.Count)];
+                    WeaponData item = randomItemList[Random.Range(0, randomItemList.Count)];
                     if (!selectedItems.Contains(item))
                     {
                         selectedItems.Add(item);
                     }
+                }
+                if (selectedItems.Count < 3)
+                {
+                    WeaponData item = maxLevelItemList[Random.Range(0, maxLevelItemList.Count)];
+                    selectedItems.Add(item);
                 }
             }
         }
@@ -86,13 +97,18 @@ public class UpgradeManager : MonoBehaviour
             }
             else
             {
-                while (selectedItems.Count < 3 && itemList.Count > 0)
+                while (randomItemList.Count > 0)
                 {
-                    WeaponData item = itemList[Random.Range(0, itemList.Count)];
+                    WeaponData item = randomItemList[Random.Range(0, randomItemList.Count)];
                     if (!selectedItems.Contains(item))
                     {
                         selectedItems.Add(item);
                     }
+                }
+                if (selectedItems.Count < 3)
+                {
+                    WeaponData item = maxLevelItemList[Random.Range(0, maxLevelItemList.Count)];
+                    selectedItems.Add(item);
                 }
             }
         }
@@ -121,6 +137,7 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
+    // Add Selected Weapon or Item
     private void OnItemSelected(WeaponData item)
     {
         Debug.Log($"{item.weaponName} 아이템 선택.");
@@ -138,17 +155,26 @@ public class UpgradeManager : MonoBehaviour
         isLevelUp = false;
     }
 
+    // Add Item or Upgrade Item
     private void AddOrUpgradeItem(List<WeaponData> itemList, WeaponData item, int maxItems)
     {
         var existingItem = itemList.Find(i => i.weaponName == item.weaponName);
         if (existingItem != null)
         {
             Debug.Log($"{item.weaponName} upgrade.");
-            // upgrade weapon
+
+            // Upgrade
+            existingItem.weapon.GetComponent<PlayerWeapon>().Upgrade();
+            if(existingItem.weapon.GetComponent<PlayerWeapon>().isMaxLevel == true)
+            {
+                randomItemList.Remove(existingItem);
+            }
         }
         else
         {
+            // Add Weapon or Item to itemList
             itemList.Add(item);
+            randomItemList.Add(item);
             if (itemList == playerWeaponList)
             {
                 gameUI.WeaponIconList(itemList);
@@ -162,7 +188,7 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
-
+    // Add Weapon or Item to Player
     private void AddItemToPlayer(GameObject item)
     {
         Instantiate(item, playerWeaponParent);

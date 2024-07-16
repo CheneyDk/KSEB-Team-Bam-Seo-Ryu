@@ -1283,7 +1283,7 @@ GameObject:
   - component: {fileID: 283899588}
   - component: {fileID: 283899593}
   m_Layer: 5
-  m_Name: Upgrade Window
+  m_Name: UpgradeManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1434,6 +1434,7 @@ MonoBehaviour:
   maxItemNumber: 4
   playerWeaponParent: {fileID: 897920589}
   gameUI: {fileID: 577996783}
+  maxLevelItemList: []
 --- !u!1 &310989112
 GameObject:
   m_ObjectHideFlags: 0
@@ -8946,7 +8947,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 3dadd54bafc4104499de2f52463df00f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -9334,7 +9335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNumber: 10
   curWave: 1
-  waveTime: 10
+  waveTime: 60
   waveInterval: 2
   time: 0
   magneticTime: 3
@@ -10177,10 +10178,6 @@ PrefabInstance:
     - target: {fileID: 944808390979848710, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5955887904906186891, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8100203599619735773, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
       propertyPath: m_LocalPosition.x

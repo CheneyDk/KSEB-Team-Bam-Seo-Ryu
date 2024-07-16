@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MyBullet : MonoBehaviour
+public class MyBullet : PlayerBullet
 {
-    public float damage = 1f;
-    public float bulletSpeed = 20f;
-    public float bulletTime = 5f;
     public float range = 10f;
 
     private Vector2 direction;
 
     private void Start()
     {
+        bulletSpeed = 20f;
+        bulletLifeTime = 5f;
+
         Vector2 targetPosition = FindNearestEnemy();
         
         direction = (targetPosition - (Vector2)transform.position).normalized;
         
 
-        Destroy(gameObject, bulletTime);
+        Destroy(gameObject, bulletLifeTime);
     }
 
     private void Update()
@@ -27,14 +27,14 @@ public class MyBullet : MonoBehaviour
         transform.Translate(direction * bulletSpeed * Time.deltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
         {
             var enemyComponent = collision.GetComponent<Enemy>();
             if (enemyComponent != null)
             {
-                enemyComponent.TakeDamage(damage);
+                enemyComponent.TakeDamage(bulletDamage);
             }
         }
     }
