@@ -8,6 +8,7 @@ public class BulletSharp : PlayerBullet
     {
         // go straight
         bulletVector = Vector2.right;
+        bulletSpeed = 70f;
     }
 
     private void Update()
