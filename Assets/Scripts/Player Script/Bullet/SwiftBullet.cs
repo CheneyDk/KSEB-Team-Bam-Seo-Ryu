@@ -24,8 +24,8 @@ public class SwiftBullet : PlayerBullet
     {
         elapsedTime += Time.deltaTime;
 
-        float angle = bulletSpeed * elapsedTime; 
-        float radius = bulletAngle * elapsedTime;
+        var angle = bulletSpeed * elapsedTime; 
+        var radius = bulletAngle * elapsedTime;
 
         Vector2 newPosition = new Vector2(
             radius * Mathf.Cos(angle),
