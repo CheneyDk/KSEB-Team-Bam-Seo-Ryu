@@ -1,0 +1,71 @@
+{
+    "name": "MainMenuControl",
+    "maps": [
+        {
+            "name": "MainMenuControll",
+            "id": "295e172b-a09f-4238-990e-5ec5f65a47f4",
+            "actions": [
+                {
+                    "name": "Window",
+                    "type": "Button",
+                    "id": "f3ffbf2e-c35a-4af1-ba55-7a73bdecdc88",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Other",
+                    "type": "Button",
+                    "id": "5934c17f-a83a-44ac-9def-38d5f2afaa3f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b47a01ce-b59b-4aa0-b94a-447e45179369",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Window",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f2dc6fa-5e81-42cf-9224-c45dbdf4bd6d",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Other",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "MainMenu",
+            "bindingGroup": "MainMenu",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
