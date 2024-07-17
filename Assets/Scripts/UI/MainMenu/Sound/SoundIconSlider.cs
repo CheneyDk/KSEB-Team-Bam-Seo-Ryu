@@ -7,6 +7,7 @@ public class SoundIconSlider : MonoBehaviour
     public GameObject I_66;
     public GameObject I_33;
     public GameObject I_0;
+    public GameObject I_Except;
 
     public void ChangeIcon(float value)
     {
@@ -16,6 +17,7 @@ public class SoundIconSlider : MonoBehaviour
             I_66.SetActive(false);
             I_33.SetActive(false);
             I_0.SetActive(false);
+            I_Except.SetActive(false);
         }
         else if (value >= 33)
         {
@@ -23,6 +25,7 @@ public class SoundIconSlider : MonoBehaviour
             I_66.SetActive(true);
             I_33.SetActive(false);
             I_0.SetActive(false);
+            I_Except.SetActive(false);
         }
         else if (value > 0)
         {
@@ -30,6 +33,7 @@ public class SoundIconSlider : MonoBehaviour
             I_66.SetActive(false);
             I_33.SetActive(true);
             I_0.SetActive(false);
+            I_Except.SetActive(false);
         }
         else if (value == 0)
         {
