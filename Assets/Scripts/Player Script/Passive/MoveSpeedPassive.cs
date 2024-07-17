@@ -8,14 +8,14 @@ public class MoveSpeedPassive : PlayerPassive
     public float totalValue;
     private float increaseRate;
 
-    private void Awake()
+    private void OnEnable()
     {
         passiveLevel = 1;
         increaseRate = 2f;
         totalValue = 0f;
     }
 
-    private void OnEnable()
+    private void Start()
     {
         player.playerMoveSpeed += increaseRate;
         totalValue += increaseRate;

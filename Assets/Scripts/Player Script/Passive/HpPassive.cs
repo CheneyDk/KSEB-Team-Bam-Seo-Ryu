@@ -7,14 +7,14 @@ public class HpPassive : PlayerPassive
     // total amount that this passive raise
     public float totalValue;
     private float increaseRate;
-    private void Awake()
+    private void OnEnable()
     {
         passiveLevel = 1;
         increaseRate = 70f;
         totalValue = 0f;
     }
 
-    private void OnEnable()
+    private void Start()
     {
         player.playerMaxHp += increaseRate;
         player.playerCurHp += increaseRate;

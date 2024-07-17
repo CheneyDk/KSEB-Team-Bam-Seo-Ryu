@@ -8,7 +8,7 @@ public class AtkPassive : PlayerPassive
     public float totalValue;
     private float increaseRate;
 
-    private void Awake()
+    private void OnEnable()
     {
         passiveLevel = 1;
         increaseRate = 4f;

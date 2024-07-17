@@ -4,7 +4,6 @@ using UnityEngine;
 
 public abstract class PlayerPassive : MonoBehaviour
 {
-
     protected int passiveLevel;
     public bool isMaxLevel = false;
     protected Player player;
