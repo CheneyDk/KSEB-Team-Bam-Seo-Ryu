@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eca71ca24a078264b9780d1aee7c37ec, type: 3}
-  m_Name: New Weapon Data 1
+  m_Name: HpPassive
   m_EditorClassIdentifier: 
-  weaponImage: {fileID: 21300000, guid: d57a0bdd2b3e7a74f9ac554ea1c66722, type: 3}
-  weaponName: Item 2
-  weaponDesc: test desc for item 2
-  type: 1
+  weaponImage: {fileID: 21300000, guid: 75e61e652963543479185b5be5d9c3d8, type: 3}
+  weaponName: Refactoring
+  weapon: {fileID: 4028333344563559254, guid: daf8f92e840a1ca40ade22279a1d6eb4, type: 3}
+  weaponDesc: 'Your Code get more stability
+
+    Max HP + 70'

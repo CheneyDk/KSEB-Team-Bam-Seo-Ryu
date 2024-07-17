@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     public float sprintTime = 1f; // need private after balancing
     public float sprintCoolDown = 2f;
     private float sprintCoolDownTimer = 2f;
-    public float playerAccelerate = 3f;
+    public float playerAccelerate = 2.5f;
 
     // invincible time
     private WaitForSeconds invincibleWait = new WaitForSeconds(0.1f);
