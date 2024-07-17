@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MyBullet : PlayerBullet
+public class UnityBullet : PlayerBullet
 {
     public float range = 10f;
 

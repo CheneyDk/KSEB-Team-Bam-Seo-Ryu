@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class WeaponUnity : PlayerWeapon
+public class UnityWeapon : PlayerWeapon
 {
     public float fireRate = 1f;
 
