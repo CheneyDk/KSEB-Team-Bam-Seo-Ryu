@@ -19,4 +19,18 @@ public class MainMenuInput : MonoBehaviour
             }
         }
     }
+
+    public void tmp(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            if (shell != null)
+            {
+                if (shell.activeSelf)
+                {
+                    shell.SetActive(false);
+                }
+            }
+        }
+    }
 }
