@@ -423,6 +423,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   windowPanel: {fileID: 847859547}
   firstPagePanel: {fileID: 406352565}
+  SoundSlider: {fileID: 1348512797}
+  I_100: {fileID: 1588211112}
+  I_66: {fileID: 1420629520}
+  I_33: {fileID: 953991726}
+  I_0: {fileID: 321219152}
+  I_Except: {fileID: 85630021}
 --- !u!1 &166216493
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,6 +729,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   windowPanel: {fileID: 0}
   firstPagePanel: {fileID: 0}
+  SoundSlider: {fileID: 0}
+  I_100: {fileID: 0}
+  I_66: {fileID: 0}
+  I_33: {fileID: 0}
+  I_0: {fileID: 0}
+  I_Except: {fileID: 0}
 --- !u!1 &321219152
 GameObject:
   m_ObjectHideFlags: 0
@@ -1081,7 +1093,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &406352566
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2585,6 +2597,7 @@ MonoBehaviour:
   I_33: {fileID: 953991726}
   I_0: {fileID: 321219152}
   I_Except: {fileID: 85630021}
+  Origin: 100
 --- !u!114 &1274871455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2629,8 +2642,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1274871454}
-        m_TargetAssemblyTypeName: MuteButton, Assembly-CSharp
+      - m_Target: {fileID: 125061004}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
         m_MethodName: Mute
         m_Mode: 1
         m_Arguments:
@@ -3056,8 +3069,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1348512798}
-        m_TargetAssemblyTypeName: SoundIcon, Assembly-CSharp
+      - m_Target: {fileID: 125061004}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
         m_MethodName: ChangeIcon
         m_Mode: 0
         m_Arguments:
