@@ -638,7 +638,6 @@ GameObject:
   - component: {fileID: 251175020}
   - component: {fileID: 251175019}
   - component: {fileID: 251175021}
-  - component: {fileID: 251175022}
   m_Layer: 5
   m_Name: BackgroundClick
   m_TagString: Untagged
@@ -715,26 +714,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d868a0c1c46a2a244bf06d6504fb92ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &251175022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 251175017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec41314c066b6e942a17e7d624d43d1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  windowPanel: {fileID: 0}
-  firstPagePanel: {fileID: 0}
-  SoundSlider: {fileID: 0}
-  I_100: {fileID: 0}
-  I_66: {fileID: 0}
-  I_33: {fileID: 0}
-  I_0: {fileID: 0}
-  I_Except: {fileID: 0}
 --- !u!1 &321219152
 GameObject:
   m_ObjectHideFlags: 0
