@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class UnityWeapon : PlayerWeapon
 {
-    public float fireRate = 1f;
+    public float fireRate = 3f;
 
     void Start()
     {

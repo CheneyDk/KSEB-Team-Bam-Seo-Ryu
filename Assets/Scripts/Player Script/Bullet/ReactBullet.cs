@@ -5,14 +5,18 @@ using UnityEngine;
 public class ReactBullet : PlayerBullet
 {
     private Player player;
+    private Collider2D myCollider;
+
 
     private void Start()
     {
+        myCollider = GetComponent<CircleCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
+        myCollider.enabled = true;
         if (collision != null && collision.CompareTag("Enemy"))
         {
             var EnemyComponent = collision.GetComponent<Enemy>();

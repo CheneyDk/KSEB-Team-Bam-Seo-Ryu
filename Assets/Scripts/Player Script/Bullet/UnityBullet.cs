@@ -11,7 +11,7 @@ public class UnityBullet : PlayerBullet
 
     private void Start()
     {
-        bulletSpeed = 20f;
+        bulletSpeed = 5f;
         bulletLifeTime = 5f;
 
         Vector2 targetPosition = FindNearestEnemy();
