@@ -134,9 +134,7 @@ public class HeavyEnemy : Enemy
 
         while (damageTimer < totalDamageTime)
         {
-            Debug.Log("-hp");
             yield return new WaitForSeconds(1f);
-            Debug.Log("abc");
             HeavyEnemyCurtHP -= damage;
             damageTimer += 1f;
         }

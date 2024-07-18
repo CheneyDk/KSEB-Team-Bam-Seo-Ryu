@@ -30,6 +30,9 @@ public class RangeEnemy : Enemy
     public int dropExpNumber = 3;
     private float spawnGroupRadius = 1f;
 
+    private Animator rangeAni;
+    private Collider2D rangeCollider;
+
     private SpriteRenderer curSR;
     private Color originColor;
 
@@ -38,6 +41,8 @@ public class RangeEnemy : Enemy
         curSR = this.GetComponent<SpriteRenderer>();
         originColor = curSR.color;
         RangeEnemyCurtHP = RangeEnemyMaxHp;
+        rangeAni = GetComponent<Animator>();
+        rangeCollider = GetComponent<CircleCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -95,7 +100,9 @@ public class RangeEnemy : Enemy
         RangeEnemyCurtHP -= damage;
         if (RangeEnemyCurtHP <= 0)
         {
-            Destroy(gameObject);
+            rangeCollider.enabled = false;
+            rangeAni.SetTrigger("isDead");
+            Destroy(gameObject, rangeAni.GetCurrentAnimatorStateInfo(0).length + 1f);
             Drop(dropExpNumber);
         }
     }

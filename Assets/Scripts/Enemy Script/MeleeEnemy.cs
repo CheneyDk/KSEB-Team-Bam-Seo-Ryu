@@ -36,7 +36,7 @@ public class MeleeEnemy : Enemy
         originColor = curSR.color;
         MeleeEnemyCurtHP = MeleeEnemyMaxHp;
         meleeAni = GetComponent<Animator>();
-        meleeCollider = GetComponent<BoxCollider2D>();
+        meleeCollider = GetComponent<CircleCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -70,7 +70,7 @@ public class MeleeEnemy : Enemy
         {
             meleeCollider.enabled = false;
             meleeAni.SetTrigger("isDead");
-            Destroy(gameObject, meleeAni.GetCurrentAnimatorStateInfo(0).normalizedTime);
+            Destroy(gameObject, meleeAni.GetCurrentAnimatorStateInfo(0).length + 1f);
             Drop(dropExpNumber);
         }
     }
