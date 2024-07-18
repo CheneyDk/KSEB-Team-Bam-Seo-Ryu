@@ -67,10 +67,13 @@ public class PytorchBullet : PlayerBullet
     {
         // time delayed explode
         // physics2d
-        var enemies = Physics2D.OverlapCircleAll(transform.position, bulletExplodeRange);
+        var enemies = Physics2D.OverlapCircleAll(transform.position, bulletExplodeRange, 1 << 8);
+
+        // effects needed
         GameObject.Destroy(gameObject);
 
-        if (enemies != null) return;
+        if (enemies == null) return;
+        
         foreach (var enemy in enemies)
         {
             enemy.GetComponent<Enemy>().TakeDamage(bulletDamage);
@@ -78,6 +81,7 @@ public class PytorchBullet : PlayerBullet
         }
 
         
+
     }
 
     // dummy

@@ -25,11 +25,11 @@ public class PytorchWeapon : PlayerWeapon
         // when playerAtkSpeed = 2, fireRate = 17.5
         weaponFireRate = 5f * MathF.Pow(2f, player.playerAtkSpeed - 1f) + fireRateRevisingValue;
         // lastingDamageRate = 0.2f;
-        pytorchFireInterval = 0.25f;
-        bulletNum = 10;
+        pytorchFireInterval = 0.25f; // 1: 0.25
+        bulletNum = 10; // 1: 10
 
         bulletExplodeRange = 3f;
-        bulletFallRange = 6f;
+        bulletFallRange = 7f;
 
         playerPos = player.transform;
 
@@ -83,15 +83,15 @@ public class PytorchWeapon : PlayerWeapon
 
     }
 
-    private async UniTask Active()
-    {
+    //private async UniTask Active()
+    //{
 
-    }
+    //}
 
-    private async UniTask Inactive()
-    {
+    //private async UniTask Inactive()
+    //{
 
-    }
+    //}
 
     // dummy
     public override void Fire(InputAction.CallbackContext context)
