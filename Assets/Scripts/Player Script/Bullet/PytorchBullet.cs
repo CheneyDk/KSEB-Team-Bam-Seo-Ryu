@@ -7,36 +7,77 @@ using UnityEngine.UIElements;
 public class PytorchBullet : PlayerBullet
 {
     // bullet rise distance = 5f?
-    private float bulletRiseTime;
-    private float bulletRiseSpeed; // slower and stop
-    private float bulletRiseDistance;
+    private float bulletTimer;
+    private Vector2 bulletRiseVector = Vector2.up;
+    private float bulletInitSpeed = 100f;
+    private float bulletRiseTime = 0.5f;
 
-    private float bulletFallTime;
-    private float bulletFallSpeed; // stop to faster
 
-    private Vector2 bulletFallPos; // inited by weapon
+    private Vector2 bulletFallVector;
+    private float bulletFallTime = 0.5f;
     private float bulletExplodeRange; // physics2d overlap circle needed
+
+    private Vector2 targetPos;
+
 
     private void Start()
     {
-        bulletRiseTime = 0.5f;
-        bulletFallTime = 0.5f;
+        BulletOrbit().Forget();
+    }
 
-        bulletRiseDistance = 30f;
-        
+    private void Update()
+    {
+        transform.Translate(bulletVector * bulletSpeed * Time.deltaTime);
     }
 
     public void SetPytorchBullet(Vector2 fallPos, float explodeRange)
     {
-        bulletFallPos = fallPos;
+        targetPos = fallPos;
         bulletExplodeRange = explodeRange;
+    }
 
+    private async UniTask BulletOrbit()
+    {
+        BulletRise();
+        await UniTask.WaitForSeconds(bulletRiseTime);
+        BulletFall();
+        await UniTask.WaitForSeconds(bulletFallTime);
+        BulletExplode();
+    }
+
+    private void BulletRise()
+    {
+        bulletVector = bulletRiseVector;
+        bulletSpeed = bulletInitSpeed;
+    }
+
+    private void BulletFall()
+    {
+        bulletVector = Vector2.zero;
+
+        var tempVector = new Vector2(transform.position.x, transform.position.y);
+        bulletFallVector = targetPos - tempVector;
+        var distance = Mathf.Sqrt(Mathf.Pow(bulletFallVector.x, 2) + Mathf.Pow(bulletFallVector.y, 2));
+
+        bulletVector = bulletFallVector.normalized;
+        bulletSpeed = distance / bulletFallTime;
     }
 
     private void BulletExplode()
     {
         // time delayed explode
         // physics2d
+        var enemies = Physics2D.OverlapCircleAll(transform.position, bulletExplodeRange);
+        GameObject.Destroy(gameObject);
+
+        if (enemies != null) return;
+        foreach (var enemy in enemies)
+        {
+            enemy.GetComponent<Enemy>().TakeDamage(bulletDamage);
+            // enemy.GetComponent<Enemy>().TakeLastingDamage(); - YH
+        }
+
+        
     }
 
     // dummy
