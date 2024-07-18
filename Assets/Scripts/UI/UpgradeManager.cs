@@ -168,10 +168,14 @@ public class UpgradeManager : MonoBehaviour
             Debug.Log($"{item.weaponName} upgrade.");
 
             // Upgrade
-            existingItem.weapon.GetComponent<PlayerWeapon>().Upgrade();
-            if(existingItem.weapon.GetComponent<PlayerWeapon>().isMaxLevel == true)
+            var weaponUpgrade = item.weapon.GetComponent<PlayerWeapon>();
+            if (weaponUpgrade != null)
             {
-                otherList.Remove(existingItem);
+                weaponUpgrade.Upgrade();
+                if (weaponUpgrade.isMaxLevel)
+                {
+                    otherList.Remove(existingItem);
+                }
             }
         }
         else

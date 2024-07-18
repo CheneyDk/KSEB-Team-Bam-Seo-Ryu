@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class SwiftWeapon : PlayerWeapon
 {
-    public float fireRate = 3.5f;
+    private float fireRate = 3.5f;
 
     void Start()
     {
