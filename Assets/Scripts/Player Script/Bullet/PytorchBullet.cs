@@ -6,12 +6,14 @@ using UnityEngine.UIElements;
 
 public class PytorchBullet : PlayerBullet
 {
+    private float bulletLastingDamage;
+    private Color pytorchColor = new Color(238, 68, 34);
+
     // bullet rise distance = 5f?
     private float bulletTimer;
     private Vector2 bulletRiseVector = Vector2.up;
     private float bulletInitSpeed = 100f;
     private float bulletRiseTime = 0.5f;
-
 
     private Vector2 bulletFallVector;
     private float bulletFallTime = 0.5f;
@@ -30,10 +32,11 @@ public class PytorchBullet : PlayerBullet
         transform.Translate(bulletVector * bulletSpeed * Time.deltaTime);
     }
 
-    public void SetPytorchBullet(Vector2 fallPos, float explodeRange)
+    public void SetPytorchBullet(Vector2 fallPos, float explodeRange, float lastingDmg)
     {
         targetPos = fallPos;
         bulletExplodeRange = explodeRange;
+        bulletLastingDamage = lastingDmg;
     }
 
     private async UniTask BulletOrbit()
@@ -77,11 +80,8 @@ public class PytorchBullet : PlayerBullet
         foreach (var enemy in enemies)
         {
             enemy.GetComponent<Enemy>().TakeDamage(bulletDamage);
-            // enemy.GetComponent<Enemy>().TakeLastingDamage(); - YH
+            enemy.GetComponent<Enemy>().LastingDamage(bulletLastingDamage, 3, pytorchColor);
         }
-
-        
-
     }
 
     // dummy
