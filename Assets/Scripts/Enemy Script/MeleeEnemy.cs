@@ -21,6 +21,9 @@ public class MeleeEnemy : Enemy
     public int dropExpNumber = 3;
     private float spawnGroupRadius = 1f;
 
+    private Animator meleeAni;
+    private Collider2D meleeCollider;
+
     private Transform player;
     private float rotationSpeed = 10f;
 
@@ -32,6 +35,8 @@ public class MeleeEnemy : Enemy
         curSR = this.GetComponent<SpriteRenderer>();
         originColor = curSR.color;
         MeleeEnemyCurtHP = MeleeEnemyMaxHp;
+        meleeAni = GetComponent<Animator>();
+        meleeCollider = GetComponent<BoxCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -63,7 +68,9 @@ public class MeleeEnemy : Enemy
         MeleeEnemyCurtHP -= damage; 
         if (MeleeEnemyCurtHP <= 0)
         {
-            Destroy(gameObject);
+            meleeCollider.enabled = false;
+            meleeAni.SetTrigger("isDead");
+            Destroy(gameObject, meleeAni.GetCurrentAnimatorStateInfo(0).normalizedTime);
             Drop(dropExpNumber);
         }
     }
