@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eca71ca24a078264b9780d1aee7c37ec, type: 3}
-  m_Name: New Weapon Data 3
+  m_Name: Loding
   m_EditorClassIdentifier: 
-  weaponImage: {fileID: 21300000, guid: e10193935e92ce14dbb470450b7dc7d3, type: 3}
-  weaponName: test item 4
-  weapon: {fileID: 4635922784251638873, guid: a1e318e1ed7455349a78f8eeddaac44c, type: 3}
-  weaponDesc: this is a test for weapon 4
+  weaponImage: {fileID: 21300018, guid: 0fd21678280ad9c47aa2d32baf438c5d, type: 3}
+  weaponName: Loding
+  weapon: {fileID: 4130909573271536976, guid: 2fa3e3b671da083498ed6a05cf86f0c7, type: 3}
+  weaponDesc: "{\n\tLoding\n}"

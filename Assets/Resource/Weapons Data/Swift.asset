@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eca71ca24a078264b9780d1aee7c37ec, type: 3}
-  m_Name: New Weapon Data 4
+  m_Name: Swift
   m_EditorClassIdentifier: 
-  weaponImage: {fileID: 21300000, guid: 920e34a8ace38e14d9e729a79ea0c643, type: 3}
-  weaponName: test item 5
-  weapon: {fileID: 4635922784251638873, guid: a1e318e1ed7455349a78f8eeddaac44c, type: 3}
-  weaponDesc: this is a test for weapon 5
+  weaponImage: {fileID: 21300000, guid: 60cf3e33622e9fd4285b6455b6582f13, type: 3}
+  weaponName: Swift
+  weapon: {fileID: 7833966774808615141, guid: 71578d8bf5a02f84b946f24c11862299, type: 3}
+  weaponDesc: '{ABC}'

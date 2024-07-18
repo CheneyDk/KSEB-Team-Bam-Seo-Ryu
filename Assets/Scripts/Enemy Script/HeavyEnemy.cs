@@ -30,8 +30,13 @@ public class HeavyEnemy : Enemy
     public int dropExpNumber = 3;
     private float spawnGroupRadius = 1f;
 
+    private SpriteRenderer curSR;
+    private Color originColor;
+
     private void Awake()
     {
+        curSR = this.GetComponent<SpriteRenderer>();
+        originColor = curSR.color;
         HeavyEnemyCurtHP = HeavyEnemyMaxHp;
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -120,5 +125,27 @@ public class HeavyEnemy : Enemy
             Vector2 spawnPlace = (Vector2)transform.position + (Vector2)Random.insideUnitCircle * spawnGroupRadius;
             Instantiate(Exp, spawnPlace, Quaternion.identity);
         }
+    }
+
+    public override IEnumerator LastingDamage(float damage, int totalDamageTime, Color color)
+    {
+        curSR.color = color;
+        var damageTimer = 0f;
+
+        while (damageTimer < totalDamageTime)
+        {
+            Debug.Log("-hp");
+            yield return new WaitForSeconds(1f);
+            Debug.Log("abc");
+            HeavyEnemyCurtHP -= damage;
+            damageTimer += 1f;
+        }
+
+        if (HeavyEnemyCurtHP <= 0)
+        {
+            Destroy(gameObject);
+            Drop(dropExpNumber);
+        }
+        curSR.color = originColor;
     }
 }

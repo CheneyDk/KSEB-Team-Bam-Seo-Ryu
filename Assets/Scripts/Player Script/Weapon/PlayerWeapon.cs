@@ -6,10 +6,10 @@ using UnityEngine.InputSystem;
 public abstract class PlayerWeapon : MonoBehaviour // abstract class로 전환! + 업그레이드DB화
 {
     // weapon stats
+    [SerializeField]
     protected float weaponDamageRate;
     protected float weaponFireRate; // weapon it's own stat
     protected float fireRateTimer;
-    [SerializeField, Range(1, 5)]
     protected int bulletNum; // Ex ) shotgun
     protected int weaponLevel = 1;
     public bool isMaxLevel = false;

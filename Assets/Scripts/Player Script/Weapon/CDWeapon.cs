@@ -1,15 +1,15 @@
-﻿using System.Collections;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class UnityWeapon : PlayerWeapon
+public class CDWeapon : PlayerWeapon
 {
-    public float fireRate = 1f;
+    public float fireRate = 3.5f;
 
     void Start()
     {
         Fire();
-        bulletNum = 1;
         weaponLevel = 1;
         weaponDamageRate = 1f;
         isMaxLevel = false;
@@ -20,11 +20,8 @@ public class UnityWeapon : PlayerWeapon
         while (true)
         {
             yield return new WaitForSeconds(fireRate);
-            for (int i = 0; i < bulletNum; i++)
-            {
-                var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
-            }
+            var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+            addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
         }
     }
 
@@ -38,10 +35,10 @@ public class UnityWeapon : PlayerWeapon
         if (weaponLevel < 5)
         {
             weaponLevel++;
-            bulletNum++;
+            fireRate -= 0.5f;
         }
-        else if (weaponLevel == 5) 
-        { 
+        else if (weaponLevel == 5)
+        {
             isMaxLevel = true;
             return;
         }

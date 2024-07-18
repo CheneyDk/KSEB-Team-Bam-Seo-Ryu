@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eca71ca24a078264b9780d1aee7c37ec, type: 3}
-  m_Name: New Weapon Data 2
+  m_Name: React
   m_EditorClassIdentifier: 
-  weaponImage: {fileID: 21300000, guid: 60cf3e33622e9fd4285b6455b6582f13, type: 3}
-  weaponName: test item 3
-  weapon: {fileID: 4635922784251638873, guid: a1e318e1ed7455349a78f8eeddaac44c, type: 3}
-  weaponDesc: this is a test for weapon 3
+  weaponImage: {fileID: 21300000, guid: ba0f76d775c69a7489f4f13b8b9a7934, type: 3}
+  weaponName: React
+  weapon: {fileID: 8376047406226453956, guid: fd30e36239e1d634fa5d9ef51a8895f6, type: 3}
+  weaponDesc: '{ React }'

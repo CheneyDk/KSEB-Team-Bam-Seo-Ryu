@@ -24,8 +24,13 @@ public class MeleeEnemy : Enemy
     private Transform player;
     private float rotationSpeed = 10f;
 
+    private SpriteRenderer curSR;
+    private Color originColor;
+
     private void Awake()
     {
+        curSR = this.GetComponent<SpriteRenderer>();
+        originColor = curSR.color;
         MeleeEnemyCurtHP = MeleeEnemyMaxHp;
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -88,4 +93,25 @@ public class MeleeEnemy : Enemy
             Instantiate(Exp, spawnPlace, Quaternion.identity);
         }
     }
+
+    public override IEnumerator LastingDamage(float damage, int totalDamageTime, Color color)
+    {
+        curSR.color = color;
+        var damageTimer = 0f;
+
+        while (damageTimer < totalDamageTime)
+        {
+            yield return new WaitForSeconds(1f);
+            MeleeEnemyCurtHP -= damage;
+            damageTimer += 1f;
+        }
+
+        if (MeleeEnemyCurtHP <= 0)
+        {
+            Destroy(gameObject);
+            Drop(dropExpNumber);
+        }
+        curSR.color = originColor;
+    }
+
 }

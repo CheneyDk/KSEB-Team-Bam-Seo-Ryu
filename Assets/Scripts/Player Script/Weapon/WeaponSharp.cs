@@ -46,8 +46,6 @@ public class WeaponSharp : PlayerWeapon
         if (context.started && fireRateTimer > weaponFireRate / player.playerAtkSpeed)
         {
             fireRateTimer = 0f;
-            Debug.Log("context started");
-
             AutoFire().Forget();
         }
     }

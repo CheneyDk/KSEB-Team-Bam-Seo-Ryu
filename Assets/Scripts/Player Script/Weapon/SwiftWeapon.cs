@@ -6,12 +6,11 @@ using UnityEngine.InputSystem;
 
 public class SwiftWeapon : PlayerWeapon
 {
-    public float fireRate = 1f;
+    public float fireRate = 3.5f;
 
     void Start()
     {
         Fire();
-        bulletNum = 1;
         weaponLevel = 1;
         weaponDamageRate = 1f;
         isMaxLevel = false;
@@ -22,13 +21,8 @@ public class SwiftWeapon : PlayerWeapon
         while (true)
         {
             yield return new WaitForSeconds(fireRate);
-            for (int i = 0; i < bulletNum; i++)
-            {
-                var fireAngle = new Vector3(0, 0, (360 / bulletNum)) * i;
-                var bulletAngle = Quaternion.Euler(fireAngle);
-                var addBullet = Instantiate(bullet, transform.position, bulletAngle);
-                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
-            }
+            var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+            addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
         }
     }
 
@@ -42,11 +36,12 @@ public class SwiftWeapon : PlayerWeapon
         if (weaponLevel < 5)
         {
             weaponLevel++;
-            bulletNum++;
+            fireRate -= 0.5f;
         }
         else if (weaponLevel == 5)
         {
             isMaxLevel = true;
+            return;
         }
     }
 
