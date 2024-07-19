@@ -54,9 +54,9 @@ public class PytorchWeapon : PlayerWeapon
         if (isMaxLevel) return;
 
         weaponLevel += 1;
-        weaponDamageRate += 0.1f;
+        weaponDamageRate += 0.075f;
         pytorchFireInterval -= 0.03f;
-        bulletNum += 10;
+        bulletNum += 8;
 
         if (weaponLevel > 4) isMaxLevel = true;
     }
@@ -98,7 +98,6 @@ public class PytorchWeapon : PlayerWeapon
     private async UniTask Active()
     {
         // pytorch active
-        transform.position += transform.up;
         float timer = 0f;
         const float duration = 1f;
 
@@ -119,7 +118,6 @@ public class PytorchWeapon : PlayerWeapon
 
     private async UniTask Inactive()
     {
-        transform.position -= transform.up;
         float timer = 0f;
         const float duration = 1f;
         var tempColor = weaponSprite.color;

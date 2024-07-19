@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 5735838364107986111}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -100,5 +100,7 @@ MonoBehaviour:
   weaponDamageRate: 0
   isMaxLevel: 0
   muzzle: {fileID: 0}
+  muzzle_sub: {fileID: 0}
   bullet: {fileID: 3596937939992291992, guid: 21c380b2098cf71479e4060b97674f76, type: 3}
+  bullet_sub: {fileID: 0}
   pytorchFireInterval: 0
