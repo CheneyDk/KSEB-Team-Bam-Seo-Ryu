@@ -69,6 +69,7 @@ Transform:
   m_Children:
   - {fileID: 5702917001411892952}
   - {fileID: 7577071843501220398}
+  - {fileID: 2710488616377190304}
   - {fileID: 6334267731783322228}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -210,7 +211,7 @@ MonoBehaviour:
   playerAccelerate: 2.5
   playerArm: {fileID: 5702917001411892952}
   weapon: {fileID: 5107621405165049367}
-  constText: {fileID: 0}
+  constText: {fileID: 2799498921057286685}
 --- !u!114 &3384030768185287080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,6 +481,37 @@ MonoBehaviour:
   m_hasFontAssetChanged: 1
   m_renderer: {fileID: 8759769108874795818}
   m_maskType: 0
+--- !u!1 &4633192111372756553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2710488616377190304}
+  m_Layer: 0
+  m_Name: playerPassiveBag
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2710488616377190304
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4633192111372756553}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3275481477621040725}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7685432053071159442
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,6 +603,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5312340608209776525, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
+      propertyPath: bullet_sub
+      value: 
+      objectReference: {fileID: 3675868750621725284, guid: 68ee2c4cfd67a094a9d3673661b2e532, type: 3}
+    - target: {fileID: 5312340608209776525, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
+      propertyPath: muzzle_sub
+      value: 
+      objectReference: {fileID: 3625255512348310417}
     - target: {fileID: 7562615359646552131, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
       propertyPath: m_Name
       value: Uroboros_R
@@ -601,6 +641,18 @@ PrefabInstance:
     - target: {fileID: 3873234192144587479, guid: 5f067b909de9539469637b97e05deb5e, type: 3}
       propertyPath: m_Name
       value: Uroboros_L
+      objectReference: {fileID: 0}
+    - target: {fileID: 3873234192144587479, guid: 5f067b909de9539469637b97e05deb5e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593384015921404449, guid: 5f067b909de9539469637b97e05deb5e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6338549259187821404, guid: 5f067b909de9539469637b97e05deb5e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6459616777277614401, guid: 5f067b909de9539469637b97e05deb5e, type: 3}
       propertyPath: m_LocalScale.x

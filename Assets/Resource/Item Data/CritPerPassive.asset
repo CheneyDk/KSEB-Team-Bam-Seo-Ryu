@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eca71ca24a078264b9780d1aee7c37ec, type: 3}
-  m_Name: New Weapon Data 5
+  m_Name: CritPerPassive
   m_EditorClassIdentifier: 
-  weaponImage: {fileID: 21300000, guid: a8012cd183867ba4b91b9e307b195929, type: 3}
-  weaponName: Item 6
-  weaponDesc: test desc for item 6
-  type: 1
+  weaponImage: {fileID: 21300000, guid: 99df28e809ab1044585aca9fabb80dad, type: 3}
+  weaponName: Pray
+  weapon: {fileID: 7420704584124971098, guid: 4ee5fdde6a8e97645a54b041ede88fab, type: 3}
+  weaponDesc: 'If you wish sincerely, it will come true.
+
+    Critical Percent +
+    10%'
