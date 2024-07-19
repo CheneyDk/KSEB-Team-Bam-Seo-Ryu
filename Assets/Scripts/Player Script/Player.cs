@@ -276,7 +276,6 @@ public class Player : MonoBehaviour
         playerMoveSpeed *= value;
         sprintCoolDown -= energyDrinkSprintCDDecrease;
         isEnergyDrinkActive = true;
-        Debug.Log("act");
 
         EnergyDrinkTimer().Forget();
 
@@ -284,12 +283,10 @@ public class Player : MonoBehaviour
         playerMoveSpeed /= value;
         sprintCoolDown += energyDrinkSprintCDDecrease;
         isEnergyDrinkActive = false;
-        Debug.Log("inact");
     }
 
     private async UniTask EnergyDrinkTimer()
     {
-        Debug.Log("Timer Start");
         while (0f < energyDrinkTimer)
         {
             await UniTask.Yield();
@@ -297,7 +294,6 @@ public class Player : MonoBehaviour
         }
 
         energyDrinkTimer = 0f;
-        Debug.Log("Timer End");
     }
 
     // System Control
