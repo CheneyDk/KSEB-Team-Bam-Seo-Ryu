@@ -19,10 +19,6 @@ public class PytorchWeapon : PlayerWeapon
 
     private Transform playerPos;
     private SpriteRenderer weaponSprite;
-    //private Vector3 activePos = new Vector3(0f, 2f, 0f);
-    //private Vector3 inactivePos = new Vector3(0f, 1f, 0f);
-
-    private float activeSpeed = 1f;
 
     // init stats
     private void Start()
