@@ -22,7 +22,6 @@ public abstract class Item : MonoBehaviour
         playerTrans = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-
     // collision with player
     protected abstract void OnTriggerEnter2D(Collider2D collision);
     // Initialize Exp only.

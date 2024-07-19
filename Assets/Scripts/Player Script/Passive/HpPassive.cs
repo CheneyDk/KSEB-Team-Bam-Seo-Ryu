@@ -10,7 +10,7 @@ public class HpPassive : PlayerPassive
     private void OnEnable()
     {
         passiveLevel = 1;
-        increaseRate = 70f;
+        increaseRate = 20f;
         totalValue = 0f;
     }
 

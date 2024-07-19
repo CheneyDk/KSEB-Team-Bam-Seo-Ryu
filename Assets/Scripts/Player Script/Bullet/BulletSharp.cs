@@ -9,18 +9,15 @@ public class BulletSharp : PlayerBullet
         // go straight
         bulletVector = Vector2.right;
         bulletSpeed = 70f;
+        bulletLifeTime = 4f;
+
+        Destroy(gameObject, bulletLifeTime);
     }
 
     private void Update()
     {
         // bullet move
         transform.Translate(bulletVector * (bulletSpeed * Time.deltaTime));
-
-        timeCounter += Time.deltaTime;
-        if (timeCounter > bulletLifeTime)
-        {
-            Destroy(gameObject);
-        }
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)

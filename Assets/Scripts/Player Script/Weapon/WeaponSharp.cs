@@ -25,7 +25,7 @@ public class WeaponSharp : PlayerWeapon
         // player can fire imediately
         fireRateTimer = weaponFireRate;
     }
-
+    
     private void Update()
     {
         fireRateTimer += Time.deltaTime;
