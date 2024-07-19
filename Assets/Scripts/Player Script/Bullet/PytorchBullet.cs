@@ -100,7 +100,7 @@ public class PytorchBullet : PlayerBullet
         spriteRenderer.color = tempColor;
         particle.Play();
         await UniTask.WaitForSeconds(1f);
-        // GameObject.Destroy(gameObject);
+        GameObject.Destroy(gameObject);
     }
 
     // dummy

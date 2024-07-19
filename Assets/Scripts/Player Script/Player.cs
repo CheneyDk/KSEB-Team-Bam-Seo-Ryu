@@ -170,7 +170,6 @@ public class Player : MonoBehaviour
         }
     }
 
-
     private IEnumerator SprintTimer(Color color)
     {
         yield return new WaitForSeconds(sprintTime);

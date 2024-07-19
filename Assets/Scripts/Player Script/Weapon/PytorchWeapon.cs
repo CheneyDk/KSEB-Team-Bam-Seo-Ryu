@@ -98,7 +98,6 @@ public class PytorchWeapon : PlayerWeapon
     private async UniTask Active()
     {
         // pytorch active
-        transform.position += transform.up;
         float timer = 0f;
         const float duration = 1f;
 
@@ -119,7 +118,6 @@ public class PytorchWeapon : PlayerWeapon
 
     private async UniTask Inactive()
     {
-        transform.position -= transform.up;
         float timer = 0f;
         const float duration = 1f;
         var tempColor = weaponSprite.color;
