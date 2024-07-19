@@ -37,6 +37,13 @@ public class UpgradeManager : MonoBehaviour
     private List<WeaponData> randomPassiveList = new List<WeaponData>();
     private List<WeaponData> randomWeaponList = new List<WeaponData>();
 
+    private Transform player;
+
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+    }
+
     // Upgrade UI
     public void OnUpgrade(bool levelup)
     {
@@ -67,18 +74,13 @@ public class UpgradeManager : MonoBehaviour
                 while (selectedItems.Count < 3 && randomWeaponList.Count > 0)
                 {
                     WeaponData item = randomWeaponList[Random.Range(0, randomWeaponList.Count)];
-                    WeaponData maxItem = maxLevelItemList[Random.Range(0, maxLevelItemList.Count)];
-                    if (!selectedItems.Contains(item) && item != null)
+                    if(!selectedItems.Contains(item))
                     {
                         selectedItems.Add(item);
                     }
-                    else
-                    {
-                        selectedItems.Add(maxItem);
-                    }
                 }
             }
-    }
+        }
         else if (levelup == false)
         {
             isLevelUp = levelup;
@@ -100,18 +102,12 @@ public class UpgradeManager : MonoBehaviour
                 while (selectedItems.Count < 3 && randomPassiveList.Count > 0)
                 {
                     WeaponData item = randomPassiveList[Random.Range(0, randomPassiveList.Count)];
-                    WeaponData maxItem = maxLevelItemList[Random.Range(0, maxLevelItemList.Count)];
-                    if (!selectedItems.Contains(item) && item != null)
+                    if(!selectedItems.Contains(item))
                     {
                         selectedItems.Add(item);
                     }
-                    else
-                    {
-                        selectedItems.Add(maxItem);
-                    }
                 }
             }
-
         }
 
         if (sourceList != null && itemList != null)
@@ -138,10 +134,24 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
+    // Add Random MaxLevel Item to randomPassiveList or randomWeaponList
+    private void AddRandomMaxLevelItem(List<WeaponData> list)
+    {
+        var random = Random.Range(0, 3);
+        if (list.Count < 3 && !list.Contains(maxLevelItemList[random]))
+        {
+            list.Add(maxLevelItemList[random]);
+        }
+    }
+
     // Add Selected Weapon or Item
     private void OnItemSelected(WeaponData item)
     {
-        if (isLevelUp == true)
+        if (item.weapon.tag == "Item")
+        {
+            Instantiate(item.weapon, player.position, Quaternion.identity);
+        }
+        else if (isLevelUp == true)
         {
             AddOrUpgradeItem(playerWeaponList, randomWeaponList, playerWeaponParent, item, maxItemNumber);
         }
@@ -157,6 +167,8 @@ public class UpgradeManager : MonoBehaviour
     // Add Item or Upgrade Item
     private void AddOrUpgradeItem(List<WeaponData> itemList, List<WeaponData> otherList, Transform upgradeItem, WeaponData item, int maxItems)
     {
+
+
         var existingItem = itemList.Find(i => i.weaponName == item.weaponName);
         if (existingItem != null)
         {
@@ -172,6 +184,7 @@ public class UpgradeManager : MonoBehaviour
             else if (upgradeWeapon.isMaxLevel == true)
             {
                 otherList.Remove(item);
+                AddRandomMaxLevelItem(otherList);
             }
         }
         else

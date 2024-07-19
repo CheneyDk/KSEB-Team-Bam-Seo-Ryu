@@ -37,10 +37,9 @@ public class ReactWeapon : PlayerWeapon
             weaponLevel++;
             weaponDamageRate += 0.1f;
         }
-        else if (weaponLevel == 5)
+        if (weaponLevel > 4)
         {
             isMaxLevel = true;
-            return;
         }
     }
 

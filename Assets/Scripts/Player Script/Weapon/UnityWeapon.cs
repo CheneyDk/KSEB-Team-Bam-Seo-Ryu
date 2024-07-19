@@ -40,10 +40,9 @@ public class UnityWeapon : PlayerWeapon
             weaponLevel++;
             bulletNum++;
         }
-        else if (weaponLevel == 5) 
+        if (weaponLevel > 4) 
         { 
             isMaxLevel = true;
-            return;
         }
     }
 
