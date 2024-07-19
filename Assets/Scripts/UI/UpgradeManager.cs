@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.UI;
@@ -152,8 +150,6 @@ public class UpgradeManager : MonoBehaviour
     // Add Selected Weapon or Item
     private void OnItemSelected(WeaponData item)
     {
-        Debug.Log($"{item.weaponName} 아이템 선택.");
-
         if (isLevelUp == true)
         {
             AddOrUpgradeItem(playerWeaponList, randomWeaponList, playerWeaponsBag, item, maxItemNumber);
