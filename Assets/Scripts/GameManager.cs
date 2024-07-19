@@ -57,6 +57,8 @@ public class GameManager : MonoBehaviour
     public void SetPlayerDead()
     {
         GameoverUI.SetActive(true);
+        timeScaleProduct = 0f;
+        isGameContinue = false;
         // WaveManager.SetActive(false); // YH - activate after merge
     }
 

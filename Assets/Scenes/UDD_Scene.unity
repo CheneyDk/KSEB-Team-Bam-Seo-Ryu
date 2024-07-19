@@ -459,7 +459,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &158310856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1446,10 +1446,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e65068d2ee758074f89a22b8fcc44984, type: 2}
   - {fileID: 11400000, guid: df894a11d49451e47ae7752a547654f1, type: 2}
   playerWeaponList: []
-  playerItemList: []
+  playerPassiveList: []
   maxItemNumber: 4
   playerWeaponParent: {fileID: 251133414}
-  playerItemParent: {fileID: 0}
+  playerPassiveParent: {fileID: 0}
   gameUI: {fileID: 577996783}
   maxLevelItemList: []
 --- !u!1 &310989112

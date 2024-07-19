@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     [Header("- Player")]
     public float playerMaxHp;
     public float playerCurHp;
-    public float playerLevel;
+    public int playerLevel;
     public float playerMaxExp;
     public float playerCurExp = 0f;
     public float playerAtk { get; set; }
@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
 
         // player stat init
         playerCurHp = playerMaxHp; // make current hp max
-        playerLevel = 1f; 
+        playerLevel = 1; 
         playerAtk = 10f;
         playerAtkSpeed = 1f;
         playerMoveSpeed = 10f;
@@ -184,7 +184,7 @@ public class Player : MonoBehaviour
 
     private void playerArmRotate()
     {
-        // ¸¶¿ì½º À§Ä¡
+        // ï¿½ï¿½ï¿½ì½º ï¿½ï¿½Ä¡
         Vector2 mousePosition = Mouse.current.position.ReadValue();
         Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane));
         
@@ -204,8 +204,8 @@ public class Player : MonoBehaviour
         playerCurHp -= damage;
         if (playerCurHp <= 0)
         {
-            Destroy(gameObject); // player destroy
-            gameObject.SetActive(false); // player obj disable
+            //Destroy(gameObject); // player destroy
+            //gameObject.SetActive(false); // player obj disable
             GameManager.Instance.SetPlayerDead();
             return; // safe return ; not to activate Coroutine
         }
