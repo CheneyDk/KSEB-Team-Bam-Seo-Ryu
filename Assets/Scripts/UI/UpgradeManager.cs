@@ -41,11 +41,6 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField]
     private List<WeaponData> randomWeaponList = new List<WeaponData>();
 
-    [SerializeField]
-    private Transform playerWeaponsBag;
-    [SerializeField]
-    private Transform playerItemsBag;
-
     // Upgrade UI
     public void OnUpgrade(bool levelup)
     {
@@ -152,11 +147,11 @@ public class UpgradeManager : MonoBehaviour
     {
         if (isLevelUp == true)
         {
-            AddOrUpgradeItem(playerWeaponList, randomWeaponList, playerWeaponsBag, item, maxItemNumber);
+            AddOrUpgradeItem(playerWeaponList, randomWeaponList, playerWeaponParent, item, maxItemNumber);
         }
         else if (isLevelUp == false)
         {
-            AddOrUpgradeItem(playerItemList, randomItemList, playerItemsBag, item, maxItemNumber);
+            AddOrUpgradeItem(playerItemList, randomItemList, playerItemParent, item, maxItemNumber);
         }
 
         GameManager.Instance.EndUpgrade();
