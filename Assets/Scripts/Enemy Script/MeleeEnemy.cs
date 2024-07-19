@@ -30,6 +30,8 @@ public class MeleeEnemy : Enemy
     private SpriteRenderer curSR;
     private Color originColor;
 
+    private bool isDead = false;
+
     private void Awake()
     {
         curSR = this.GetComponent<SpriteRenderer>();
@@ -43,8 +45,11 @@ public class MeleeEnemy : Enemy
     private void Update()
     {
         if (player == null) { return; }
-        EnemyMovement();
-        Rotation();
+        if (!isDead)
+        {
+            EnemyMovement();
+            Rotation();
+        }
     }
 
     public override void EnemyMovement()
@@ -69,6 +74,7 @@ public class MeleeEnemy : Enemy
         if (MeleeEnemyCurtHP <= 0)
         {
             meleeCollider.enabled = false;
+            isDead = true;
             meleeAni.SetTrigger("isDead");
             Destroy(gameObject, meleeAni.GetCurrentAnimatorStateInfo(0).length + 1f);
             Drop(dropExpNumber);

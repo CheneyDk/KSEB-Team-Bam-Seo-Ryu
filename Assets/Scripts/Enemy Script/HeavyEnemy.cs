@@ -30,14 +30,22 @@ public class HeavyEnemy : Enemy
     public int dropExpNumber = 3;
     private float spawnGroupRadius = 1f;
 
+    private Animator HeavyAni;
+    private Collider2D HeavyCollider;
+
     private SpriteRenderer curSR;
     private Color originColor;
+
+    private bool isDead = false;
 
     private void Awake()
     {
         curSR = this.GetComponent<SpriteRenderer>();
         originColor = curSR.color;
         HeavyEnemyCurtHP = HeavyEnemyMaxHp;
+
+        HeavyAni = GetComponent<Animator>();
+        HeavyCollider = GetComponent<CircleCollider2D>();
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -46,7 +54,7 @@ public class HeavyEnemy : Enemy
     private void Update()
     {
         if (player == null) { return; }
-        if (!canDash)
+        if (!canDash && !isDead)
         {
             EnemyMovement();
         }
@@ -96,7 +104,10 @@ public class HeavyEnemy : Enemy
         HeavyEnemyCurtHP -= damage;
         if (HeavyEnemyCurtHP <= 0)
         {
-            Destroy(gameObject);
+            HeavyCollider.enabled = false;
+            isDead = true;
+            HeavyAni.SetTrigger("isDead");
+            Destroy(gameObject, 0.6f);
             Drop(dropExpNumber);
         }
     }

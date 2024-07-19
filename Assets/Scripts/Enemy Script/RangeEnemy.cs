@@ -36,6 +36,8 @@ public class RangeEnemy : Enemy
     private SpriteRenderer curSR;
     private Color originColor;
 
+    private bool isDead = false;
+
     private void Awake()
     {
         curSR = this.GetComponent<SpriteRenderer>();
@@ -50,8 +52,11 @@ public class RangeEnemy : Enemy
     private void Update()
     {
         if(player == null) { return; }
-        EnemyMovement();
-        Rotation();
+        if (!isDead)
+        {
+            EnemyMovement();
+            Rotation();
+        }
     }
 
     public override void EnemyMovement()
@@ -101,6 +106,7 @@ public class RangeEnemy : Enemy
         if (RangeEnemyCurtHP <= 0)
         {
             rangeCollider.enabled = false;
+            isDead = true;
             rangeAni.SetTrigger("isDead");
             Destroy(gameObject, rangeAni.GetCurrentAnimatorStateInfo(0).length + 1f);
             Drop(dropExpNumber);

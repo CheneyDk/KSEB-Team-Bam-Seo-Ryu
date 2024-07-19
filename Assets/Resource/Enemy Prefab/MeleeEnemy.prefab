@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8476254047252156802}
   - component: {fileID: 4535803037116341138}
   - component: {fileID: 5206710149727404208}
-  - component: {fileID: 736455273706035311}
   - component: {fileID: 7706997678367386798}
+  - component: {fileID: 736455273706035311}
   m_Layer: 8
   m_Name: MeleeEnemy
   m_TagString: Enemy
@@ -150,24 +150,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &736455273706035311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4256284729351784842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fa49367a990bcd4c91a7d419bcbf9a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MeleeEnemyMaxHp: 20
-  MeleeEnemyCurtHP: 0
-  MeleeEnemyAtk: 5
-  MeleeEnemyMoveSpeed: 5
-  Exp: {fileID: 2828242351688375285, guid: 9f21b77202f043d45a40df1d9c28c4d8, type: 3}
-  dropExpNumber: 5
 --- !u!95 &7706997678367386798
 Animator:
   serializedVersion: 5
@@ -189,3 +171,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &736455273706035311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4256284729351784842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fa49367a990bcd4c91a7d419bcbf9a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MeleeEnemyMaxHp: 20
+  MeleeEnemyCurtHP: 0
+  MeleeEnemyAtk: 5
+  MeleeEnemyMoveSpeed: 6
+  Exp: {fileID: 2828242351688375285, guid: 9f21b77202f043d45a40df1d9c28c4d8, type: 3}
+  dropExpNumber: 5

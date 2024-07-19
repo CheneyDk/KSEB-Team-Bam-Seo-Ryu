@@ -186,7 +186,7 @@ MonoBehaviour:
   RangeEnemyMaxHp: 10
   RangeEnemyCurtHP: 0
   RangeEnemyAtk: 5
-  RangeEnemyMoveSpeed: 3
+  RangeEnemyMoveSpeed: 4
   bulletPrefab: {fileID: 4296012918434823456, guid: efb09630e56b75d4d9ed06da5e657f34, type: 3}
   Exp: {fileID: 2828242351688375285, guid: 9f21b77202f043d45a40df1d9c28c4d8, type: 3}
   dropExpNumber: 5
