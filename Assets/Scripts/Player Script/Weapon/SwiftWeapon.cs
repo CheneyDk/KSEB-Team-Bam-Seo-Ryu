@@ -38,10 +38,9 @@ public class SwiftWeapon : PlayerWeapon
             weaponLevel++;
             fireRate -= 0.5f;
         }
-        else if (weaponLevel == 5)
+        if (weaponLevel > 4)
         {
             isMaxLevel = true;
-            return;
         }
     }
 

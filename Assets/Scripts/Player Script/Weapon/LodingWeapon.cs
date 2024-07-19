@@ -56,10 +56,9 @@ public class LodingWeapon : PlayerWeapon
             weaponDamageRate += 0.5f;
             transform.localScale += new Vector3(0.5f, 0.5f, 0f);
         }
-        else if (weaponLevel == 5)
+        if (weaponLevel > 4)
         {
             isMaxLevel = true;
-            return;
         }
     }
 
