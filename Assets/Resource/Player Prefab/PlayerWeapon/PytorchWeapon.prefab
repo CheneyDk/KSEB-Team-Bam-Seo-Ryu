@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 641089805458191687}
   - component: {fileID: 6707744927815998022}
   m_Layer: 0
-  m_Name: Pytorch
+  m_Name: PytorchWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
