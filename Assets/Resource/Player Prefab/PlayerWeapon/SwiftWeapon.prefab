@@ -48,4 +48,4 @@ MonoBehaviour:
   isMaxLevel: 0
   muzzle: {fileID: 0}
   bullet: {fileID: 6626596008623015290, guid: ac3f306ebd257fe4fac49bb1b5f338d8, type: 3}
-  fireRate: 1
+  fireRate: 3.5

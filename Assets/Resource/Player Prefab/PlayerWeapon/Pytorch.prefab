@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22164144533359997}
   - component: {fileID: 641089805458191687}
+  - component: {fileID: 6707744927815998022}
   m_Layer: 0
   m_Name: Pytorch
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 5735838364107986111}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -72,9 +73,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 2bac56dd8c539e140a7dd97a7e014725, type: 3}
-  m_Color: {r: 0.93333334, g: 0.26666668, b: 0.13333334, a: 1}
+  m_Color: {r: 0.93333334, g: 0.26666668, b: 0.13333334, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -84,3 +85,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6707744927815998022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5735838364107986111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d81ae484b3dc224883508aada0811fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponDamageRate: 0
+  isMaxLevel: 0
+  muzzle: {fileID: 0}
+  bullet: {fileID: 3596937939992291992, guid: 21c380b2098cf71479e4060b97674f76, type: 3}
+  pytorchFireInterval: 0
