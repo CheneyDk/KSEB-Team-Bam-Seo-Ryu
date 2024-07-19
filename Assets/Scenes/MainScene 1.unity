@@ -1436,6 +1436,7 @@ MonoBehaviour:
   playerItemParent: {fileID: 546200656}
   gameUI: {fileID: 577996783}
   maxLevelItemList: []
+  playerWeapons: {fileID: 0}
 --- !u!1 &310989112
 GameObject:
   m_ObjectHideFlags: 0
@@ -9547,7 +9548,7 @@ MonoBehaviour:
   RESpawnGroupRadius: 1
   HESpawnRate: 1
   HESpawnStartTime: 1
-  HESpawnNumber: 1
+  HESpawnNumber: 0
   HESpawnGroupRadius: 1
   noSpawnRange: 5
   EnemySpawnRange: 10
