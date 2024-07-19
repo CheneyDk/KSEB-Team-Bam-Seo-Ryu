@@ -18,16 +18,12 @@ public abstract class Item : MonoBehaviour
 
     private void Start()
     {
-        // Init
         playerTrans = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // collision with player
     protected abstract void OnTriggerEnter2D(Collider2D collision);
     // Initialize Exp only.
-    public abstract void Init(float expAmount);
-    // Hp potion and Red Bool have their' own const value.
-    // Init on Awake and make this func null return or something.
 
     // actual magnetic effects
     // 비동기 + 한 번 걸리면 따라가도록 변경

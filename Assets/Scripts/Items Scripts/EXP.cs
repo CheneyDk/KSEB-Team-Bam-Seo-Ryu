@@ -9,12 +9,6 @@ public class EXP : Item
         value = 1f;
     }
 
-    // YH - on test
-    public override void Init(float expAmount)
-    {
-        //value = expAmount;
-        return;
-    }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {

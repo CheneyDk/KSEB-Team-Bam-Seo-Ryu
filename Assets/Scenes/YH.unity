@@ -1437,6 +1437,7 @@ MonoBehaviour:
   playerItemParent: {fileID: 0}
   gameUI: {fileID: 577996783}
   maxLevelItemList: []
+  randomWeaponList: []
 --- !u!1 &310989112
 GameObject:
   m_ObjectHideFlags: 0
