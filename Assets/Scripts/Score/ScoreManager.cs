@@ -12,9 +12,7 @@ public class ScoreManager : MonoBehaviour
     public int LV;
     public Dictionary<string, float> weaponDamages = new Dictionary<string, float>();
 
-    //public WaveManager waveManager;
-    //public GameManager gameManager;
-    //public Player player;
+    bool flag = true;
 
     private void Awake()
     {
@@ -31,13 +29,12 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "UDD_Scene")
         {
             WaveManager waveManager = FindObjectOfType<WaveManager>();
-            //GameManager gameManager = (GameManager)GameObject.Find("GameManager");
+            GameManager gameManager = FindObjectOfType<GameManager>();
             Player player = FindObjectOfType<Player>();
 
             waveCount = waveManager.curWave;
@@ -46,9 +43,14 @@ public class ScoreManager : MonoBehaviour
             //weaponDamages["Sword"] = 150.0f;
             //weaponDamages["Bow"] = 120.5f;
 
-            if (player.playerCurHp <= 0)
+            if (player.playerCurHp <= 0 && flag)
             {
                 SaveScoreData();
+                flag = false;
+            }
+            if (gameManager.isGameContinue)
+            {
+                flag = true;
             }
         }
     }
