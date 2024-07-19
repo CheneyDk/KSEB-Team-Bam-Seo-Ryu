@@ -1430,13 +1430,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e65068d2ee758074f89a22b8fcc44984, type: 2}
   - {fileID: 11400000, guid: df894a11d49451e47ae7752a547654f1, type: 2}
   playerWeaponList: []
-  playerItemList: []
+  playerPassiveList: []
   maxItemNumber: 4
   playerWeaponParent: {fileID: 897920589}
-  playerItemParent: {fileID: 546200656}
+  playerPassiveParent: {fileID: 0}
   gameUI: {fileID: 577996783}
   maxLevelItemList: []
-  playerWeapons: {fileID: 0}
 --- !u!1 &310989112
 GameObject:
   m_ObjectHideFlags: 0
@@ -2812,11 +2811,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!4 &546200656 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2799643135447565958, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
-  m_PrefabInstance: {fileID: 8766426790022767645}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &548932941
 GameObject:
   m_ObjectHideFlags: 0

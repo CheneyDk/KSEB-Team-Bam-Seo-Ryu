@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.UI;
-using static Cinemachine.DocumentationSortingAttribute;
 
 public class UpgradeManager : MonoBehaviour
 {
@@ -22,14 +19,14 @@ public class UpgradeManager : MonoBehaviour
 
     [Header("Player Weapon & Item Slot")]
     public List<WeaponData> playerWeaponList = new List<WeaponData>();
-    public List<WeaponData> playerItemList = new List<WeaponData>();
+    public List<WeaponData> playerPassiveList = new List<WeaponData>();
     public int maxItemNumber = 4;
 
     private bool isLevelUp = false;
 
     [Header("Player Weapon and Item")]
     public Transform playerWeaponParent;
-    public Transform playerItemParent;
+    public Transform playerPassiveParent;
 
     public GameUI gameUI;
 
@@ -37,8 +34,7 @@ public class UpgradeManager : MonoBehaviour
     public List<WeaponData> maxLevelItemList = new List<WeaponData>();
 
     // Cheak Weapon or Item is Max Level or not
-    private List<WeaponData> randomItemList = new List<WeaponData>();
-    [SerializeField]
+    private List<WeaponData> randomPassiveList = new List<WeaponData>();
     private List<WeaponData> randomWeaponList = new List<WeaponData>();
 
     // Upgrade UI
@@ -87,7 +83,7 @@ public class UpgradeManager : MonoBehaviour
         {
             isLevelUp = levelup;
             sourceList = itemDataList;
-            itemList = playerItemList;
+            itemList = playerPassiveList;
             if (itemList.Count != maxItemNumber)
             {
                 while (selectedItems.Count< 3 && sourceList.Count > 0)
@@ -101,9 +97,9 @@ public class UpgradeManager : MonoBehaviour
             }
             else if (itemList.Count == maxItemNumber)
             {
-                while (selectedItems.Count < 3 && randomItemList.Count > 0)
+                while (selectedItems.Count < 3 && randomPassiveList.Count > 0)
                 {
-                    WeaponData item = randomItemList[Random.Range(0, randomItemList.Count)];
+                    WeaponData item = randomPassiveList[Random.Range(0, randomPassiveList.Count)];
                     WeaponData maxItem = maxLevelItemList[Random.Range(0, maxLevelItemList.Count)];
                     if (!selectedItems.Contains(item) && item != null)
                     {
@@ -151,7 +147,7 @@ public class UpgradeManager : MonoBehaviour
         }
         else if (isLevelUp == false)
         {
-            AddOrUpgradeItem(playerItemList, randomItemList, playerItemParent, item, maxItemNumber);
+            AddOrUpgradeItem(playerPassiveList, randomPassiveList, playerPassiveParent, item, maxItemNumber);
         }
 
         GameManager.Instance.EndUpgrade();
@@ -188,7 +184,7 @@ public class UpgradeManager : MonoBehaviour
                 gameUI.WeaponIconList(itemList);
                 AddWeaponToPlayer(item.weapon);
             }
-            else if (itemList == playerItemList)
+            else if (itemList == playerPassiveList)
             {
                 gameUI.ItemIconList(itemList);
                 AddItemToPlayer(item.weapon);
@@ -206,6 +202,6 @@ public class UpgradeManager : MonoBehaviour
     // Add Item to Player
     private void AddItemToPlayer(GameObject item)
     {
-        Instantiate(item, playerItemParent);
+        Instantiate(item, playerPassiveParent);
     }
 }
