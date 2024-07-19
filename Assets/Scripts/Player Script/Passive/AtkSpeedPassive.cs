@@ -10,7 +10,7 @@ public class AtkSpeedPassive : PlayerPassive
     private void OnEnable()
     {
         passiveLevel = 1;
-        increaseRate = 1f;
+        increaseRate = 0.06f;
         totalValue = 0f;
     }
 

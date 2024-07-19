@@ -13,7 +13,7 @@ public class WeaponUroboros_L : PlayerWeapon
     {
         // init stats
         weaponDamageRate = 1.2f;
-        weaponFireRate = 0.55f;
+        weaponFireRate = 0.8f;
         bulletNum = 1;
         weaponLevel = 1;
 

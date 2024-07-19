@@ -9404,7 +9404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNumber: 10
   curWave: 1
-  waveTime: 60
+  waveTime: 10
   waveInterval: 2
   time: 0
   magneticTime: 3
