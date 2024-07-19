@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eca71ca24a078264b9780d1aee7c37ec, type: 3}
-  m_Name: New Weapon Data 5
+  m_Name: AtkSpeedPassive
   m_EditorClassIdentifier: 
-  weaponImage: {fileID: 21300000, guid: a8012cd183867ba4b91b9e307b195929, type: 3}
-  weaponName: Item 6
-  weaponDesc: test desc for item 6
-  type: 1
+  weaponImage: {fileID: 21300000, guid: 7900277dc4640194c90bfc84687c7433, type: 3}
+  weaponName: CPU chipset
+  weapon: {fileID: 4309293738989804150, guid: 62bb84369b6f7b44baa8198aadefa159, type: 3}
+  weaponDesc: 'Computer calculation speed has increased
+
+    Atk Speed + 1'
