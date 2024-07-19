@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -55,6 +56,13 @@ public class Player : MonoBehaviour
 
     // upgrades
 
+    // Energy Drinks
+    [Header("-EnergyDrink")]
+    public float energyDrinkTimer = 0f;
+    public float energyDrinkDuration = 10f;
+    private float energyDrinkSprintCDDecrease = 1.25f;
+    private bool isEnergyDrinkActive;
+
 
     private void Awake()
     {
@@ -75,6 +83,8 @@ public class Player : MonoBehaviour
         // input system init
         playerInput = GetComponent<PlayerInput>();
         weaponInput = weapon.GetComponent<PlayerInput>();
+
+        isEnergyDrinkActive = false;
     }
 
     private void Update()
@@ -160,7 +170,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    
 
     private IEnumerator SprintTimer(Color color)
     {
@@ -236,10 +245,60 @@ public class Player : MonoBehaviour
         SwitchToPlayerControlStop();
     }
 
+    // apple
+    public void GetHpPotion(float heal)
+    {
+        if (playerCurHp > playerMaxHp - heal)
+        {
+            playerCurHp = playerMaxHp;
+        }
+        else
+        {
+            playerCurHp += heal;
+        }
+    }
 
-    // GetHpPotion() - YH add this func later.
-    // GetRedBull()
+    // RedBull
+    public void GetEnergyDrink(float value)
+    {
+        GetHigh(value).Forget();
+    }
 
+    private async UniTask GetHigh(float value)
+    {
+        energyDrinkTimer = energyDrinkDuration;
+
+        if (isEnergyDrinkActive)
+        {
+            return;
+        }
+
+        playerMoveSpeed *= value;
+        sprintCoolDown -= energyDrinkSprintCDDecrease;
+        isEnergyDrinkActive = true;
+        Debug.Log("act");
+
+        EnergyDrinkTimer().Forget();
+
+        await UniTask.WaitUntil(() => energyDrinkTimer <= 0f);
+        playerMoveSpeed /= value;
+        sprintCoolDown += energyDrinkSprintCDDecrease;
+        isEnergyDrinkActive = false;
+        Debug.Log("inact");
+    }
+
+    private async UniTask EnergyDrinkTimer()
+    {
+        Debug.Log("Timer Start");
+        while (0f < energyDrinkTimer)
+        {
+            await UniTask.Yield();
+            energyDrinkTimer -= Time.deltaTime;
+        }
+
+        energyDrinkTimer = 0f;
+        Debug.Log("Timer End");
+    }
 
     // System Control
 

@@ -54,9 +54,9 @@ public class PytorchWeapon : PlayerWeapon
         if (isMaxLevel) return;
 
         weaponLevel += 1;
-        weaponDamageRate += 0.1f;
+        weaponDamageRate += 0.075f;
         pytorchFireInterval -= 0.03f;
-        bulletNum += 10;
+        bulletNum += 8;
 
         if (weaponLevel > 4) isMaxLevel = true;
     }

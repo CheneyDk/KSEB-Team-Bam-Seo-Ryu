@@ -9,7 +9,7 @@ public class BulletSharp : PlayerBullet
         // go straight
         bulletVector = Vector2.right;
         bulletSpeed = 70f;
-        bulletLifeTime = 4f;
+        bulletLifeTime = 1.5f;
 
         Destroy(gameObject, bulletLifeTime);
     }
