@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1372434677682281048}
   - component: {fileID: 2913531854518072210}
   - component: {fileID: 3702804551872520689}
+  - component: {fileID: -4548726143398089522}
   m_Layer: 0
   m_Name: RunTimeErrorBullet
   m_TagString: Untagged
@@ -120,3 +121,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.07
+--- !u!114 &-4548726143398089522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6193504377320133229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee094eb923734745909467adc02d263, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletDamage: 30
+  bulletSpeed: 0
+  bulletDirection: {x: 0, y: 0}
