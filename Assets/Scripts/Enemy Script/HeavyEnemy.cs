@@ -109,6 +109,9 @@ public class HeavyEnemy : Enemy
             HeavyAni.SetTrigger("isDead");
             Destroy(gameObject, 0.6f);
             Drop(dropExpNumber);
+
+            GameManager gameManager = FindObjectOfType<GameManager>();
+            gameManager.enemyKills++;
         }
     }
 

@@ -16,12 +16,11 @@ public class ScoreManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("생성!");
-
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            Debug.Log("생성!");
         }
         else
         {
@@ -38,7 +37,7 @@ public class ScoreManager : MonoBehaviour
             Player player = FindObjectOfType<Player>();
 
             waveCount = waveManager.curWave;
-            //enemyKills = 20;
+            enemyKills = gameManager.enemyKills;
             LV = player.playerLevel;
             //weaponDamages["Sword"] = 150.0f;
             //weaponDamages["Bow"] = 120.5f;
@@ -58,5 +57,8 @@ public class ScoreManager : MonoBehaviour
     public void SaveScoreData()
     {
         Debug.Log("저장 성공!");
+        Debug.Log("도달 웨이브: " + waveCount.ToString());
+        Debug.Log("죽인 적 수: " + enemyKills.ToString());
+        Debug.Log("도달 레벨: " + LV.ToString());
     }
 }

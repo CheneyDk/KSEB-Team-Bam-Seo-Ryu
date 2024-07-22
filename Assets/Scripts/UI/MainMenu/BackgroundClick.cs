@@ -7,6 +7,6 @@ public class BackgroundClick : MonoBehaviour, IPointerClickHandler
 {
     public void OnPointerClick(PointerEventData eventData)
     {
-        MainMenuManager.instance.OnlyDisable("Window");
+        MainMenuManager.instance.OnlyDisable();
     }
 }

@@ -78,6 +78,9 @@ public class MeleeEnemy : Enemy
             meleeAni.SetTrigger("isDead");
             Destroy(gameObject, meleeAni.GetCurrentAnimatorStateInfo(0).length + 1f);
             Drop(dropExpNumber);
+
+            GameManager gameManager = FindObjectOfType<GameManager>();
+            gameManager.enemyKills++;
         }
     }
 

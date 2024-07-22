@@ -11,8 +11,7 @@ public class MainMenuManager : MonoBehaviour
 {
     public static MainMenuManager instance;
     
-    public GameObject windowPanel;
-    public GameObject firstPagePanel;
+    public GameObject panel;
     public Slider SoundSlider;
     public GameObject I_100;
     public GameObject I_66;
@@ -27,22 +26,11 @@ public class MainMenuManager : MonoBehaviour
         instance = this;
     }
 
-    public void OnlyDisable(string panel)
+    public void OnlyDisable()
     {
-        if (panel == "Window")
+        if (panel.activeSelf)
         {
-            if (windowPanel.activeSelf)
-            {
-                windowPanel.SetActive(false);
-            }
-        }
-
-        if (panel == "FirstPage")
-        {
-            if (firstPagePanel.activeSelf)
-            {
-                firstPagePanel.SetActive(false);
-            }
+            panel.SetActive(false);
         }
     }
 
@@ -50,12 +38,12 @@ public class MainMenuManager : MonoBehaviour
     {
         if (context.started)
         {
-            windowPanel.SetActive(!windowPanel.activeSelf);
+            panel.SetActive(!panel.activeSelf);
         }
     }
     public void Toggle()
     {
-        windowPanel.SetActive(!windowPanel.activeSelf);
+        panel.SetActive(!panel.activeSelf);
     }
 
     public void MoveScene(string sceneName)

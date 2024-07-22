@@ -110,6 +110,9 @@ public class RangeEnemy : Enemy
             rangeAni.SetTrigger("isDead");
             Destroy(gameObject, rangeAni.GetCurrentAnimatorStateInfo(0).length + 1f);
             Drop(dropExpNumber);
+
+            GameManager gameManager = FindObjectOfType<GameManager>();
+            gameManager.enemyKills++;
         }
     }
 
