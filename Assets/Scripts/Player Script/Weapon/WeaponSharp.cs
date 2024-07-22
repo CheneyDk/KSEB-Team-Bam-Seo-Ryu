@@ -12,7 +12,9 @@ public class WeaponSharp : PlayerWeapon
     // this stat means time interval between round and round.
     private float weaponSharpFireInterval = 0.1f;
 
+    // Auto Fire Control
     private CancellationTokenSource cancelFire;
+    private bool isFire;
 
     private void Start()
     {
@@ -24,6 +26,7 @@ public class WeaponSharp : PlayerWeapon
 
         // player can fire imediately
         fireRateTimer = weaponFireRate;
+        isFire = false;
     }
     
     private void Update()
@@ -43,9 +46,8 @@ public class WeaponSharp : PlayerWeapon
         }
 
         // when hold click
-        if (context.started && fireRateTimer > weaponFireRate / player.playerAtkSpeed)
+        if (context.started)
         {
-            fireRateTimer = 0f;
             AutoFire().Forget();
         }
     }
@@ -56,10 +58,15 @@ public class WeaponSharp : PlayerWeapon
         // cancel token
         cancelFire = new CancellationTokenSource();
 
+        // wait for next fire cycle
+        await UniTask.WaitUntil(() => fireRateTimer > weaponFireRate / player.playerAtkSpeed, cancellationToken: cancelFire.Token);
+        fireRateTimer = 0f;
+
         while (!cancelFire.IsCancellationRequested)
         {
             SharpFire().Forget();
             await UniTask.WaitForSeconds(weaponFireRate / player.playerAtkSpeed, cancellationToken: cancelFire.Token);
+            fireRateTimer = 0f;
         }
     }
 

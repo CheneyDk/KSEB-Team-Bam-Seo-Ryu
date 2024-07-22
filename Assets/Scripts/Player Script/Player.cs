@@ -132,11 +132,12 @@ public class Player : MonoBehaviour
         // while stop state, player can't rollin'
         if (playerMoveVector == Vector2.zero) return;
 
+        // only key input down active sprint
+        if (!context.started) return;
+
         // if still CoolDown
         if (sprintCoolDown > sprintCoolDownTimer) return;
         sprintCoolDownTimer = 0f;
-
-        if (!context.started) return;
 
         Debug.Log("sprint");
 
