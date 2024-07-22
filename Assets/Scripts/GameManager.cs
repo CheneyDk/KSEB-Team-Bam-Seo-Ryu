@@ -73,6 +73,11 @@ public class GameManager : MonoBehaviour
         enemyKills = 0;
     }
 
+    public void GoMainMenu()
+    {
+        SceneManager.LoadScene("MainMenuScene");
+    }
+
     public void PauseGame()
     {
         // 1. pause menu on
