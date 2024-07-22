@@ -70,7 +70,7 @@ public class WaveManager : MonoBehaviour
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemies)
         {
-            Destroy(enemy);
+            enemy.SetActive(false);
         }
     }
 }

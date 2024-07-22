@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class LodingWeapon : PlayerWeapon
+public class LoadingWeapon : PlayerWeapon
 {
     public float fireRate = 2f;
     public float rotationSpeed = 100f;

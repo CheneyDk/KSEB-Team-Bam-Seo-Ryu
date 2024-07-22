@@ -9469,8 +9469,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2030385432}
-  - component: {fileID: 1987470288}
   - component: {fileID: 2030385431}
+  - component: {fileID: 1987470288}
   - component: {fileID: 2030385430}
   m_Layer: 0
   m_Name: WaveManager
@@ -9704,6 +9704,7 @@ MonoBehaviour:
   noSpawnRange: 5
   EnemySpawnRange: 10
   warningDuration: 1
+  numberToPool: 0
 --- !u!222 &2030385431
 CanvasRenderer:
   m_ObjectHideFlags: 0

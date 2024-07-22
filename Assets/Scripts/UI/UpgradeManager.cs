@@ -44,6 +44,7 @@ public class UpgradeManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
+
     // Upgrade UI
     public void OnUpgrade(bool levelup)
     {
@@ -58,56 +59,14 @@ public class UpgradeManager : MonoBehaviour
             isLevelUp = levelup;
             sourceList = weaponDataList;
             itemList = playerWeaponList;
-            if (itemList.Count != maxItemNumber)
-            {
-                while (selectedItems.Count < 3 && sourceList.Count > 0)
-                {
-                    WeaponData item = sourceList[Random.Range(0, sourceList.Count)];
-                    if (!selectedItems.Contains(item))
-                    {
-                        selectedItems.Add(item);
-                    }
-                }
-            }
-            else if (itemList.Count == maxItemNumber)
-            {
-                while (selectedItems.Count < 3 && randomWeaponList.Count > 0)
-                {
-                    WeaponData item = randomWeaponList[Random.Range(0, randomWeaponList.Count)];
-                    if(!selectedItems.Contains(item))
-                    {
-                        selectedItems.Add(item);
-                    }
-                }
-            }
+            ItemToSelectedItems(selectedItems, sourceList, itemList, randomWeaponList);
         }
         else if (levelup == false)
         {
             isLevelUp = levelup;
             sourceList = itemDataList;
             itemList = playerPassiveList;
-            if (itemList.Count != maxItemNumber)
-            {
-                while (selectedItems.Count< 3 && sourceList.Count > 0)
-                {
-                    WeaponData item = sourceList[Random.Range(0, sourceList.Count)];
-                    if (!selectedItems.Contains(item))
-                    {
-                        selectedItems.Add(item);
-                    }
-                }
-            }
-            else if (itemList.Count == maxItemNumber)
-            {
-                while (selectedItems.Count < 3 && randomPassiveList.Count > 0)
-                {
-                    WeaponData item = randomPassiveList[Random.Range(0, randomPassiveList.Count)];
-                    if(!selectedItems.Contains(item))
-                    {
-                        selectedItems.Add(item);
-                    }
-                }
-            }
+            ItemToSelectedItems(selectedItems, sourceList, itemList, randomPassiveList);
         }
 
         if (sourceList != null && itemList != null)
@@ -129,6 +88,33 @@ public class UpgradeManager : MonoBehaviour
                     optionDescTexts[i].text = "";
                     optionImages[i].sprite = null;
                     optionButtons[i].onClick.RemoveAllListeners();
+                }
+            }
+        }
+    }
+
+    // Put Items in to select windows
+    private void ItemToSelectedItems(List<WeaponData> selectedItems, List<WeaponData> sourceList, List<WeaponData> itemList, List<WeaponData> randomList)
+    {
+        if (itemList.Count != maxItemNumber)
+        {
+            while (selectedItems.Count < 3 && sourceList.Count > 0)
+            {
+                WeaponData item = sourceList[Random.Range(0, sourceList.Count)];
+                if (!selectedItems.Contains(item))
+                {
+                    selectedItems.Add(item);
+                }
+            }
+        }
+        else if (itemList.Count == maxItemNumber)
+        {
+            while (selectedItems.Count < 3 && randomList.Count > 0)
+            {
+                WeaponData item = randomList[Random.Range(0, randomList.Count)];
+                if (!selectedItems.Contains(item))
+                {
+                    selectedItems.Add(item);
                 }
             }
         }

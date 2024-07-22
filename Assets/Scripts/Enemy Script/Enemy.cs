@@ -15,5 +15,7 @@ public abstract class Enemy : MonoBehaviour
 
     public abstract IEnumerator LastingDamage(float damage, int totalDamageTime, Color color);
 
-    public abstract void Drop(int iteamNumber);
+    public abstract void DropEXP(int iteamNumber);
+
+    public abstract void ResetEnemy();
 }

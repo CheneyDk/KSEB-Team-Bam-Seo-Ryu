@@ -30,6 +30,11 @@ public class RangeEnemy : Enemy
     public int dropExpNumber = 3;
     private float spawnGroupRadius = 1f;
 
+    [Header("Drop Item"), SerializeField]
+    private GameObject healingItem;
+    [SerializeField]
+    private GameObject redbuleItem;
+
     private Animator rangeAni;
     private Collider2D rangeCollider;
 
@@ -37,6 +42,11 @@ public class RangeEnemy : Enemy
     private Color originColor;
 
     private bool isDead = false;
+
+    private void OnEnable()
+    {
+        StopAllCoroutines();
+    }
 
     private void Awake()
     {
@@ -105,12 +115,25 @@ public class RangeEnemy : Enemy
         RangeEnemyCurtHP -= damage;
         if (RangeEnemyCurtHP <= 0)
         {
-            rangeCollider.enabled = false;
-            isDead = true;
-            rangeAni.SetTrigger("isDead");
-            Destroy(gameObject, rangeAni.GetCurrentAnimatorStateInfo(0).length + 1f);
-            Drop(dropExpNumber);
+            EnemyDead();
         }
+    }
+
+    private void EnemyDead()
+    {
+        rangeCollider.enabled = false;
+        isDead = true;
+        rangeAni.SetBool("isDead", true);
+        StartCoroutine("SetActiveToFalse");
+        DropEXP(dropExpNumber);
+        ChanceToDropItem(healingItem, 1);
+        ChanceToDropItem(redbuleItem, 0);
+    }
+
+    private IEnumerator SetActiveToFalse()
+    {
+        yield return new WaitForSeconds(0.8f);
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -130,7 +153,7 @@ public class RangeEnemy : Enemy
         }
     }
 
-    public override void Drop(int itemNumber)
+    public override void DropEXP(int itemNumber)
     {
         for (int i = 0; i < itemNumber; i++)
         {
@@ -153,9 +176,26 @@ public class RangeEnemy : Enemy
 
         if (RangeEnemyCurtHP <= 0)
         {
-            Destroy(gameObject);
-            Drop(dropExpNumber);
+            EnemyDead();
         }
         curSR.color = originColor;
+    }
+
+    private void ChanceToDropItem(GameObject item, int chance)
+    {
+        var randomChance = Random.Range(1, 11);
+        if (randomChance <= chance)
+        {
+            Instantiate(item, transform.position, Quaternion.identity);
+        }
+    }
+
+    public override void ResetEnemy()
+    {
+        rangeAni.SetBool("isDead", false);
+        curSR.color = originColor;
+        RangeEnemyCurtHP = RangeEnemyMaxHp;
+        rangeCollider.enabled = true;
+        isDead = false;
     }
 }

@@ -30,13 +30,24 @@ public class HeavyEnemy : Enemy
     public int dropExpNumber = 3;
     private float spawnGroupRadius = 1f;
 
-    private Animator HeavyAni;
-    private Collider2D HeavyCollider;
+    [Header("Drop Item"), SerializeField]
+    private GameObject healingItem;
+    [SerializeField]
+    private GameObject redbuleItem;
+
+    private Animator heavyAni;
+    private Collider2D heavyCollider;
 
     private SpriteRenderer curSR;
     private Color originColor;
 
     private bool isDead = false;
+
+    private void OnEnable()
+    {
+        StopCoroutine("TakeLastingDamage");
+        StopCoroutine("SetActiveToFalse");
+    }
 
     private void Awake()
     {
@@ -44,8 +55,8 @@ public class HeavyEnemy : Enemy
         originColor = curSR.color;
         HeavyEnemyCurtHP = HeavyEnemyMaxHp;
 
-        HeavyAni = GetComponent<Animator>();
-        HeavyCollider = GetComponent<CircleCollider2D>();
+        heavyAni = GetComponent<Animator>();
+        heavyCollider = GetComponent<CircleCollider2D>();
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -104,12 +115,25 @@ public class HeavyEnemy : Enemy
         HeavyEnemyCurtHP -= damage;
         if (HeavyEnemyCurtHP <= 0)
         {
-            HeavyCollider.enabled = false;
-            isDead = true;
-            HeavyAni.SetTrigger("isDead");
-            Destroy(gameObject, 0.6f);
-            Drop(dropExpNumber);
+            EnemyDead();
         }
+    }
+
+    private void EnemyDead()
+    {
+        heavyCollider.enabled = false;
+        isDead = true;
+        heavyAni.SetBool("isDead", true);
+        StartCoroutine("SetActiveToFalse");
+        DropEXP(dropExpNumber);
+        ChanceToDropItem(healingItem, 2);
+        ChanceToDropItem(redbuleItem, 1);
+    }
+
+    private IEnumerator SetActiveToFalse()
+    {
+        yield return new WaitForSeconds(0.8f);
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -129,12 +153,21 @@ public class HeavyEnemy : Enemy
         }
     }
 
-    public override void Drop(int itemNumber)
+    public override void DropEXP(int itemNumber)
     {
         for (int i = 0; i < itemNumber; i++)
         {
             Vector2 spawnPlace = (Vector2)transform.position + (Vector2)Random.insideUnitCircle * spawnGroupRadius;
             Instantiate(Exp, spawnPlace, Quaternion.identity);
+        }
+    }
+
+    private void ChanceToDropItem(GameObject item, int chance)
+    {
+        var randomChance = Random.Range(1, 11);
+        if (randomChance <= chance)
+        {
+            Instantiate(item, transform.position, Quaternion.identity);
         }
     }
 
@@ -152,9 +185,18 @@ public class HeavyEnemy : Enemy
 
         if (HeavyEnemyCurtHP <= 0)
         {
-            Destroy(gameObject);
-            Drop(dropExpNumber);
+            EnemyDead();
         }
         curSR.color = originColor;
+    }
+
+    public override void ResetEnemy()
+    {
+        heavyAni.SetBool("isDead", false);
+        curSR.color = originColor;
+        HeavyEnemyCurtHP = HeavyEnemyMaxHp;
+        heavyCollider.enabled = true;
+        canDash = false;
+        isDead = false;
     }
 }

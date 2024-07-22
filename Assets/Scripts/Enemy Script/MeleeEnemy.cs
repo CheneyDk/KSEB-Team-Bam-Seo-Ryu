@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Services.Analytics.Internal;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class MeleeEnemy : Enemy
 {
@@ -21,6 +22,11 @@ public class MeleeEnemy : Enemy
     public int dropExpNumber = 3;
     private float spawnGroupRadius = 1f;
 
+    [Header("Drop Item"), SerializeField]
+    private GameObject healingItem;
+    [SerializeField]
+    private GameObject redbuleItem;
+
     private Animator meleeAni;
     private Collider2D meleeCollider;
 
@@ -31,6 +37,11 @@ public class MeleeEnemy : Enemy
     private Color originColor;
 
     private bool isDead = false;
+
+    private void OnEnable()
+    {
+        StopAllCoroutines();
+    }
 
     private void Awake()
     {
@@ -73,12 +84,25 @@ public class MeleeEnemy : Enemy
         MeleeEnemyCurtHP -= damage; 
         if (MeleeEnemyCurtHP <= 0)
         {
-            meleeCollider.enabled = false;
-            isDead = true;
-            meleeAni.SetTrigger("isDead");
-            Destroy(gameObject, meleeAni.GetCurrentAnimatorStateInfo(0).length + 1f);
-            Drop(dropExpNumber);
+            EnemyDead();
         }
+    }
+
+    private void EnemyDead()
+    {
+        meleeCollider.enabled = false;
+        isDead = true;
+        meleeAni.SetBool("isDead", true);
+        StartCoroutine("SetActiveToFalse");
+        DropEXP(dropExpNumber);
+        ChanceToDropItem(healingItem, 1);
+        ChanceToDropItem(redbuleItem, 0);
+    }
+
+    private IEnumerator SetActiveToFalse()
+    {
+        yield return new WaitForSeconds(.8f);
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -98,7 +122,7 @@ public class MeleeEnemy : Enemy
         }
     }
 
-    public override void Drop(int itemNumber)
+    public override void DropEXP(int itemNumber)
     {
         for (int i = 0; i < itemNumber; i++)
         {
@@ -121,10 +145,26 @@ public class MeleeEnemy : Enemy
 
         if (MeleeEnemyCurtHP <= 0)
         {
-            Destroy(gameObject);
-            Drop(dropExpNumber);
+            EnemyDead();
         }
         curSR.color = originColor;
     }
 
+    private void ChanceToDropItem(GameObject item, int chance)
+    {
+        var randomChance = Random.Range(1, 11);
+        if (randomChance <= chance)
+        {
+            Instantiate(item, transform.position, Quaternion.identity);
+        }
+    }
+
+    public override void ResetEnemy()
+    {
+        meleeAni.SetBool("isDead", false);
+        curSR.color = originColor;
+        MeleeEnemyCurtHP = MeleeEnemyMaxHp;
+        meleeCollider.enabled = true;
+        isDead = false;
+    }
 }

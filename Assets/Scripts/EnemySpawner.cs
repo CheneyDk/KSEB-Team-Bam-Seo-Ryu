@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -40,17 +41,58 @@ public class EnemySpawner : MonoBehaviour
     public float noSpawnRange = 5f;
     public float EnemySpawnRange = 10f;
 
-    [Header("Warning Settings")]
-    public float warningDuration = 1f;
+    [Header("Warning Settings"), SerializeField]
+    private float warningTime = 1f;
 
     private int nowWave;
+
+    [Header("Object Pooling")]
+    [SerializeField]
+    private int numberToPool;
+    [SerializeField]
+    private Transform poolingZone;
+    private List<GameObject> pooledMeleeEnemies = new List<GameObject>();
+    private List<GameObject> pooledRangeEnemies = new List<GameObject>();
+    private List<GameObject> pooledHeavyEnemies = new List<GameObject>();
 
     private void Awake()
     {
         waveManager = GetComponent<WaveManager>();
         nowWave = waveManager.curWave;
+
+        //Pooling
+        PutEnemiesToPool(pooledMeleeEnemies, MeleeEnemyPrefab);
+        PutEnemiesToPool(pooledRangeEnemies, RangeEnemyPrefab);
+        PutEnemiesToPool(pooledHeavyEnemies, HeavyEnemyPrefab);
     }
 
+    // Put enemies in pooling list
+    private void PutEnemiesToPool(List<GameObject>  poolList, GameObject enemyPrefab)
+    {
+        for (int i = 0; i < numberToPool; i++)
+        {
+            var tmp = Instantiate(enemyPrefab);
+            tmp.transform.parent = poolingZone;
+            tmp.SetActive(false);
+            poolList.Add(tmp);
+        }
+    }
+
+    // Get enemies from pooling list
+    public GameObject GetPooledEnemies(List<GameObject> poolList)
+    {
+        for (int i = 0; i < numberToPool; i++)
+        {
+            if (!poolList[i].activeInHierarchy)
+            {
+                poolList[i].GetComponent<Enemy>().ResetEnemy();
+                return poolList[i];
+            }
+        }
+        return null;
+    }
+
+    // Start spawn enemies
     public void StartSpawning()
     {
         if (!Spawning)
@@ -72,19 +114,21 @@ public class EnemySpawner : MonoBehaviour
                 }
                 nowWave = waveManager.curWave;
             }
-            StartCoroutine(EnemiesSpawn(MeleeEnemyPrefab, MESpawnStartTime, MESpawnRate, MESpawnNumber, MESpawnGroupRadius));
-            StartCoroutine(EnemiesSpawn(RangeEnemyPrefab, RESpawnStartTime, RESpawnRate, RESpawnNumber, RESpawnGroupRadius));
-            StartCoroutine(EnemiesSpawn(HeavyEnemyPrefab, HESpawnStartTime, HESpawnRate, HESpawnNumber, HESpawnGroupRadius));
+            StartCoroutine(EnemiesSpawn(pooledMeleeEnemies, MESpawnStartTime, MESpawnRate, MESpawnNumber, MESpawnGroupRadius));
+            StartCoroutine(EnemiesSpawn(pooledRangeEnemies, RESpawnStartTime, RESpawnRate, RESpawnNumber, RESpawnGroupRadius));
+            StartCoroutine(EnemiesSpawn(pooledHeavyEnemies, HESpawnStartTime, HESpawnRate, HESpawnNumber, HESpawnGroupRadius));
         }
     }
 
+    // Stop spawn
     public void StopSpawning()
     {
         Spawning = false;
         StopAllCoroutines();
     }
 
-    private IEnumerator EnemiesSpawn(GameObject enemyPrefab, float spawnStartTime, float spawnRate, int spawnNumber, float spawnGroupRadius)
+    // Spawn enemies and warning mark
+    private IEnumerator EnemiesSpawn(List<GameObject> enemyPoolList, float spawnStartTime, float spawnRate, int spawnNumber, float spawnGroupRadius)
     {
         yield return new WaitForSeconds(spawnStartTime);
         while (Spawning && !GameOver)
@@ -108,16 +152,21 @@ public class EnemySpawner : MonoBehaviour
                 Vector2 limitSpawnPosition = new Vector2(finalSpawnPosition.x, finalSpawnPosition.y);
                 spawnPositions.Add(limitSpawnPosition);
 
-                // 경고 표시 생성
                 GameObject warning = Instantiate(WarningPrefab, limitSpawnPosition, Quaternion.identity);
-                Destroy(warning, warningDuration);
+                Destroy(warning, warningTime);
             }
 
-            yield return new WaitForSeconds(warningDuration);
+            yield return new WaitForSeconds(warningTime);
 
             foreach (var position in spawnPositions)
             {
-                Instantiate(enemyPrefab, position, Quaternion.identity);
+                GameObject enemies = GetPooledEnemies(enemyPoolList);
+                if (enemies != null)
+                {
+                    enemies.transform.position = position;
+                    enemies.transform.rotation = Quaternion.identity;
+                    enemies.SetActive(true);
+                }
             }
 
             yield return new WaitForSeconds(spawnRate);

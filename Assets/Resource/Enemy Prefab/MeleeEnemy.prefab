@@ -188,4 +188,6 @@ MonoBehaviour:
   MeleeEnemyAtk: 5
   MeleeEnemyMoveSpeed: 6
   Exp: {fileID: 2828242351688375285, guid: 9f21b77202f043d45a40df1d9c28c4d8, type: 3}
-  dropExpNumber: 5
+  dropExpNumber: 1
+  healingItem: {fileID: 256046693093680286, guid: 9b4d105ecc7ec8444a24bfdfbcc172d3, type: 3}
+  redbuleItem: {fileID: 9016300061562779816, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
