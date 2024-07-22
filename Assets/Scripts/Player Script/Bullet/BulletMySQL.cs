@@ -48,6 +48,8 @@ public class BulletMySQL : PlayerBullet
             if (EnemyComponent != null)
             {
                 EnemyComponent.TakeDamage(bulletDamage);
+
+                ScoreManager.instance.UpdateDamage("MySQL", bulletDamage);
             }
         }
     }

@@ -110,8 +110,7 @@ public class HeavyEnemy : Enemy
             Destroy(gameObject, 0.6f);
             Drop(dropExpNumber);
 
-            GameManager gameManager = FindObjectOfType<GameManager>();
-            gameManager.enemyKills++;
+            ScoreManager.instance.UpdateEnemyKills();
         }
     }
 

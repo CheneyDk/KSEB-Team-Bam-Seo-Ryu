@@ -43,6 +43,8 @@ public class SwiftBullet : PlayerBullet
             if (enemyComponent != null)
             {
                 enemyComponent.TakeDamage(bulletDamage);
+
+                ScoreManager.instance.UpdateDamage("Swift", bulletDamage);
             }
         }
     }

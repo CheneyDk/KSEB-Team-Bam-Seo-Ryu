@@ -29,6 +29,8 @@ public class BulletSharp : PlayerBullet
             {
                 EnemyComponent.TakeDamage(bulletDamage);
                 Destroy(gameObject);
+
+                ScoreManager.instance.UpdateDamage("Basic", bulletDamage);
             }
         }
     }

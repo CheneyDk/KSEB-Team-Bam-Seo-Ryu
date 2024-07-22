@@ -45,6 +45,8 @@ public class BulletWhip : PlayerBullet
             if (EnemyComponent != null)
             {
                 EnemyComponent.TakeDamage(bulletDamage);
+
+                ScoreManager.instance.UpdateDamage("Basic", bulletDamage);
             }
         }
     }

@@ -8,5 +8,5 @@ public class ScoreData
     public int waveCount;
     public int enemyKills;
     public int LV;
-    public Dictionary<string, float> weaponDamages = new Dictionary<string, float>();
+    public Dictionary<string, int> weaponDamages = new Dictionary<string, int>();
 }
