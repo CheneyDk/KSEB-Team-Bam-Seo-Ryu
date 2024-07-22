@@ -33,7 +33,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 6867138972273937314}
+  - {fileID: 1461155787970749784}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1102049892243522096
@@ -108,7 +108,7 @@ MonoBehaviour:
   Exp: {fileID: 2828242351688375285, guid: 9f21b77202f043d45a40df1d9c28c4d8, type: 3}
   dropExpNumber: 3
   rotateBullet: {fileID: 6193504377320133229, guid: d8d4958a034201c4ebc6e96b15fe4ee1, type: 3}
-  rotationalAxis: {fileID: 6867138972273937314}
+  rotationalAxis: {fileID: 0}
   rotateBulletSpeed: 0
   rotateBulletNum: 0
 --- !u!58 &7851675844547211640
@@ -140,7 +140,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.05}
@@ -173,7 +173,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!1 &6473196783159505370
+--- !u!1 &7489818124013458593
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,21 +181,21 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6867138972273937314}
+  - component: {fileID: 1461155787970749784}
   m_Layer: 8
-  m_Name: rotationalAxis
+  m_Name: bulletRotationalAxis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6867138972273937314
+--- !u!4 &1461155787970749784
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6473196783159505370}
+  m_GameObject: {fileID: 7489818124013458593}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
