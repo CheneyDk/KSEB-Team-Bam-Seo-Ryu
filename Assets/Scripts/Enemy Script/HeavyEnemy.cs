@@ -128,6 +128,8 @@ public class HeavyEnemy : Enemy
         DropEXP(dropExpNumber);
         ChanceToDropItem(healingItem, 2);
         ChanceToDropItem(redbuleItem, 1);
+
+        ScoreManager.instance.UpdateEnemyKills();
     }
 
     private IEnumerator SetActiveToFalse()

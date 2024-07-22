@@ -97,6 +97,8 @@ public class MeleeEnemy : Enemy
         DropEXP(dropExpNumber);
         ChanceToDropItem(healingItem, 1);
         ChanceToDropItem(redbuleItem, 0);
+
+        ScoreManager.instance.UpdateEnemyKills();
     }
 
     private IEnumerator SetActiveToFalse()

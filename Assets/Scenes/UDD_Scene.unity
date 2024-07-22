@@ -291,7 +291,6 @@ MonoBehaviour:
   UpgradeUI: {fileID: 283899587}
   isGameContinue: 1
   player: {fileID: 537205968}
-  enemyKills: 0
 --- !u!4 &65655188
 Transform:
   m_ObjectHideFlags: 0
@@ -9772,9 +9771,9 @@ MonoBehaviour:
   RangeEnemyPrefab: {fileID: 2360296499876324244, guid: 41887659ad3be2749b0d51806e13d085, type: 3}
   HeavyEnemyPrefab: {fileID: 8426056131966608244, guid: 1c1dd7358eea0f44689489789463e457, type: 3}
   WarningPrefab: {fileID: 5580843737553246376, guid: b823dbc49d3e44d4e8c8fe859c42b447, type: 3}
-  MaxMeleeEnemy: 0
-  MaxRangeEnemy: 0
-  MaxHeavyEnemy: 0
+  MaxMeleeEnemy: 5
+  MaxRangeEnemy: 5
+  MaxHeavyEnemy: 5
   MESpawnRate: 1
   MESpawnStartTime: 1
   MESpawnNumber: 3
@@ -9789,7 +9788,9 @@ MonoBehaviour:
   HESpawnGroupRadius: 1
   noSpawnRange: 5
   EnemySpawnRange: 10
-  warningDuration: 1
+  warningTime: 1
+  numberToPool: 20
+  poolingZone: {fileID: 0}
 --- !u!222 &2030385431
 CanvasRenderer:
   m_ObjectHideFlags: 0
