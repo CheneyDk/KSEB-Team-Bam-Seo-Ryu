@@ -14,7 +14,6 @@ public class WeaponSharp : PlayerWeapon
 
     // Auto Fire Control
     private CancellationTokenSource cancelFire;
-    private bool isFire;
 
     private void Start()
     {
@@ -26,7 +25,6 @@ public class WeaponSharp : PlayerWeapon
 
         // player can fire imediately
         fireRateTimer = weaponFireRate;
-        isFire = false;
     }
     
     private void Update()
