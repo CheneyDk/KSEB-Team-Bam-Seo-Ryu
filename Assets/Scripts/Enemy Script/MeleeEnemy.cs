@@ -27,6 +27,9 @@ public class MeleeEnemy : Enemy
     [SerializeField]
     private GameObject redbuleItem;
 
+    [Header("Hit Particle"), SerializeField]
+    private ParticleSystem hitParticle;
+
     private Animator meleeAni;
     private Collider2D meleeCollider;
 
@@ -81,6 +84,7 @@ public class MeleeEnemy : Enemy
 
     public override void TakeDamage(float damage)
     {
+        hitParticle.Play();
         MeleeEnemyCurtHP -= damage; 
         if (MeleeEnemyCurtHP <= 0)
         {
@@ -139,6 +143,7 @@ public class MeleeEnemy : Enemy
         while (damageTimer < totalDamageTime)
         {
             yield return new WaitForSeconds(1f);
+            hitParticle.Play();
             MeleeEnemyCurtHP -= damage;
             damageTimer += 1f;
         }

@@ -35,6 +35,9 @@ public class HeavyEnemy : Enemy
     [SerializeField]
     private GameObject redbuleItem;
 
+    [Header("Hit Particle"), SerializeField]
+    private ParticleSystem hitParticle;
+
     private Animator heavyAni;
     private Collider2D heavyCollider;
 
@@ -112,6 +115,7 @@ public class HeavyEnemy : Enemy
 
     public override void TakeDamage(float damage)
     {
+        hitParticle.Play();
         HeavyEnemyCurtHP -= damage;
         if (HeavyEnemyCurtHP <= 0)
         {
@@ -179,6 +183,7 @@ public class HeavyEnemy : Enemy
         while (damageTimer < totalDamageTime)
         {
             yield return new WaitForSeconds(1f);
+            hitParticle.Play();
             HeavyEnemyCurtHP -= damage;
             damageTimer += 1f;
         }

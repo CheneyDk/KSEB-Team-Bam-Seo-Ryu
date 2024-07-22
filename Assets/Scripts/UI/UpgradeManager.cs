@@ -161,16 +161,32 @@ public class UpgradeManager : MonoBehaviour
             Debug.Log($"{item.weaponName} upgrade.");
 
             // Upgrade
-            var upgradeWeaponName = upgradeItem.Find(existingItem.weapon.name + ("(Clone)"));
-            var upgradeWeapon = upgradeWeaponName.GetComponent<PlayerWeapon>();
-            if (upgradeWeapon.isMaxLevel == false)
+            var upgradeItemName = upgradeItem.Find(existingItem.weapon.name + ("(Clone)"));
+            var upgradeWeapon = upgradeItemName.GetComponent<PlayerWeapon>();
+            var upgradePassive = upgradeItemName.GetComponent<PlayerPassive>();
+            if (isLevelUp)
             {
-                upgradeWeapon.Upgrade();
+                if (upgradeWeapon.isMaxLevel == false)
+                {
+                    upgradeWeapon.Upgrade();
+                }
+                else if (upgradeWeapon.isMaxLevel == true)
+                {
+                    otherList.Remove(item);
+                    AddRandomMaxLevelItem(otherList);
+                }
             }
-            else if (upgradeWeapon.isMaxLevel == true)
+            else if (!isLevelUp)
             {
-                otherList.Remove(item);
-                AddRandomMaxLevelItem(otherList);
+                if (upgradePassive.isMaxLevel == false)
+                {
+                    upgradePassive.Upgrade();
+                }
+                else if (upgradePassive.isMaxLevel == true)
+                {
+                    otherList.Remove(item);
+                    AddRandomMaxLevelItem(otherList);
+                }
             }
         }
         else

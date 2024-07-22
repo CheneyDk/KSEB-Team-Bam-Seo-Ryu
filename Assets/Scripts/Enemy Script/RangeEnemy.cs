@@ -35,6 +35,9 @@ public class RangeEnemy : Enemy
     [SerializeField]
     private GameObject redbuleItem;
 
+    [Header("Hit Particle"), SerializeField]
+    private ParticleSystem hitParticle;
+
     private Animator rangeAni;
     private Collider2D rangeCollider;
 
@@ -112,6 +115,7 @@ public class RangeEnemy : Enemy
 
     public override void TakeDamage(float damage)
     {
+        hitParticle.Play();
         RangeEnemyCurtHP -= damage;
         if (RangeEnemyCurtHP <= 0)
         {
@@ -170,6 +174,7 @@ public class RangeEnemy : Enemy
         while (damageTimer < totalDamageTime)
         {
             yield return new WaitForSeconds(1f);
+            hitParticle.Play();
             RangeEnemyCurtHP -= damage;
             damageTimer += 1f;
         }
