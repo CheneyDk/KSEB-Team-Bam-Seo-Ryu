@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -46,9 +47,17 @@ public class RunTimeError : Enemy
     public Transform rotationalAxis;
     [SerializeField] private float rotateBulletSpeed;
     [SerializeField] private float rotateBulletNum; // if 7 -> init 3 and 4
+
+    // random move
     private Vector2 randomMoveVector;
     private float moveDistance; 
+
+    // direct fire
     private float randomChangeInterval;
+    private float directFireRate = 3f;
+    private int directFireBulletNum = 3;
+    private CancellationTokenSource dircetionFireCancelSource;
+
 
     private void Awake()
     {
@@ -66,6 +75,7 @@ public class RunTimeError : Enemy
     private void Start()
     {
         RandomMoveVector().Forget();
+        DirectFire().Forget();
     }
 
     private void Update()
@@ -86,6 +96,7 @@ public class RunTimeError : Enemy
         }
     }
 
+    // Enemy move
     public override void EnemyMovement()
     {
         // random move with random speed
@@ -108,6 +119,33 @@ public class RunTimeError : Enemy
         
     }
 
+
+    // Enemy shot
+    private async UniTask DirectFire()
+    {
+        dircetionFireCancelSource = new CancellationTokenSource();
+
+        while (!dircetionFireCancelSource.IsCancellationRequested)
+        {
+            await UniTask.WaitForSeconds(directFireRate, cancellationToken: dircetionFireCancelSource.Token);
+
+            var direction = player.transform.position - transform.position;
+            direction.Normalize();
+
+            var pos = transform.position;
+
+            var bulletSpeed = Random.Range(10f, 30f);
+
+            for (int i = 0; i < directFireBulletNum; i++)
+            {
+                var tempBullet = GameObject.Instantiate(bulletPrefab, pos, Quaternion.identity);
+                tempBullet.GetComponent<RunTimeErrorBullet>().Init(bulletSpeed, direction);
+                await UniTask.WaitForSeconds(0.3f, cancellationToken: dircetionFireCancelSource.Token);
+            }
+        }
+    }
+
+
     public override IEnumerator LastingDamage(float damage, int totalDamageTime, Color color)
     {
         curSR.color = color;
@@ -128,6 +166,8 @@ public class RunTimeError : Enemy
         curSR.color = originColor;
     }
 
+
+
     public override void TakeDamage(float damage)
     {
         RunTimeErrorCurtHP -= damage;
@@ -135,7 +175,9 @@ public class RunTimeError : Enemy
         {
             runtimeCollider.enabled = false;
             isDead = true;
-            runtimeAni.SetTrigger("isDead");
+            dircetionFireCancelSource.Cancel();
+
+            // runtimeAni.SetTrigger("isDead");
             Destroy(gameObject, runtimeAni.GetCurrentAnimatorStateInfo(0).length + 1f);
             DropEXP(dropExpNumber);
 
