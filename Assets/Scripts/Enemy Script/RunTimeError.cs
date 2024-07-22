@@ -77,7 +77,7 @@ public class RunTimeError : Enemy
         }
     }
 
-    public override void Drop(int itemNumber)
+    public override void DropEXP(int itemNumber)
     {
         for (int i = 0; i < itemNumber; i++)
         {
@@ -123,7 +123,7 @@ public class RunTimeError : Enemy
         if (RunTimeErrorCurtHP <= 0)
         {
             Destroy(gameObject);
-            Drop(dropExpNumber);
+            DropEXP(dropExpNumber);
         }
         curSR.color = originColor;
     }
@@ -137,7 +137,9 @@ public class RunTimeError : Enemy
             isDead = true;
             runtimeAni.SetTrigger("isDead");
             Destroy(gameObject, runtimeAni.GetCurrentAnimatorStateInfo(0).length + 1f);
-            Drop(dropExpNumber);
+            DropEXP(dropExpNumber);
         }
     }
+
+    public override void ResetEnemy(){}
 }
