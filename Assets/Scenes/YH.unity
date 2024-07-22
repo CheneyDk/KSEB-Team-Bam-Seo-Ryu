@@ -122,6 +122,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &4804418
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -22.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016300061562779816, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_Name
+      value: EnergyDrink (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
 --- !u!1 &56953709
 GameObject:
   m_ObjectHideFlags: 0
@@ -2745,8 +2802,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'WAVE : 0'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 399033dfbde0b734f8c90a034616ba70, type: 2}
-  m_sharedMaterial: {fileID: -1522483301736112443, guid: 399033dfbde0b734f8c90a034616ba70, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2770,7 +2827,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 53.55
+  m_fontSize: 46.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4054,8 +4111,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Cur / Max
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 399033dfbde0b734f8c90a034616ba70, type: 2}
-  m_sharedMaterial: {fileID: -1522483301736112443, guid: 399033dfbde0b734f8c90a034616ba70, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4271,6 +4328,120 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1001 &818094906
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -22.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016300061562779816, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_Name
+      value: EnergyDrink (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+--- !u!1001 &842598427
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -22.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016300061562779816, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_Name
+      value: EnergyDrink (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
 --- !u!4 &897920589 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6025502528629382335, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
@@ -6026,6 +6197,63 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1001 &1311370297
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -22.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016300061562779816, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_Name
+      value: EnergyDrink
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
 --- !u!1 &1403679341
 GameObject:
   m_ObjectHideFlags: 0
@@ -6401,8 +6629,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Cur / Max
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 399033dfbde0b734f8c90a034616ba70, type: 2}
-  m_sharedMaterial: {fileID: -1522483301736112443, guid: 399033dfbde0b734f8c90a034616ba70, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6426,7 +6654,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
+  m_fontSize: 26.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7755,6 +7983,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &1627780479
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -22.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6271961781844486656, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016300061562779816, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+      propertyPath: m_Name
+      value: EnergyDrink (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
 --- !u!1 &1636495228
 GameObject:
   m_ObjectHideFlags: 0
@@ -9381,8 +9666,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 60
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 399033dfbde0b734f8c90a034616ba70, type: 2}
-  m_sharedMaterial: {fileID: -1522483301736112443, guid: 399033dfbde0b734f8c90a034616ba70, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9406,7 +9691,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 66.65
+  m_fontSize: 71.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10258,3 +10543,8 @@ SceneRoots:
   - {fileID: 1852131536}
   - {fileID: 577996787}
   - {fileID: 2034099218}
+  - {fileID: 1311370297}
+  - {fileID: 4804418}
+  - {fileID: 818094906}
+  - {fileID: 842598427}
+  - {fileID: 1627780479}
