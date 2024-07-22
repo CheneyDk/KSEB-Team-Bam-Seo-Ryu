@@ -189,6 +189,8 @@ public class UpgradeManager : MonoBehaviour
                 AddItemToPlayer(item.weapon);
             }
             Debug.Log($"{item.weaponName} added.");
+
+            ScoreManager.instance.AddWeapon(item.weaponName);
         }
     }
 

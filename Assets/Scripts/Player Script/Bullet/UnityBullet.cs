@@ -35,6 +35,8 @@ public class UnityBullet : PlayerBullet
             if (enemyComponent != null)
             {
                 enemyComponent.TakeDamage(bulletDamage);
+
+                ScoreManager.instance.UpdateDamage("Unity", bulletDamage);
             }
         }
     }

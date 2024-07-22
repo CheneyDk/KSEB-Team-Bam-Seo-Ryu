@@ -28,8 +28,6 @@ public class GameManager : MonoBehaviour
     public Player player;
     private PauseWindow pauseWindow;
 
-    public int enemyKills;
-
     private void Awake()
     {
         //////////////////////
@@ -49,8 +47,6 @@ public class GameManager : MonoBehaviour
         PauseUI.SetActive(false);
         UpgradeUI.SetActive(false);
         Time.timeScale = 1f; // init
-
-        enemyKills = 0;
     }
 
     private void Update()
@@ -70,7 +66,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         isGameContinue = true;
-        enemyKills = 0;
+        ScoreManager.instance.ResetData();
     }
 
     public void GoMainMenu()
@@ -127,6 +123,8 @@ public class GameManager : MonoBehaviour
         UpgradeUI.GetComponent<UpgradeManager>().OnUpgrade(false);
         timeScaleProduct = 0f;
         isGameContinue = false;
+
+        ScoreManager.instance.UpdateWave();
     }
 
     public void EndUpgrade()

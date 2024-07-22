@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
 {
     private SpriteRenderer sprite;
 
+    public Dictionary<string, float> weaponList = new Dictionary<string, float>();
+
     // Player Variances
     // readonly.
     
@@ -85,6 +87,8 @@ public class Player : MonoBehaviour
         weaponInput = weapon.GetComponent<PlayerInput>();
 
         isEnergyDrinkActive = false;
+
+        weaponList.Add("basic", 0);
     }
 
     private void Update()
@@ -208,6 +212,9 @@ public class Player : MonoBehaviour
             //Destroy(gameObject); // player destroy
             //gameObject.SetActive(false); // player obj disable
             GameManager.Instance.SetPlayerDead();
+
+            ScoreManager.instance.SaveScoreData();
+
             return; // safe return ; not to activate Coroutine
         }
 
@@ -232,6 +239,8 @@ public class Player : MonoBehaviour
         if (playerCurExp >= playerMaxExp)
         {
             PlayerLevelUp();
+
+            ScoreManager.instance.UpdateLevel();
         }
     }
 
