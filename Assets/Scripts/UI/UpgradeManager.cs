@@ -198,6 +198,7 @@ public class UpgradeManager : MonoBehaviour
             {
                 gameUI.WeaponIconList(itemList);
                 AddWeaponToPlayer(item.weapon);
+                ScoreManager.instance.AddWeapon(item.weaponName);
             }
             else if (itemList == playerPassiveList)
             {
@@ -205,8 +206,6 @@ public class UpgradeManager : MonoBehaviour
                 AddItemToPlayer(item.weapon);
             }
             Debug.Log($"{item.weaponName} added.");
-
-            ScoreManager.instance.AddWeapon(item.weaponName);
         }
     }
 
