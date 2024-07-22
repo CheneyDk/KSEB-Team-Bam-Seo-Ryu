@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,11 +38,20 @@ public class UpgradeManager : MonoBehaviour
     private List<WeaponData> randomPassiveList = new List<WeaponData>();
     private List<WeaponData> randomWeaponList = new List<WeaponData>();
 
+    public Animator animator;
+
     private Transform player;
 
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+    }
+
+    private IEnumerator OpenUI(bool TorF)
+    {
+        animator.SetBool("isOpen", TorF);
+        yield return new WaitForSeconds(1f);
     }
 
 
@@ -49,6 +59,7 @@ public class UpgradeManager : MonoBehaviour
     public void OnUpgrade(bool levelup)
     {
         UpgradeUI.SetActive(true);
+        StartCoroutine(OpenUI(true));
 
         List<WeaponData> selectedItems = new List<WeaponData>();
         List<WeaponData> sourceList = null;
@@ -146,6 +157,7 @@ public class UpgradeManager : MonoBehaviour
             AddOrUpgradeItem(playerPassiveList, randomPassiveList, playerPassiveParent, item, maxItemNumber);
         }
 
+        StartCoroutine(OpenUI(false));
         GameManager.Instance.EndUpgrade();
         isLevelUp = false;
     }
@@ -220,4 +232,5 @@ public class UpgradeManager : MonoBehaviour
     {
         Instantiate(item, playerPassiveParent);
     }
+
 }
