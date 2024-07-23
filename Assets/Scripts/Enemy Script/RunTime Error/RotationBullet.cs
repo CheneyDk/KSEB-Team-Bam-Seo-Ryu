@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,21 +10,35 @@ public class RotationBullet : MonoBehaviour
     // rotate in the same line and same orbit.
 
     public float bulletDamage = 30f;
-    public float bulletMoveSpeed = 3f;
-    public Vector2 bulletInitPos;
+    public float bulletMoveSpeed = 1f;
+    public Vector3 direction;
+    public float waitTime;
+    private float timer = 0f;
 
-    public Transform parent;
-    
+    public void Start()
+    {
+        SetBulletPos().Forget();
+    }
+
     public void Update()
     {
-        transform.Translate(bulletInitPos * bulletMoveSpeed * Time.deltaTime, Space.Self);
+        timer += Time.deltaTime;
+        transform.Translate(direction * Time.deltaTime);
     }
 
     // - 30 ~ -10 , 10 ~ 30: bullets range. num: 3 ~ 4 bullet
     // if not enough add more bullets
-    public void Init(Vector2 pos)
+    public void Init(Vector2 vec, float time)
     {
-        bulletInitPos = pos;
+        direction = vec;
+        waitTime = time;
+    }
+
+    private async UniTask SetBulletPos()
+    {
+        await UniTask.WaitForSeconds(waitTime);
+
+        direction = Vector3.zero;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -18,13 +18,8 @@ public class RunTimeError : Enemy
     [SerializeField]
     private float RunTimeErrorMoveSpeed = 10f;
 
-    private float playerEnemyRange = 15f;
-    private float attackCooldown = 1f;
-    private float bulletSpeed = 5f;
-
     public GameObject bulletPrefab;
 
-    private bool canAttack = true;
     private Transform player;
 
     [Header("Exp")]
@@ -57,6 +52,9 @@ public class RunTimeError : Enemy
     private float directFireRate = 3f;
     private int directFireBulletNum = 3;
     private CancellationTokenSource dircetionFireCancelSource;
+
+    // rotation bullet
+    public GameObject rotationBulletSpawner;
 
 
     private void Awake()
@@ -145,7 +143,27 @@ public class RunTimeError : Enemy
         }
     }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            var obj = collision.gameObject.GetComponent<Player>();
+            obj.TakeDamage(RunTimeErrorAtk);
 
+            if (obj.playerCurHp <= 0)
+            {
+                obj = null;
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == 9)
+        {
+            randomMoveVector = Vector3.zero - transform.position;
+        }
+    }
     public override IEnumerator LastingDamage(float damage, int totalDamageTime, Color color)
     {
         curSR.color = color;
@@ -160,8 +178,7 @@ public class RunTimeError : Enemy
 
         if (RunTimeErrorCurtHP <= 0)
         {
-            Destroy(gameObject);
-            DropEXP(dropExpNumber);
+            RunTimeErrorDestroy();
         }
         curSR.color = originColor;
     }
@@ -173,16 +190,22 @@ public class RunTimeError : Enemy
         RunTimeErrorCurtHP -= damage;
         if (RunTimeErrorCurtHP <= 0)
         {
-            runtimeCollider.enabled = false;
-            isDead = true;
-            dircetionFireCancelSource.Cancel();
-
-            // runtimeAni.SetTrigger("isDead");
-            Destroy(gameObject, runtimeAni.GetCurrentAnimatorStateInfo(0).length + 1f);
-            DropEXP(dropExpNumber);
-
-            ScoreManager.instance.UpdateEnemyKills();
+            RunTimeErrorDestroy();
         }
+    }
+
+    private void RunTimeErrorDestroy()
+    {
+        runtimeCollider.enabled = false;
+        isDead = true;
+        dircetionFireCancelSource.Cancel();
+        rotationBulletSpawner.GetComponent<RotateBulletSpawner>().StopBullets();
+
+        // runtimeAni.SetTrigger("isDead");
+        Destroy(gameObject); //, runtimeAni.GetCurrentAnimatorStateInfo(0).length + 1f);
+        DropEXP(dropExpNumber);
+
+        ScoreManager.instance.UpdateEnemyKills();
     }
 
     public override void ResetEnemy(){}
