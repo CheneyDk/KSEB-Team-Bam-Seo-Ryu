@@ -105,7 +105,7 @@ public class UpgradeManager : MonoBehaviour
     }
 
     // Put Items in to select windows
-    private void ItemToSelectedItems(List<WeaponData> selectedItems, List<WeaponData> sourceList, List<WeaponData> itemList, List<WeaponData> randomList)
+    private void ItemToSelectedItems(List<WeaponData> selectedItems, List<WeaponData> sourceList, List<WeaponData> itemList, List<WeaponData> selectedItemsList)
     {
         if (itemList.Count != maxItemNumber)
         {
@@ -120,9 +120,9 @@ public class UpgradeManager : MonoBehaviour
         }
         else if (itemList.Count == maxItemNumber)
         {
-            while (selectedItems.Count < 3 && randomList.Count > 0)
+            while (selectedItems.Count < 3 && selectedItemsList.Count > 0)
             {
-                WeaponData item = randomList[Random.Range(0, randomList.Count)];
+                WeaponData item = selectedItemsList[Random.Range(0, selectedItemsList.Count)];
                 if (!selectedItems.Contains(item))
                 {
                     selectedItems.Add(item);
