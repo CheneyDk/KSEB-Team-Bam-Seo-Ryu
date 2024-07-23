@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca71ca24a078264b9780d1aee7c37ec, type: 3}
   m_Name: MagneticRangePassive
   m_EditorClassIdentifier: 
-  weaponImage: {fileID: 21300000, guid: 2ff4a3b273b78bc4c9e023780aa29192, type: 3}
-  weaponName: Bluetooth
-  weapon: {fileID: 4389278241390101985, guid: 02cb4dd143e32394c95633620209fbb7, type: 3}
+  itemImage: {fileID: 21300000, guid: 2ff4a3b273b78bc4c9e023780aa29192, type: 3}
+  itemName: BuleTooth
+  item: {fileID: 4389278241390101985, guid: 02cb4dd143e32394c95633620209fbb7, type: 3}
+  powerWeapon: {fileID: 0}
+  passiveForPowerWeapon: 
   weaponDesc: 'Wider and Wider
 
     Magnetic Range + 0.6'

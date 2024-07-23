@@ -13,6 +13,7 @@ public class CDWeapon : PlayerWeapon
         weaponLevel = 1;
         weaponDamageRate = 1f;
         isMaxLevel = false;
+        isPowerWeapon = false;
     }
 
     IEnumerator FireBullet()
@@ -25,10 +26,31 @@ public class CDWeapon : PlayerWeapon
         }
     }
 
+    IEnumerator PowerFire()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(fireRate);
+            for (int i = 0; i < 5; i++)
+            {
+                float angle = i * (360f / 5f);
+                Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
+            }
+        }
+    }
+
     protected override void Fire()
     {
-        StartCoroutine(FireBullet());
+        if (!isPowerWeapon) 
+        {
+            StartCoroutine(FireBullet());
+        }
+        else if(isPowerWeapon)
+        {
+            StartCoroutine(PowerFire());
+        }
     }
+
 
     public override void Upgrade()
     {

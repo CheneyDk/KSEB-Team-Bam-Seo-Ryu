@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca71ca24a078264b9780d1aee7c37ec, type: 3}
   m_Name: Loading
   m_EditorClassIdentifier: 
-  weaponImage: {fileID: 21300018, guid: 0fd21678280ad9c47aa2d32baf438c5d, type: 3}
-  weaponName: Loading
-  weapon: {fileID: 4130909573271536976, guid: 2fa3e3b671da083498ed6a05cf86f0c7, type: 3}
-  weaponDesc: "{\n\tLoding\n}"
+  item: {fileID: 4130909573271536976, guid: 2fa3e3b671da083498ed6a05cf86f0c7, type: 3}
+  itemImage: {fileID: 21300028, guid: 0fd21678280ad9c47aa2d32baf438c5d, type: 3}
+  itemName: Loading
+  itemDesc: '{ Loading }'
+  passiveForPowerWeapon: 
+  powerImage: {fileID: 0}
+  powerName: 
+  powerDesc: 

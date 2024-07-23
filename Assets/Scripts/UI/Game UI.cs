@@ -54,7 +54,7 @@ public class GameUI : MonoBehaviour
     {
         for (int i = 0; i < dataList.Count; i++)
         {
-            weaponList[i].sprite = dataList[i].weaponImage;
+            weaponList[i].sprite = dataList[i].itemImage;
             weaponList[i].gameObject.SetActive(true);
         }
     }
@@ -63,7 +63,7 @@ public class GameUI : MonoBehaviour
     {
         for (int i = 0; i < dataList.Count; i++)
         {
-            itemList[i].sprite = dataList[i].weaponImage;
+            itemList[i].sprite = dataList[i].itemImage;
             itemList[i].gameObject.SetActive(true);
         }
     }

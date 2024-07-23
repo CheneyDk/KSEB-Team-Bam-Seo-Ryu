@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca71ca24a078264b9780d1aee7c37ec, type: 3}
   m_Name: CritDmgPassive
   m_EditorClassIdentifier: 
-  weaponImage: {fileID: 21300000, guid: b26a84857334cf642a3bcd0182f66227, type: 3}
-  weaponName: PC Overclock
-  weapon: {fileID: 8984865748664306881, guid: 3bcd99bf8c57d574286e5c807d70d30c, type: 3}
+  itemImage: {fileID: 21300000, guid: b26a84857334cf642a3bcd0182f66227, type: 3}
+  itemName: OverClock
+  item: {fileID: 8984865748664306881, guid: 3bcd99bf8c57d574286e5c807d70d30c, type: 3}
+  powerWeapon: {fileID: 0}
+  passiveForPowerWeapon: 
   weaponDesc: 'Components of your computer have improved
 
     Critical Damage + 0.6'

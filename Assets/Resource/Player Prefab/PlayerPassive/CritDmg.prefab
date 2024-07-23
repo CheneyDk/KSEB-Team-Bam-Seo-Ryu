@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2029340445511569749}
   - component: {fileID: -8575575426378341608}
   m_Layer: 0
-  m_Name: CritDmgSpeed
+  m_Name: CritDmg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

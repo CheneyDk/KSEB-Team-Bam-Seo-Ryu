@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca71ca24a078264b9780d1aee7c37ec, type: 3}
   m_Name: MoveSpeedPassive
   m_EditorClassIdentifier: 
-  weaponImage: {fileID: 21300000, guid: 4d40ba8c954de954785eb847292230bf, type: 3}
-  weaponName: 5G
-  weapon: {fileID: 7058506577757926102, guid: 97fd3e8ae0fcfbf4086bbe7ce9c24a93, type: 3}
+  itemImage: {fileID: 21300000, guid: 4d40ba8c954de954785eb847292230bf, type: 3}
+  itemName: 5G
+  item: {fileID: 7058506577757926102, guid: 97fd3e8ae0fcfbf4086bbe7ce9c24a93, type: 3}
+  powerWeapon: {fileID: 0}
+  passiveForPowerWeapon: 
   weaponDesc: 'Faster and Faster
 
     Move Speed + 2'

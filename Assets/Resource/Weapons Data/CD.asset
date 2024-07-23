@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca71ca24a078264b9780d1aee7c37ec, type: 3}
   m_Name: CD
   m_EditorClassIdentifier: 
-  weaponImage: {fileID: 0}
-  weaponName: 
-  weapon: {fileID: 0}
-  weaponDesc: 
+  item: {fileID: 3241618633666494829, guid: 7553b21e07ad0c449bf31d2340061d0d, type: 3}
+  itemImage: {fileID: 21300000, guid: d5d00890c1a26ec4badc1a8c546619e0, type: 3}
+  itemName: CD++
+  itemDesc: '{ CD }'
+  passiveForPowerWeapon: CPU
+  powerImage: {fileID: 21300000, guid: bbdc18e317c2c2044897bd6e10c3e08c, type: 3}
+  powerName: CD++
+  powerDesc: '{ CD++ }'
