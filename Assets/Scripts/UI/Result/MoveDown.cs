@@ -19,16 +19,6 @@ public class MoveDown : MonoBehaviour
 
     public GameObject Right;
 
-    private Dictionary<string, string> spriteDictionary = new Dictionary<string, string>
-    {
-        { "Unity", "Image/weapon/Communal/Unity/new unity (1)" },
-        { "WWW Internet", "Image/weapon/Communal/WWW Effect/WWW Effect_1" },
-        { "MySQL", "Image/weapon/Communal/MYSQL(ax)" },
-        { "React", "Image/weapon/Communal/React" },
-        { "Loading", "Image/weapon/Communal/Loading Chain" },
-        { "Swift", "Image/weapon/Communal/Swift" }
-    };
-
     private bool flag = true;
 
     public void ShowDetails()
@@ -54,7 +44,7 @@ public class MoveDown : MonoBehaviour
 
                 if (cnt != 0)
                 {
-                    w.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(spriteDictionary[kvp.Key]);
+                    w.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(kvp.Key);
 
                     Image i = w.GetChild(0).GetComponent<Image>();
                     Color c = i.color;
