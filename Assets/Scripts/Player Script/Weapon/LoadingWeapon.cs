@@ -42,7 +42,7 @@ public class LoadingWeapon : PlayerWeapon
             {
                 EnemyComponent.TakeDamage(damage);
 
-                ScoreManager.instance.UpdateDamage("Laoding", damage);
+                ScoreManager.instance.UpdateDamage("Loading", damage);
             }
         }
     }
