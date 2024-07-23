@@ -55,6 +55,13 @@ public class MoveDown : MonoBehaviour
                 if (cnt != 0)
                 {
                     w.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(spriteDictionary[kvp.Key]);
+
+                    Image i = w.GetChild(0).GetComponent<Image>();
+                    Color c = i.color;
+                    c.r = 0f;
+                    c.g = 0f;
+                    c.b = 0f;
+                    i.color = c;
                 }
                 w.GetChild(1).GetComponent<TextMeshProUGUI>().text = kvp.Key;
                 w.GetChild(2).GetComponent<TextMeshProUGUI>().text = kvp.Value.ToString();
