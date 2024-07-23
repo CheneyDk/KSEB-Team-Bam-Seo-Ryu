@@ -19,7 +19,7 @@ public class RotateBulletSpawner : MonoBehaviour
 
     // rotation
     private Transform bulletParent;
-    private float rotationSpeed = 0.3f;
+    private float rotationSpeed = 0.15f;
     private CancellationTokenSource stopRotate;
 
 

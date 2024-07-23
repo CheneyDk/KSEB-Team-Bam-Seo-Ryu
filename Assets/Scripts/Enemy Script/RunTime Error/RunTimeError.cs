@@ -39,17 +39,18 @@ public class RunTimeError : Enemy
 
     [Header("BossInspector")]
     public GameObject rotateBullet;
-    public Transform rotationalAxis;
+    private Transform rotationalAxis;
     [SerializeField] private float rotateBulletSpeed;
     [SerializeField] private float rotateBulletNum; // if 7 -> init 3 and 4
 
     // random move
     private Vector2 randomMoveVector;
-    private float moveDistance; 
+    private float moveDistance;
+    private float mapSize = 23f;
 
     // direct fire
     private float randomChangeInterval;
-    private float directFireRate = 3f;
+    private float directFireRate = 5f;
     private int directFireBulletNum = 3;
     private CancellationTokenSource dircetionFireCancelSource;
 
@@ -62,11 +63,14 @@ public class RunTimeError : Enemy
         curSR = this.GetComponent<SpriteRenderer>();
         originColor = curSR.color;
         RunTimeErrorCurtHP = RunTimeErrorMaxHp;
+
+        rotationalAxis = rotationBulletSpawner.GetComponent<Transform>();
+
         runtimeAni = GetComponent<Animator>();
         runtimeCollider = GetComponent<CircleCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         moveDistance = 5f;
-        randomMoveVector = Vector2.zero;
+        randomMoveVector = transform.position;
         randomChangeInterval = 5f; // initial wait
     }
 
@@ -98,9 +102,9 @@ public class RunTimeError : Enemy
     public override void EnemyMovement()
     {
         // random move with random speed
-        if (player is null) return;
+        // if (player is null) return;
 
-        transform.Translate(randomMoveVector * RunTimeErrorMoveSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, randomMoveVector, RunTimeErrorMoveSpeed * Time.deltaTime);
 
     }
 
@@ -108,11 +112,16 @@ public class RunTimeError : Enemy
     {
         while (!isDead)
         {
+            await UniTask.WaitForSeconds(randomChangeInterval + 5f);
+
+            // 23 == map size, if map changed, this literal needed to change too.
+            randomMoveVector = new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
+            RunTimeErrorMoveSpeed = Random.Range(6f, 8f);
+            randomChangeInterval = moveDistance / RunTimeErrorMoveSpeed;
+
             await UniTask.WaitForSeconds(randomChangeInterval);
 
-            randomMoveVector = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
-            RunTimeErrorMoveSpeed = Random.Range(6f, 10f);
-            randomChangeInterval = moveDistance / RunTimeErrorMoveSpeed;
+            randomMoveVector = Vector2.zero;
         }
         
     }
@@ -123,8 +132,11 @@ public class RunTimeError : Enemy
     {
         dircetionFireCancelSource = new CancellationTokenSource();
 
+        await UniTask.WaitForSeconds(randomChangeInterval);
+
         while (!dircetionFireCancelSource.IsCancellationRequested)
         {
+            
             await UniTask.WaitForSeconds(directFireRate, cancellationToken: dircetionFireCancelSource.Token);
 
             var direction = player.transform.position - transform.position;
@@ -201,6 +213,7 @@ public class RunTimeError : Enemy
         dircetionFireCancelSource.Cancel();
         rotationBulletSpawner.GetComponent<RotateBulletSpawner>().StopBullets();
 
+        // gonna make destroy animation - YH
         // runtimeAni.SetTrigger("isDead");
         Destroy(gameObject); //, runtimeAni.GetCurrentAnimatorStateInfo(0).length + 1f);
         DropEXP(dropExpNumber);

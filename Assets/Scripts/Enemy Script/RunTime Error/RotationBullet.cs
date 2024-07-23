@@ -10,7 +10,7 @@ public class RotationBullet : MonoBehaviour
     // rotate in the same line and same orbit.
 
     public float bulletDamage = 30f;
-    public float bulletMoveSpeed = 1f;
+    public float bulletMoveSpeed = 1.3f;
     public Vector3 direction;
     public float waitTime;
     private float timer = 0f;
@@ -23,7 +23,7 @@ public class RotationBullet : MonoBehaviour
     public void Update()
     {
         timer += Time.deltaTime;
-        transform.Translate(direction * Time.deltaTime);
+        transform.Translate(direction * bulletMoveSpeed * Time.deltaTime);
     }
 
     // - 30 ~ -10 , 10 ~ 30: bullets range. num: 3 ~ 4 bullet
@@ -36,7 +36,7 @@ public class RotationBullet : MonoBehaviour
 
     private async UniTask SetBulletPos()
     {
-        await UniTask.WaitForSeconds(waitTime);
+        await UniTask.WaitForSeconds(waitTime / bulletMoveSpeed);
 
         direction = Vector3.zero;
     }

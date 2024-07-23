@@ -10188,6 +10188,10 @@ PrefabInstance:
       propertyPath: rotationalAxis
       value: 
       objectReference: {fileID: 3011780090005313809}
+    - target: {fileID: 1557469813831148840, guid: a67909d812e2db34cb3e90adfb54de25, type: 3}
+      propertyPath: rotationBulletSpawner
+      value: 
+      objectReference: {fileID: 3011780090005313810}
     - target: {fileID: 3314534399600722626, guid: a67909d812e2db34cb3e90adfb54de25, type: 3}
       propertyPath: m_Name
       value: RunTimeErrorBoss
@@ -10282,6 +10286,10 @@ PrefabInstance:
     - target: {fileID: 944808390979848710, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 944808390979848710, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8100203599619735773, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
       propertyPath: m_LocalPosition.x
