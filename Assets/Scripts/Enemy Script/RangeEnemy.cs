@@ -133,7 +133,7 @@ public class RangeEnemy : Enemy
         ChanceToDropItem(healingItem, 1);
         ChanceToDropItem(redbuleItem, 0);
 
-        ScoreManager.instance.UpdateEnemyKills();
+        ScoreManager.instance.UpdateEnemiesDeafeated();
     }
 
     private IEnumerator SetActiveToFalse()

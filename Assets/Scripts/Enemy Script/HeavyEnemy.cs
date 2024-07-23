@@ -133,7 +133,7 @@ public class HeavyEnemy : Enemy
         ChanceToDropItem(healingItem, 2);
         ChanceToDropItem(redbuleItem, 1);
 
-        ScoreManager.instance.UpdateEnemyKills();
+        ScoreManager.instance.UpdateEnemiesDeafeated();
     }
 
     private IEnumerator SetActiveToFalse()
