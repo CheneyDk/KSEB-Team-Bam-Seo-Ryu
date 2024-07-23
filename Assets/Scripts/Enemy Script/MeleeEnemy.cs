@@ -102,7 +102,7 @@ public class MeleeEnemy : Enemy
         ChanceToDropItem(healingItem, 1);
         ChanceToDropItem(redbuleItem, 0);
 
-        ScoreManager.instance.UpdateEnemyKills();
+        ScoreManager.instance.UpdateEnemiesDeafeated();
     }
 
     private IEnumerator SetActiveToFalse()
@@ -148,6 +148,8 @@ public class MeleeEnemy : Enemy
             hitParticle.Play();
             MeleeEnemyCurtHP -= damage;
             damageTimer += 1f;
+
+            ScoreManager.instance.UpdateDamage("React", damage);
         }
 
         if (MeleeEnemyCurtHP <= 0)

@@ -133,7 +133,7 @@ public class HeavyEnemy : Enemy
         ChanceToDropItem(healingItem, 2);
         ChanceToDropItem(redbuleItem, 1);
 
-        ScoreManager.instance.UpdateEnemyKills();
+        ScoreManager.instance.UpdateEnemiesDeafeated();
     }
 
     private IEnumerator SetActiveToFalse()
@@ -188,6 +188,8 @@ public class HeavyEnemy : Enemy
             hitParticle.Play();
             HeavyEnemyCurtHP -= damage;
             damageTimer += 1f;
+
+            ScoreManager.instance.UpdateDamage("React", damage);
         }
 
         if (HeavyEnemyCurtHP <= 0)

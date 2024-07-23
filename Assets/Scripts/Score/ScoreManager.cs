@@ -9,7 +9,7 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager instance;
 
     public int waveCount = 1;
-    public int enemyKills = 0;
+    public int enemiesDeafeated = 0;
     public int LV = 1;
     public Dictionary<string, float> weaponDamages = new Dictionary<string, float>
         {
@@ -34,7 +34,7 @@ public class ScoreManager : MonoBehaviour
     {
         Debug.Log("저장 성공!");
         Debug.Log("도달 웨이브: " + waveCount.ToString());
-        Debug.Log("죽인 적 수: " + enemyKills.ToString());
+        Debug.Log("죽인 적 수: " + enemiesDeafeated.ToString());
         Debug.Log("도달 레벨: " + LV.ToString());
         foreach (KeyValuePair<string, float> kvp in weaponDamages)
         {
@@ -57,15 +57,25 @@ public class ScoreManager : MonoBehaviour
         LV++;
     }
 
+    public int GetLevel()
+    {
+        return LV;
+    }
+
     public void UpdateWave()
     {
         waveCount++;
     }
 
+    public int GetWave()
+    {
+        return waveCount;
+    }
+
     public void ResetData()
     {
         waveCount = 1;
-        enemyKills = 0;
+        enemiesDeafeated = 0;
         LV = 1;
         weaponDamages = new Dictionary<string, float>
         {
@@ -73,8 +83,29 @@ public class ScoreManager : MonoBehaviour
         };
     }
 
-    public void UpdateEnemyKills()
+    public void UpdateEnemiesDeafeated()
     {
-        enemyKills++;
+        enemiesDeafeated++;
+    }
+
+    public int GetEnemiesDeafeated()
+    {
+        return enemiesDeafeated;
+    }
+
+    public Dictionary<string, float> GetweaponDamages()
+    {
+        return weaponDamages;
+    }
+
+    public float GetTotalDamages()
+    {
+        float total = 0;
+        foreach(KeyValuePair<String, float> kvp in weaponDamages)
+        {
+            total += kvp.Value;
+        }
+
+        return total;
     }
 }
