@@ -97,4 +97,15 @@ public class ScoreManager : MonoBehaviour
     {
         return weaponDamages;
     }
+
+    public float GetTotalDamages()
+    {
+        float total = 0;
+        foreach(KeyValuePair<String, float> kvp in weaponDamages)
+        {
+            total += kvp.Value;
+        }
+
+        return total;
+    }
 }

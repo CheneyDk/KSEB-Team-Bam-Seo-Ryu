@@ -148,6 +148,8 @@ public class MeleeEnemy : Enemy
             hitParticle.Play();
             MeleeEnemyCurtHP -= damage;
             damageTimer += 1f;
+
+            ScoreManager.instance.UpdateDamage("React", damage);
         }
 
         if (MeleeEnemyCurtHP <= 0)

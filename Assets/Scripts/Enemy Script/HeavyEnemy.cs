@@ -188,6 +188,8 @@ public class HeavyEnemy : Enemy
             hitParticle.Play();
             HeavyEnemyCurtHP -= damage;
             damageTimer += 1f;
+
+            ScoreManager.instance.UpdateDamage("React", damage);
         }
 
         if (HeavyEnemyCurtHP <= 0)

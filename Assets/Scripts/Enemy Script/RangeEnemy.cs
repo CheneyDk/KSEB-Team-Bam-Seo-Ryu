@@ -179,6 +179,8 @@ public class RangeEnemy : Enemy
             hitParticle.Play();
             RangeEnemyCurtHP -= damage;
             damageTimer += 1f;
+
+            ScoreManager.instance.UpdateDamage("React", damage);
         }
 
         if (RangeEnemyCurtHP <= 0)
