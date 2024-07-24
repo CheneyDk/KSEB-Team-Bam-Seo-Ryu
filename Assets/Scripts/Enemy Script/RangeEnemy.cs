@@ -13,11 +13,13 @@ public class RangeEnemy : Enemy
     private float RangeEnemyAtk = 3f;
     [SerializeField]
     private float RangeEnemyMoveSpeed = 7f;
-
-    private float rotationSpeed = 10f;
+    [SerializeField]
     private float playerEnemyRange = 15f;
+    [SerializeField]
     private float attackCooldown = 1f;
+    [SerializeField]
     private float bulletSpeed = 5f;
+    private float rotationSpeed = 10f;
 
     public GameObject bulletPrefab;
 
@@ -104,7 +106,7 @@ public class RangeEnemy : Enemy
         canAttack = false;
 
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-        Destroy(bullet, 3f);
+        Destroy(bullet, 10f);
         Vector2 direction = (player.position - transform.position).normalized;
         bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
 
