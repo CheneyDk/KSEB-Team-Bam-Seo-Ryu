@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     public float playerAccelerate = 2.5f;
 
     // invincible time
-    private WaitForSeconds invincibleWait = new WaitForSeconds(0.1f);
+    private WaitForSeconds invincibleWait = new WaitForSeconds(1f);
 
 
     // Player Directions
@@ -212,9 +212,6 @@ public class Player : MonoBehaviour
             //Destroy(gameObject); // player destroy
             //gameObject.SetActive(false); // player obj disable
             GameManager.Instance.SetPlayerDead();
-
-            ScoreManager.instance.SaveScoreData();
-
             return; // safe return ; not to activate Coroutine
         }
 

@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -22,7 +24,6 @@ public class ScoreManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-            Debug.Log("»ý¼º!");
         }
         else
         {
@@ -107,5 +108,10 @@ public class ScoreManager : MonoBehaviour
         }
 
         return total;
+    }
+
+    public void SaveData()
+    {
+        Debug.Log("Save Success!");
     }
 }
