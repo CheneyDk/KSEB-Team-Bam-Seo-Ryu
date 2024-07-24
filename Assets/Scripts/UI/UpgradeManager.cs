@@ -71,7 +71,6 @@ public class UpgradeManager : MonoBehaviour
             isLevelUp = levelup;
             sourceDataList = weaponDataList;
             itemList = playerWeaponList;
-            CheckPowerWeapon();
             ItemToSelectedItems(selectedItems, sourceDataList, itemList, selectedWeaponList);
         }
         else if (levelup == false)
@@ -112,9 +111,8 @@ public class UpgradeManager : MonoBehaviour
         {
             var weaponData = selectedWeaponList[i];
             var playerWeapon = playerWeaponParent.GetComponentsInChildren<PlayerWeapon>()[i];
-
             // 무기중에서 maxLevel이 있는지 확인
-            if (playerWeapon.isMaxLevel)
+            if (playerWeapon != null && playerWeapon.isMaxLevel)
             {
                 // maxLevel 무기일 경우 선택지에서 빼기
                 selectedWeaponList.Remove(weaponData);
@@ -165,6 +163,7 @@ public class UpgradeManager : MonoBehaviour
         // 템 수가 max으면, 이미 선택한 템만 나오게
         else if (itemList.Count == maxItemNumber)
         {
+            CheckPowerWeapon();
             if (sourceList == weaponDataList)
             {
                 // 선택한 무기list에서 랜덤으로 선택지에 나오게 하기
