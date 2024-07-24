@@ -1492,9 +1492,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5132c6530c67aaf43935e08a758b0882, type: 2}
   - {fileID: 11400000, guid: 4b34eb5a4d08bdd4d9afc435f3ef0c44, type: 2}
   - {fileID: 11400000, guid: e65068d2ee758074f89a22b8fcc44984, type: 2}
-  - {fileID: 11400000, guid: 13adf7aa9830564439ca00fd6997293f, type: 2}
-  - {fileID: 11400000, guid: df894a11d49451e47ae7752a547654f1, type: 2}
-  - {fileID: 11400000, guid: bf27f4b7d137e2547badad8dfcbe3e09, type: 2}
   playerWeaponList: []
   playerPassiveList: []
   maxItemNumber: 4
@@ -6014,7 +6011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveCount: 1
-  enemyKills: 0
+  enemiesDeafeated: 0
   LV: 1
 --- !u!4 &1340869017
 Transform:

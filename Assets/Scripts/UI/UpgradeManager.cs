@@ -87,9 +87,9 @@ public class UpgradeManager : MonoBehaviour
             {
                 if (i < selectedItems.Count)
                 {
-                    optionNameTexts[i].text = selectedItems[i].itemName;
-                    optionDescTexts[i].text = selectedItems[i].itemDesc;
-                    optionImages[i].sprite = selectedItems[i].itemImage;
+                    optionNameTexts[i].text = selectedItems[i].curName;
+                    optionDescTexts[i].text = selectedItems[i].curDesc;
+                    optionImages[i].sprite = selectedItems[i].curImage;
                     optionButtons[i].onClick.RemoveAllListeners();
                     WeaponData selectedItem = selectedItems[i];
                     optionButtons[i].onClick.AddListener(() => OnItemSelected(selectedItem));
@@ -111,17 +111,21 @@ public class UpgradeManager : MonoBehaviour
         {
             var weaponData = selectedWeaponList[i];
             var playerWeapon = playerWeaponParent.GetComponentsInChildren<PlayerWeapon>()[i];
+
             // 무기중에서 maxLevel이 있는지 확인
-            if (playerWeapon != null && playerWeapon.isMaxLevel)
+            if (playerWeapon.isMaxLevel)
             {
                 // maxLevel 무기일 경우 선택지에서 빼기
-                selectedWeaponList.Remove(weaponData);
+                if (playerWeapon.name == weaponData.item.name + ("(Clone)"))
+                {
+                    selectedWeaponList.Remove(weaponData);
+                }
 
                 // maxLevel 무기 중에 그의 맞는 passive템이 있는지 확인
                 bool hasMatchingPassive = false;
                 foreach (var passive in playerPassiveList)
                 {
-                    if (weaponData.passiveForPowerWeapon == passive.itemName)
+                    if (playerWeapon.matchPassive == passive.itemName)
                     {
                         hasMatchingPassive = true;
                         break;
@@ -129,12 +133,14 @@ public class UpgradeManager : MonoBehaviour
                 }
 
                 // 그의 맞는 passive템이 있으면 다시 선택지에 powerWeapon으로 추가
+
                 if (hasMatchingPassive)
                 {
-                    weaponData.itemImage = weaponData.powerImage;
-                    weaponData.itemName = weaponData.powerName;
-                    weaponData.itemDesc = weaponData.powerDesc;
-                    selectedWeaponList.Add(weaponData);
+                    var findItem = weaponDataList.Find(i => i.item.name + ("(Clone)") == playerWeapon.name);
+                    findItem.curImage = findItem.powerImage;
+                    findItem.curName = findItem.powerName;
+                    findItem.curDesc = findItem.powerDesc;
+                    selectedWeaponList.Add(findItem);
                 }
             }
         }
@@ -163,9 +169,9 @@ public class UpgradeManager : MonoBehaviour
         // 템 수가 max으면, 이미 선택한 템만 나오게
         else if (itemList.Count == maxItemNumber)
         {
-            CheckPowerWeapon();
             if (sourceList == weaponDataList)
             {
+                CheckPowerWeapon();
                 // 선택한 무기list에서 랜덤으로 선택지에 나오게 하기
                 while (showOnSelectedItems.Count < 3 && selectedItemsList.Count > 0)
                 {

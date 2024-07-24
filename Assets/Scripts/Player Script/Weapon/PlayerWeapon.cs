@@ -14,6 +14,7 @@ public abstract class PlayerWeapon : MonoBehaviour // abstract class·Î ÀüÈ¯! + ¾
     protected int weaponLevel = 1;
     public bool isMaxLevel = false;
     public bool isPowerWeapon = false;
+    public string matchPassive;
 
     // muzzle position
     public Transform muzzle;

@@ -13,9 +13,24 @@ public class WeaponData : ScriptableObject
     public string itemDesc;
 
     [Header("Power Weapon")]
-    public string passiveForPowerWeapon;
     public Sprite powerImage;
     public string powerName;
     [TextArea]
     public string powerDesc;
+
+    [HideInInspector]
+    public Sprite curImage;
+    [HideInInspector]
+    public string curName;
+    [HideInInspector]
+    public string curDesc;
+
+
+    private void OnEnable()
+    {
+        curImage = itemImage;
+        curName = itemName;
+        curDesc = itemDesc;
+    }
 }
+

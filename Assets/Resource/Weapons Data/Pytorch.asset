@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca71ca24a078264b9780d1aee7c37ec, type: 3}
   m_Name: Pytorch
   m_EditorClassIdentifier: 
-  item: {fileID: 3596937939992291992, guid: 21c380b2098cf71479e4060b97674f76, type: 3}
+  item: {fileID: 5735838364107986111, guid: 3dda3ce8bd115b748b261adb9527ac97, type: 3}
   itemImage: {fileID: 21300000, guid: 2bac56dd8c539e140a7dd97a7e014725, type: 3}
   itemName: Pytorch
   itemDesc: '{ Pytorch }'
@@ -20,3 +20,6 @@ MonoBehaviour:
   powerImage: {fileID: 0}
   powerName: 
   powerDesc: 
+  curImage: {fileID: 21300000, guid: 2bac56dd8c539e140a7dd97a7e014725, type: 3}
+  curName: Pytorch
+  curDesc: '{ Pytorch }'
