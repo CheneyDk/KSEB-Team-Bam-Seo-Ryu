@@ -12,7 +12,7 @@ public class RotateBulletSpawner : MonoBehaviour
     private int colBulletNum = 3;
     private int bulletInterDiv;
 
-    // divide 26 ~ 5 in seven part. bullets are located in cross
+    // divide 29 ~ 5 in seven part. bullets are located in cross
     private float bulletCircleMinRadius = 5f;
     private float bulletCircleMaxRadius = 29f;
     private float bulletCircleIntervalUnit;

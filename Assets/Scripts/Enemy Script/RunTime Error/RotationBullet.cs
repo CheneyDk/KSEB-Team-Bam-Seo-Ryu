@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class RotationBullet : MonoBehaviour
 {
-    // like brotato normal boss.
     // bullets are spread by time.
     // rotate in the same line and same orbit.
 
@@ -14,6 +13,8 @@ public class RotationBullet : MonoBehaviour
     public Vector3 direction;
     public float waitTime;
     private float timer = 0f;
+
+    private bool isDestroy = false;
 
     public void Start()
     {
@@ -37,9 +38,12 @@ public class RotationBullet : MonoBehaviour
     private async UniTask SetBulletPos()
     {
         await UniTask.WaitForSeconds(waitTime / bulletMoveSpeed);
+        if (isDestroy) return;
 
         direction = Vector3.zero;
     }
+
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
