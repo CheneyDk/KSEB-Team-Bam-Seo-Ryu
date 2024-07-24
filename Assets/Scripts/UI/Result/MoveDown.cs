@@ -35,7 +35,7 @@ public class MoveDown : MonoBehaviour
             levelReached.text = ScoreManager.instance.GetLevel().ToString();
             enemiesDefeated.text = ScoreManager.instance.GetEnemiesDeafeated().ToString();
 
-            Dictionary<string, float> weapons = ScoreManager.instance.GetweaponDamages();
+            var weapons = ScoreManager.instance.WeaponDamages;
 
             int cnt = 0;
             foreach (KeyValuePair<string, float> kvp in weapons)
