@@ -58,6 +58,10 @@ public class GameManager : MonoBehaviour
     {
         GameoverUI.SetActive(true);
         timeScaleProduct = 0f;
+        if (isGameContinue) 
+        {
+            ScoreManager.instance.SaveData();
+        }
         isGameContinue = false;
         // WaveManager.SetActive(false); // YH - activate after merge
     }
