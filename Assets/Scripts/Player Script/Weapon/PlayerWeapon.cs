@@ -11,7 +11,7 @@ public abstract class PlayerWeapon : MonoBehaviour // abstract class·Î ÀüÈ¯! + ¾
     protected float weaponFireRate; // weapon it's own stat
     protected float fireRateTimer;
     protected int bulletNum; // Ex ) shotgun
-    protected int weaponLevel = 1;
+    public int weaponLevel = 1;
     public bool isMaxLevel = false;
     public bool isPowerWeapon = false;
     public string matchPassive;

@@ -28,10 +28,12 @@ public class GameUI : MonoBehaviour
     public Image[] weaponList;
     public Image[] itemList;
 
-    private UpgradeManager upgradeManager;
-
     [SerializeField]
     private Player player;
+
+    public TextMeshProUGUI[] weaponLevel;
+    public TextMeshProUGUI[] passiveLevel;
+
 
     private void Awake()
     {
@@ -68,4 +70,22 @@ public class GameUI : MonoBehaviour
         }
     }
 
+    public void AddWeaponLevel(Transform playerWeaponBag)
+    {
+        for ( int i = 0; i < playerWeaponBag.childCount; i++)
+        {
+            var weapons = playerWeaponBag.GetComponentsInChildren<PlayerWeapon>()[i];
+            var weaponLevels = weapons.weaponLevel;
+            weaponLevel[i].text = weaponLevels.ToString();
+        }
+    }
+    public void AddPassiveLevel(Transform playerPassiveBag)
+    {
+        for (int i = 0; i < playerPassiveBag.childCount; i++)
+        {
+            var passives = playerPassiveBag.GetComponentsInChildren<PlayerPassive>()[i];
+            var passiveLevels = passives.passiveItemLevel;
+            passiveLevel[i].text = passiveLevels.ToString();
+        }
+    }
 }

@@ -27,8 +27,8 @@ public class UpgradeManager : MonoBehaviour
     private bool isLevelUp = false;
 
     [Header("Player Weapon and Item")]
-    public Transform playerWeaponParent;
-    public Transform playerPassiveParent;
+    public Transform playerWeaponBag;
+    public Transform playerPassiveBag;
 
     public GameUI gameUI;
 
@@ -110,7 +110,7 @@ public class UpgradeManager : MonoBehaviour
         for (int i = 0; i < selectedWeaponList.Count; i++)
         {
             var weaponData = selectedWeaponList[i];
-            var playerWeapon = playerWeaponParent.GetComponentsInChildren<PlayerWeapon>()[i];
+            var playerWeapon = playerWeaponBag.GetComponentsInChildren<PlayerWeapon>()[i];
 
             // 무기중에서 maxLevel이 있는지 확인
             if (playerWeapon.isMaxLevel)
@@ -220,13 +220,13 @@ public class UpgradeManager : MonoBehaviour
         // 레업이라 무기들 나오기
         else if (isLevelUp)
         {
-            AddOrUpgradeItem(playerWeaponList, selectedWeaponList, playerWeaponParent, item);
+            AddOrUpgradeItem(playerWeaponList, selectedWeaponList, playerWeaponBag, item);
         }
 
         // wave끝이라 passive템 나오기
         else if (!isLevelUp)
         {
-            AddOrUpgradeItem(playerPassiveList, selectedPassiveList, playerPassiveParent, item);
+            AddOrUpgradeItem(playerPassiveList, selectedPassiveList, playerPassiveBag, item);
         }
 
         StartCoroutine(OpenUI(false));
@@ -258,11 +258,13 @@ public class UpgradeManager : MonoBehaviour
                 else
                 {
                     upgradeWeapon.Upgrade();
+                    gameUI.AddWeaponLevel(playerWeaponBag);
                 }
             }
             else if (!isLevelUp)
             {
                 upgradePassive.Upgrade();
+                gameUI.AddPassiveLevel(playerPassiveBag);
             }
         }
         else
@@ -274,12 +276,14 @@ public class UpgradeManager : MonoBehaviour
             {
                 gameUI.WeaponIconList(itemList);
                 AddWeaponToPlayer(item.item);
+                gameUI.AddWeaponLevel(playerWeaponBag);
                 ScoreManager.instance.AddWeapon(item.itemName);
             }
             else if (itemList == playerPassiveList)
             {
                 gameUI.ItemIconList(itemList);
                 AddItemToPlayer(item.item);
+                gameUI.AddPassiveLevel(playerPassiveBag);
             }
             Debug.Log($"{item.itemName} added.");
         }
@@ -288,13 +292,13 @@ public class UpgradeManager : MonoBehaviour
     // Add Weapon to Player
     private void AddWeaponToPlayer(GameObject item)
     {
-        Instantiate(item, playerWeaponParent);
+        Instantiate(item, playerWeaponBag);
     }
 
     // Add Item to Player
     private void AddItemToPlayer(GameObject item)
     {
-        Instantiate(item, playerPassiveParent);
+        Instantiate(item, playerPassiveBag);
     }
 
 }
