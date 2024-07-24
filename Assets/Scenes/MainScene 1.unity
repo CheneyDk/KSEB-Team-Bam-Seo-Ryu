@@ -6640,9 +6640,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 508f1e3be5a139d42b5601b1e3552e47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveCount: 1
-  enemiesDeafeated: 0
-  LV: 1
 --- !u!4 &1340869017
 Transform:
   m_ObjectHideFlags: 0
@@ -10761,8 +10758,8 @@ MonoBehaviour:
   HESpawnStartTime: 1
   HESpawnNumber: 0
   HESpawnGroupRadius: 1
-  noSpawnRange: 5
-  EnemySpawnRange: 10
+  noSpawnRange: 15
+  EnemySpawnRange: 30
   warningTime: 1
   numberToPool: 20
   poolingZone: {fileID: 646352766}

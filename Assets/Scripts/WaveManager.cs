@@ -68,9 +68,14 @@ public class WaveManager : MonoBehaviour
     private void DestroyAllEnemies()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
         foreach (GameObject enemy in enemies)
         {
             enemy.SetActive(false);
+        }
+        foreach (GameObject bullet in bullets)
+        {
+            Destroy(bullet);
         }
     }
 }
