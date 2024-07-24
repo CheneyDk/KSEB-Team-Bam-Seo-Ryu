@@ -19,6 +19,7 @@ public class MiniCD : PlayerBullet
             if (enemyComponent != null)
             {
                 enemyComponent.TakeDamage(player.playerAtk * 0.5f);
+                ScoreManager.instance.UpdateDamage("CD", player.playerAtk * 0.5f);
             }
 
         }
