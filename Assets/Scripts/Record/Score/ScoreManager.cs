@@ -123,6 +123,7 @@ public class ScoreManager : MonoBehaviour
         scoreData.weaponDamagesData = list;
 
         data.scoreDataList.Add(scoreData);
+        Debug.Log(data.scoreDataList.Count);
 
         SaveLoadHelper.Save(data);
 
