@@ -10180,10 +10180,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1557469813831148840, guid: a67909d812e2db34cb3e90adfb54de25, type: 3}
-      propertyPath: destroySprite
-      value: 
-      objectReference: {fileID: -1115704315, guid: f8473cd5299e27344be74620a11c4ded, type: 3}
     - target: {fileID: 3314534399600722626, guid: a67909d812e2db34cb3e90adfb54de25, type: 3}
       propertyPath: m_Name
       value: RunTimeErrorBoss

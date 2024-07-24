@@ -112,6 +112,7 @@ MonoBehaviour:
   rotateBulletSpeed: 0
   rotateBulletNum: 0
   rotationBulletSpawner: {fileID: 7489818124013458593}
+  destroySprite: {fileID: -1115704315, guid: f8473cd5299e27344be74620a11c4ded, type: 3}
 --- !u!58 &7851675844547211640
 CircleCollider2D:
   m_ObjectHideFlags: 0
