@@ -56,11 +56,11 @@ public class RunTimeError : Enemy
 
     // rotation bullet
     public GameObject rotationBulletSpawner;
-
+    public Sprite destroySprite;
 
     private void Awake()
     {
-        curSR = this.GetComponent<SpriteRenderer>();
+        curSR = gameObject.GetComponent<SpriteRenderer>();
         originColor = curSR.color;
         RunTimeErrorCurtHP = RunTimeErrorMaxHp;
 
@@ -214,8 +214,14 @@ public class RunTimeError : Enemy
         rotationBulletSpawner.GetComponent<RotateBulletSpawner>().StopBullets();
 
         // gonna make destroy animation - YH
-        // runtimeAni.SetTrigger("isDead");
-        Destroy(gameObject); //, runtimeAni.GetCurrentAnimatorStateInfo(0).length + 1f);
+        runtimeAni.SetTrigger("isRuntimeErrorDead");
+
+        curSR.sprite = destroySprite;
+        
+
+        // need player win func in GameManger
+
+        Destroy(gameObject, runtimeAni.GetCurrentAnimatorStateInfo(0).length + 4f);
         DropEXP(dropExpNumber);
 
         ScoreManager.instance.UpdateEnemyKills();
