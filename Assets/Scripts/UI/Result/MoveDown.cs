@@ -9,6 +9,7 @@ using System;
 public class MoveDown : MonoBehaviour
 {
     public Canvas bottom;
+    public GameObject window;
     public GameObject result;
     public Button button;
 
@@ -27,7 +28,8 @@ public class MoveDown : MonoBehaviour
 
         if (flag) 
         {
-            bottom.transform.Translate(new Vector3(0, -250, 0));
+            window.transform.Translate(new Vector3(0, 120, 0));
+            bottom.transform.Translate(new Vector3(0, -220, 0));
             flag = false;
             Image buttonImage = button.GetComponent<Image>();
 
@@ -46,16 +48,19 @@ public class MoveDown : MonoBehaviour
                 {
                     w.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(kvp.Key);
 
-                    Image i = w.GetChild(0).GetComponent<Image>();
-                    Color c = i.color;
-                    c.r = 0f;
-                    c.g = 0f;
-                    c.b = 0f;
-                    i.color = c;
+                    if (kvp.Key != "CD")
+                    {
+                        Image i = w.GetChild(0).GetComponent<Image>();
+                        Color c = i.color;
+                        c.r = 0f;
+                        c.g = 0f;
+                        c.b = 0f;
+                        i.color = c;
+                    }
                 }
                 w.GetChild(1).GetComponent<TextMeshProUGUI>().text = kvp.Key;
                 w.GetChild(2).GetComponent<TextMeshProUGUI>().text = kvp.Value.ToString();
-                w.GetChild(3).GetComponent<Image>().GetComponent<RectTransform>().sizeDelta = new Vector2(kvp.Value / ScoreManager.instance.GetTotalDamages() * 25, 6);
+                w.GetChild(3).GetComponent<Image>().GetComponent<RectTransform>().sizeDelta = new Vector2(kvp.Value / ScoreManager.instance.GetTotalDamages() * 180, 25);
 
                 cnt++;
             }
@@ -66,7 +71,8 @@ public class MoveDown : MonoBehaviour
         }
         else
         {
-            bottom.transform.Translate(new Vector3(0, 250, 0));
+            window.transform.Translate(new Vector3(0, -120, 0));
+            bottom.transform.Translate(new Vector3(0, 220, 0));
             flag = true;
             Image buttonImage = button.GetComponent<Image>();
             Color color = buttonImage.color;

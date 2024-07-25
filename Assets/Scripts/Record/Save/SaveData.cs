@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public abstract class SaveData
 {
-    private string fileName;
-    private string directory;
+    [SerializeField] private string fileName;
+    [SerializeField] private string directory;
 
     public SaveData(string _fileName, string _directory)
     {

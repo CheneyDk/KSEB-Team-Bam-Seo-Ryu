@@ -38,6 +38,7 @@ public class CDBullet : PlayerBullet
             if (enemyComponent != null)
             {
                 enemyComponent.TakeDamage(bulletDamage);
+                ScoreManager.instance.UpdateDamage("CD", bulletDamage);
             }
         }
     }
