@@ -1,32 +1,34 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SnakeLogicError : Enemy
 {
-    private float snakeSpeed = 20f;
-    private float turnSpeed = 5f;
+    private float snakeSpeed = 500f;
+    private float turnSpeed = 300f;
 
     // allocate in unity
+    // 0: head, 1: body, 2: tail
     [SerializeField] public List<GameObject> bodyParts = new List<GameObject>();
     // actually use in script
     private List<GameObject> snakeBody = new List<GameObject>();
     private float bodyLength = 7;
-    private float distanceBetween = 1f;
+    private float distanceBetween = 0.2f;
 
 
-    private void Start()
+    private void Awake()
     {
-        InitSnake();
+        InitSnake().Forget();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         
-        EnemyMovement();
+        SnakeMovement();
     }
 
-    private void InitSnake()
+    private async UniTask InitSnake()
     {
         // need to fix
         int bodytype = 0;
@@ -40,20 +42,23 @@ public class SnakeLogicError : Enemy
             var tempBodypart = Instantiate(bodyParts[bodytype], transform.position, transform.rotation, transform);
             tempBodypart.GetComponent<SnakeMovement>().ClearMovementList();
             snakeBody.Add(tempBodypart);
+
+            await UniTask.WaitForSeconds(distanceBetween);
         }
     }
 
-    public override void EnemyMovement() 
+    public void SnakeMovement() 
     {
         // SnakeMovement
 
         // Head Movement
         // straight
-        snakeBody[0].GetComponent<Rigidbody2D>().velocity = snakeBody[0].transform.right * snakeSpeed * Time.deltaTime;
+        snakeBody[0].GetComponent<Rigidbody2D>().velocity = snakeSpeed * Time.deltaTime * snakeBody[0].transform.right;
         // zigzag
         // gonna change later - YH
 
         // The other parts Movement
+        if (snakeBody.Count < 1) return;
         for (int i = 1; i < snakeBody.Count; i++)
         {
             var movement = snakeBody[i - 1].GetComponent<SnakeMovement>();
@@ -81,5 +86,7 @@ public class SnakeLogicError : Enemy
     }
 
 
+
+    public override void EnemyMovement() {}
     public override void ResetEnemy() { }
 }
