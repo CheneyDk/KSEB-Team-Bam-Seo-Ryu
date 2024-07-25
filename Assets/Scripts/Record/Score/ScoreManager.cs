@@ -34,19 +34,7 @@ public class ScoreManager : MonoBehaviour
             return;
         }
     }
-
-    public void SaveScoreData()
-    {
-        Debug.Log("저장 성공!");
-        Debug.Log("도달 웨이브: " + scoreData.waveReached.ToString());
-        Debug.Log("죽인 적 수: " + scoreData.enemiesDeafeated.ToString());
-        Debug.Log("도달 레벨: " + scoreData.levelReached.ToString());
-        //foreach (KeyValuePair<string, float> kvp in scoreData.weaponDamages)
-        //{
-        //    Debug.Log(kvp.Key + " " + kvp.Value);
-        //}
-    }
-
+    
     public void AddWeapon(string name)
     {
         tempWeaponDamages.Add(name, 0);
@@ -112,8 +100,6 @@ public class ScoreManager : MonoBehaviour
 
     public void SaveData()
     {
-        //RecordData data = SaveLoadHelper.Load("GameData", "Test/Bootcamp");
-
         scoreData.playDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         scoreData.totalDamage = GetTotalDamages();
 
@@ -125,7 +111,6 @@ public class ScoreManager : MonoBehaviour
         scoreData.weaponDamagesData = list;
 
         recordData.scoreDataList.Add(scoreData);
-        Debug.Log(recordData.scoreDataList.Count);
 
         SaveLoadHelper.Save(recordData);
 
