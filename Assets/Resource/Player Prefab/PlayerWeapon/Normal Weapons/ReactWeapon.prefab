@@ -45,7 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponDamageRate: 0.5
+  weaponLevel: 1
   isMaxLevel: 0
+  isPowerWeapon: 0
+  matchPassive: Overclock
   muzzle: {fileID: 0}
+  muzzle_sub: {fileID: 0}
   bullet: {fileID: 2735251914564995957, guid: d419732766d61834fae59afd5d032944, type: 3}
-  fireRate: 2
+  bullet_sub: {fileID: 0}
+  fireRate: 5

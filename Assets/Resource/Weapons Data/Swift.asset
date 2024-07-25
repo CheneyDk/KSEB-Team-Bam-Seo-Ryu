@@ -16,7 +16,9 @@ MonoBehaviour:
   itemImage: {fileID: 21300000, guid: 60cf3e33622e9fd4285b6455b6582f13, type: 3}
   itemName: Swift
   itemDesc: '{ Swift }'
-  passiveForPowerWeapon: 
-  powerImage: {fileID: 0}
-  powerName: 
-  powerDesc: 
+  powerImage: {fileID: 21300000, guid: 60cf3e33622e9fd4285b6455b6582f13, type: 3}
+  powerName: Power Swift
+  powerDesc: '{ Power Swift }'
+  curImage: {fileID: 21300000, guid: 60cf3e33622e9fd4285b6455b6582f13, type: 3}
+  curName: Swift
+  curDesc: '{ Swift }'

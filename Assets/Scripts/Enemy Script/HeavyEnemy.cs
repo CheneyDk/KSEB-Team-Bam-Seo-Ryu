@@ -1,3 +1,4 @@
+using DamageNumbersPro;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,6 +38,10 @@ public class HeavyEnemy : Enemy
 
     [Header("Hit Particle"), SerializeField]
     private ParticleSystem hitParticle;
+    [SerializeField]
+    private DamageNumber damageNumber;
+    [SerializeField]
+    private DamageNumber lastingDamageNumber;
 
     private Animator heavyAni;
     private Collider2D heavyCollider;
@@ -116,6 +121,7 @@ public class HeavyEnemy : Enemy
     public override void TakeDamage(float damage)
     {
         hitParticle.Play();
+        damageNumber.Spawn(transform.position, damage);
         HeavyEnemyCurtHP -= damage;
         if (HeavyEnemyCurtHP <= 0)
         {
@@ -186,6 +192,7 @@ public class HeavyEnemy : Enemy
         {
             yield return new WaitForSeconds(1f);
             hitParticle.Play();
+            lastingDamageNumber.Spawn(transform.position, damage);
             HeavyEnemyCurtHP -= damage;
             damageTimer += 1f;
 

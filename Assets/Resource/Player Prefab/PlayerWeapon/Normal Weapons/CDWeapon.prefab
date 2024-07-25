@@ -45,7 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponDamageRate: 1
+  weaponLevel: 1
   isMaxLevel: 0
+  isPowerWeapon: 0
+  matchPassive: Bluetooth
   muzzle: {fileID: 0}
+  muzzle_sub: {fileID: 0}
   bullet: {fileID: 6593704557754234052, guid: b51ec5d78ecb7ca4cace167cf43c3572, type: 3}
+  bullet_sub: {fileID: 0}
   fireRate: 3.5

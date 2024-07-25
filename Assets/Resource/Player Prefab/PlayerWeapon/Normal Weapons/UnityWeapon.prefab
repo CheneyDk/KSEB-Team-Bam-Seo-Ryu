@@ -45,7 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponDamageRate: 0
+  weaponLevel: 1
   isMaxLevel: 0
+  isPowerWeapon: 0
+  matchPassive: Wifi
   muzzle: {fileID: 0}
+  muzzle_sub: {fileID: 0}
   bullet: {fileID: 1270477733814697342, guid: 3bf649b608aa53141be55314de6adf09, type: 3}
+  bullet_sub: {fileID: 0}
   fireRate: 3

@@ -1,3 +1,4 @@
+using DamageNumbersPro;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,6 +40,10 @@ public class RangeEnemy : Enemy
 
     [Header("Hit Particle"), SerializeField]
     private ParticleSystem hitParticle;
+    [SerializeField]
+    private DamageNumber damageNumber;
+    [SerializeField]
+    private DamageNumber lastingDamageNumber;
 
     private Animator rangeAni;
     private Collider2D rangeCollider;
@@ -118,6 +123,7 @@ public class RangeEnemy : Enemy
     public override void TakeDamage(float damage)
     {
         hitParticle.Play();
+        damageNumber.Spawn(transform.position, damage);
         RangeEnemyCurtHP -= damage;
         if (RangeEnemyCurtHP <= 0)
         {
@@ -179,6 +185,7 @@ public class RangeEnemy : Enemy
         {
             yield return new WaitForSeconds(1f);
             hitParticle.Play();
+            lastingDamageNumber.Spawn(transform.position, damage);
             RangeEnemyCurtHP -= damage;
             damageTimer += 1f;
 
@@ -208,5 +215,6 @@ public class RangeEnemy : Enemy
         RangeEnemyCurtHP = RangeEnemyMaxHp;
         rangeCollider.enabled = true;
         isDead = false;
+        canAttack = true;
     }
 }

@@ -9,21 +9,33 @@ public class UnityWeapon : PlayerWeapon
     void Start()
     {
         Fire();
-        bulletNum = 1;
         weaponLevel = 1;
         weaponDamageRate = 1f;
         isMaxLevel = false;
+        isPowerWeapon = false;
+        matchPassive = "";
     }
 
     IEnumerator FireBullet()
     {
         while (true)
         {
-            yield return new WaitForSeconds(fireRate);
-            for (int i = 0; i < bulletNum; i++)
+            if (!isPowerWeapon)
             {
+                yield return new WaitForSeconds(fireRate);
                 var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
                 addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+
+            }
+            else if (isPowerWeapon)
+            {
+                yield return new WaitForSeconds(fireRate);
+                for (int i = 0; i < 2; i++)
+                {
+                    float angle = i * 180f;
+                    var addBullet = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
+                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+                }
             }
         }
     }
@@ -38,7 +50,7 @@ public class UnityWeapon : PlayerWeapon
         if (weaponLevel < 5)
         {
             weaponLevel++;
-            bulletNum++;
+            weaponDamageRate += 0.2f;
         }
         if (weaponLevel > 4) 
         { 

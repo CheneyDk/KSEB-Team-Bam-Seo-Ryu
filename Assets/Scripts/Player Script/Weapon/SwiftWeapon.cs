@@ -14,15 +14,29 @@ public class SwiftWeapon : PlayerWeapon
         weaponLevel = 1;
         weaponDamageRate = 1f;
         isMaxLevel = false;
+        isPowerWeapon = false;
+        matchPassive = "";
     }
 
     IEnumerator FireBullet()
     {
         while (true)
         {
-            yield return new WaitForSeconds(fireRate);
-            var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-            addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+            if (!isPowerWeapon)
+            {
+                yield return new WaitForSeconds(fireRate);
+                var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+            }
+            else if (isPowerWeapon)
+            {
+                yield return new WaitForSeconds(3);
+                for (int i = 0; i < 4; i++)
+                {
+                    float angle = i * (360f /4f);
+                    Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
+                }
+            }
         }
     }
 

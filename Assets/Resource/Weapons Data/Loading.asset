@@ -16,7 +16,9 @@ MonoBehaviour:
   itemImage: {fileID: 21300028, guid: 0fd21678280ad9c47aa2d32baf438c5d, type: 3}
   itemName: Loading
   itemDesc: '{ Loading }'
-  passiveForPowerWeapon: 
-  powerImage: {fileID: 0}
-  powerName: 
-  powerDesc: 
+  powerImage: {fileID: 21300020, guid: 0fd21678280ad9c47aa2d32baf438c5d, type: 3}
+  powerName: Faster Loading
+  powerDesc: '{ Faster Loading }'
+  curImage: {fileID: 21300028, guid: 0fd21678280ad9c47aa2d32baf438c5d, type: 3}
+  curName: Loading
+  curDesc: '{ Loading }'

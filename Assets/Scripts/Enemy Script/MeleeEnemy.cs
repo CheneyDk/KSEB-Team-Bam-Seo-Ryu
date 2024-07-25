@@ -1,6 +1,6 @@
+using DamageNumbersPro;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Services.Analytics.Internal;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -29,6 +29,10 @@ public class MeleeEnemy : Enemy
 
     [Header("Hit Particle"), SerializeField]
     private ParticleSystem hitParticle;
+    [SerializeField]
+    private DamageNumber damageNumber;
+    [SerializeField]
+    private DamageNumber lastingDamageNumber;
 
     private Animator meleeAni;
     private Collider2D meleeCollider;
@@ -85,6 +89,7 @@ public class MeleeEnemy : Enemy
     public override void TakeDamage(float damage)
     {
         hitParticle.Play();
+        damageNumber.Spawn(transform.position, damage);
         MeleeEnemyCurtHP -= damage; 
         if (MeleeEnemyCurtHP <= 0)
         {
@@ -146,6 +151,7 @@ public class MeleeEnemy : Enemy
         {
             yield return new WaitForSeconds(1f);
             hitParticle.Play();
+            lastingDamageNumber.Spawn(transform.position, damage);
             MeleeEnemyCurtHP -= damage;
             damageTimer += 1f;
 

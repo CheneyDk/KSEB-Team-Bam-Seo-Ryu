@@ -197,6 +197,8 @@ MonoBehaviour:
   healingItem: {fileID: 256046693093680286, guid: 9b4d105ecc7ec8444a24bfdfbcc172d3, type: 3}
   redbuleItem: {fileID: 9016300061562779816, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
   hitParticle: {fileID: 7706061699327231876}
+  damageNumber: {fileID: 1848622758658849530, guid: 1928df38c9c7b7342a2a95eeab8f991d, type: 3}
+  lastingDamageNumber: {fileID: 1848622758658849530, guid: 94b7e5789fc284b4eba92f18cad04c72, type: 3}
 --- !u!1001 &2743142908143086298
 PrefabInstance:
   m_ObjectHideFlags: 0

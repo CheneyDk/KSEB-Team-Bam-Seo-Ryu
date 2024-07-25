@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class ReactWeapon : PlayerWeapon
 {
-    public float fireRate = 2f;
+    public float fireRate = 5f;
 
     void Start()
     {
@@ -13,15 +13,27 @@ public class ReactWeapon : PlayerWeapon
         weaponLevel = 1;
         weaponDamageRate = 0.5f;
         isMaxLevel = false;
+        isPowerWeapon = false;
+        matchPassive = "";
     }
 
     IEnumerator FireBullet()
     {
         while (true)
         {
-            yield return new WaitForSeconds(fireRate);
-            var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-            addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+            if (!isPowerWeapon)
+            {
+                yield return new WaitForSeconds(fireRate);
+                var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+
+            }
+            else if (isPowerWeapon)
+            {
+                yield return new WaitForSeconds(fireRate/2f);
+                var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+            }
         }
     }
 

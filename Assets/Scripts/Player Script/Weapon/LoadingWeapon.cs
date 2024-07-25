@@ -10,12 +10,17 @@ public class LoadingWeapon : PlayerWeapon
     public float rotationSpeed = 100f;
     public float damage;
 
+    private SpriteRenderer sprite;
+
     void Start()
     {
+        sprite = GetComponent<SpriteRenderer>();
         weaponLevel = 1;
         weaponDamageRate = 1f;
         damage = player.playerAtk * weaponDamageRate;
         isMaxLevel = false;
+        isPowerWeapon = false;
+        matchPassive = "CPU";
     }
 
     private void Update()
@@ -25,7 +30,16 @@ public class LoadingWeapon : PlayerWeapon
 
     void Rotation()
     {
-        transform.Rotate(-Vector3.forward * rotationSpeed * Time.deltaTime);
+        if(!isPowerWeapon)
+        {
+            transform.Rotate(-Vector3.forward * rotationSpeed * Time.deltaTime);
+            sprite.color = Color.white;
+        }
+        else if (isPowerWeapon)
+        {
+            transform.Rotate(-Vector3.forward * rotationSpeed * Time.deltaTime * 2);
+            sprite.color = Color.red;
+        }
 
         if (transform.rotation.eulerAngles.z <= -360f)
         {

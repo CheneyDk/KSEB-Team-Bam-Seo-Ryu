@@ -76,7 +76,18 @@ public class GameUI : MonoBehaviour
         {
             var weapons = playerWeaponBag.GetComponentsInChildren<PlayerWeapon>()[i];
             var weaponLevels = weapons.weaponLevel;
-            weaponLevel[i].text = weaponLevels.ToString();
+            if (weaponLevels > 4f)
+            {
+                weaponLevel[i].text = "Max";
+            }
+            else if(weapons.isPowerWeapon == true && weaponLevels == 5)
+            {
+                weaponLevel[i].text = "Pow";
+            }
+            else
+            {
+                weaponLevel[i].text = weaponLevels.ToString();
+            }
         }
     }
     public void AddPassiveLevel(Transform playerPassiveBag)
@@ -85,7 +96,14 @@ public class GameUI : MonoBehaviour
         {
             var passives = playerPassiveBag.GetComponentsInChildren<PlayerPassive>()[i];
             var passiveLevels = passives.passiveItemLevel;
-            passiveLevel[i].text = passiveLevels.ToString();
+            if (passiveLevels > 4f)
+            {
+                passiveLevel[i].text = "Max";
+            }
+            else
+            {
+                passiveLevel[i].text = passiveLevels.ToString();
+            }
         }
     }
 }
