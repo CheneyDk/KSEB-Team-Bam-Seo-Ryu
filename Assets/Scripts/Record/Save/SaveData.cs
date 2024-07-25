@@ -23,6 +23,12 @@ public class RecordData : SaveData
 {
     public List<ScoreData> scoreDataList = new List<ScoreData>();
 
+    public ScoreData this[int i] //indexer
+    {
+        get => scoreDataList[i];
+        set => scoreDataList[i] = value;
+    }
+
     public RecordData(string _fileName, string _directory) : base(_fileName, _directory)
     {
 
