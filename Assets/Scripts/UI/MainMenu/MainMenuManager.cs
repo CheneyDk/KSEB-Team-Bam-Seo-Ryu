@@ -13,6 +13,8 @@ public class MainMenuManager : MonoBehaviour
     
     public GameObject panel;
     public GameObject log;
+    public GameObject detail;
+    public GameObject record;
     public Slider SoundSlider;
     public GameObject I_100;
     public GameObject I_66;
@@ -136,13 +138,11 @@ public class MainMenuManager : MonoBehaviour
         if (panel == "Log")
         {
             log.SetActive(true);
-
-            //RecordData data = SaveLoadHelper.Load("GameData", "Test/Bootcamp");
             logManager.SetStart();
-            foreach (ScoreData score in ScoreManager.instance.recordData.scoreDataList)
-            {
-                Debug.Log(score.waveReached + " " + score.levelReached + " " + score.enemiesDeafeated + " " + score.totalDamage + " " + score.playDateTime);
-            }
+        }
+        else if (panel == "Detail")
+        {
+            detail.SetActive(true);
         }
         else if (panel == "Record")
         {
@@ -155,6 +155,10 @@ public class MainMenuManager : MonoBehaviour
         if (panel == "Log")
         {
             log.SetActive(false);
+        }
+        else if (panel == "Detail")
+        {
+            detail.SetActive(false);
         }
         else if (panel == "Record")
         {

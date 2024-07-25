@@ -7,13 +7,11 @@ using UnityEngine.UI;
 public class LogManager : MonoBehaviour
 {
     public ColumnManager[] logs;
-    public Button[] buttons;
-    public GameObject detailPage;
-    //public DetailPanel detailPanel;
+    public DetailPanel detailPanel;
 
-    int idx = 0;
     public void SetStart()
     {
+        int idx = 0;
         foreach(ScoreData score in ScoreManager.instance.recordData.scoreDataList)
         {
             if (idx >= 10)
@@ -28,14 +26,8 @@ public class LogManager : MonoBehaviour
         }
     }
 
-    public void ShowDetails(int idx)
+    public void SetDetails(int idx)
     {
-        detailPage.SetActive(true);
-        detailPanel.ShowPanel(ScoreManager.instance.recordData[idx]);
-    }
-
-    public void CloseDetails()
-    {
-        detailPage.SetActive(false);
+        detailPanel.SetPanel(ScoreManager.instance.recordData[idx]);
     }
 }
