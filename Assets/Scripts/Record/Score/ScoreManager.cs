@@ -11,6 +11,7 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
 
+    public RecordData recordData { get; private set; }
     private ScoreData scoreData;
 
     private Dictionary<string, float> tempWeaponDamages = new Dictionary<string, float>();
@@ -24,6 +25,9 @@ public class ScoreManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             ResetData();
+
+            recordData = SaveLoadHelper.Load("GameData", "Test/Bootcamp");
+            recordData ??= new RecordData("GameData", "Test/Bootcamp");
         }
         else
         {
@@ -108,9 +112,7 @@ public class ScoreManager : MonoBehaviour
 
     public void SaveData()
     {
-        RecordData data = SaveLoadHelper.Load("GameData", "Test/Bootcamp");
-
-        data ??= new RecordData("GameData", "Test/Bootcamp");
+        //RecordData data = SaveLoadHelper.Load("GameData", "Test/Bootcamp");
 
         scoreData.playDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         scoreData.totalDamage = GetTotalDamages();
@@ -122,10 +124,10 @@ public class ScoreManager : MonoBehaviour
         }
         scoreData.weaponDamagesData = list;
 
-        data.scoreDataList.Add(scoreData);
-        Debug.Log(data.scoreDataList.Count);
+        recordData.scoreDataList.Add(scoreData);
+        Debug.Log(recordData.scoreDataList.Count);
 
-        SaveLoadHelper.Save(data);
+        SaveLoadHelper.Save(recordData);
 
         Debug.Log("Save Success!");
     }
