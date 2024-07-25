@@ -31,7 +31,7 @@ public class LogManager : MonoBehaviour
     public void ShowDetails(int idx)
     {
         detailPage.SetActive(true);
-        detailPanel.ShowPanel(ScoreManager.instance.recordData[idx]);
+        //detailPanel.ShowPanel(ScoreManager.instance.recordData[idx]);
     }
 
     public void CloseDetails()

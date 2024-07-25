@@ -242,7 +242,7 @@ public class UpgradeManager : MonoBehaviour
         var existingItem = itemList.Find(i => i.itemName == item.itemName);
         if (existingItem != null)
         {
-            Debug.Log($"{item.itemName} upgrade.");
+            GameInfoManager.Instance.DisplayGameInfo($"{item.itemName} upgrade.");
 
             // Upgrade
             var upgradeItemName = upgradeItem.Find(existingItem.item.name + ("(Clone)"));
@@ -285,7 +285,7 @@ public class UpgradeManager : MonoBehaviour
                 AddItemToPlayer(item.item);
                 gameUI.AddPassiveLevel(playerPassiveBag);
             }
-            Debug.Log($"{item.itemName} added.");
+            GameInfoManager.Instance.DisplayGameInfo($"{item.itemName} added.");
         }
     }
 

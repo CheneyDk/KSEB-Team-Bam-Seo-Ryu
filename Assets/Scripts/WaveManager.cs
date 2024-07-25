@@ -40,7 +40,7 @@ public class WaveManager : MonoBehaviour
     {
         while (curWave <= waveNumber)
         {
-            Debug.Log($"Wave {curWave} Start!");
+            GameInfoManager.Instance.DisplayGameInfo($"Wave {curWave} Start!");
             enemySpawner.StartSpawning();
             waveIsStarted = true;
             yield return new WaitForSeconds(waveTime);
@@ -57,7 +57,7 @@ public class WaveManager : MonoBehaviour
             curWave++;
             if (curWave <= waveNumber)
             {
-                Debug.Log($"Wave {curWave} Loading...");
+                GameInfoManager.Instance.DisplayGameInfo($"Wave {curWave} Loading...");
                 yield return new WaitForSeconds(waveInterval);
                 time = waveTime;
             }
