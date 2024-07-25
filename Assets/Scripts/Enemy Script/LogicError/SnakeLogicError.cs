@@ -1,32 +1,65 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
+
+/// <summary>
+/// 
+/// Guides about Second Boss, LogicError (Snake) 
+/// 
+/// basic rulse
+/// 1. snake always go straight
+/// 2. we only can change rotation (left or right)
+/// 3. if there is wall in front of snake, snake have to rotate (left or right half and half)
+/// -> gonna use snake tongue (kind of wall detection)
+/// 
+/// important functions in this class
+/// 1. snake zigzag move
+/// 2. snake straight move
+/// 3. straight - zigzag state transit (of course, this is not state pattern)
+/// 
+/// 4. 90 degree rotate (you can rotate 180 degree to do this one more time)
+/// 5. charge to player - need to ready motion
+/// 6. Gun Fire to player - each 
+/// 
+/// </summary>
 
 public class SnakeLogicError : Enemy
 {
-    private float snakeSpeed = 20f;
-    private float turnSpeed = 5f;
+    private float snakeSpeed = 900f;
+    private float turnSpeed = 130f;
+    private float turnTime;
+    private Vector3 turningVector = new Vector3(0f, 0f, 1f);
 
-    // allocate in unity
+    // bodyParts need to pre-allocate in unity
+    // 0: head, 1: body, 2: tail
     [SerializeField] public List<GameObject> bodyParts = new List<GameObject>();
     // actually use in script
     private List<GameObject> snakeBody = new List<GameObject>();
-    private float bodyLength = 7;
-    private float distanceBetween = 1f;
+    private float bodyLength = 15;
+    private float distanceBetween = 0.1f;
 
+    public GameObject tongue;
+
+    private void Awake()
+    {
+        InitSnake().Forget();
+        turningVector *= turnSpeed;
+    }
 
     private void Start()
     {
-        InitSnake();
+        TurningSnake(180f, -1f).Forget();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        
-        EnemyMovement();
+        SnakeMovement();
     }
 
-    private void InitSnake()
+
+    private async UniTask InitSnake()
     {
         // need to fix
         int bodytype = 0;
@@ -40,20 +73,22 @@ public class SnakeLogicError : Enemy
             var tempBodypart = Instantiate(bodyParts[bodytype], transform.position, transform.rotation, transform);
             tempBodypart.GetComponent<SnakeMovement>().ClearMovementList();
             snakeBody.Add(tempBodypart);
+
+            await UniTask.WaitForSeconds(distanceBetween);
         }
     }
 
-    public override void EnemyMovement() 
+    public void SnakeMovement() 
     {
         // SnakeMovement
 
         // Head Movement
-        // straight
-        snakeBody[0].GetComponent<Rigidbody2D>().velocity = snakeBody[0].transform.right * snakeSpeed * Time.deltaTime;
-        // zigzag
+        snakeBody[0].GetComponent<Rigidbody2D>().velocity = snakeSpeed * Time.deltaTime * snakeBody[0].transform.right;
+        // direction
         // gonna change later - YH
 
         // The other parts Movement
+        if (snakeBody.Count < 1) return;
         for (int i = 1; i < snakeBody.Count; i++)
         {
             var movement = snakeBody[i - 1].GetComponent<SnakeMovement>();
@@ -63,6 +98,19 @@ public class SnakeLogicError : Enemy
         }
     }
 
+    // key value: 45, 90, 135, 180 -> rotate degree
+    // dir: left: 1, right: -1
+    private async UniTask TurningSnake(float key, float dir)
+    {
+        float timer = 0f;
+        float turningTime = key / turnSpeed;
+        while (timer < turningTime)
+        {
+            snakeBody[0].transform.Rotate(turningVector * Time.deltaTime * dir);
+            timer += Time.deltaTime;
+            await UniTask.Yield();
+        }
+    }
 
 
     public override IEnumerator LastingDamage(float damage, int totalDamageTime, Color color)
@@ -81,5 +129,7 @@ public class SnakeLogicError : Enemy
     }
 
 
+
+    public override void EnemyMovement() {}
     public override void ResetEnemy() { }
 }
