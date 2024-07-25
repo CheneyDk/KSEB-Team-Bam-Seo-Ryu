@@ -27,8 +27,10 @@ using UnityEngine;
 
 public class SnakeLogicError : Enemy
 {
-    private float snakeSpeed = 900f;
-    private float turnSpeed = 130f;
+    public float snakeSpeed = 900f;
+    private float curTurnSpeed;
+    private float slowTurnSpeed = 130f;
+    private float fastTurnSpeed = 400f;
     private float turnTime;
     private Vector3 turningVector = new Vector3(0f, 0f, 1f);
 
@@ -45,12 +47,13 @@ public class SnakeLogicError : Enemy
     private void Awake()
     {
         InitSnake().Forget();
-        turningVector *= turnSpeed;
+        curTurnSpeed = slowTurnSpeed;
+        turningVector *= curTurnSpeed;
     }
 
     private void Start()
     {
-        TurningSnake(180f, -1f).Forget();
+        SnakeRoundZigZag().Forget();
     }
 
     private void FixedUpdate()
@@ -98,18 +101,44 @@ public class SnakeLogicError : Enemy
         }
     }
 
+    private async UniTask SnakeRoundZigZag()
+    {
+        // start
+        await TurningSnake(80, 1);
+
+        // zigzag
+        await TurningSnake(160, -1);
+        await TurningSnake(160, 1);
+
+        // end - back to straight
+        await TurningSnake(80, -1);
+    }
+
+    private void SnakeSharpZigZag()
+    {
+
+    }
+
     // key value: 45, 90, 135, 180 -> rotate degree
     // dir: left: 1, right: -1
-    private async UniTask TurningSnake(float key, float dir)
+    private async UniTask TurningSnake(float degree, float dir)
     {
+        curTurnSpeed = fastTurnSpeed;
+        var curRot = snakeBody[0].transform.eulerAngles;
+        curRot.z += dir * degree;
+
         float timer = 0f;
-        float turningTime = key / turnSpeed;
+        float turningTime = degree / curTurnSpeed;
         while (timer < turningTime)
         {
             snakeBody[0].transform.Rotate(turningVector * Time.deltaTime * dir);
             timer += Time.deltaTime;
             await UniTask.Yield();
         }
+
+        // still not a strict angle, need to correct angle in int value
+        snakeBody[0].transform.eulerAngles = curRot;
+        curTurnSpeed = slowTurnSpeed;
     }
 
 

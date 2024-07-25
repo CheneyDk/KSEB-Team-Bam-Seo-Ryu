@@ -9,7 +9,7 @@ public class LogManager : MonoBehaviour
     public ColumnManager[] logs;
     public Button[] buttons;
     public GameObject detailPage;
-    //public DetailPanel detailPanel;
+    // public DetailPanel detailPanel;
 
     int idx = 0;
     public void SetStart()
@@ -31,7 +31,7 @@ public class LogManager : MonoBehaviour
     public void ShowDetails(int idx)
     {
         detailPage.SetActive(true);
-        detailPanel.ShowPanel(ScoreManager.instance.recordData[idx]);
+        // detailPanel.ShowPanel(ScoreManager.instance.recordData[idx]);
     }
 
     public void CloseDetails()
