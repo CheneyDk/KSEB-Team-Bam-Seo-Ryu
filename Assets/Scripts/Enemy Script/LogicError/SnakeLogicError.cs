@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using DamageNumbersPro;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -27,33 +28,77 @@ using UnityEngine;
 
 public class SnakeLogicError : Enemy
 {
-    public float snakeSpeed = 900f;
+    // Enemy Inspector
+    [Header("Enemy Information")]
+    [SerializeField] private float snakeMaxHp = 20f;
+    [SerializeField] private float snakeCurtHP;
+    [SerializeField] private float snakeAtk = 5f;
+    [SerializeField] private float snakeMoveSpeed = 10f;
+
+    [Header("Exp")]
+    [SerializeField] private GameObject Exp;
+    public int dropExpNumber = 3;
+    private float spawnGroupRadius = 1f;
+
+    [Header("Drop Item"), SerializeField]
+    private GameObject healingItem;
+    [SerializeField]
+    private GameObject redbuleItem;
+
+    [Header("Hit Particle"), SerializeField]
+    private ParticleSystem hitParticle;
+    [SerializeField]
+    private DamageNumber damageNumber;
+    [SerializeField]
+    private DamageNumber lastingDamageNumber;
+
+    private Animator snakeAni;
+    private Collider2D snakeCollider;
+
+    private Transform player;
+    private float rotationSpeed = 10f;
+
+    private SpriteRenderer curSR;
+    private Color originColor;
+
+    private bool isDead = false;
+
+    // Snake Inspector
+    [Header("Snake Inspector")]
+    public float snakeSpeed = 20f;
     private float curTurnSpeed;
-    private float slowTurnSpeed = 130f;
-    private float fastTurnSpeed = 400f;
+    private float slowTurnSpeed = 60f;
+    private float fastTurnSpeed = 360f;
     private float turnTime;
     private Vector3 turningVector = new Vector3(0f, 0f, 1f);
 
     // bodyParts need to pre-allocate in unity
-    // 0: head, 1: body, 2: tail
+    // 0: Head, 1: body, 2: tail
     [SerializeField] public List<GameObject> bodyParts = new List<GameObject>();
     // actually use in script
     private List<GameObject> snakeBody = new List<GameObject>();
     private float bodyLength = 15;
     private float distanceBetween = 0.1f;
 
-    public GameObject tongue;
+    public GameObject tongue; // ?
 
     private void Awake()
     {
-        InitSnake().Forget();
+        // YH - move some components to each parts
+        // curSR = gameObject.GetComponent<SpriteRenderer>();
+        // originColor = curSR.color;
+        snakeCurtHP = snakeMaxHp;
+        // snakeAni = GetComponent<Animator>();
+        // snakeCollider = GetComponent<CircleCollider2D>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        InitSnakeObj().Forget();
         curTurnSpeed = slowTurnSpeed;
-        turningVector *= curTurnSpeed;
     }
 
     private void Start()
     {
-        SnakeRoundZigZag().Forget();
+        SnakeSlowZigZag().Forget();
     }
 
     private void FixedUpdate()
@@ -62,12 +107,10 @@ public class SnakeLogicError : Enemy
     }
 
 
-    private async UniTask InitSnake()
+    private async UniTask InitSnakeObj()
     {
         // need to fix
         int bodytype = 0;
-
-        // need delta timer
 
         for (int i = 0; i < bodyLength; i++)
         {
@@ -86,7 +129,7 @@ public class SnakeLogicError : Enemy
         // SnakeMovement
 
         // Head Movement
-        snakeBody[0].GetComponent<Rigidbody2D>().velocity = snakeSpeed * Time.deltaTime * snakeBody[0].transform.right;
+        snakeBody[0].GetComponent<Rigidbody2D>().velocity = snakeSpeed * snakeBody[0].transform.right;
         // direction
         // gonna change later - YH
 
@@ -101,20 +144,23 @@ public class SnakeLogicError : Enemy
         }
     }
 
-    private async UniTask SnakeRoundZigZag()
+    private async UniTask SnakeSlowZigZag()
     {
         // start
+        curTurnSpeed = fastTurnSpeed;
         await TurningSnake(80, 1);
 
-        // zigzag
+        // zigzag - YH - need to fix. fast turn and go straight
         await TurningSnake(160, -1);
+        await UniTask.WaitForSeconds(0.5f);
         await TurningSnake(160, 1);
 
         // end - back to straight
         await TurningSnake(80, -1);
+        curTurnSpeed = slowTurnSpeed;
     }
 
-    private void SnakeSharpZigZag()
+    private void SnakeFastZigZag()
     {
 
     }
@@ -123,7 +169,6 @@ public class SnakeLogicError : Enemy
     // dir: left: 1, right: -1
     private async UniTask TurningSnake(float degree, float dir)
     {
-        curTurnSpeed = fastTurnSpeed;
         var curRot = snakeBody[0].transform.eulerAngles;
         curRot.z += dir * degree;
 
@@ -131,32 +176,76 @@ public class SnakeLogicError : Enemy
         float turningTime = degree / curTurnSpeed;
         while (timer < turningTime)
         {
-            snakeBody[0].transform.Rotate(turningVector * Time.deltaTime * dir);
+            Debug.Log("rotating");
+            snakeBody[0].transform.Rotate(turningVector * curTurnSpeed * Time.deltaTime *  dir);
             timer += Time.deltaTime;
             await UniTask.Yield();
         }
 
         // still not a strict angle, need to correct angle in int value
         snakeBody[0].transform.eulerAngles = curRot;
-        curTurnSpeed = slowTurnSpeed;
     }
 
 
     public override IEnumerator LastingDamage(float damage, int totalDamageTime, Color color)
     {
-        yield return null; // temp
+        curSR.color = color;
+        var damageTimer = 0f;
+
+        while (damageTimer < totalDamageTime)
+        {
+            yield return new WaitForSeconds(1f);
+            // hitParticle.Play();
+            // lastingDamageNumber.Spawn(transform.position, damage);
+            snakeCurtHP -= damage;
+            damageTimer += 1f;
+
+            ScoreManager.instance.UpdateDamage("React", damage);
+        }
+
+        if (snakeCurtHP <= 0)
+        {
+            snakeDead();
+        }
+        curSR.color = originColor;
     }
 
     public override void TakeDamage(float damage)
     {
-        
+        // hitParticle.Play();
+        // damageNumber.Spawn(transform.position, damage);
+        snakeCurtHP -= damage;
+        if (snakeCurtHP <= 0)
+        {
+            snakeDead();
+        }
     }
 
-    public override void DropEXP(int iteamNumber)
+    private void snakeDead()
     {
+        snakeCollider.enabled = false;
+        isDead = true;
+        // snakeAni.SetBool("isDead", true); // YH - animations
+        // StartCoroutine("SetActiveToFalse"); // YH - dead motion wait?
+        DropEXP(dropExpNumber);
+        ChanceToDropItem(healingItem, 1);
 
+        ScoreManager.instance.UpdateEnemiesDeafeated();
     }
 
+    public override void DropEXP(int itemNumber)
+    {
+        for (int i = 0; i < itemNumber; i++)
+        {
+            Vector2 spawnPlace = (Vector2)transform.position + (Vector2)Random.insideUnitCircle * spawnGroupRadius;
+            Instantiate(Exp, spawnPlace, Quaternion.identity);
+        }
+    }
+    private void ChanceToDropItem(GameObject item, int chance)
+    {
+        // var randomChance = Random.Range(1, 11);
+        Instantiate(item, transform.position, Quaternion.identity);
+    }
 
 
     public override void EnemyMovement() {}
