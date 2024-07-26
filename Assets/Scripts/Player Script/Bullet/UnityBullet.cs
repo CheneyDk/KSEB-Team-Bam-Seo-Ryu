@@ -9,6 +9,8 @@ public class UnityBullet : PlayerBullet
 
     private Vector2 direction;
 
+    public SpriteRenderer spriteRenderer;
+
     private void Start()
     {
         bulletSpeed = 5f;
@@ -25,6 +27,11 @@ public class UnityBullet : PlayerBullet
     private void Update()
     {
         transform.Translate(direction * bulletSpeed * Time.deltaTime);
+    }
+
+    public override void ChangeSprite(Sprite powerWeapon)
+    {
+        spriteRenderer.sprite = powerWeapon;
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)

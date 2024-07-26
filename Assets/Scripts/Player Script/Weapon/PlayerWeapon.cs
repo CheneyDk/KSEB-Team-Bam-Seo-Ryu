@@ -27,6 +27,10 @@ public abstract class PlayerWeapon : MonoBehaviour // abstract class·Î ÀüÈ¯! + ¾
     // Player class
     protected Player player;
 
+    // Weapon Sprite
+    public Sprite normalWeaponSprite;
+    public Sprite powerWeaponSprite;
+
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();

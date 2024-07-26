@@ -6,9 +6,14 @@ public class MiniCD : PlayerBullet
 {
     private Player player;
 
+    private SpriteRenderer spriteRenderer;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
@@ -27,7 +32,12 @@ public class MiniCD : PlayerBullet
 
     void Update()
     {
-        transform.Translate(Vector2.up * 10f *Time.deltaTime);
+        transform.Translate(Vector2.up * 10f * Time.deltaTime);
         Destroy(gameObject, 2f);
+    }
+
+    public override void ChangeSprite(Sprite powerWeapon)
+    {
+        spriteRenderer.sprite = powerWeapon;
     }
 }

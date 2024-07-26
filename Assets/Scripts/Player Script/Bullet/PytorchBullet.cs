@@ -109,4 +109,8 @@ public class PytorchBullet : PlayerBullet
     {
 
     }
+
+    public override void ChangeSprite(Sprite powerWeapon)
+    {
+    }
 }

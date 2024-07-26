@@ -11,10 +11,13 @@ public class CDBullet : PlayerBullet
 
     private Vector2 direction;
 
+    public SpriteRenderer spriteRenderer;
+
     private void Start()
     {
         bulletSpeed = 5f;
         bulletLifeTime = 7f;
+
 
         Vector2 targetPosition = MouseAim();
 
@@ -62,5 +65,10 @@ public class CDBullet : PlayerBullet
         Vector2 mousePosition = Mouse.current.position.ReadValue();
         Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane));
         return new Vector2(worldMousePosition.x, worldMousePosition.y);
+    }
+
+    public override void ChangeSprite(Sprite powerWeapon)
+    {
+        spriteRenderer.sprite = powerWeapon;
     }
 }

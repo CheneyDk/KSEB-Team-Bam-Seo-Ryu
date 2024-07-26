@@ -68,5 +68,9 @@ public class BulletInternet : PlayerBullet
             enemy.GetComponent<Enemy>().TakeDamage(bulletDamage);
             ScoreManager.instance.UpdateDamage("Internet", bulletDamage);
         }
-    }  
+    }
+
+    public override void ChangeSprite(Sprite powerWeapon)
+    {
+    }
 }

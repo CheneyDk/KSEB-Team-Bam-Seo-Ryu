@@ -11,6 +11,13 @@ public class SwiftBullet : PlayerBullet
 
     private Rigidbody2D rigid;
 
+    private SpriteRenderer spriteRenderer;
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     private void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -47,5 +54,10 @@ public class SwiftBullet : PlayerBullet
                 ScoreManager.instance.UpdateDamage("Swift", bulletDamage);
             }
         }
+    }
+
+    public override void ChangeSprite(Sprite powerWeapon)
+    {
+        spriteRenderer.sprite = powerWeapon;
     }
 }

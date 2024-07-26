@@ -53,3 +53,5 @@ MonoBehaviour:
   muzzle_sub: {fileID: 0}
   bullet: {fileID: 6626596008623015290, guid: ac3f306ebd257fe4fac49bb1b5f338d8, type: 3}
   bullet_sub: {fileID: 0}
+  normalWeaponSprite: {fileID: 21300000, guid: 60cf3e33622e9fd4285b6455b6582f13, type: 3}
+  powerWeaponSprite: {fileID: 21300000, guid: 9145f738d27ec5a44ad90f12010807b3, type: 3}

@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class ReactBullet : PlayerBullet
 {
-    private Player player;
     private Collider2D myCollider;
 
+    private SpriteRenderer spriteRenderer;
 
     private void Start()
     {
         myCollider = GetComponent<CircleCollider2D>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
@@ -30,5 +32,10 @@ public class ReactBullet : PlayerBullet
     private void DestroyBullet()
     {
         Destroy(gameObject);
+    }
+
+    public override void ChangeSprite(Sprite powerWeapon)
+    {
+        spriteRenderer.sprite = powerWeapon;
     }
 }

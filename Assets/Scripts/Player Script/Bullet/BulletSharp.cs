@@ -34,6 +34,10 @@ public class BulletSharp : PlayerBullet
             }
         }
     }
+
+    public override void ChangeSprite(Sprite powerWeapon)
+    {
+    }
 }
 
 

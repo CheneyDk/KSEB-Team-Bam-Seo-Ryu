@@ -78,6 +78,10 @@ public class BulletWhip : PlayerBullet
         spriteRenderer.color = color;
         gameObject.SetActive(false); // 오브젝트를 비활성화
     }
+
+    public override void ChangeSprite(Sprite powerWeapon)
+    {
+    }
 }
 
 

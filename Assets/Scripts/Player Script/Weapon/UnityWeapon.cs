@@ -22,6 +22,7 @@ public class UnityWeapon : PlayerWeapon
         {
             if (!isPowerWeapon)
             {
+                bullet.GetComponent<PlayerBullet>().ChangeSprite(normalWeaponSprite);
                 yield return new WaitForSeconds(fireRate);
                 var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
                 addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
@@ -29,10 +30,11 @@ public class UnityWeapon : PlayerWeapon
             }
             else if (isPowerWeapon)
             {
+                bullet.GetComponent<PlayerBullet>().ChangeSprite(powerWeaponSprite);
                 yield return new WaitForSeconds(fireRate);
-                for (int i = 0; i < 2; i++)
+                for (int i = 0; i < 3; i++)
                 {
-                    float angle = i * 180f;
+                    float angle = -30f + (i * 30f);
                     var addBullet = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
                     addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
                 }

@@ -242,7 +242,7 @@ public class UpgradeManager : MonoBehaviour
     }
 
     // Add Item or Upgrade Item
-    private void AddOrUpgradeItem(List<WeaponData> itemList, List<WeaponData> selectedList, Transform upgradeItem, WeaponData item)
+    private void AddOrUpgradeItem(List<WeaponData> itemList, List<WeaponData> selectedList, Transform playerItemBag, WeaponData item)
     {
 
 
@@ -252,7 +252,7 @@ public class UpgradeManager : MonoBehaviour
             GameInfoManager.Instance.DisplayGameInfo($"{item.itemName} upgrade.");
 
             // Upgrade
-            var upgradeItemName = upgradeItem.Find(existingItem.item.name + ("(Clone)"));
+            var upgradeItemName = playerItemBag.Find(existingItem.item.name + ("(Clone)"));
             var upgradeWeapon = upgradeItemName.GetComponent<PlayerWeapon>();
             var upgradePassive = upgradeItemName.GetComponent<PlayerPassive>();
             if (isLevelUp)
@@ -260,6 +260,7 @@ public class UpgradeManager : MonoBehaviour
                 if (upgradeWeapon.isMaxLevel == true)
                 {
                     upgradeWeapon.isPowerWeapon = true;
+                    gameUI.ChangePowerWeaponIcon(playerItemBag);
                     selectedList.Remove(item);
                 }
                 else

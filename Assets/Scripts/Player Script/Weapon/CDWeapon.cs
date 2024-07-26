@@ -23,12 +23,14 @@ public class CDWeapon : PlayerWeapon
         {
             if (!isPowerWeapon)
             {
+                bullet.GetComponent<PlayerBullet>().ChangeSprite(normalWeaponSprite);
                 yield return new WaitForSeconds(fireRate);
                 var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
                 addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
             }
             else if(isPowerWeapon)
             {
+                bullet.GetComponent<PlayerBullet>().ChangeSprite(powerWeaponSprite);
                 yield return new WaitForSeconds(fireRate);
                 for (int i = 0; i < 5; i++)
                 {
@@ -36,6 +38,14 @@ public class CDWeapon : PlayerWeapon
                     Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
                 }
             }
+        }
+    }
+
+    private void Update()
+    {
+        if (isPowerWeapon)
+        {
+            bullet.GetComponent<PlayerBullet>().ChangeSprite(powerWeaponSprite);
         }
     }
 

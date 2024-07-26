@@ -61,6 +61,19 @@ public class GameUI : MonoBehaviour
         }
     }
 
+    public void ChangePowerWeaponIcon(Transform playerWeaponBag)
+    {
+        for (int i = 0; i < playerWeaponBag.childCount; i++)
+        {
+            var weapon = playerWeaponBag.GetChild(i);
+            var compon = weapon.GetComponent<PlayerWeapon>();
+            if (compon.isPowerWeapon == true)
+            {
+                weaponList[i].sprite = compon.powerWeaponSprite;
+            }
+        }
+    }
+
     public void ItemIconList(List<WeaponData> dataList)
     {
         for (int i = 0; i < dataList.Count; i++)

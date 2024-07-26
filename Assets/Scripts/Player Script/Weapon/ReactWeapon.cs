@@ -23,6 +23,7 @@ public class ReactWeapon : PlayerWeapon
         {
             if (!isPowerWeapon)
             {
+                bullet.GetComponent<PlayerBullet>().ChangeSprite(normalWeaponSprite);
                 yield return new WaitForSeconds(fireRate);
                 var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
                 addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
@@ -30,6 +31,7 @@ public class ReactWeapon : PlayerWeapon
             }
             else if (isPowerWeapon)
             {
+                bullet.GetComponent<PlayerBullet>().ChangeSprite(powerWeaponSprite);
                 yield return new WaitForSeconds(fireRate/2f);
                 var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
                 addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);

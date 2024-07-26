@@ -71,4 +71,8 @@ public class BulletMySQL : PlayerBullet
         isExist = false;
         Destroy(gameObject);
     }
+
+    public override void ChangeSprite(Sprite powerWeapon)
+    {
+    }
 }

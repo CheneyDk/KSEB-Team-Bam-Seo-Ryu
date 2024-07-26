@@ -24,4 +24,6 @@ public abstract class PlayerBullet : MonoBehaviour
 
     // if stay triggered, give damage
     protected abstract void OnTriggerEnter2D(Collider2D collision);
+
+    public abstract void ChangeSprite(Sprite powerWeapon);
 }
