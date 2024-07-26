@@ -67,8 +67,8 @@ public class SnakeLogicError : Enemy
     [Header("Snake Inspector")]
     public float snakeSpeed = 20f;
     private float curTurnSpeed;
-    private float slowTurnSpeed = 15f;
-    private float fastTurnSpeed = 25f;
+    private float slowTurnSpeed = 60f;
+    private float fastTurnSpeed = 360f;
     private float turnTime;
     private Vector3 turningVector = new Vector3(0f, 0f, 1f);
 
@@ -94,12 +94,11 @@ public class SnakeLogicError : Enemy
 
         InitSnakeObj().Forget();
         curTurnSpeed = slowTurnSpeed;
-        turningVector *= curTurnSpeed;
     }
 
     private void Start()
     {
-        // SnakeRoundZigZag().Forget();
+        SnakeSlowZigZag().Forget();
     }
 
     private void FixedUpdate()
@@ -145,21 +144,23 @@ public class SnakeLogicError : Enemy
         }
     }
 
-    private async UniTask SnakeRoundZigZag()
+    private async UniTask SnakeSlowZigZag()
     {
         // start
+        curTurnSpeed = fastTurnSpeed;
         await TurningSnake(80, 1);
 
         // zigzag - YH - need to fix. fast turn and go straight
         await TurningSnake(160, -1);
-        await UniTask.WaitForSeconds(5f);
+        await UniTask.WaitForSeconds(0.5f);
         await TurningSnake(160, 1);
 
         // end - back to straight
         await TurningSnake(80, -1);
+        curTurnSpeed = slowTurnSpeed;
     }
 
-    private void SnakeSharpZigZag()
+    private void SnakeFastZigZag()
     {
 
     }
@@ -168,7 +169,6 @@ public class SnakeLogicError : Enemy
     // dir: left: 1, right: -1
     private async UniTask TurningSnake(float degree, float dir)
     {
-        curTurnSpeed = fastTurnSpeed;
         var curRot = snakeBody[0].transform.eulerAngles;
         curRot.z += dir * degree;
 
@@ -177,14 +177,13 @@ public class SnakeLogicError : Enemy
         while (timer < turningTime)
         {
             Debug.Log("rotating");
-            snakeBody[0].transform.Rotate(turningVector * Time.deltaTime * dir);
+            snakeBody[0].transform.Rotate(turningVector * curTurnSpeed * Time.deltaTime *  dir);
             timer += Time.deltaTime;
             await UniTask.Yield();
         }
 
         // still not a strict angle, need to correct angle in int value
         snakeBody[0].transform.eulerAngles = curRot;
-        curTurnSpeed = slowTurnSpeed;
     }
 
 
