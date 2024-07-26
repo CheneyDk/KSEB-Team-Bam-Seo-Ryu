@@ -9,7 +9,7 @@ public abstract class Item : MonoBehaviour
     protected float value;
 
     // flags
-    protected bool isDestroyed = false;
+    public bool isDestroyed = false;
 
     // magnetic system
     private float itemMagneticMoveSpeed = 30f;

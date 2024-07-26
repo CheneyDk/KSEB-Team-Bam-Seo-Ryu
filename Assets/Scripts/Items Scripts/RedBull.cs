@@ -18,7 +18,7 @@ public class RedBull : Item
             playerObj.GetEnergyDrink(value);
 
             isDestroyed = true;
-            Destroy(gameObject);
+            ItemPooling.Instance.ReturnRedBlue(gameObject);
         }
     }
 }

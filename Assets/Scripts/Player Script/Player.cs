@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using DamageNumbersPro;
 using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -65,7 +66,8 @@ public class Player : MonoBehaviour
     private float energyDrinkSprintCDDecrease = 1.25f;
     private bool isEnergyDrinkActive;
 
-
+    [SerializeField, Header("-Spawn Damage Number")]
+    private DamageNumber damageNumber;
     private void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
@@ -204,7 +206,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(float damage)
     {
         if (isInvincible) return; // if invincible -> do not take any damage
-
+        damageNumber.Spawn(transform.position, damage);
         // game over: destroy
         playerCurHp -= damage;
         if (playerCurHp <= 0)

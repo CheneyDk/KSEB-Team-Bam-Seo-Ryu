@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 256046693093680286, guid: 9b4d105ecc7ec8444a24bfdfbcc172d3, type: 3}
   itemImage: {fileID: 21300000, guid: 94084c4cde9f1fa4aae2f93857e5165a, type: 3}
-  itemName: Apple 2
+  itemName: Apple
   itemDesc: '{ HP + 10 }'
-  passiveForPowerWeapon: 
   powerImage: {fileID: 0}
   powerName: 
   powerDesc: 
+  curImage: {fileID: 21300000, guid: 94084c4cde9f1fa4aae2f93857e5165a, type: 3}
+  curName: Apple
+  curDesc: '{ HP + 10 }'

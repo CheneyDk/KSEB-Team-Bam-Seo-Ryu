@@ -214,7 +214,14 @@ public class UpgradeManager : MonoBehaviour
         // maxLevel템
         if (item.item.tag == "Item")
         {
-            Instantiate(item.item, player.position, Quaternion.identity);
+            if(item.itemName == "Apple")
+            {
+                ItemPooling.Instance.GetApple();
+            }
+            else if (item.itemName == "RedBlue")
+            {
+                ItemPooling.Instance.GetRedBlue();
+            }
         }
 
         // 레업이라 무기들 나오기

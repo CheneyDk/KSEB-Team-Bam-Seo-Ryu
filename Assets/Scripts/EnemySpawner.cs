@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cysharp.Threading.Tasks.Triggers;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -50,7 +51,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private int numberToPool;
     [SerializeField]
-    private Transform poolingZone;
+    private Transform enemiesPoolingZone;
     private List<GameObject> pooledMeleeEnemies = new List<GameObject>();
     private List<GameObject> pooledRangeEnemies = new List<GameObject>();
     private List<GameObject> pooledHeavyEnemies = new List<GameObject>();
@@ -72,7 +73,7 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < numberToPool; i++)
         {
             var tmp = Instantiate(enemyPrefab);
-            tmp.transform.parent = poolingZone;
+            tmp.transform.parent = enemiesPoolingZone;
             tmp.SetActive(false);
             poolList.Add(tmp);
         }

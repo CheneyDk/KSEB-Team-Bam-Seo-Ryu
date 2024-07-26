@@ -17,7 +17,7 @@ public class EXP : Item
             var playerObj = collision.GetComponent<Player>();
             playerObj.GetExp(value);
             isDestroyed = true;
-            Destroy(gameObject);
+            ItemPooling.Instance.ReturnEXP(gameObject);
         }
     }
     

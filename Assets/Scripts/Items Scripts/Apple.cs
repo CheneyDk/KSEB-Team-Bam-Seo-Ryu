@@ -16,7 +16,7 @@ public class Apple : Item
             var playerObj = collision.GetComponent<Player>();
             playerObj.GetHpPotion(value);
             isDestroyed = true;
-            Destroy(gameObject);
+            ItemPooling.Instance.ReturnApple(gameObject);
         }
     }
 }

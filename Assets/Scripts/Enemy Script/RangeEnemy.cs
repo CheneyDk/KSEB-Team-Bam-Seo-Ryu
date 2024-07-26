@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using DamageNumbersPro;
 using System.Collections;
 using System.Collections.Generic;
@@ -138,9 +139,8 @@ public class RangeEnemy : Enemy
         rangeAni.SetBool("isDead", true);
         StartCoroutine("SetActiveToFalse");
         DropEXP(dropExpNumber);
-        ChanceToDropItem(healingItem, 1);
-        ChanceToDropItem(redbuleItem, 0);
-
+        ChanceToDropApple(1);
+        ChanceToDropRedBlue(0);
         ScoreManager.instance.UpdateEnemiesDeafeated();
     }
 
@@ -172,7 +172,7 @@ public class RangeEnemy : Enemy
         for (int i = 0; i < itemNumber; i++)
         {
             Vector2 spawnPlace = (Vector2)transform.position + (Vector2)Random.insideUnitCircle * spawnGroupRadius;
-            Instantiate(Exp, spawnPlace, Quaternion.identity);
+            ItemPooling.Instance.GetEXP(spawnPlace);
         }
     }
 
@@ -199,12 +199,20 @@ public class RangeEnemy : Enemy
         curSR.color = originColor;
     }
 
-    private void ChanceToDropItem(GameObject item, int chance)
+    private void ChanceToDropApple(int chance)
     {
         var randomChance = Random.Range(1, 11);
         if (randomChance <= chance)
         {
-            Instantiate(item, transform.position, Quaternion.identity);
+            ItemPooling.Instance.GetApple();
+        }
+    }
+    private void ChanceToDropRedBlue(int chance)
+    {
+        var randomChance = Random.Range(1, 11);
+        if (randomChance <= chance)
+        {
+            ItemPooling.Instance.GetRedBlue();
         }
     }
 
