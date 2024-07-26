@@ -569,7 +569,7 @@ GameObject:
   - component: {fileID: 168133424}
   - component: {fileID: 168133426}
   - component: {fileID: 168133425}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Wall Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4664,7 +4664,7 @@ Transform:
   m_GameObject: {fileID: 996812866}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 20, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8979,7 +8979,7 @@ GameObject:
   - component: {fileID: 1863956407}
   - component: {fileID: 1863956409}
   - component: {fileID: 1863956408}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Wall Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9873,7 +9873,7 @@ Transform:
   m_GameObject: {fileID: 2081913072}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -0.0035438538, y: 15.21262, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10173,7 +10173,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1333883953898625091, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
       propertyPath: snakeSpeed
-      value: 900
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3967779656545519921, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
       propertyPath: m_Name
@@ -10254,7 +10254,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8100203599619735773, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8100203599619735773, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
       propertyPath: m_LocalPosition.z

@@ -17,8 +17,8 @@ TagManager:
   - Item
   - BackGround
   - Enemy
-  - Wall
-  - 
+  - VerticalWall
+  - HorizontalWall
   - 
   - 
   - 
