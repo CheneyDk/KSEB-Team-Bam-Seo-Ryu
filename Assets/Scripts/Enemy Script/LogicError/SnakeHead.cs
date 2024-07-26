@@ -21,11 +21,11 @@ public class SnakeHead : SnakePart
 
 
     // bounce on wall collision
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         // layer 9: Vertical Wall
         // if collision occur, X axis vector is inversed
-        if (collision.gameObject.layer == 9)
+        if (other.gameObject.layer == 9)
         {
             // convert degree to Vector
             Vector2 vec = DegreeToVector(transform.eulerAngles.z);
@@ -41,7 +41,7 @@ public class SnakeHead : SnakePart
         }
         // layer 10: Horizontal Wall
         // if collision occur, Y axis vector is inversed.
-        else if (collision.gameObject.layer == 10)
+        else if (other.gameObject.layer == 10)
         {
             var rot = transform.rotation;
             rot.z *= -1f;
