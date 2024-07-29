@@ -17,6 +17,8 @@ public class ScoreManager : MonoBehaviour
     private Dictionary<string, float> tempWeaponDamages = new Dictionary<string, float>();
     public IReadOnlyDictionary<string, float> WeaponDamages => tempWeaponDamages;
 
+    private DateTime timer;
+
     private void Awake()
     {
         if (instance == null)
@@ -34,7 +36,7 @@ public class ScoreManager : MonoBehaviour
             return;
         }
     }
-    
+
     public void AddWeapon(string name)
     {
         tempWeaponDamages.Add(name, 0);
@@ -68,6 +70,7 @@ public class ScoreManager : MonoBehaviour
     public void ResetData()
     {
         scoreData = new ScoreData();
+        scoreData.survived = 0;
         scoreData.waveReached = 1;
         scoreData.enemiesDeafeated = 0;
         scoreData.levelReached = 1;
@@ -75,6 +78,8 @@ public class ScoreManager : MonoBehaviour
         {
             { "Basic", 0.0f }
         };
+
+        timer = DateTime.Now;
     }
 
     public void UpdateEnemiesDeafeated()
@@ -98,10 +103,13 @@ public class ScoreManager : MonoBehaviour
         return total;
     }
 
-    public void SaveData()
+    public void SaveData(bool clear)
     {
+        scoreData.survived = (int)(DateTime.Now - timer).TotalSeconds;
         scoreData.playDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         scoreData.totalDamage = GetTotalDamages();
+        scoreData.isClear = clear;
+        if (clear) { scoreData.waveReached--; }
 
         List<WeaponDamagesData> list = new List<WeaponDamagesData>();
         foreach (KeyValuePair<string, float> kvp in tempWeaponDamages)
@@ -115,5 +123,10 @@ public class ScoreManager : MonoBehaviour
         SaveLoadHelper.Save(recordData);
 
         Debug.Log("Save Success!");
+    }
+
+    public int GerSurvived()
+    {
+        return scoreData.survived;
     }
 }

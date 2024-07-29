@@ -23,6 +23,4 @@ public class ColumnManager : MonoBehaviour
         damage.text = score.totalDamage.ToString();
         dateTime.text = score.playDateTime.ToString();
     }
-
-    
 }
