@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletLogicError : MonoBehaviour
 {
     private float bulletDamage = 30f;
-    private float bulletSpeed = 15f;
+    private float bulletSpeed = 20f;
     private Vector3 bulletVector;
     private float bulletLifeTime = 4f;
 
@@ -16,7 +16,8 @@ public class BulletLogicError : MonoBehaviour
 
     public void Init(Vector3 vec)
     {
-        bulletVector = vec;
+        bulletVector = (vec - transform.position);
+        bulletVector.Normalize();
         GameObject.Destroy(gameObject, bulletLifeTime);
     }
 
@@ -25,13 +26,13 @@ public class BulletLogicError : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             var player = collision.GetComponent<Player>();
+            player.TakeDamage(bulletDamage);
 
             if (player.playerCurHp <= 0)
             {
                 player = null;
                 return;
             }
-            player.TakeDamage(bulletDamage);
         }
     }
 

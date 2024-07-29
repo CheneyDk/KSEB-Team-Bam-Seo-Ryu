@@ -34,7 +34,7 @@ public class BulletMySQL : PlayerBullet
         rigid.AddForce(bulletVector * bulletSpeed, ForceMode2D.Impulse);
 
         // rotation
-        DolpineRotate().Forget();
+        DolphineRotate().Forget();
 
         // Destroy
         ObjDestroyTimer().Forget();
@@ -54,11 +54,11 @@ public class BulletMySQL : PlayerBullet
         }
     }
 
-    private async UniTask DolpineRotate()
+    private async UniTask DolphineRotate()
     {
         while (isExist)
         {
-            await UniTask.NextFrame();
+            await UniTask.Yield();
             if (!isExist) return;
             await UniTask.WaitUntil(() => GameManager.Instance.isGameContinue);
             transform.Rotate(Vector3.forward, rotateSpeed);
