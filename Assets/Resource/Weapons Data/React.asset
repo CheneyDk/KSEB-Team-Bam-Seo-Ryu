@@ -16,7 +16,7 @@ MonoBehaviour:
   itemImage: {fileID: 21300000, guid: ba0f76d775c69a7489f4f13b8b9a7934, type: 3}
   itemName: React
   itemDesc: '{ React }'
-  powerImage: {fileID: 21300000, guid: ba0f76d775c69a7489f4f13b8b9a7934, type: 3}
+  powerImage: {fileID: 21300000, guid: cdfa135136584514cbb16cbb4e63f09b, type: 3}
   powerName: Power React
   powerDesc: '{ Power React }'
   curImage: {fileID: 21300000, guid: ba0f76d775c69a7489f4f13b8b9a7934, type: 3}

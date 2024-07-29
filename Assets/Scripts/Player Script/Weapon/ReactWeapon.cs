@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,7 +13,7 @@ public class ReactWeapon : PlayerWeapon
         weaponDamageRate = 0.5f;
         isMaxLevel = false;
         isPowerWeapon = false;
-        matchPassive = "";
+        matchPassive = "Overclock";
     }
 
     IEnumerator FireBullet()

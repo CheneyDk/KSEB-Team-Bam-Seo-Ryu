@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Timeline;
 using UnityEngine.UI;
 
 public class UpgradeManager : MonoBehaviour
 {
+    // 선택지들에 UI
     [Header("Upgrade UI")]
     public GameObject UpgradeUI;
     public Button[] optionButtons;
@@ -14,11 +16,16 @@ public class UpgradeManager : MonoBehaviour
     public TextMeshProUGUI[] optionDescTexts;
     public Image[] optionImages;
 
+    // 전체 무기, 템들
     [Header("Weapon and Item")]
     public List<WeaponData> weaponDataList;
     public List<WeaponData> passiveDataList;
+    // 선택지로 나오는 템들 (Max템이 있으면 제거 할라는 용도)
+    private List<WeaponData> listForWeapons;
+    private List<WeaponData> listForPassives;
 
-
+    // 템들을 뭘 선택했는지 알려주는 리스트(선택된 무기들 X)
+    // 뭐 있는지만 알수 있어서 GameUI에 사용하는 용도
     [Header("Player Weapon & Item Slot")]
     public List<WeaponData> playerWeaponList = new List<WeaponData>();
     public List<WeaponData> playerPassiveList = new List<WeaponData>();
@@ -26,27 +33,30 @@ public class UpgradeManager : MonoBehaviour
 
     private bool isLevelUp = false;
 
+    // 실제 무기들이 있는 곳
+    // 여기서 실제 무기들에 레벨을 알수 있고 실제 강화도 여기서
     [Header("Player Weapon and Item")]
     public Transform playerWeaponBag;
     public Transform playerPassiveBag;
 
+    // 게임의 UI
     public GameUI gameUI;
 
+    // 강화템중에 MaxLevel이 많아서 선택지의 나오는 템 수가 3개 아하때 나오는 템들
     [Header("Item for MaxLevel")]
     public List<WeaponData> maxLevelItemList = new List<WeaponData>();
 
-    // Cheak Weapon or Item is Max Level or not
+    // 템 선택수가 최대일때 선택지로 나타나는 템들
     private List<WeaponData> selectedPassiveList = new List<WeaponData>();
     private List<WeaponData> selectedWeaponList = new List<WeaponData>();
 
-    public Animator animator;
-
-    private Transform player;
+    private Animator animator;
 
     private void Awake()
     {
+        listForWeapons = new (weaponDataList);
+        listForPassives = new (passiveDataList);
         animator = GetComponent<Animator>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
     private IEnumerator OpenUI(bool TorF)
@@ -69,15 +79,17 @@ public class UpgradeManager : MonoBehaviour
         if (levelup == true)
         {
             isLevelUp = levelup;
-            sourceDataList = weaponDataList;
+            sourceDataList = listForWeapons;
             itemList = playerWeaponList;
+            CheckMaxLevelItem(playerWeaponBag);
             ItemToSelectedItems(selectedItems, sourceDataList, itemList, selectedWeaponList);
         }
         else if (levelup == false)
         {
             isLevelUp = levelup;
-            sourceDataList = passiveDataList;
+            sourceDataList = listForPassives;
             itemList = playerPassiveList;
+            CheckMaxLevelItem(playerPassiveBag);
             ItemToSelectedItems(selectedItems, sourceDataList, itemList, selectedPassiveList);
         }
 
@@ -105,21 +117,16 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
+    // 무기가 Max이고 강화도 가능 한지 확인 하고 가능 하면 선택지에 추가
     private void CheckPowerWeapon()
     {
-        for (int i = 0; i < selectedWeaponList.Count; i++)
+        for (int i = 0; i < playerWeaponBag.childCount; i++)
         {
-            var weaponData = selectedWeaponList[i];
             var playerWeapon = playerWeaponBag.GetComponentsInChildren<PlayerWeapon>()[i];
 
             // 무기중에서 maxLevel이 있는지 확인
-            if (playerWeapon.isMaxLevel)
+            if (playerWeapon.isMaxLevel && !playerWeapon.isPowerWeapon)
             {
-                // maxLevel 무기일 경우 선택지에서 빼기
-                if (playerWeapon.name == weaponData.item.name + ("(Clone)"))
-                {
-                    selectedWeaponList.Remove(weaponData);
-                }
 
                 // maxLevel 무기 중에 그의 맞는 passive템이 있는지 확인
                 bool hasMatchingPassive = false;
@@ -149,16 +156,61 @@ public class UpgradeManager : MonoBehaviour
         AddRandomMaxLevelItem(selectedWeaponList);
     }
 
+    // 템 선택수가 최대가 아리고 템이 Max레벨인지 확인, Max이면 선택지에 안 나오개 하기
+    private void CheckMaxLevelItem(Transform itemBag)
+    {
+        if (itemBag == playerWeaponBag)
+        {
+            for (int i = 0; i < playerWeaponBag.childCount; i++)
+            {
+                var playerWeapon = playerWeaponBag.GetComponentsInChildren<PlayerWeapon>()[i];
+                if (playerWeapon.isMaxLevel)
+                {
+                    // maxLevel 무기일 경우 선택지에서 빼기
+                    var findItem = listForWeapons.Find(i => i.item.name + ("(Clone)") == playerWeapon.name);
+                    var findWeapon = selectedWeaponList.Find(i => i.item.name + ("(Clone)") == playerWeapon.name);
+                    if (findItem != null)
+                    {
+                        listForWeapons.Remove(findItem);
+                    }
+                    if (findWeapon != null)
+                    {
+                        selectedWeaponList.Remove(findWeapon);
+                    }
+                }
+            }
+        }
+        else if (itemBag == playerPassiveBag)
+        {
+            for (int i = 0; i < playerPassiveBag.childCount; i++)
+            {
+                var playerPassive = playerPassiveBag.GetComponentsInChildren<PlayerPassive>()[i];
+                if (playerPassive.isMaxLevel)
+                {
+                    var findItem = listForPassives.Find(i => i.item.name + ("(Clone)") == playerPassive.name);
+                    var findPassive = selectedPassiveList.Find(i => i.item.name + ("(Clone)") == playerPassive.name);
+                    if (findItem != null)
+                    {
+                        listForPassives.Remove(findItem);
+                    }
+                    if (findPassive != null)
+                    {
+                        selectedPassiveList.Remove(findPassive);
+                    }
+                }
+            }
+        }
+    }
 
     // Put Items in to select windows
-    private void ItemToSelectedItems(List<WeaponData> showOnSelectedItems, List<WeaponData> sourceList, List<WeaponData> itemList, List<WeaponData> selectedItemsList)
+    private void ItemToSelectedItems(List<WeaponData> showOnSelectedItems, List<WeaponData> itemListForSelected, List<WeaponData> itemList, List<WeaponData> selectedItemsList)
     {
         // 템 소지수가 max아니면 그 data에 있는거에서 랜덤으로 추가
         if (itemList.Count != maxItemNumber)
         {
-            while (showOnSelectedItems.Count < 3 && sourceList.Count > 0)
+            while (showOnSelectedItems.Count < 3 && itemListForSelected.Count > 0)
             {
-                WeaponData item = sourceList[Random.Range(0, sourceList.Count)];
+                WeaponData item = itemListForSelected[Random.Range(0, itemListForSelected.Count)];
                 if (!showOnSelectedItems.Contains(item))
                 {
                     showOnSelectedItems.Add(item);
@@ -169,7 +221,7 @@ public class UpgradeManager : MonoBehaviour
         // 템 수가 max으면, 이미 선택한 템만 나오게
         else if (itemList.Count == maxItemNumber)
         {
-            if (sourceList == weaponDataList)
+            if (itemListForSelected == listForWeapons)
             {
                 CheckPowerWeapon();
                 // 선택한 무기list에서 랜덤으로 선택지에 나오게 하기
@@ -183,8 +235,8 @@ public class UpgradeManager : MonoBehaviour
                 }
             }
 
-            // passive템은 뺄일이 없어서 그냥 이미 선택한거 중에서 랜덤으로 나타나게
-            else if (sourceList == passiveDataList)
+            // passive템은 뺄 일이 없어서 그냥 이미 선택한거 중에서 랜덤으로 나타나게
+            else if (itemListForSelected == listForPassives)
             {
                 while (showOnSelectedItems.Count < 3 && selectedItemsList.Count > 0)
                 {
@@ -261,7 +313,8 @@ public class UpgradeManager : MonoBehaviour
                 {
                     upgradeWeapon.isPowerWeapon = true;
                     gameUI.ChangePowerWeaponIcon(playerItemBag);
-                    selectedList.Remove(item);
+                    WeaponData removeWeapon = selectedList.Find(i => i.name == upgradeWeapon.name);
+                    selectedList.Remove(removeWeapon);
                 }
                 else
                 {

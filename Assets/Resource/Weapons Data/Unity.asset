@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Unity
   m_EditorClassIdentifier: 
   item: {fileID: 4635922784251638873, guid: a1e318e1ed7455349a78f8eeddaac44c, type: 3}
-  itemImage: {fileID: 21300000, guid: a18831a534b49c74f8515aa5c66519e3, type: 3}
+  itemImage: {fileID: 21300000, guid: 196bc4e0b94f88f46a66a84fa6d3caba, type: 3}
   itemName: Unity
   itemDesc: '{ Unity }'
-  powerImage: {fileID: 0}
-  powerName: 
-  powerDesc: 
+  powerImage: {fileID: 21300000, guid: a18831a534b49c74f8515aa5c66519e3, type: 3}
+  powerName: Power Unity
+  powerDesc: '{ Power Unity }'
   curImage: {fileID: 21300000, guid: a18831a534b49c74f8515aa5c66519e3, type: 3}
   curName: Unity
   curDesc: '{ Unity }'

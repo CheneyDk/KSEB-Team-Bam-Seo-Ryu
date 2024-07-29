@@ -6,14 +6,11 @@ public class ReactBullet : PlayerBullet
 {
     private Collider2D myCollider;
 
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
 
     private void Start()
     {
         myCollider = GetComponent<CircleCollider2D>();
-
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)

@@ -4,9 +4,8 @@ using UnityEngine;
 
 public abstract class PlayerPassive : MonoBehaviour
 {
-    protected int passiveLevel;
+    public int passiveLevel;
     public bool isMaxLevel = false;
-    public int passiveItemLevel = 1;
     protected Player player;
 
     private void Awake()

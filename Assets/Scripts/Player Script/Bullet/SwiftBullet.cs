@@ -11,12 +11,7 @@ public class SwiftBullet : PlayerBullet
 
     private Rigidbody2D rigid;
 
-    private SpriteRenderer spriteRenderer;
-
-    private void Awake()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
+    public SpriteRenderer spriteRenderer;
 
     private void Start()
     {

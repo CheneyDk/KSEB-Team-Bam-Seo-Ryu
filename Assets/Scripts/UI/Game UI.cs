@@ -108,7 +108,7 @@ public class GameUI : MonoBehaviour
         for (int i = 0; i < playerPassiveBag.childCount; i++)
         {
             var passives = playerPassiveBag.GetComponentsInChildren<PlayerPassive>()[i];
-            var passiveLevels = passives.passiveItemLevel;
+            var passiveLevels = passives.passiveLevel;
             if (passiveLevels > 4f)
             {
                 passiveLevel[i].text = "Max";

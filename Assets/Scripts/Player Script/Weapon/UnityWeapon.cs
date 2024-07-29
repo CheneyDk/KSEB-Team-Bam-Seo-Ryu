@@ -13,7 +13,7 @@ public class UnityWeapon : PlayerWeapon
         weaponDamageRate = 1f;
         isMaxLevel = false;
         isPowerWeapon = false;
-        matchPassive = "";
+        matchPassive = "Wifi";
     }
 
     IEnumerator FireBullet()
