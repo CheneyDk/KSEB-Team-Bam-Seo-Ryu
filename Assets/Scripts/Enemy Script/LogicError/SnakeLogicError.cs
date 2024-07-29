@@ -32,8 +32,7 @@ public class SnakeLogicError : Enemy
     [Header("Enemy Information")]
     [SerializeField] private float snakeMaxHp = 20f;
     [SerializeField] private float snakeCurtHP;
-    [SerializeField] private float snakeAtk = 5f;
-    [SerializeField] private float snakeMoveSpeed = 10f;
+    [SerializeField] private float snakeAtk = 40f;
 
     [Header("Exp")]
     [SerializeField] private GameObject Exp;
@@ -56,16 +55,18 @@ public class SnakeLogicError : Enemy
     private Collider2D snakeCollider;
 
     private Transform player;
-    private float rotationSpeed = 10f;
 
     private SpriteRenderer curSR;
     private Color originColor;
 
-    private bool isDead = false;
+    public bool isDead { get; set; }
 
     // Snake Inspector
     [Header("Snake Inspector")]
-    public float snakeSpeed = 20f;
+    public float snakeSpeed;
+    private float slowSpeed = 10f;
+    private float normalSpeed = 20f;
+    private float chargeSpeed = 50f;
     private float curTurnSpeed;
     private float slowTurnSpeed = 60f;
     private float fastTurnSpeed = 360f;
@@ -75,10 +76,15 @@ public class SnakeLogicError : Enemy
     // bodyParts need to pre-allocate in unity
     // 0: Head, 1: body, 2: tail
     [SerializeField] public List<GameObject> bodyParts = new List<GameObject>();
+
     // actually use in script
     private List<GameObject> snakeBody = new List<GameObject>();
-    private float bodyLength = 15;
-    private float distanceBetween = 0.1f;
+    private float bodyLength = 10;
+    private float distanceBetween = 0.3f; // speed 10, distance 0.3f
+
+    private float initTurningAngle;
+    private int zigzagRepeat;
+    private float chargeWaitTime = 2f;
 
     public GameObject tongue; // ?
 
@@ -94,11 +100,15 @@ public class SnakeLogicError : Enemy
 
         InitSnakeObj().Forget();
         curTurnSpeed = slowTurnSpeed;
+        snakeSpeed = normalSpeed;
     }
 
     private void Start()
     {
+        isDead = false;
         SnakeSlowZigZag().Forget();
+        // SnakeChargeZigZag().Forget();
+        // SnakeChargeStraight().Forget();
     }
 
     private void FixedUpdate()
@@ -106,7 +116,8 @@ public class SnakeLogicError : Enemy
         SnakeMovement();
     }
 
-
+    // Initialize Snake Body Parts
+    // 
     private async UniTask InitSnakeObj()
     {
         // need to fix
@@ -114,10 +125,11 @@ public class SnakeLogicError : Enemy
 
         for (int i = 0; i < bodyLength; i++)
         {
-            // i == 1: right after head, bodyL - 1: right before tail
+            // i == 1: right after head, bodyLength - 1: right before tail
             if (i == 1 || i == bodyLength - 1) bodytype++;
             var tempBodypart = Instantiate(bodyParts[bodytype], transform.position, transform.rotation, transform);
             tempBodypart.GetComponent<SnakeMovement>().ClearMovementList();
+            tempBodypart.GetComponent<SnakePart>().InitSnakeBodypart(snakeAtk);
             snakeBody.Add(tempBodypart);
 
             await UniTask.WaitForSeconds(distanceBetween);
@@ -138,32 +150,112 @@ public class SnakeLogicError : Enemy
         for (int i = 1; i < snakeBody.Count; i++)
         {
             var movement = snakeBody[i - 1].GetComponent<SnakeMovement>();
-            snakeBody[i].transform.position = movement.movementList[0].position;
+
+            // Lerp neeeeed
+            // YH - how can I make distance shorter.
+            snakeBody[i].transform.position = SnakePosLerp(movement.movementList[1].position, movement.movementList[0].position);
             snakeBody[i].transform.rotation = movement.movementList[0].rotation;
             movement.movementList.RemoveAt(0);
         }
     }
 
+    // Lerp func - param: snakespeed
+    private Vector3 SnakePosLerp(Vector3 front, Vector3 back)
+    {
+        // speed: 50 -> ratio 0.2, speed: 10 -> ratio: 1
+        float ratio = slowSpeed / snakeSpeed;
+        return Vector3.Lerp(front, back, ratio);
+    }
+
+    // SnakePatternCycle()
+
+
     private async UniTask SnakeSlowZigZag()
     {
+        initTurningAngle = Random.Range(0f, 90f);
+        zigzagRepeat = Random.Range(1, 3);
+        snakeSpeed = slowSpeed;
+
         // start
         curTurnSpeed = fastTurnSpeed;
-        await TurningSnake(80, 1);
+        await TurningSnake(initTurningAngle, 1);
 
-        // zigzag - YH - need to fix. fast turn and go straight
-        await TurningSnake(160, -1);
-        await UniTask.WaitForSeconds(0.5f);
-        await TurningSnake(160, 1);
+        // zigzag
+        for (int i = 0; i < zigzagRepeat; i++)
+        {
+            await UniTask.WaitForSeconds(0.5f);
+            await TurningSnake(170, -1);
+            await UniTask.WaitForSeconds(0.5f);
+            await TurningSnake(170, 1);
+        }
 
         // end - back to straight
-        await TurningSnake(80, -1);
+        await TurningSnake(initTurningAngle, -1);
+        snakeSpeed = normalSpeed;
         curTurnSpeed = slowTurnSpeed;
     }
 
-    private void SnakeFastZigZag()
+    private async UniTask SnakeChargeStraight()
     {
+        for (int i = 0; i < 3; i++) 
+        {
+            await ChargeCasting();
+            await GoBackNForth(1.2f);
 
+            // start
+            snakeSpeed = chargeSpeed;
+            await UniTask.WaitForSeconds(1.5f);
+            await SpeedGraduallySlowDown(5f, 15f);
+            Debug.Log("slow down end");
+        }
     }
+
+    private async UniTask SnakeChargeZigZag()
+    {
+        // casting motion
+        await ChargeCasting();
+        await GoBackNForth(1.2f);
+
+        snakeSpeed = chargeSpeed;
+        curTurnSpeed = fastTurnSpeed;
+        await TurningSnake(20, 1);
+        await UniTask.WaitForSeconds(0.2f);
+
+        curTurnSpeed = slowTurnSpeed;
+        await TurningSnake(15, -1);
+        await UniTask.WaitForSeconds(0.4f);
+        await TurningSnake(15, 1);
+
+        curTurnSpeed = slowTurnSpeed;
+        await UniTask.WaitForSeconds(0.2f);
+        await TurningSnake(20, -1);
+        SpeedGraduallySlowDown(5f, 15f).Forget();
+    }
+
+    private async UniTask ChargeCasting()
+    {
+        float timer = 0f;
+        snakeSpeed = 8f;
+
+        // looking at player
+        while (timer < chargeWaitTime)
+        {
+            LookAtPlayer();
+            timer += Time.deltaTime;
+            await UniTask.Yield();
+        }
+    }
+
+    private void LookAtPlayer()
+    {
+        Vector3 playerPos = player.transform.position;
+        Vector3 dir = playerPos - snakeBody[0].transform.position;
+
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        snakeBody[0].transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+    }
+
+    // portal teleport pattern?
 
     // key value: 45, 90, 135, 180 -> rotate degree
     // dir: left: 1, right: -1
@@ -176,16 +268,42 @@ public class SnakeLogicError : Enemy
         float turningTime = degree / curTurnSpeed;
         while (timer < turningTime)
         {
-            Debug.Log("rotating");
             snakeBody[0].transform.Rotate(turningVector * curTurnSpeed * Time.deltaTime *  dir);
             timer += Time.deltaTime;
             await UniTask.Yield();
         }
 
-        // still not a strict angle, need to correct angle in int value
+        // need to correct angle in int value
         snakeBody[0].transform.eulerAngles = curRot;
     }
 
+    private async UniTask SpeedGraduallySlowDown(float decRate, float underLine)
+    {
+        while (snakeSpeed > underLine)
+        {
+            snakeSpeed -= decRate * Time.deltaTime;
+            await UniTask.Yield();
+            if (isDead) return;
+        }
+        snakeSpeed = normalSpeed;
+    }
+
+    private async UniTask GoBackNForth(float time)
+    {
+        // white shining ani
+        snakeSpeed = -normalSpeed;
+        float incRate = chargeSpeed / time;
+        while (snakeSpeed < 0f)
+        {
+            snakeSpeed += incRate * Time.deltaTime;
+            await UniTask.Yield();
+        }
+        while (snakeSpeed < chargeSpeed)
+        {
+            snakeSpeed += incRate * 2 * Time.deltaTime;
+            await UniTask.Yield();
+        }
+    }
 
     public override IEnumerator LastingDamage(float damage, int totalDamageTime, Color color)
     {
@@ -205,7 +323,7 @@ public class SnakeLogicError : Enemy
 
         if (snakeCurtHP <= 0)
         {
-            snakeDead();
+            SnakeDead();
         }
         curSR.color = originColor;
     }
@@ -217,11 +335,11 @@ public class SnakeLogicError : Enemy
         snakeCurtHP -= damage;
         if (snakeCurtHP <= 0)
         {
-            snakeDead();
+            SnakeDead();
         }
     }
 
-    private void snakeDead()
+    private void SnakeDead()
     {
         snakeCollider.enabled = false;
         isDead = true;

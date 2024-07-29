@@ -6,17 +6,28 @@ using UnityEngine;
 public class SnakeBody : SnakePart
 {
     public GameObject bullet;
+    public SnakeLogicError snakeMain;
+    private float waittimeForFirstFire = 10f;
+    private float snakeFireRate = 8f;
+    private float fireRateRamdom;
 
-    // Start is called before the first frame update
+
     void Start()
     {
-        
+        FireCycle().Forget();
     }
 
-    // Update is called once per frame
-    void Update()
+    private async UniTask FireCycle()
     {
-        
+        await UniTask.WaitForSeconds(waittimeForFirstFire);
+
+        while (true)
+        {
+            fireRateRamdom = Random.Range(-0.5f, 0.5f);
+            SnakeBodyGunFire();
+            await UniTask.WaitForSeconds(snakeFireRate + fireRateRamdom);
+            if (snakeMain.isDead) return;
+        }
     }
 
     // gun fire

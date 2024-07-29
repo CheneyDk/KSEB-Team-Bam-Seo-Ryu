@@ -13,12 +13,6 @@ public class SnakeHead : SnakePart
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     // bounce on wall collision
     private void OnTriggerEnter2D(Collider2D other)
