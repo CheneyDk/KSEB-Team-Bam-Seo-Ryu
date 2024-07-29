@@ -17,6 +17,7 @@ public class DetailPanel : MonoBehaviour
 
     public void SetPanel(ScoreData data)
     {
+        survived.text = data.survived.ToString();
         wave.text = data.waveReached.ToString();
         level.text = data.levelReached.ToString();
         kills.text = data.enemiesDeafeated.ToString();

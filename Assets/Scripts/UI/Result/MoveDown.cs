@@ -33,6 +33,7 @@ public class MoveDown : MonoBehaviour
             flag = false;
             Image buttonImage = button.GetComponent<Image>();
 
+            survived.text = ScoreManager.instance.GerSurvived().ToString();
             waveReached.text = ScoreManager.instance.GetWave().ToString();
             levelReached.text = ScoreManager.instance.GetLevel().ToString();
             enemiesDefeated.text = ScoreManager.instance.GetEnemiesDeafeated().ToString();

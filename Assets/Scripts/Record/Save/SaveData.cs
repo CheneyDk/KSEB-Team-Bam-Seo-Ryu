@@ -38,7 +38,7 @@ public class RecordData : SaveData
 [System.Serializable]
 public class ScoreData
 {
-    // public float survived
+    public int survived;
     public int waveReached;
     public int levelReached;
     public int enemiesDeafeated;
