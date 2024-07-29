@@ -45,6 +45,8 @@ public class ScoreData
     public float totalDamage;
     public List<WeaponDamagesData> weaponDamagesData;
     public string playDateTime;
+
+    public bool isClear;
 }
 
 [System.Serializable]

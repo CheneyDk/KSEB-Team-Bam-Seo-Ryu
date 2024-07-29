@@ -11,7 +11,7 @@ public class MainMenuManager : MonoBehaviour
 {
     public static MainMenuManager instance;
     
-    public GameObject panel;
+    public GameObject window;
     public GameObject log;
     public GameObject detail;
     public GameObject record;
@@ -33,9 +33,9 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnlyDisable()
     {
-        if (panel.activeSelf)
+        if (window.activeSelf)
         {
-            panel.SetActive(false);
+            window.SetActive(false);
         }
     }
 
@@ -43,12 +43,12 @@ public class MainMenuManager : MonoBehaviour
     {
         if (context.started)
         {
-            panel.SetActive(!panel.activeSelf);
+            window.SetActive(!window.activeSelf);
         }
     }
     public void Toggle()
     {
-        panel.SetActive(!panel.activeSelf);
+        window.SetActive(!window.activeSelf);
     }
 
     public void MoveScene(string sceneName)
@@ -146,7 +146,9 @@ public class MainMenuManager : MonoBehaviour
         }
         else if (panel == "Record")
         {
-            //record.SetActive(true);
+            record.SetActive(true);
+            window.SetActive(false);
+            RecordManager.instance.Calc();
         }
     }
 
@@ -162,7 +164,7 @@ public class MainMenuManager : MonoBehaviour
         }
         else if (panel == "Record")
         {
-            //record.SetActive(false);
+            record.SetActive(false);
         }
     }
 }

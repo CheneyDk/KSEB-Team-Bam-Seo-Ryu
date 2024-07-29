@@ -63,6 +63,7 @@ public class WaveManager : MonoBehaviour
             }
         }
         Debug.Log("All Wave Clear!");
+        ScoreManager.instance.SaveData(true);
     }
 
     private void DestroyAllEnemies()

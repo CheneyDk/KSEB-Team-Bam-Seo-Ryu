@@ -103,11 +103,13 @@ public class ScoreManager : MonoBehaviour
         return total;
     }
 
-    public void SaveData()
+    public void SaveData(bool clear)
     {
         scoreData.survived = (int)(DateTime.Now - timer).TotalSeconds;
         scoreData.playDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         scoreData.totalDamage = GetTotalDamages();
+        scoreData.isClear = clear;
+        if (clear) { scoreData.waveReached--; }
 
         List<WeaponDamagesData> list = new List<WeaponDamagesData>();
         foreach (KeyValuePair<string, float> kvp in tempWeaponDamages)
