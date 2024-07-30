@@ -1,16 +1,16 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class GithubWeapon : MonoBehaviour
+public class GithubWeapon : PlayerWeapon
 {
-    public GameObject bullet;
     public int bulletNumber;
     public float playerRange = 8f;
     public float moveSpeed = 5f;
     public float stopDistance = 1f;
-    public Transform player;
 
+    private Transform playerPos;
+    private Player players;
     private Animator animator;
     private bool isMoving = false;
     private bool isInRange = false;
@@ -19,11 +19,22 @@ public class GithubWeapon : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        playerPos = GameObject.FindGameObjectWithTag("Player").transform;
+        players = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+
+    private void Start()
+    {
+        weaponLevel = 1;
+        weaponDamageRate = 0.5f;
+        isMaxLevel = false;
+        isPowerWeapon = false;
+        matchPassive = "Google";
     }
 
     private void Update()
     {
-        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        float distanceToPlayer = Vector2.Distance(transform.position, playerPos.position);
         if (distanceToPlayer <= playerRange && isMoving == false)
         {
             if (!isInRange)
@@ -54,29 +65,72 @@ public class GithubWeapon : MonoBehaviour
     {
         while (true)
         {
-            animator.Play("Github Attack");
-            yield return new WaitForSeconds(0.5f);
-            for (int i = 0; i < bulletNumber; i++)
+            if (!isPowerWeapon)
             {
-                Instantiate(bullet, transform.position, Quaternion.identity);
+                animator.Play("Github Attack");
+                yield return new WaitForSeconds(1f);
+                for (int i = 0; i < bulletNumber; i++)
+                {
+                    var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+                    addBullet.GetComponent<PlayerBullet>().Init(players.playerAtk * weaponDamageRate);
+                    yield return new WaitForSeconds(1f);
+                }
+            }
+            else if(isPowerWeapon)
+            {
+                animator.Play("Power Github Attack");
                 yield return new WaitForSeconds(0.5f);
+                for (int i = 0; i < bulletNumber; i++)
+                {
+                    var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+                    addBullet.GetComponent<PlayerBullet>().Init(players.playerAtk * weaponDamageRate);
+                    yield return new WaitForSeconds(0.5f);
+                }
             }
         }
     }
 
     private void MoveToPlayer()
     {
-        animator.Play("Github Move");
+        if (!isPowerWeapon)
+        {
+            animator.Play("Github Move");
+        }
+        else if (isPowerWeapon)
+        {
+            animator.Play("Power Github Move");
+        }
         isMoving = true;
-        Vector2 direction = (player.position - transform.position).normalized;
+        Vector2 direction = (playerPos.position - transform.position).normalized;
 
-        if (Vector2.Distance(transform.position, player.position) > stopDistance)
+        if (Vector2.Distance(transform.position, playerPos.position) > stopDistance)
         {
             transform.Translate(direction * moveSpeed * Time.deltaTime);
         }
         else
         {
             isMoving = false;
+        }
+    }
+
+    protected override void Fire()
+    {
+    }
+
+    public override void Fire(InputAction.CallbackContext context)
+    {
+    }
+
+    public override void Upgrade()
+    {
+        if (weaponLevel < 5)
+        {
+            weaponLevel++;
+            bulletNumber += 1;
+        }
+        if (weaponLevel > 4)
+        {
+            isMaxLevel = true;
         }
     }
 }

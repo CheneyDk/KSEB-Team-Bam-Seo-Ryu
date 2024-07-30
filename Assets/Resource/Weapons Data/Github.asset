@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eca71ca24a078264b9780d1aee7c37ec, type: 3}
+  m_Name: Github
+  m_EditorClassIdentifier: 
+  item: {fileID: 53435649746199400, guid: 51307d1a5e72439448368ad63117a016, type: 3}
+  itemImage: {fileID: 389654247, guid: bf3e1ca5374a7634a9e1a3044afcd40e, type: 3}
+  itemName: Github
+  itemDesc: '{ Github }'
+  powerImage: {fileID: 1910876538, guid: 7b0a6355b543adc4b9db6acbc5decf5a, type: 3}
+  powerName: Power Github
+  powerDesc: '{ Power Github}'
+  curImage: {fileID: 389654247, guid: bf3e1ca5374a7634a9e1a3044afcd40e, type: 3}
+  curName: Github
+  curDesc: '{ Github }'

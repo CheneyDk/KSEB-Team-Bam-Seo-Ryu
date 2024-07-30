@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    private SpriteRenderer sprite;
+    private Material material;
 
     public Dictionary<string, float> weaponList = new Dictionary<string, float>();
 
@@ -68,9 +68,13 @@ public class Player : MonoBehaviour
 
     [SerializeField, Header("-Spawn Damage Number")]
     private DamageNumber damageNumber;
+
+    [SerializeField]
+    private ParticleSystem levelUp;
+
     private void Awake()
     {
-        sprite = GetComponent<SpriteRenderer>();
+        material = GetComponent<Renderer>().material;
 
         // player stat init
         playerCurHp = playerMaxHp; // make current hp max
@@ -150,13 +154,13 @@ public class Player : MonoBehaviour
         constText.SetActive(true);
 
         // temp sprint visual effects
-        var tempColor = sprite.color;
-        sprite.color = Color.yellow;
+        material.EnableKeyword("GLOW_ON");
+
 
         // invincible & move speed
         isInvincible = true;
         playerMoveSpeed *= playerAccelerate;
-        StartCoroutine(SprintTimer(tempColor));
+        StartCoroutine(SprintTimer());
     }
 
     // open pause window
@@ -177,15 +181,15 @@ public class Player : MonoBehaviour
         }
     }
 
-    private IEnumerator SprintTimer(Color color)
+    private IEnumerator SprintTimer()
     {
         yield return new WaitForSeconds(sprintTime);
         isInvincible = false;
         playerMoveSpeed /= playerAccelerate;
-        
+
 
         // flag -- YH: for test
-        sprite.color = color;
+        material.DisableKeyword("GLOW_ON");
         constText.SetActive(false);
     }
 
@@ -238,7 +242,7 @@ public class Player : MonoBehaviour
         if (playerCurExp >= playerMaxExp)
         {
             PlayerLevelUp();
-
+            Instantiate(levelUp, transform.position, Quaternion.identity);
             ScoreManager.instance.UpdateLevel();
         }
     }

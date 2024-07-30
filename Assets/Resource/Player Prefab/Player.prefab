@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3429033707377483252}
   - component: {fileID: 6260638533341849288}
   - component: {fileID: 404201160916649962}
+  - component: {fileID: 4896552538103405306}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -60,7 +61,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -179,6 +180,9 @@ MonoBehaviour:
   playerArm: {fileID: 6251437387262647915}
   weapon: {fileID: 5955887904906186891}
   constText: {fileID: 3070960400511700439}
+  energyDrinkTimer: 0
+  energyDrinkDuration: 10
+  damageNumber: {fileID: 0}
 --- !u!114 &404201160916649962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,6 +281,22 @@ MonoBehaviour:
   m_DefaultActionMap: playerMove
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &4896552538103405306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944808390979848710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shaderTypes: 4
+  normalStrength: 5
+  normalSmoothing: 1
+  computingNormal: 0
 --- !u!1 &2322289498054430202
 GameObject:
   m_ObjectHideFlags: 0
