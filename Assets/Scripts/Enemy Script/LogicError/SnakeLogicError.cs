@@ -84,6 +84,8 @@ public class SnakeLogicError : Enemy
     private int zigzagRepeat;
     private float chargeWaitTime = 2f;
 
+    private CancellationTokenSource snakeStop;
+
     private void Awake()
     {
         // YH - move some components to each parts
@@ -102,9 +104,7 @@ public class SnakeLogicError : Enemy
     private void Start()
     {
         isDead = false;
-        // SnakeSlowZigZag().Forget();
-        // SnakeChargeZigZag().Forget();
-        SnakeChargeStraight().Forget();
+        SnakePatternCycle().Forget();
     }
 
     private void FixedUpdate()
@@ -169,7 +169,23 @@ public class SnakeLogicError : Enemy
         return Quaternion.Lerp(front, back, ratio);
     }
 
-    // SnakePatternCycle()
+    private async UniTask SnakePatternCycle()
+    {
+        snakeStop = new CancellationTokenSource();
+
+        while (!snakeStop.IsCancellationRequested)
+        {
+            await UniTask.WaitForSeconds(3f, cancellationToken: snakeStop.Token);
+
+            await SnakeSlowZigZag();
+            await UniTask.WaitForSeconds(3f, cancellationToken: snakeStop.Token);
+
+            await SnakeChargeZigZag();
+            await UniTask.WaitForSeconds(3f, cancellationToken: snakeStop.Token);
+
+            await SnakeChargeStraight();
+        }
+    }
 
 
     private async UniTask SnakeSlowZigZag()
@@ -231,7 +247,7 @@ public class SnakeLogicError : Enemy
         curTurnSpeed = slowTurnSpeed;
         await UniTask.WaitForSeconds(0.2f);
         await TurningSnake(20, -1);
-        SpeedGraduallySlowDown(5f, 15f).Forget();
+        await SpeedGraduallySlowDown(5f, 15f);
     }
 
     private async UniTask ChargeCasting()
@@ -256,8 +272,6 @@ public class SnakeLogicError : Enemy
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         snakeBody[0].transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
     }
-
-    // portal teleport pattern?
 
     // key value: 45, 90, 135, 180 -> rotate degree
     // dir: left: 1, right: -1
@@ -349,6 +363,7 @@ public class SnakeLogicError : Enemy
         // call all parts' dead func
         // each body part play dead motion on their own
         CallDeadFunc().Forget();
+        snakeStop.Cancel();
 
         // StartCoroutine("SetActiveToFalse"); // YH - dead motion wait?
         DropEXP(dropExpNumber);
