@@ -98,9 +98,9 @@ GameObject:
   - component: {fileID: -5062837047048896332}
   - component: {fileID: -6512544203900851676}
   - component: {fileID: 3137660386715293147}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SnakeBody
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -197,8 +197,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f9dec9051fa10b46b5d5b29a1084eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 6381758804468079586, guid: 6c46260b4e394c047b75df60a5cb0da7, type: 3}
+  snakePartMaxHp: 0
+  snakePartCurHp: 0
   snakeMain: {fileID: 1333883953898625091, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
+  hitParticle: {fileID: 5539699917983100254, guid: f7ba99bfc6842f245a899b0c2ca579c3, type: 3}
+  damageNumber: {fileID: 1848622758658849530, guid: 1928df38c9c7b7342a2a95eeab8f991d, type: 3}
+  lastingDamageNumber: {fileID: 1848622758658849530, guid: 94b7e5789fc284b4eba92f18cad04c72, type: 3}
+  bullet: {fileID: 6381758804468079586, guid: 6c46260b4e394c047b75df60a5cb0da7, type: 3}
 --- !u!50 &-6512544203900851676
 Rigidbody2D:
   serializedVersion: 4

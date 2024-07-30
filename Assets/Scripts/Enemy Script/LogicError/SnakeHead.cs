@@ -7,12 +7,11 @@ public class SnakeHead : SnakePart
 {
     private const float Pi = Mathf.PI;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        snakePartMaxHp = snakeMain.snakeMaxHp; // 5000f
+        snakePartCurHp = snakePartMaxHp;
     }
-
 
     // bounce on wall collision
     private void OnTriggerEnter2D(Collider2D other)
@@ -43,12 +42,6 @@ public class SnakeHead : SnakePart
         }
     }
 
-    // 애초에 이걸 메인 스크립트에 넣을까?
-    // charge1 func (activate on main script)
-
-    // charge2 func ( " )
-
-
     // Utility Funcs
     private float VectorToDegree(Vector2 vector)
     {
@@ -61,4 +54,37 @@ public class SnakeHead : SnakePart
         float radian = Pi / 180 * degree;
         return new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
     }
+
+
+    // abstract override
+    public override void TakeDamage(float damage)
+    {
+        hitParticle.Play();
+        damageNumber.Spawn(transform.position, damage);
+        snakePartCurHp -= damage;
+        snakeMain.TakeDamage(damage); // head dont need to got a damage
+    }
+
+    public override IEnumerator LastingDamage(float damage, int totalDamageTime, Color color)
+    {
+        curSR.color = color;
+        var damageTimer = 0f;
+
+        while (damageTimer < totalDamageTime)
+        {
+            yield return new WaitForSeconds(1f);
+            hitParticle.Play();
+            lastingDamageNumber.Spawn(transform.position, damage);
+            snakeMain.TakeDamage(damage);
+            damageTimer += 1f;
+
+            ScoreManager.instance.UpdateDamage("React", damage);
+        }
+        curSR.color = originColor;
+    }
+
+    // gof would mad at me
+    public override void DropEXP(int iteamNumber){}
+    public override void EnemyMovement(){}
+    public override void ResetEnemy(){}
 }
