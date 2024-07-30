@@ -30,9 +30,9 @@ public class SnakeLogicError : Enemy
 {
     // Enemy Inspector
     [Header("Enemy Information")]
-    [SerializeField] private float snakeMaxHp = 20f;
+    [SerializeField] private float snakeMaxHp = 5000f;
     [SerializeField] private float snakeCurtHP;
-    [SerializeField] private float snakeAtk = 40f;
+    [SerializeField] private float snakeAtk = 30f;
 
     [Header("Exp")]
     [SerializeField] private GameObject Exp;
@@ -80,7 +80,7 @@ public class SnakeLogicError : Enemy
     // actually use in script
     private List<GameObject> snakeBody = new List<GameObject>();
     private float bodyLength = 10;
-    private float distanceBetween = 0.3f; // speed 10, distance 0.3f
+    private float distanceBetween = 0.21f; // speed 20, distance 0.2f
 
     private float initTurningAngle;
     private int zigzagRepeat;
@@ -106,9 +106,9 @@ public class SnakeLogicError : Enemy
     private void Start()
     {
         isDead = false;
-        SnakeSlowZigZag().Forget();
+        // SnakeSlowZigZag().Forget();
         // SnakeChargeZigZag().Forget();
-        // SnakeChargeStraight().Forget();
+        SnakeChargeStraight().Forget();
     }
 
     private void FixedUpdate()
@@ -153,18 +153,24 @@ public class SnakeLogicError : Enemy
 
             // Lerp neeeeed
             // YH - how can I make distance shorter.
-            snakeBody[i].transform.position = SnakePosLerp(movement.movementList[1].position, movement.movementList[0].position);
-            snakeBody[i].transform.rotation = movement.movementList[0].rotation;
+            snakeBody[i].transform.position = SnakePosLerp(movement.movementList[8].position, movement.movementList[0].position);
+            snakeBody[i].transform.rotation = SnakeRotLerp(movement.movementList[8].rotation, movement.movementList[0].rotation);
             movement.movementList.RemoveAt(0);
         }
     }
 
-    // Lerp func - param: snakespeed
+    // Lerp func - snakespeed
     private Vector3 SnakePosLerp(Vector3 front, Vector3 back)
     {
         // speed: 50 -> ratio 0.2, speed: 10 -> ratio: 1
         float ratio = slowSpeed / snakeSpeed;
         return Vector3.Lerp(front, back, ratio);
+    }
+
+    private Quaternion SnakeRotLerp(Quaternion front, Quaternion back)
+    {
+        float ratio = slowSpeed / snakeSpeed;
+        return Quaternion.Lerp(front, back, ratio);
     }
 
     // SnakePatternCycle()
@@ -330,6 +336,7 @@ public class SnakeLogicError : Enemy
 
     public override void TakeDamage(float damage)
     {
+        // YH - on each bodypart
         // hitParticle.Play();
         // damageNumber.Spawn(transform.position, damage);
         snakeCurtHP -= damage;

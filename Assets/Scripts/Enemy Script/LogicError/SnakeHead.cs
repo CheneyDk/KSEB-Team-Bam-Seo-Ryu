@@ -7,12 +7,12 @@ public class SnakeHead : SnakePart
 {
     private const float Pi = Mathf.PI;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
-    }
+        snakePartMaxHp = 5000f;
+        snakePartCurHp = snakePartMaxHp;
 
+    }
 
     // bounce on wall collision
     private void OnTriggerEnter2D(Collider2D other)
@@ -61,4 +61,29 @@ public class SnakeHead : SnakePart
         float radian = Pi / 180 * degree;
         return new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
     }
+
+
+    // abstract override
+
+    public override void TakeDamage(float damage)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override IEnumerator LastingDamage(float damage, int totalDamageTime, Color color)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void DropEXP(int iteamNumber)
+    {
+        throw new NotImplementedException();
+    }
+
+
+
+
+    // gof would mad at me
+    public override void EnemyMovement() { }
+    public override void ResetEnemy(){}
 }

@@ -1674,7 +1674,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: be3e7941fd558ee4cae31883e37dce3f, type: 2}
   - {fileID: 11400000, guid: 7f2b43d45034f7f4295ebf24798b038d, type: 2}
   - {fileID: 11400000, guid: 9f2efd4a8743ab0479c4211afbdb6bfd, type: 2}
-  animator: {fileID: 0}
 --- !u!95 &283899594
 Animator:
   serializedVersion: 5
@@ -5013,6 +5012,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1333883953898625091, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
+      propertyPath: snakeAtk
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 3967779656545519921, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
       propertyPath: m_Name
       value: SnakeLogicError
@@ -13959,7 +13962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNumber: 10
   curWave: 1
-  waveTime: 20
+  waveTime: 10
   waveInterval: 2
   time: 0
   magneticTime: 3
