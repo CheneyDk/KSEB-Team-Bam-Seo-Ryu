@@ -5012,17 +5012,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1333883953898625091, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
-      propertyPath: snakeAtk
-      value: 30
-      objectReference: {fileID: 0}
     - target: {fileID: 3967779656545519921, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
       propertyPath: m_Name
       value: SnakeLogicError
-      objectReference: {fileID: 0}
-    - target: {fileID: 3967779656545519921, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6425206775501427404, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
       propertyPath: m_LocalPosition.x

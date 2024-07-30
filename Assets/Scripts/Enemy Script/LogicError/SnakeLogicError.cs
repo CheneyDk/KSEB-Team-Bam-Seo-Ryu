@@ -12,8 +12,6 @@ using UnityEngine;
 /// basic rulse
 /// 1. snake always go straight
 /// 2. we only can change rotation (left or right)
-/// 3. if there is wall in front of snake, snake have to rotate (left or right half and half)
-/// -> gonna use snake tongue (kind of wall detection)
 /// 
 /// important functions in this class
 /// 1. snake zigzag move
@@ -30,8 +28,8 @@ public class SnakeLogicError : Enemy
 {
     // Enemy Inspector
     [Header("Enemy Information")]
-    [SerializeField] private float snakeMaxHp = 5000f;
-    [SerializeField] private float snakeCurtHP;
+    [SerializeField] public float snakeMaxHp = 5000f;
+    [SerializeField] private float snakeCurHP;
     [SerializeField] private float snakeAtk = 30f;
 
     [Header("Exp")]
@@ -86,14 +84,12 @@ public class SnakeLogicError : Enemy
     private int zigzagRepeat;
     private float chargeWaitTime = 2f;
 
-    public GameObject tongue; // ?
-
     private void Awake()
     {
         // YH - move some components to each parts
         // curSR = gameObject.GetComponent<SpriteRenderer>();
         // originColor = curSR.color;
-        snakeCurtHP = snakeMaxHp;
+        snakeCurHP = snakeMaxHp;
         // snakeAni = GetComponent<Animator>();
         // snakeCollider = GetComponent<CircleCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -313,34 +309,33 @@ public class SnakeLogicError : Enemy
 
     public override IEnumerator LastingDamage(float damage, int totalDamageTime, Color color)
     {
-        curSR.color = color;
-        var damageTimer = 0f;
+        //curSR.color = color;
+        //var damageTimer = 0f;
 
-        while (damageTimer < totalDamageTime)
-        {
-            yield return new WaitForSeconds(1f);
-            // hitParticle.Play();
-            // lastingDamageNumber.Spawn(transform.position, damage);
-            snakeCurtHP -= damage;
-            damageTimer += 1f;
+        //while (damageTimer < totalDamageTime)
+        //{
+        //    yield return new WaitForSeconds(1f);
+        //    // hitParticle.Play();
+        //    // lastingDamageNumber.Spawn(transform.position, damage);
+        //    snakeCurHp -= damage;
+        //    damageTimer += 1f;
 
-            ScoreManager.instance.UpdateDamage("React", damage);
-        }
+        //    ScoreManager.instance.UpdateDamage("React", damage);
+        //}
 
-        if (snakeCurtHP <= 0)
-        {
-            SnakeDead();
-        }
-        curSR.color = originColor;
+        //if (snakeCurHp <= 0)
+        //{
+        //    SnakeDead();
+        //}
+        //curSR.color = originColor;
+
+        yield return null;
     }
 
     public override void TakeDamage(float damage)
     {
-        // YH - on each bodypart
-        // hitParticle.Play();
-        // damageNumber.Spawn(transform.position, damage);
-        snakeCurtHP -= damage;
-        if (snakeCurtHP <= 0)
+        snakeCurHP -= damage;
+        if (snakeCurHP <= 0)
         {
             SnakeDead();
         }
@@ -348,14 +343,26 @@ public class SnakeLogicError : Enemy
 
     private void SnakeDead()
     {
-        snakeCollider.enabled = false;
         isDead = true;
         // snakeAni.SetBool("isDead", true); // YH - animations
+
+        // call all parts' dead func
+        // each body part play dead motion on their own
+        CallDeadFunc().Forget();
+
         // StartCoroutine("SetActiveToFalse"); // YH - dead motion wait?
         DropEXP(dropExpNumber);
-        ChanceToDropItem(healingItem, 1);
 
         ScoreManager.instance.UpdateEnemiesDeafeated();
+    }
+
+    private async UniTask CallDeadFunc()
+    {
+        foreach (var part in snakeBody)
+        {
+            part.GetComponent<SnakePart>().PartDead();
+            await UniTask.WaitForSeconds(0.1f);
+        }
     }
 
     public override void DropEXP(int itemNumber)
@@ -366,12 +373,6 @@ public class SnakeLogicError : Enemy
             Instantiate(Exp, spawnPlace, Quaternion.identity);
         }
     }
-    private void ChanceToDropItem(GameObject item, int chance)
-    {
-        // var randomChance = Random.Range(1, 11);
-        Instantiate(item, transform.position, Quaternion.identity);
-    }
-
 
     public override void EnemyMovement() {}
     public override void ResetEnemy() { }

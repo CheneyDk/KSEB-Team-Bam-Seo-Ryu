@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 5026583606688231451}
   - component: {fileID: 9004007422544268798}
   - component: {fileID: -64920145872449095}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SnakeHead
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,6 +113,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccaa48aea9bce5147bfe6d92407d5faf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  snakePartMaxHp: 0
+  snakePartCurHp: 0
+  snakeMain: {fileID: 1333883953898625091, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
+  hitParticle: {fileID: 5539699917983100254, guid: f7ba99bfc6842f245a899b0c2ca579c3, type: 3}
+  damageNumber: {fileID: 1848622758658849530, guid: 1928df38c9c7b7342a2a95eeab8f991d, type: 3}
+  lastingDamageNumber: {fileID: 1848622758658849530, guid: 94b7e5789fc284b4eba92f18cad04c72, type: 3}
 --- !u!50 &9004007422544268798
 Rigidbody2D:
   serializedVersion: 4
@@ -186,7 +192,7 @@ GameObject:
   - component: {fileID: 8811560513333640859}
   - component: {fileID: 8134417681494350181}
   - component: {fileID: 5761558954669478154}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tognue
   m_TagString: Untagged
   m_Icon: {fileID: 0}

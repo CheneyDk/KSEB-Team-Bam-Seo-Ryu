@@ -11,36 +11,43 @@ public abstract class SnakePart : Enemy
     protected float snakeDamage;
 
     protected Player player;
+    protected SnakeLogicError snakeMain;
 
-    [Header("Hit Particle"), SerializeField]
-    private ParticleSystem hitParticle;
-    [SerializeField]
-    private DamageNumber damageNumber;
-    [SerializeField]
-    private DamageNumber lastingDamageNumber;
+    [Header("Hit Particle")]
+    [SerializeField] protected ParticleSystem hitParticle;
+    [SerializeField] protected DamageNumber damageNumber;
+    [SerializeField] protected DamageNumber lastingDamageNumber;
 
-    private Animator snakePartAni;
-    private Collider2D snakePartCollider;
+    protected Animator snakePartAni;
+    protected Collider2D snakePartCollider;
 
-    private SpriteRenderer curSR;
-    private Color originColor;
+    protected SpriteRenderer curSR;
+    protected Color originColor;
 
-    private bool isDead;
+    protected bool isDestroyed;
 
 
     private void Awake()
     {
+        snakeMain = GameObject.FindGameObjectWithTag("SnakeMain").GetComponent<SnakeLogicError>();
         curSR = gameObject.GetComponent<SpriteRenderer>();
         originColor = curSR.color;
         snakePartAni = GetComponent<Animator>();
         snakePartCollider = GetComponent<CircleCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        isDead = false;
+        isDestroyed = false;
     }
 
     public void InitSnakeBodypart(float dmg)
     {
         snakeDamage = dmg;
+    }
+
+    public void PartDead()
+    {
+        snakePartCollider.enabled = false;
+        gameObject.SetActive(false);
+
     }
 
     // give player bodyhit damage

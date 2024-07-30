@@ -7,11 +7,10 @@ public class SnakeHead : SnakePart
 {
     private const float Pi = Mathf.PI;
 
-    private void Awake()
+    private void Start()
     {
-        snakePartMaxHp = 5000f;
+        snakePartMaxHp = snakeMain.snakeMaxHp; // 5000f
         snakePartCurHp = snakePartMaxHp;
-
     }
 
     // bounce on wall collision
@@ -43,12 +42,6 @@ public class SnakeHead : SnakePart
         }
     }
 
-    // 애초에 이걸 메인 스크립트에 넣을까?
-    // charge1 func (activate on main script)
-
-    // charge2 func ( " )
-
-
     // Utility Funcs
     private float VectorToDegree(Vector2 vector)
     {
@@ -64,26 +57,34 @@ public class SnakeHead : SnakePart
 
 
     // abstract override
-
     public override void TakeDamage(float damage)
     {
-        throw new NotImplementedException();
+        hitParticle.Play();
+        damageNumber.Spawn(transform.position, damage);
+        snakePartCurHp -= damage;
+        snakeMain.TakeDamage(damage); // head dont need to got a damage
     }
 
     public override IEnumerator LastingDamage(float damage, int totalDamageTime, Color color)
     {
-        throw new NotImplementedException();
+        curSR.color = color;
+        var damageTimer = 0f;
+
+        while (damageTimer < totalDamageTime)
+        {
+            yield return new WaitForSeconds(1f);
+            hitParticle.Play();
+            lastingDamageNumber.Spawn(transform.position, damage);
+            snakeMain.TakeDamage(damage);
+            damageTimer += 1f;
+
+            ScoreManager.instance.UpdateDamage("React", damage);
+        }
+        curSR.color = originColor;
     }
-
-    public override void DropEXP(int iteamNumber)
-    {
-        throw new NotImplementedException();
-    }
-
-
-
 
     // gof would mad at me
-    public override void EnemyMovement() { }
+    public override void DropEXP(int iteamNumber){}
+    public override void EnemyMovement(){}
     public override void ResetEnemy(){}
 }

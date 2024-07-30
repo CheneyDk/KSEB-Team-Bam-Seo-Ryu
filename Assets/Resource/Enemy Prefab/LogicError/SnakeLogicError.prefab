@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 6425206775501427404}
   - component: {fileID: 1333883953898625091}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: SnakeLogicError
-  m_TagString: Enemy
+  m_TagString: SnakeMain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6425206775501427404
 Transform:
   m_ObjectHideFlags: 0
@@ -44,11 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4652b2420752a2e459f74079baf486d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snakeMaxHp: 20
-  snakeCurtHP: 0
-  snakeAtk: 5
-  snakeMoveSpeed: 10
-  Exp: {fileID: 0}
+  snakeMaxHp: 5000
+  snakeCurHP: 0
+  snakeAtk: 30
+  Exp: {fileID: 2828242351688375285, guid: 9f21b77202f043d45a40df1d9c28c4d8, type: 3}
   dropExpNumber: 3
   healingItem: {fileID: 0}
   redbuleItem: {fileID: 0}
@@ -60,4 +59,3 @@ MonoBehaviour:
   - {fileID: 4309065233223068657, guid: 99a0b77322588244bbf44bc6c870b491, type: 3}
   - {fileID: 7007943591923285095, guid: f094e135ebdbfbc439353705ae9d6827, type: 3}
   - {fileID: 4877063011114354683, guid: 5ec63a9c865f3f74f851ef82b96f4d0f, type: 3}
-  tongue: {fileID: 0}

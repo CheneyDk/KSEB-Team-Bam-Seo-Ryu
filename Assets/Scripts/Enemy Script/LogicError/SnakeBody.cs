@@ -1,32 +1,38 @@
 using Cysharp.Threading.Tasks;
-using System;
+using DamageNumbersPro;
+// using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class SnakeBody : SnakePart
 {
     public GameObject bullet;
-    public SnakeLogicError snakeMain;
+
     private float waittimeForFirstFire = 10f;
     private float snakeFireRate = 8f;
     private float fireRateRamdom;
 
+    private CancellationTokenSource cancelFire;
 
-    void Start()
+    private void Start()
     {
+        snakePartMaxHp = 200f;
+        snakePartCurHp = snakePartMaxHp;
         FireCycle().Forget();
     }
 
     private async UniTask FireCycle()
     {
+        cancelFire = new CancellationTokenSource();
         await UniTask.WaitForSeconds(waittimeForFirstFire);
 
-        while (true)
+        while (!cancelFire.IsCancellationRequested)
         {
             fireRateRamdom = UnityEngine.Random.Range(-0.5f, 0.5f);
             SnakeBodyGunFire();
-            await UniTask.WaitForSeconds(snakeFireRate + fireRateRamdom);
+            await UniTask.WaitForSeconds(snakeFireRate + fireRateRamdom, cancellationToken: cancelFire.Token);
             if (snakeMain.isDead) return;
         }
     }
@@ -39,23 +45,55 @@ public class SnakeBody : SnakePart
     }
 
     // abstract override
-
     public override void TakeDamage(float damage)
     {
-        throw new NotImplementedException();
+        hitParticle.Play();
+
+        if (isDestroyed) damage /= 2f;
+        damageNumber.Spawn(transform.position, damage);
+        snakePartCurHp -= damage;
+        snakeMain.TakeDamage(damage);
+        if (snakePartCurHp <= 0)
+        {
+            PartDestroyed();
+        }
     }
 
     public override IEnumerator LastingDamage(float damage, int totalDamageTime, Color color)
     {
-        throw new NotImplementedException();
+        curSR.color = color;
+        var damageTimer = 0f;
+
+        while (damageTimer < totalDamageTime)
+        {
+            yield return new WaitForSeconds(1f);
+            hitParticle.Play();
+            lastingDamageNumber.Spawn(transform.position, damage);
+            snakeMain.TakeDamage(damage);
+            damageTimer += 1f;
+
+            ScoreManager.instance.UpdateDamage("React", damage);
+        }
+
+        if (snakePartCurHp <= 0)
+        {
+            PartDestroyed();
+        }
+        curSR.color = originColor;
     }
 
-    public override void DropEXP(int iteamNumber)
+    private void PartDestroyed()
     {
-        throw new NotImplementedException();
+        // snakePartCollider.enabled = false; - ?
+        isDestroyed = true;
+        cancelFire.Cancel();
+
+        // play animation
+        // sprite change
     }
 
     // gof would mad at me
-    public override void EnemyMovement() { }
-    public override void ResetEnemy() { }
+    public override void DropEXP(int itemNumber) {}
+    public override void EnemyMovement() {}
+    public override void ResetEnemy() {}
 }
