@@ -66,6 +66,16 @@ public class RecordManager : MonoBehaviour
 
             texts[i].text = values[i].ToString();
             texts[i + 14].text = values[i].ToString();
+
+            // least clear time
+            if (i == 13)
+            {
+                if (values[i] == int.MaxValue)
+                {
+                    texts[i].text = "-";
+                    texts[i + 14].text = "-";
+                }
+            }
         }
     }
 

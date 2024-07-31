@@ -3469,6 +3469,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 373602357}
+  - component: {fileID: 373602358}
   m_Layer: 5
   m_Name: Weapon_4
   m_TagString: Untagged
@@ -3499,6 +3500,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -10}
   m_SizeDelta: {x: 50, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &373602358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373602356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf10cd1a2a1afa14fb7c4a8c06685599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 408135540}
+  weaponName: {fileID: 193693247}
+  weaponDamage: {fileID: 1914078349}
+  graph: {fileID: 821546443}
 --- !u!1 &384002034
 GameObject:
   m_ObjectHideFlags: 0
@@ -4029,6 +4046,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 433148742}
+  - component: {fileID: 433148743}
   m_Layer: 5
   m_Name: Weapon_5
   m_TagString: Untagged
@@ -4059,6 +4077,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -26}
   m_SizeDelta: {x: 50, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &433148743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433148741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf10cd1a2a1afa14fb7c4a8c06685599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 1562679310}
+  weaponName: {fileID: 1430449202}
+  weaponDamage: {fileID: 1553904166}
+  graph: {fileID: 675123614}
 --- !u!1 &462608464
 GameObject:
   m_ObjectHideFlags: 0
@@ -5613,7 +5647,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Basic
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
   m_sharedMaterial: {fileID: 515699730400513198, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
@@ -8067,7 +8101,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a6ea495b74bb9534c93aace5dc79a840, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8228,6 +8262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1123428328}
+  - component: {fileID: 1123428329}
   m_Layer: 5
   m_Name: Weapon_2
   m_TagString: Untagged
@@ -8258,6 +8293,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 22}
   m_SizeDelta: {x: 50, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1123428329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123428327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf10cd1a2a1afa14fb7c4a8c06685599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 2115626898}
+  weaponName: {fileID: 1999559411}
+  weaponDamage: {fileID: 1355657116}
+  graph: {fileID: 716364842}
 --- !u!1 &1155394370
 GameObject:
   m_ObjectHideFlags: 0
@@ -11894,6 +11945,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1647290188}
+  - component: {fileID: 1647290189}
   m_Layer: 5
   m_Name: Weapon_1
   m_TagString: Untagged
@@ -11924,6 +11976,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 38}
   m_SizeDelta: {x: 50, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1647290189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1647290187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf10cd1a2a1afa14fb7c4a8c06685599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 1067942572}
+  weaponName: {fileID: 703842459}
+  weaponDamage: {fileID: 1937153741}
+  graph: {fileID: 1900805587}
 --- !u!1 &1658507475
 GameObject:
   m_ObjectHideFlags: 0
@@ -12232,6 +12300,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1673615278}
+  - component: {fileID: 1673615279}
   m_Layer: 5
   m_Name: Weapon_3
   m_TagString: Untagged
@@ -12262,6 +12331,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 6}
   m_SizeDelta: {x: 50, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1673615279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1673615277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf10cd1a2a1afa14fb7c4a8c06685599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 830887980}
+  weaponName: {fileID: 45143378}
+  weaponDamage: {fileID: 123570944}
+  graph: {fileID: 1345340589}
 --- !u!1 &1681309175
 GameObject:
   m_ObjectHideFlags: 0
@@ -13750,8 +13835,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 25, y: 0.0000038146973}
-  m_SizeDelta: {x: 175, y: 25}
+  m_AnchoredPosition: {x: 25, y: 0}
+  m_SizeDelta: {x: 0, y: 25}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1900805587
 MonoBehaviour:
@@ -13984,7 +14069,12 @@ MonoBehaviour:
   waveReached: {fileID: 1642839193}
   levelReached: {fileID: 1458246101}
   enemiesDefeated: {fileID: 288114171}
-  Right: {fileID: 1539338635}
+  setters:
+  - {fileID: 1647290189}
+  - {fileID: 1123428329}
+  - {fileID: 1673615279}
+  - {fileID: 373602358}
+  - {fileID: 433148743}
 --- !u!114 &1928414534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14030,8 +14120,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1928414533}
-        m_TargetAssemblyTypeName: MoveDown, Assembly-CSharp
-        m_MethodName: ShowDetails
+        m_TargetAssemblyTypeName: ToggleDetail, Assembly-CSharp
+        m_MethodName: Toggle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14136,7 +14226,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
   m_sharedMaterial: {fileID: 515699730400513198, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}

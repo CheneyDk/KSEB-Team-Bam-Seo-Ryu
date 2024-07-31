@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
         PauseUI.SetActive(false);
         UpgradeUI.SetActive(false);
         Time.timeScale = 1f; // init
+        ScoreManager.instance.ResetData();
     }
 
     private void Update()

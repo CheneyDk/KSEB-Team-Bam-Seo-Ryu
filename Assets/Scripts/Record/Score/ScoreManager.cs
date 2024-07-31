@@ -6,6 +6,7 @@ using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -40,6 +41,11 @@ public class ScoreManager : MonoBehaviour
     public void SetCharacter(string character)
     {
         scoreData.character = character;
+    }
+
+    public string GetCharacter()
+    {
+        return scoreData.character;
     }
 
     public void AddWeapon(string name)
@@ -85,6 +91,17 @@ public class ScoreManager : MonoBehaviour
         };
 
         timer = DateTime.Now;
+
+        scoreData.character = SceneManager.GetActiveScene().name;
+        // 씬 이름 최종결정 시 삭제
+        if (scoreData.character == "UDD_Scene")
+        {
+            scoreData.character = "Python";
+        }
+        else if (scoreData.character == "MainScene 1")
+        {
+            scoreData.character = "C";
+        }
     }
 
     public void UpdateEnemiesDeafeated()

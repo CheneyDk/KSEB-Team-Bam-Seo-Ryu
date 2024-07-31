@@ -6,7 +6,7 @@ using TMPro;
 using System.Xml;
 using System;
 
-public class MoveDown : MonoBehaviour
+public class ToggleDetail : MonoBehaviour
 {
     public Canvas bottom;
     public GameObject window;
@@ -18,11 +18,11 @@ public class MoveDown : MonoBehaviour
     public TextMeshProUGUI levelReached;
     public TextMeshProUGUI enemiesDefeated;
 
-    public GameObject Right;
+    public ResultSetter[] setters;
 
     private bool flag = true;
 
-    public void ShowDetails()
+    public void Toggle()
     {
         result.SetActive(flag);
 
@@ -43,27 +43,7 @@ public class MoveDown : MonoBehaviour
             int cnt = 0;
             foreach (KeyValuePair<string, float> kvp in weapons)
             {
-                Transform w = Right.transform.GetChild(cnt);
-
-                if (cnt != 0)
-                {
-                    w.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(kvp.Key);
-
-                    if (kvp.Key != "CD")
-                    {
-                        Image i = w.GetChild(0).GetComponent<Image>();
-                        Color c = i.color;
-                        c.r = 0f;
-                        c.g = 0f;
-                        c.b = 0f;
-                        i.color = c;
-                    }
-                }
-                w.GetChild(1).GetComponent<TextMeshProUGUI>().text = kvp.Key;
-                w.GetChild(2).GetComponent<TextMeshProUGUI>().text = kvp.Value.ToString();
-                w.GetChild(3).GetComponent<Image>().GetComponent<RectTransform>().sizeDelta = new Vector2(kvp.Value / ScoreManager.instance.GetTotalDamages() * 180, 25);
-
-                cnt++;
+                setters[cnt++].SetAll(kvp.Key, kvp.Value);
             }
 
             Color color = buttonImage.color;

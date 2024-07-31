@@ -11,20 +11,15 @@ public class WeaponSetter : MonoBehaviour
     public TextMeshProUGUI damage;
     public Image graph;
 
-    public void setAll(WeaponDamagesData data, float total)
+    public void SetAll(WeaponDamagesData data, float total, string charName)
     {
         if (data.weaponName != "Basic")
         {
             icon.sprite = Resources.Load<Sprite>(data.weaponName);
-
-            if (!data.weaponName.Equals("CD"))
-            {
-                Color c = icon.color;
-                c.r = 0f;
-                c.g = 0f;
-                c.b = 0f;
-                icon.color = c;
-            }
+        }
+        else
+        {
+            icon.sprite = Resources.Load<Sprite>(charName);
         }
 
         weaponName.text = data.weaponName;
@@ -36,11 +31,6 @@ public class WeaponSetter : MonoBehaviour
     public void ResetAll()
     {
         icon.sprite = Resources.Load<Sprite>("Invisible");
-        Color c = icon.color;
-        c.r = 255f;
-        c.g = 255f;
-        c.b = 255f;
-        icon.color = c;
         weaponName.text = "";
         damage.text = "";
         graph.GetComponent<RectTransform>().sizeDelta = new Vector2(0f, 0f);
