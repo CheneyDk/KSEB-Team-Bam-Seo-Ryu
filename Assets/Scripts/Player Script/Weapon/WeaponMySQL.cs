@@ -17,9 +17,7 @@ public class WeaponMySQL : PlayerWeapon
         weaponFireRate = 3f;
         bulletNum = 1;
         weaponLevel = 1;
-        isPowerWeapon = false;
-        matchPassive = "SSD";
-            
+
         // player can fire imediately
         fireRateTimer = weaponFireRate;
 

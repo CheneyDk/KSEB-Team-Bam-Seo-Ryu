@@ -33,7 +33,7 @@ public abstract class SnakePart : Enemy
         curSR = gameObject.GetComponent<SpriteRenderer>();
         originColor = curSR.color;
         snakePartAni = GetComponent<Animator>();
-        snakePartCollider = GetComponent<BoxCollider2D>();
+        snakePartCollider = GetComponent<CircleCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         isDestroyed = false;
     }

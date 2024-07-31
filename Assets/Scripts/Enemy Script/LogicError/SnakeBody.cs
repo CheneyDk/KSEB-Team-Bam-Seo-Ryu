@@ -92,12 +92,6 @@ public class SnakeBody : SnakePart
         // sprite change
     }
 
-    private void OnDestroy()
-    {
-        if (isDestroyed) return; // token already used
-        cancelFire.Cancel();
-    }
-
     // gof would mad at me
     public override void DropEXP(int itemNumber) {}
     public override void EnemyMovement() {}

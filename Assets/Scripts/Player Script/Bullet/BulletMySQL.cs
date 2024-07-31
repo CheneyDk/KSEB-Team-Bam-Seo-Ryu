@@ -59,8 +59,8 @@ public class BulletMySQL : PlayerBullet
         while (isExist)
         {
             await UniTask.Yield();
-            await UniTask.WaitUntil(() => GameManager.Instance.isGameContinue);
             if (!isExist) return;
+            await UniTask.WaitUntil(() => GameManager.Instance.isGameContinue);
             transform.Rotate(Vector3.forward, rotateSpeed);
         }
     }
