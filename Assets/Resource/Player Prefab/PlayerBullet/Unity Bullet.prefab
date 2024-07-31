@@ -106,6 +106,7 @@ MonoBehaviour:
   bulletSpeed: 0
   range: 10
   spriteRenderer: {fileID: 2921292525299001276}
+  unityParticle: {fileID: 2641207380488688874, guid: d7fea8a7dc1f9f641b0137caa0d8800e, type: 3}
 --- !u!1 &6995793177296840943
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ public class UpgradeManager : MonoBehaviour
     public Image[] optionImages;
 
     // 전체 무기, 템들
-    [Header("Weapon and Item")]
+    [Header("Weapon and Passive")]
     public List<WeaponData> weaponDataList;
     public List<WeaponData> passiveDataList;
     // 선택지로 나오는 템들 (Max템이 있으면 제거 할라는 용도)
@@ -342,7 +342,7 @@ public class UpgradeManager : MonoBehaviour
             }
             else if (itemList == playerPassiveList)
             {
-                gameUI.ItemIconList(itemList);
+                gameUI.PassiveIconList(itemList);
                 AddItemToPlayer(item.item);
                 gameUI.AddPassiveLevel(playerPassiveBag);
             }

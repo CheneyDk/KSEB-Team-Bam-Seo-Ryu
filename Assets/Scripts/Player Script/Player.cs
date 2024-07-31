@@ -72,9 +72,13 @@ public class Player : MonoBehaviour
     [SerializeField]
     private ParticleSystem levelUp;
 
+    private Collider2D playerCollider;
+    private List<Collider2D> ignoredColliders = new List<Collider2D>();
+
     private void Awake()
     {
         material = GetComponent<Renderer>().material;
+        playerCollider = GetComponent<Collider2D>();
 
         // player stat init
         playerCurHp = playerMaxHp; // make current hp max
@@ -151,6 +155,8 @@ public class Player : MonoBehaviour
 
         Debug.Log("sprint");
 
+        IgnoreEnemyCollisions(true);
+
         constText.SetActive(true);
 
         // temp sprint visual effects
@@ -187,7 +193,7 @@ public class Player : MonoBehaviour
         isInvincible = false;
         playerMoveSpeed /= playerAccelerate;
 
-
+        IgnoreEnemyCollisions(false);
         // flag -- YH: for test
         material.DisableKeyword("GLOW_ON");
         constText.SetActive(false);
@@ -306,6 +312,28 @@ public class Player : MonoBehaviour
         }
 
         energyDrinkTimer = 0f;
+    }
+
+    private void IgnoreEnemyCollisions(bool ignore)
+    {
+        Collider2D[] enemies = FindObjectsOfType<Collider2D>();
+
+        foreach (var enemyCollider in enemies)
+        {
+            if (enemyCollider.CompareTag("Enemy"))
+            {
+                Physics2D.IgnoreCollision(playerCollider, enemyCollider, ignore);
+
+                if (ignore)
+                {
+                    ignoredColliders.Add(enemyCollider);
+                }
+                else
+                {
+                    ignoredColliders.Remove(enemyCollider);
+                }
+            }
+        }
     }
 
     // System Control

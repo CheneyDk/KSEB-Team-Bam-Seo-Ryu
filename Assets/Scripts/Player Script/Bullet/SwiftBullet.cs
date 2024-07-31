@@ -13,6 +13,8 @@ public class SwiftBullet : PlayerBullet
 
     public SpriteRenderer spriteRenderer;
 
+    public ParticleSystem swiftParticle;
+
     private void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -45,6 +47,7 @@ public class SwiftBullet : PlayerBullet
             if (enemyComponent != null)
             {
                 enemyComponent.TakeDamage(bulletDamage);
+                Instantiate(swiftParticle, transform.position, Quaternion.identity);
 
                 ScoreManager.instance.UpdateDamage("Swift", bulletDamage);
             }

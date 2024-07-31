@@ -11,6 +11,8 @@ public class UnityBullet : PlayerBullet
 
     public SpriteRenderer spriteRenderer;
 
+    public ParticleSystem unityParticle;
+
     private void Start()
     {
         bulletSpeed = 5f;
@@ -42,6 +44,7 @@ public class UnityBullet : PlayerBullet
             if (enemyComponent != null)
             {
                 enemyComponent.TakeDamage(bulletDamage);
+                Instantiate(unityParticle, transform.position, Quaternion.identity);
 
                 ScoreManager.instance.UpdateDamage("Unity", bulletDamage);
             }

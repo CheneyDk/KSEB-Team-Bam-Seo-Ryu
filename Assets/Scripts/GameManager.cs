@@ -8,9 +8,6 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Hide Mouse Cursor")]
-    public bool hideMouse = false;
-
     public static GameManager Instance;
     // UI
     [Header("- UI")]
@@ -28,17 +25,14 @@ public class GameManager : MonoBehaviour
     public Player player;
     private PauseWindow pauseWindow;
 
+    [Header("- Mouse Cursor")]
+    public Texture2D aimCursor;
+    public Texture2D normalCursor;
+
     private void Awake()
     {
-        //////////////////////
+        ChangeMouseCursor(aimCursor);
 
-        if (hideMouse)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-
-        //////////////////////
         Instance = this; // singleton
 
         pauseWindow = PauseUI.GetComponent<PauseWindow>();
@@ -52,18 +46,19 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         Time.timeScale = timeScaleProduct;
+
     }
 
     public void SetPlayerDead()
     {
-        GameoverUI.SetActive(true);
+        GameoverUI.gameObject.SetActive(true);
+        ChangeMouseCursor(normalCursor);
         timeScaleProduct = 0f;
         if (isGameContinue) 
         {
             ScoreManager.instance.SaveData(false);
         }
         isGameContinue = false;
-        // WaveManager.SetActive(false); // YH - activate after merge
     }
 
     public void ResetGame()
@@ -83,6 +78,8 @@ public class GameManager : MonoBehaviour
         // 1. pause menu on
         PauseUI.gameObject.SetActive(true);
 
+        ChangeMouseCursor(normalCursor);
+
         // 2. TimeScale 0
         timeScaleProduct = 0f;
         isGameContinue = false;
@@ -96,6 +93,8 @@ public class GameManager : MonoBehaviour
     {
         // 1. pause menu off
         PauseUI.gameObject.SetActive(false);
+
+        ChangeMouseCursor(aimCursor);
 
         // 2. TimeScale 1
         timeScaleProduct = 1f;
@@ -116,6 +115,7 @@ public class GameManager : MonoBehaviour
     public void LevelUp()
     {
         UpgradeUI.SetActive(true);
+        ChangeMouseCursor(normalCursor);
         UpgradeUI.GetComponent<UpgradeManager>().OnUpgrade(true);
         timeScaleProduct = 0f;
         isGameContinue = false;
@@ -124,6 +124,7 @@ public class GameManager : MonoBehaviour
     public void WaveEnd()
     {
         UpgradeUI.SetActive(true);
+        ChangeMouseCursor(normalCursor);
         UpgradeUI.GetComponent<UpgradeManager>().OnUpgrade(false);
         timeScaleProduct = 0f;
         isGameContinue = false;
@@ -134,8 +135,14 @@ public class GameManager : MonoBehaviour
     public void EndUpgrade()
     {
         UpgradeUI.gameObject.SetActive(false);
+        ChangeMouseCursor(aimCursor);
         player.SwitchToPlayerControl();
         timeScaleProduct = 1f;
         isGameContinue = true;
+    }
+
+    private void ChangeMouseCursor(Texture2D cursor)
+    {
+        Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
     }
 }

@@ -25,8 +25,11 @@ public class GameUI : MonoBehaviour
     [SerializeField]
     private WaveManager waveManager;
 
-    public Image[] weaponList;
-    public Image[] itemList;
+    [Header("Icon")]
+    public GameObject[] weaponIconList;
+    public Image[] weaponImage;
+    public GameObject[] passiveIconList;
+    public Image[] passiveImage;
 
     [SerializeField]
     private Player player;
@@ -56,8 +59,8 @@ public class GameUI : MonoBehaviour
     {
         for (int i = 0; i < dataList.Count; i++)
         {
-            weaponList[i].sprite = dataList[i].itemImage;
-            weaponList[i].gameObject.SetActive(true);
+            weaponImage[i].sprite = dataList[i].itemImage;
+            weaponIconList[i].gameObject.SetActive(true);
         }
     }
 
@@ -69,17 +72,17 @@ public class GameUI : MonoBehaviour
             var compon = weapon.GetComponent<PlayerWeapon>();
             if (compon.isPowerWeapon == true)
             {
-                weaponList[i].sprite = compon.powerWeaponSprite;
+                weaponImage[i].sprite = compon.powerWeaponSprite;
             }
         }
     }
 
-    public void ItemIconList(List<WeaponData> dataList)
+    public void PassiveIconList(List<WeaponData> dataList)
     {
         for (int i = 0; i < dataList.Count; i++)
         {
-            itemList[i].sprite = dataList[i].itemImage;
-            itemList[i].gameObject.SetActive(true);
+            passiveImage[i].sprite = dataList[i].itemImage;
+            passiveIconList[i].gameObject.SetActive(true);
         }
     }
 
