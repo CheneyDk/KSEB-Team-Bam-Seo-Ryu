@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75491408f29ca9f4ab4882f9700df418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMaxHp: 100
+  playerMaxHp: 10
   playerCurHp: 0
   playerLevel: 0
   playerMaxExp: 10
@@ -212,6 +212,10 @@ MonoBehaviour:
   playerArm: {fileID: 5702917001411892952}
   weapon: {fileID: 5107621405165049367}
   constText: {fileID: 2799498921057286685}
+  energyDrinkTimer: 0
+  energyDrinkDuration: 10
+  damageNumber: {fileID: 850405986135239423, guid: 1ac856c4fab6fbf439c9afc37ab8dafa, type: 3}
+  levelUp: {fileID: 8335586952449206777, guid: 97eb3258d86dffc4caa0d8b3d57db1ae, type: 3}
 --- !u!114 &3384030768185287080
 MonoBehaviour:
   m_ObjectHideFlags: 0

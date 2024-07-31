@@ -54,6 +54,7 @@ public class MainMenuManager : MonoBehaviour
     public void MoveScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+        //ScoreManager.instance.SetCharacter(sceneName);
     }
 
     public void ChangeIcon(float value)

@@ -8,6 +8,8 @@ public abstract class SaveData
 {
     [SerializeField] private string fileName;
     [SerializeField] private string directory;
+    
+    [SerializeField] private int money;
 
     public SaveData(string _fileName, string _directory)
     {
@@ -47,6 +49,7 @@ public class ScoreData
     public string playDateTime;
 
     public bool isClear;
+    public string character;
 }
 
 [System.Serializable]

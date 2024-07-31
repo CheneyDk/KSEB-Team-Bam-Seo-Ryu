@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 19722488}
   - component: {fileID: 19722487}
   m_Layer: 5
-  m_Name: LogicErrorDeafeated (3)
+  m_Name: HeavyEnemyDefeated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1223,7 +1223,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: runtimeError deafeated
+  m_text: runtime error deafeated
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
   m_sharedMaterial: {fileID: 515699730400513198, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
@@ -3580,7 +3580,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: logicErrorDeafeated
+  m_text: logic error deafeated
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
   m_sharedMaterial: {fileID: 515699730400513198, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
@@ -4799,7 +4799,7 @@ GameObject:
   - component: {fileID: 274093627}
   - component: {fileID: 274093626}
   m_Layer: 5
-  m_Name: LogicErrorDeafeated (1)
+  m_Name: MeleeEnemyDefeated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4844,7 +4844,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: logicErrorDeafeated
+  m_text: melee enemy defeated
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
   m_sharedMaterial: {fileID: 515699730400513198, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
@@ -12059,7 +12059,7 @@ GameObject:
   - component: {fileID: 772546550}
   - component: {fileID: 772546549}
   m_Layer: 5
-  m_Name: LogicErrorDeafeated (3)
+  m_Name: HeavyEnemyDefeated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12104,7 +12104,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: logicErrorDeafeated
+  m_text: heavy enemy defeated
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
   m_sharedMaterial: {fileID: 515699730400513198, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
@@ -12903,7 +12903,7 @@ GameObject:
   - component: {fileID: 846110346}
   - component: {fileID: 846110345}
   m_Layer: 5
-  m_Name: LogicErrorDeafeated (2)
+  m_Name: RangeEnemyDefeated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12948,7 +12948,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: logicErrorDeafeated
+  m_text: range enemy defeated
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
   m_sharedMaterial: {fileID: 515699730400513198, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
@@ -13919,7 +13919,7 @@ GameObject:
   - component: {fileID: 932276778}
   - component: {fileID: 932276777}
   m_Layer: 5
-  m_Name: LogicErrorDeafeated (1)
+  m_Name: MeleeEnemyDefeated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13964,7 +13964,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: logicErrorDeafeated
+  m_text: melee enemy defeated
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
   m_sharedMaterial: {fileID: 515699730400513198, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
@@ -17284,7 +17284,7 @@ GameObject:
   - component: {fileID: 1116363088}
   - component: {fileID: 1116363087}
   m_Layer: 5
-  m_Name: LogicErrorDeafeated (2)
+  m_Name: RangeEnemyDefeated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18276,7 +18276,7 @@ GameObject:
   - component: {fileID: 1158300194}
   - component: {fileID: 1158300193}
   m_Layer: 5
-  m_Name: LogicErrorDeafeated (1)
+  m_Name: MeleeEnemyDefeated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20504,7 +20504,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: runtimeError deafeated
+  m_text: runtime error deafeated
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
   m_sharedMaterial: {fileID: 515699730400513198, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
@@ -22936,7 +22936,7 @@ GameObject:
   - component: {fileID: 1539415582}
   - component: {fileID: 1539415581}
   m_Layer: 5
-  m_Name: LogicErrorDeafeated (1)
+  m_Name: MeleeEnemyDefeated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23327,7 +23327,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: logicErrorDeafeated
+  m_text: logic error deafeated
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
   m_sharedMaterial: {fileID: 515699730400513198, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
@@ -25805,7 +25805,7 @@ GameObject:
   - component: {fileID: 1790287451}
   - component: {fileID: 1790287450}
   m_Layer: 5
-  m_Name: LogicErrorDeafeated (3)
+  m_Name: HeavyEnemyDefeated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25850,7 +25850,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: logicErrorDeafeated
+  m_text: heavy enemy defeated
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
   m_sharedMaterial: {fileID: 515699730400513198, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
@@ -27614,7 +27614,7 @@ GameObject:
   - component: {fileID: 1920400846}
   - component: {fileID: 1920400845}
   m_Layer: 5
-  m_Name: LogicErrorDeafeated (2)
+  m_Name: RangeEnemyDefeated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27659,7 +27659,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: logicErrorDeafeated
+  m_text: range enemy defeated
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
   m_sharedMaterial: {fileID: 515699730400513198, guid: 3bfbcc5e80d87074abd4a1b3b12280d3, type: 2}
@@ -29815,7 +29815,7 @@ GameObject:
   - component: {fileID: 2068773464}
   - component: {fileID: 2068773463}
   m_Layer: 5
-  m_Name: LogicErrorDeafeated (3)
+  m_Name: HeavyEnemyDefeated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30204,7 +30204,7 @@ GameObject:
   - component: {fileID: 2104079218}
   - component: {fileID: 2104079217}
   m_Layer: 5
-  m_Name: LogicErrorDeafeated (2)
+  m_Name: RangeEnemyDefeated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

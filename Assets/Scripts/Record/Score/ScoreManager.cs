@@ -37,6 +37,11 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    public void SetCharacter(string character)
+    {
+        scoreData.character = character;
+    }
+
     public void AddWeapon(string name)
     {
         tempWeaponDamages.Add(name, 0);
