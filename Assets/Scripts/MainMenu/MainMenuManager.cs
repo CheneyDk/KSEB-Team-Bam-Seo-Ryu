@@ -15,6 +15,7 @@ public class MainMenuManager : MonoBehaviour
     public GameObject log;
     public GameObject detail;
     public GameObject record;
+    public GameObject shop;
     public Slider SoundSlider;
     public GameObject I_100;
     public GameObject I_66;
@@ -126,6 +127,8 @@ public class MainMenuManager : MonoBehaviour
 
     public void QuitGame()
     {
+        SaveLoadHelper.Save(ScoreManager.instance.recordData);
+
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
@@ -150,6 +153,10 @@ public class MainMenuManager : MonoBehaviour
             window.SetActive(false);
             RecordManager.instance.Calc();
         }
+        else if (panel == "Shop")
+        {
+            shop.SetActive(true);
+        }
     }
 
     public void ClosePanel(string panel)
@@ -165,6 +172,10 @@ public class MainMenuManager : MonoBehaviour
         else if (panel == "Record")
         {
             record.SetActive(false);
+        }
+        else if (panel == "Shop")
+        {
+            shop.SetActive(false);
         }
     }
 }
