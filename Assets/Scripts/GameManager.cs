@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public ScoreManager scmanager;
+
     [Header("Hide Mouse Cursor")]
     public bool hideMouse = false;
 
@@ -47,6 +49,10 @@ public class GameManager : MonoBehaviour
         PauseUI.SetActive(false);
         UpgradeUI.SetActive(false);
         Time.timeScale = 1f; // init
+    }
+
+    private void Start()
+    {
         ScoreManager.instance.ResetData();
     }
 

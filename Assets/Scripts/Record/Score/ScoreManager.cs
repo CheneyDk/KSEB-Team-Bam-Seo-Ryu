@@ -17,7 +17,7 @@ public class ScoreManager : MonoBehaviour
 
     public Dictionary<string, int> match = new Dictionary<string, int>
     {
-        {"W1", 0 },
+        {"CD", 0 },
         {"W2", 1 },
         {"W3", 2 },
         {"P1", 3 },

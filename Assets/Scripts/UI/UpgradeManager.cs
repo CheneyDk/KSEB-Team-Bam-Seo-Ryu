@@ -20,6 +20,7 @@ public class UpgradeManager : MonoBehaviour
     [Header("Weapon and Item")]
     public List<WeaponData> weaponDataList;
     public List<WeaponData> passiveDataList;
+    public List<WeaponData> buyWeaponDataList;
     // 선택지로 나오는 템들 (Max템이 있으면 제거 할라는 용도)
     private List<WeaponData> listForWeapons;
     private List<WeaponData> listForPassives;
@@ -54,6 +55,14 @@ public class UpgradeManager : MonoBehaviour
 
     private void Awake()
     {
+        foreach (var data in ScoreManager.instance.recordData.items)
+        {
+            if (data.isBought)
+            {
+                weaponDataList.Add(buyWeaponDataList[ScoreManager.instance.match[data.itemName]]);
+            }
+        }
+
         listForWeapons = new (weaponDataList);
         listForPassives = new (passiveDataList);
         animator = GetComponent<Animator>();

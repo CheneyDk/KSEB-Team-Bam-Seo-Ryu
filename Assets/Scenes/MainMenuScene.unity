@@ -12230,7 +12230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 196168144872739405, guid: 9e706600754fd5e47a4b69d2141e2ab9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: W1
+      value: CD
       objectReference: {fileID: 0}
     - target: {fileID: 3684011919398685121, guid: 9e706600754fd5e47a4b69d2141e2ab9, type: 3}
       propertyPath: m_Name

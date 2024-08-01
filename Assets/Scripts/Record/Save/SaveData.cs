@@ -14,7 +14,7 @@ public abstract class SaveData
     [SerializeField]
     public List<item> items = new List<item>
     {
-        new item("W1", false),
+        new item("CD", false),
         new item("W2", false),
         new item("W3", false),
         new item("P1", false),
