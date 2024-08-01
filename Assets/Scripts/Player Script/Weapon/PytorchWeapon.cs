@@ -20,6 +20,8 @@ public class PytorchWeapon : PlayerWeapon
     private Transform playerPos;
     private SpriteRenderer weaponSprite;
 
+    private bool isDestroyed = false;
+
     // init stats
     private void Start()
     {
@@ -106,6 +108,7 @@ public class PytorchWeapon : PlayerWeapon
         while (timer < duration)
         {
             await UniTask.Yield();
+            if (isDestroyed) return;
 
             tempColor.a = timer / duration;
             weaponSprite.color = tempColor;
@@ -135,6 +138,11 @@ public class PytorchWeapon : PlayerWeapon
 
         tempColor.a = 0f;
         weaponSprite.color = tempColor;
+    }
+
+    private void OnDestroy()
+    {
+        isDestroyed = true;
     }
 
     // dummy
