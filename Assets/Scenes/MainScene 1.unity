@@ -551,7 +551,7 @@ GameObject:
   - component: {fileID: 168133424}
   - component: {fileID: 168133426}
   - component: {fileID: 168133425}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wall Up
   m_TagString: HorizontalWall
   m_Icon: {fileID: 0}
@@ -5830,6 +5830,63 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &676436973
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3967779656545519921, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
+      propertyPath: m_Name
+      value: SnakeLogicError
+      objectReference: {fileID: 0}
+    - target: {fileID: 6425206775501427404, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.72352
+      objectReference: {fileID: 0}
+    - target: {fileID: 6425206775501427404, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -8.291728
+      objectReference: {fileID: 0}
+    - target: {fileID: 6425206775501427404, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6425206775501427404, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6425206775501427404, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6425206775501427404, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6425206775501427404, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6425206775501427404, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6425206775501427404, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6425206775501427404, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
 --- !u!1 &677427628
 GameObject:
   m_ObjectHideFlags: 0
@@ -10741,7 +10798,7 @@ GameObject:
   - component: {fileID: 1187695880}
   - component: {fileID: 1187695882}
   - component: {fileID: 1187695881}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall Left
   m_TagString: VerticalWall
   m_Icon: {fileID: 0}
@@ -11435,7 +11492,7 @@ GameObject:
   - component: {fileID: 1255584160}
   - component: {fileID: 1255584162}
   - component: {fileID: 1255584161}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall Right
   m_TagString: VerticalWall
   m_Icon: {fileID: 0}
@@ -17416,7 +17473,7 @@ GameObject:
   - component: {fileID: 1863956407}
   - component: {fileID: 1863956409}
   - component: {fileID: 1863956408}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wall Down
   m_TagString: HorizontalWall
   m_Icon: {fileID: 0}
@@ -18827,7 +18884,7 @@ MonoBehaviour:
   RESpawnGroupRadius: 1
   HESpawnRate: 5
   HESpawnStartTime: 1
-  HESpawnNumber: 0
+  HESpawnNumber: 1
   HESpawnGroupRadius: 1
   noSpawnRange: 15
   EnemySpawnRange: 30
@@ -19774,3 +19831,4 @@ SceneRoots:
   - {fileID: 1340869017}
   - {fileID: 671616493}
   - {fileID: 934351004}
+  - {fileID: 676436973}
