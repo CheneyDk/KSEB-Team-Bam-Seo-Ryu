@@ -2038,6 +2038,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 13adf7aa9830564439ca00fd6997293f, type: 2}
   - {fileID: 11400000, guid: df894a11d49451e47ae7752a547654f1, type: 2}
   - {fileID: 11400000, guid: bf27f4b7d137e2547badad8dfcbe3e09, type: 2}
+  buyWeaponDataList: []
   playerWeaponList: []
   playerPassiveList: []
   maxItemNumber: 4
@@ -17607,7 +17608,7 @@ MonoBehaviour:
   waveReached: {fileID: 1642839193}
   levelReached: {fileID: 1458246101}
   enemiesDefeated: {fileID: 288114171}
-  Right: {fileID: 1539338635}
+  setters: []
 --- !u!114 &1928414534
 MonoBehaviour:
   m_ObjectHideFlags: 0

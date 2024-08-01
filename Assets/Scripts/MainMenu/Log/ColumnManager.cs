@@ -12,11 +12,8 @@ public class ColumnManager : MonoBehaviour
     public TextMeshProUGUI damage;
     public TextMeshProUGUI dateTime;
 
-    private ScoreData data;
-
     public void setAll(ScoreData score)
     {
-        data = score;
         wave.text = score.waveReached.ToString();
         level.text = score.levelReached.ToString();
         kills.text = score.enemiesDeafeated.ToString();

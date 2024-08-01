@@ -6,6 +6,7 @@ using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -13,6 +14,16 @@ public class ScoreManager : MonoBehaviour
 
     public RecordData recordData { get; private set; }
     private ScoreData scoreData;
+
+    public Dictionary<string, int> match = new Dictionary<string, int>
+    {
+        {"CD", 0 },
+        {"W2", 1 },
+        {"W3", 2 },
+        {"P1", 3 },
+        {"P2", 4 },
+        {"P3", 5 }
+    };
 
     private Dictionary<string, float> tempWeaponDamages = new Dictionary<string, float>();
     public IReadOnlyDictionary<string, float> WeaponDamages => tempWeaponDamages;
@@ -35,6 +46,16 @@ public class ScoreManager : MonoBehaviour
         {
             return;
         }
+    }
+
+    public void SetCharacter(string character)
+    {
+        scoreData.character = character;
+    }
+
+    public string GetCharacter()
+    {
+        return scoreData.character;
     }
 
     public void AddWeapon(string name)
@@ -80,6 +101,17 @@ public class ScoreManager : MonoBehaviour
         };
 
         timer = DateTime.Now;
+
+        scoreData.character = SceneManager.GetActiveScene().name;
+        // 씬 이름 최종결정 시 삭제
+        if (scoreData.character == "UDD_Scene")
+        {
+            scoreData.character = "Python";
+        }
+        else if (scoreData.character == "MainScene 1")
+        {
+            scoreData.character = "C";
+        }
     }
 
     public void UpdateEnemiesDeafeated()

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -41,6 +41,11 @@ public class GameManager : MonoBehaviour
         PauseUI.SetActive(false);
         UpgradeUI.SetActive(false);
         Time.timeScale = 1f; // init
+    }
+
+    private void Start()
+    {
+        ScoreManager.instance.ResetData();
     }
 
     private void Update()

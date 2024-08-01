@@ -32,7 +32,7 @@ public class DetailPanel : MonoBehaviour
 
         foreach(WeaponDamagesData damageData in data.weaponDamagesData)
         {
-            setters[idx++].setAll(damageData, data.totalDamage);
+            setters[idx++].SetAll(damageData, data.totalDamage, data.character);
         }
     }
 }

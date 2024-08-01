@@ -14,8 +14,6 @@ public static class SaveLoadHelper
 
         var json = JsonUtility.ToJson(data);
         File.WriteAllText(data.GetFullPath(), json);
-
-        //Debug.Log("Data is Saved : " + data.GetFullPath());
     }
 
     public static RecordData Load(string fileName, string dir)
@@ -24,14 +22,11 @@ public static class SaveLoadHelper
 
         if (!File.Exists(fullPath))
         {
-            //Debug.LogError("There is no file : " + fullPath);
             return null;
         }
 
         var json = File.ReadAllText(fullPath);
         var data = JsonUtility.FromJson<RecordData>(json);
-
-        //Debug.Log("Data is Loaded : " + fullPath);
 
         return data;
     }
