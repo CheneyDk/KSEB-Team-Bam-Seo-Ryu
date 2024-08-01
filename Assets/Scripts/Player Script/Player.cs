@@ -201,6 +201,8 @@ public class Player : MonoBehaviour
 
     private void playerArmRotate()
     {
+        if (!GameManager.Instance.isGameContinue) return;
+
         // ���콺 ��ġ
         Vector2 mousePosition = Mouse.current.position.ReadValue();
         Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane));

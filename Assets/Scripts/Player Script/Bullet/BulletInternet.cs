@@ -57,7 +57,7 @@ public class BulletInternet : PlayerBullet
         // if bullet does not become bigger yet, fast return
         if (transform.localScale.x < radius) return;
 
-        var targetEnemies = Physics2D.OverlapCircleAll(transform.position, transform.localScale.x, 1 << 8);
+        var targetEnemies = Physics2D.OverlapCircleAll(transform.position, transform.localScale.x / 4, 1 << 8);
 
         // if there are no enemy, fast return
         if (targetEnemies.Length < 1) return;
