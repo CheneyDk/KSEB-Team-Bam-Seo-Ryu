@@ -16,7 +16,9 @@ MonoBehaviour:
   itemImage: {fileID: 21300000, guid: cad34ea3f2ec59a489dc13e0b86dc970, type: 3}
   itemName: Internet
   itemDesc: '{ Internet }'
-  passiveForPowerWeapon: 
-  powerImage: {fileID: 0}
-  powerName: 
-  powerDesc: 
+  powerImage: {fileID: -410068970, guid: 536315ee559dada408388d66c4b2aa7f, type: 3}
+  powerName: Internet++
+  powerDesc: '{ Faster Internet }'
+  curImage: {fileID: 21300000, guid: cad34ea3f2ec59a489dc13e0b86dc970, type: 3}
+  curName: Internet
+  curDesc: '{ Internet }'

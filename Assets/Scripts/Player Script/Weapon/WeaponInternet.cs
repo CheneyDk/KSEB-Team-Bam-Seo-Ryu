@@ -8,6 +8,7 @@ public class WeaponInternet : PlayerWeapon
     private float autoTargetRange = 15f;
     private Vector2 bulletVector;
     private float bulletRadius;
+    public GameObject powerBullet;
 
     void Start()
     {
@@ -16,10 +17,11 @@ public class WeaponInternet : PlayerWeapon
         weaponFireRate = 5f;
         weaponLevel = 1;
         bulletRadius = 15f; // max 25
+        isPowerWeapon = false;
+        matchPassive = "WiFi";
 
         // can fire imediately
         fireRateTimer = weaponFireRate;
-
     }
 
     void Update()
@@ -36,7 +38,7 @@ public class WeaponInternet : PlayerWeapon
 
         weaponLevel++;
         weaponDamageRate += 0.05f;
-        bulletRadius += 2f;
+        bulletRadius += 1f;
 
         if (weaponLevel > 4) isMaxLevel = true;
 
@@ -57,9 +59,18 @@ public class WeaponInternet : PlayerWeapon
             // reset Timer
             fireRateTimer = 0f;
 
-            var tempBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-            tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
-            tempBullet.GetComponent<BulletInternet>().SetBulletInternet(bulletVector, bulletRadius);
+            if (isPowerWeapon)
+            {
+                var tempBullet = Instantiate(powerBullet, transform.position, Quaternion.identity);
+                tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+                tempBullet.GetComponent<PowerInternetBulllet>().SetBulletInternet(bulletVector, bulletRadius);
+            }
+            else
+            {
+                var tempBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+                tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+                tempBullet.GetComponent<BulletInternet>().SetBulletInternet(bulletVector, bulletRadius);
+            }
 
         }
     }
