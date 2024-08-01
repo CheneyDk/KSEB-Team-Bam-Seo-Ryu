@@ -23,12 +23,15 @@ public class MainMenuManager : MonoBehaviour
     public GameObject I_0;
     public GameObject I_Except;
 
+    public Texture2D normalCursor;
+
     public LogManager logManager;
 
     private float Origin = 100;
 
     void Awake()
     {
+        Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
         instance = this;
     }
 

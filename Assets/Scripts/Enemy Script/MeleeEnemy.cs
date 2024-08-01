@@ -106,7 +106,7 @@ public class MeleeEnemy : Enemy
         meleeAni.SetBool("isDead", true);
         StartCoroutine("SetActiveToFalse");
         DropEXP(dropExpNumber);
-        ChanceToDropApple(10);
+        ChanceToDropApple(1);
         ChanceToDropRedBlue(0);
 
         ScoreManager.instance.UpdateEnemiesDeafeated();

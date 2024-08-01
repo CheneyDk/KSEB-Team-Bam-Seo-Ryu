@@ -2104,6 +2104,7 @@ MonoBehaviour:
   I_33: {fileID: 953991726}
   I_0: {fileID: 321219152}
   I_Except: {fileID: 85630021}
+  normalCursor: {fileID: 2800000, guid: 26c2c77dac299cb40bc833971175f9f9, type: 3}
   logManager: {fileID: 1876163507}
 --- !u!1 &129936270
 GameObject:

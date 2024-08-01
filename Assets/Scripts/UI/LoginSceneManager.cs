@@ -9,8 +9,11 @@ public class LoginSceneManager : MonoBehaviour
 
     public TextMeshProUGUI passwordText;
 
+    public Texture2D normalCursor;
+
     void Awake()
     {
+        Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
         instance = this;
     }
 

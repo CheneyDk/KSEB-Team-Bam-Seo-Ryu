@@ -787,6 +787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passwordText: {fileID: 1890973919}
+  normalCursor: {fileID: 2800000, guid: 26c2c77dac299cb40bc833971175f9f9, type: 3}
 --- !u!1 &721706541
 GameObject:
   m_ObjectHideFlags: 0
