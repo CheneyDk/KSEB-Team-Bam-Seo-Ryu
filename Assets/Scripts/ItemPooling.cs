@@ -73,7 +73,7 @@ public class ItemPooling : MonoBehaviour
         return item;
     }
 
-    public GameObject GetApple()
+    public GameObject GetApple(Vector3 spawnPos)
     {
         if (applePool.Count < 1)
         {
@@ -84,10 +84,11 @@ public class ItemPooling : MonoBehaviour
         item.GetComponent<Item>().isDestroyed = false;
         item.gameObject.layer = 6;
         item.gameObject.SetActive(true);
+        item.transform.position = spawnPos;
         return item;
     }
 
-    public GameObject GetRedBlue()
+    public GameObject GetRedBlue(Vector3 spawnPos)
     {
         if (redbluePool.Count < 1)
         {
@@ -98,6 +99,7 @@ public class ItemPooling : MonoBehaviour
         item.GetComponent<Item>().isDestroyed = false;
         item.gameObject.layer = 6;
         item.gameObject.SetActive(true);
+        item.transform.position = spawnPos;
         return item;
     }
 

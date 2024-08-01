@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using VInspector;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -15,39 +16,41 @@ public class EnemySpawner : MonoBehaviour
     public GameObject WarningPrefab;
     private WaveManager waveManager;
 
-    [Header("Max Enemy Number")]
+    [Foldout("Max Enemy Number")]
     public int MaxMeleeEnemy = 3;
     public int MaxRangeEnemy = 3;
     public int MaxHeavyEnemy = 3;
+    [EndFoldout]
 
-    [Header("Melee Enemy")]
+    [Tab("Melee Enemy")]
     public float MESpawnRate = 1f;
     public float MESpawnStartTime = 1f;
     public int MESpawnNumber = 3;
     public float MESpawnGroupRadius = 1f;
 
-    [Header("Range Enemy")]
+    [Tab("Range Enemy")]
     public float RESpawnRate = 1f;
     public float RESpawnStartTime = 1f;
     public int RESpawnNumber = 3;
     public float RESpawnGroupRadius = 1f;
 
-    [Header("Heavy Enemy")]
+    [Tab("Heavy Enemy")]
     public float HESpawnRate = 1f;
     public float HESpawnStartTime = 1f;
     public int HESpawnNumber = 3;
     public float HESpawnGroupRadius = 1f;
+    [EndTab]
 
-    [Header("Spawn Range")]
+    [Foldout("Spawn Range")]
     public float noSpawnRange = 5f;
     public float EnemySpawnRange = 10f;
 
-    [Header("Warning Settings"), SerializeField]
+    [Foldout("Warning Settings"), SerializeField]
     private float warningTime = 1f;
 
     private int nowWave;
 
-    [Header("Object Pooling")]
+    [Foldout("Object Pooling")]
     [SerializeField]
     private int numberToPool;
     [SerializeField]
@@ -55,6 +58,7 @@ public class EnemySpawner : MonoBehaviour
     private List<GameObject> pooledMeleeEnemies = new List<GameObject>();
     private List<GameObject> pooledRangeEnemies = new List<GameObject>();
     private List<GameObject> pooledHeavyEnemies = new List<GameObject>();
+    [EndFoldout]
 
     private void Awake()
     {

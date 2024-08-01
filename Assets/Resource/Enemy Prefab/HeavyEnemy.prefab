@@ -281,7 +281,7 @@ MonoBehaviour:
   dropExpNumber: 3
   healingItem: {fileID: 256046693093680286, guid: 9b4d105ecc7ec8444a24bfdfbcc172d3, type: 3}
   redbuleItem: {fileID: 9016300061562779816, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
-  hitParticle: {fileID: 1528982776129457494}
+  hitParticle: {fileID: 5887403672603289517, guid: 0b91319fbe427db4b8121f5e8db42064, type: 3}
   damageNumber: {fileID: 1848622758658849530, guid: 1928df38c9c7b7342a2a95eeab8f991d, type: 3}
   lastingDamageNumber: {fileID: 1848622758658849530, guid: 94b7e5789fc284b4eba92f18cad04c72, type: 3}
 --- !u!58 &7133866450221708888
@@ -384,11 +384,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7ba99bfc6842f245a899b0c2ca579c3, type: 3}
---- !u!198 &1528982776129457494 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5539699917983100254, guid: f7ba99bfc6842f245a899b0c2ca579c3, type: 3}
-  m_PrefabInstance: {fileID: 6474203750688333832}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3328996657466615247 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8640726325780612551, guid: f7ba99bfc6842f245a899b0c2ca579c3, type: 3}

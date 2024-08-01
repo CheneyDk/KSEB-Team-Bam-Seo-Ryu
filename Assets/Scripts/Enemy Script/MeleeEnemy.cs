@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using VInspector;
 
 public class MeleeEnemy : Enemy
 {
-    [Header("Enemy Information")]
+    [Foldout("Enemy Information")]
     [SerializeField]
     private float MeleeEnemyMaxHp = 20f;
     [SerializeField]
@@ -15,6 +16,7 @@ public class MeleeEnemy : Enemy
     private float MeleeEnemyAtk = 5f;
     [SerializeField]
     private float MeleeEnemyMoveSpeed =10f;
+    [EndFoldout]
 
     [Header("Exp")]
     [SerializeField]
@@ -88,7 +90,7 @@ public class MeleeEnemy : Enemy
 
     public override void TakeDamage(float damage)
     {
-        hitParticle.Play();
+        Instantiate(hitParticle, transform.position, Quaternion.identity);
         damageNumber.Spawn(transform.position, damage);
         MeleeEnemyCurtHP -= damage; 
         if (MeleeEnemyCurtHP <= 0)
@@ -104,7 +106,7 @@ public class MeleeEnemy : Enemy
         meleeAni.SetBool("isDead", true);
         StartCoroutine("SetActiveToFalse");
         DropEXP(dropExpNumber);
-        ChanceToDropApple(1);
+        ChanceToDropApple(10);
         ChanceToDropRedBlue(0);
 
         ScoreManager.instance.UpdateEnemiesDeafeated();
@@ -170,7 +172,7 @@ public class MeleeEnemy : Enemy
         var randomChance = Random.Range(1, 11);
         if (randomChance <= chance)
         {
-            ItemPooling.Instance.GetApple();
+            ItemPooling.Instance.GetApple(transform.position);
         }
     }
     private void ChanceToDropRedBlue(int chance)
@@ -178,7 +180,7 @@ public class MeleeEnemy : Enemy
         var randomChance = Random.Range(1, 11);
         if (randomChance <= chance)
         {
-            ItemPooling.Instance.GetRedBlue();
+            ItemPooling.Instance.GetRedBlue(transform.position);
         }
     }
 

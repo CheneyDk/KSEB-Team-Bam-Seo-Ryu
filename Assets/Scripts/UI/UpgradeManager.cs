@@ -277,11 +277,11 @@ public class UpgradeManager : MonoBehaviour
         {
             if(item.itemName == "Apple")
             {
-                ItemPooling.Instance.GetApple();
+                ItemPooling.Instance.GetApple(GameObject.FindGameObjectWithTag("Player").transform.position);
             }
             else if (item.itemName == "RedBlue")
             {
-                ItemPooling.Instance.GetRedBlue();
+                ItemPooling.Instance.GetRedBlue(GameObject.FindGameObjectWithTag("Player").transform.position);
             }
         }
 

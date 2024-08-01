@@ -3,10 +3,11 @@ using DamageNumbersPro;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VInspector;
 
 public class RangeEnemy : Enemy
 {
-    [Header("Enemy Information")]
+    [Foldout("Enemy Information")]
     [SerializeField]
     private float RangeEnemyMaxHp = 10f;
     [SerializeField]
@@ -22,6 +23,7 @@ public class RangeEnemy : Enemy
     [SerializeField]
     private float bulletSpeed = 5f;
     private float rotationSpeed = 10f;
+    [EndFoldout]
 
     public GameObject bulletPrefab;
 
@@ -123,7 +125,7 @@ public class RangeEnemy : Enemy
 
     public override void TakeDamage(float damage)
     {
-        hitParticle.Play();
+        Instantiate(hitParticle, transform.position, Quaternion.identity);
         damageNumber.Spawn(transform.position, damage);
         RangeEnemyCurtHP -= damage;
         if (RangeEnemyCurtHP <= 0)
@@ -204,7 +206,7 @@ public class RangeEnemy : Enemy
         var randomChance = Random.Range(1, 11);
         if (randomChance <= chance)
         {
-            ItemPooling.Instance.GetApple();
+            ItemPooling.Instance.GetApple(transform.position);
         }
     }
     private void ChanceToDropRedBlue(int chance)
@@ -212,7 +214,7 @@ public class RangeEnemy : Enemy
         var randomChance = Random.Range(1, 11);
         if (randomChance <= chance)
         {
-            ItemPooling.Instance.GetRedBlue();
+            ItemPooling.Instance.GetRedBlue(transform.position);
         }
     }
 

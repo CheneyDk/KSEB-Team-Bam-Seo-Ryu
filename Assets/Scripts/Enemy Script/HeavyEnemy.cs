@@ -2,10 +2,11 @@ using DamageNumbersPro;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VInspector;
 
 public class HeavyEnemy : Enemy
 {
-    [Header("Enemy Information")]
+    [Foldout("Enemy Information")]
     [SerializeField]
     private float HeavyEnemyMaxHp = 40f;
     [SerializeField]
@@ -14,6 +15,7 @@ public class HeavyEnemy : Enemy
     private float HeavyEnemyAtk = 10f;
     [SerializeField]
     private float HeavyEnemyMoveSpeed = 5f;
+    [EndFoldout]
 
     [Header("Dash")]
     public float dashSpeed = 15f;
@@ -120,7 +122,7 @@ public class HeavyEnemy : Enemy
 
     public override void TakeDamage(float damage)
     {
-        hitParticle.Play();
+        Instantiate(hitParticle, transform.position, Quaternion.identity);
         damageNumber.Spawn(transform.position, damage);
         HeavyEnemyCurtHP -= damage;
         if (HeavyEnemyCurtHP <= 0)
@@ -179,7 +181,7 @@ public class HeavyEnemy : Enemy
         var randomChance = Random.Range(1, 11);
         if (randomChance <= chance)
         {
-            ItemPooling.Instance.GetApple();
+            ItemPooling.Instance.GetApple(transform.position);
         }
     }
     private void ChanceToDropRedBlue(int chance)
@@ -187,7 +189,7 @@ public class HeavyEnemy : Enemy
         var randomChance = Random.Range(1, 11);
         if (randomChance <= chance)
         {
-            ItemPooling.Instance.GetRedBlue();
+            ItemPooling.Instance.GetRedBlue(transform.position);
         }
     }
 

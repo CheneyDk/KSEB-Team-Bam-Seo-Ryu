@@ -8,6 +8,8 @@ public class ReactBullet : PlayerBullet
 
     public SpriteRenderer spriteRenderer;
 
+    public ParticleSystem reactParticle;
+
     private void Start()
     {
         myCollider = GetComponent<CircleCollider2D>();
@@ -26,10 +28,16 @@ public class ReactBullet : PlayerBullet
         }
     }
 
+    private void ParticleStart()
+    {
+        Instantiate(reactParticle, transform.position, Quaternion.identity);
+    }
+
     private void DestroyBullet()
     {
         Destroy(gameObject);
     }
+
 
     public override void ChangeSprite(Sprite powerWeapon)
     {

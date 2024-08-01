@@ -122,6 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 0
   spriteRenderer: {fileID: 1932242702466225548}
+  reactParticle: {fileID: 2865608717676348864, guid: d8a835b185b995b4cbb468093b79e85a, type: 3}
 --- !u!58 &93126861420984451
 CircleCollider2D:
   m_ObjectHideFlags: 0
