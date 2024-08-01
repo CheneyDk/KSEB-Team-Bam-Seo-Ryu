@@ -25,6 +25,6 @@ public class ResultSetter : MonoBehaviour
         weaponName.text = name;
         weaponDamage.text = damage.ToString();
 
-        graph.GetComponent<RectTransform>().sizeDelta = new Vector2(damage / ScoreManager.instance.GetTotalDamages() * 175, 25);
+        graph.GetComponent<RectTransform>().sizeDelta = new Vector2(damage / ScoreManager.instance.GetTotalDamages() * 160, 24);
     }
 }

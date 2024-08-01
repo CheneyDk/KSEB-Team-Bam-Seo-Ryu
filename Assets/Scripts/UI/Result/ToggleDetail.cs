@@ -8,9 +8,11 @@ using System;
 
 public class ToggleDetail : MonoBehaviour
 {
-    public Canvas bottom;
+    public TextMeshProUGUI GameOvetText;
+    
     public GameObject window;
     public GameObject result;
+    public GameObject bottom;
     public Button button;
 
     public TextMeshProUGUI survived;
@@ -22,13 +24,18 @@ public class ToggleDetail : MonoBehaviour
 
     private bool flag = true;
 
+    private void Awake()
+    {
+        GameOvetText.text = ScoreManager.instance.GetCharacter() + ".exe has stopped working";
+    }
+
     public void Toggle()
     {
         result.SetActive(flag);
 
         if (flag) 
         {
-            window.transform.Translate(new Vector3(0, 120, 0));
+            window.transform.Translate(new Vector3(0, 80, 0));
             bottom.transform.Translate(new Vector3(0, -220, 0));
             flag = false;
             Image buttonImage = button.GetComponent<Image>();
@@ -52,7 +59,7 @@ public class ToggleDetail : MonoBehaviour
         }
         else
         {
-            window.transform.Translate(new Vector3(0, -120, 0));
+            window.transform.Translate(new Vector3(0, -80, 0));
             bottom.transform.Translate(new Vector3(0, 220, 0));
             flag = true;
             Image buttonImage = button.GetComponent<Image>();
