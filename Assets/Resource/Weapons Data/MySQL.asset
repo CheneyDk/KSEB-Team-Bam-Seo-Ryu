@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eca71ca24a078264b9780d1aee7c37ec, type: 3}
-  m_Name: MySQLData
+  m_Name: MySQL
   m_EditorClassIdentifier: 
   item: {fileID: 1510536386484217596, guid: 05e319a9d203c45419ffec3f471dfc02, type: 3}
   itemImage: {fileID: 21300000, guid: 4d4e940847fdb2047aaf0ab2e7d1f132, type: 3}

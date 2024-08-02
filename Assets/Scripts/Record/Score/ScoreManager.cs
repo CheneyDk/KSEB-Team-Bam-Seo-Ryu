@@ -15,16 +15,6 @@ public class ScoreManager : MonoBehaviour
     public RecordData recordData { get; private set; }
     private ScoreData scoreData;
 
-    public Dictionary<string, int> match = new Dictionary<string, int>
-    {
-        {"CD", 0 },
-        {"W2", 1 },
-        {"W3", 2 },
-        {"P1", 3 },
-        {"P2", 4 },
-        {"P3", 5 }
-    };
-
     private Dictionary<string, float> tempWeaponDamages = new Dictionary<string, float>();
     public IReadOnlyDictionary<string, float> WeaponDamages => tempWeaponDamages;
 
