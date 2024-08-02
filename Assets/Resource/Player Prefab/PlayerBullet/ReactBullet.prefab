@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1851416759072398397}
   - component: {fileID: 3484882311215005965}
   - component: {fileID: 93126861420984451}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ReactBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

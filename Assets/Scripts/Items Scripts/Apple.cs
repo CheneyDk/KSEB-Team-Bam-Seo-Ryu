@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Apple : Item
 {
+    public ParticleSystem healParticle;
+
     private void Awake()
     {
         value = 10f;
@@ -16,6 +18,7 @@ public class Apple : Item
             var playerObj = collision.GetComponent<Player>();
             playerObj.GetHpPotion(value);
             isDestroyed = true;
+            Instantiate(healParticle, transform.position, Quaternion.Euler(-90f,0,0));
             ItemPooling.Instance.ReturnApple(gameObject);
         }
     }

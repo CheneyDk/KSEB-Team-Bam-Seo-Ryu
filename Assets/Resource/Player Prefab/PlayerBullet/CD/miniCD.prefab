@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 635849902835797838}
   - component: {fileID: 4861678145878211093}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 6669337879748654555}
   - component: {fileID: 6591301683268060590}
   - component: {fileID: 4861770532064581715}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: miniCD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,3 +188,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 0
+  CDparticle: {fileID: 339284107043860550, guid: c30d66c52169812428e32f26a3ad209e, type: 3}

@@ -13,6 +13,8 @@ public class CDBullet : PlayerBullet
 
     public SpriteRenderer spriteRenderer;
 
+    public ParticleSystem CDParticle;
+
     private void Start()
     {
         bulletSpeed = 5f;
@@ -40,6 +42,7 @@ public class CDBullet : PlayerBullet
             var enemyComponent = collision.GetComponent<Enemy>();
             if (enemyComponent != null)
             {
+                Instantiate(CDParticle, transform.position, Quaternion.identity);
                 enemyComponent.TakeDamage(bulletDamage);
                 ScoreManager.instance.UpdateDamage("CD", bulletDamage);
             }

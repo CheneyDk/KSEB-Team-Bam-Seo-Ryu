@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1770281023350250558}
   - component: {fileID: 3090459483746975422}
   - component: {fileID: 6562767589553458410}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,6 +86,7 @@ MonoBehaviour:
   range: 10
   miniCD: {fileID: 5740476075470546779, guid: 55432458fe000134caef04c46b67e7dc, type: 3}
   spriteRenderer: {fileID: 2330122064806285653}
+  CDParticle: {fileID: 339284107043860550, guid: c30d66c52169812428e32f26a3ad209e, type: 3}
 --- !u!95 &6562767589553458410
 Animator:
   serializedVersion: 5
@@ -117,7 +118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2069694586585261465}
   - component: {fileID: 2330122064806285653}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CD
   m_TagString: Untagged
   m_Icon: {fileID: 0}

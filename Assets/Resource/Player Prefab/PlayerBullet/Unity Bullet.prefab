@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -2767137924687111995}
   - component: {fileID: -4011122890957173510}
   - component: {fileID: 8928032420733879611}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Unity Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6445268420965123935}
   - component: {fileID: 2921292525299001276}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Unity
   m_TagString: Untagged
   m_Icon: {fileID: 0}

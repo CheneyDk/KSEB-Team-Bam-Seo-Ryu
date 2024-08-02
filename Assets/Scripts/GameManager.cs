@@ -148,6 +148,13 @@ public class GameManager : MonoBehaviour
 
     private void ChangeMouseCursor(Texture2D cursor)
     {
-        Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
+        if(cursor == aimCursor)
+        {
+            Cursor.SetCursor(cursor, new Vector2(80,80), CursorMode.Auto);
+        }
+        else
+        {
+            Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
+        }
     }
 }

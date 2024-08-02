@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDestroyed: 0
+  healParticle: {fileID: 3917867675521001445, guid: 236c90f5ade20ad4b82fec4f8eb3ad41, type: 3}
 --- !u!58 &-8137724788746323438
 CircleCollider2D:
   m_ObjectHideFlags: 0

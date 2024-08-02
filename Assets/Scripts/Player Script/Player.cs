@@ -74,9 +74,12 @@ public class Player : MonoBehaviour
 
     private Collider2D playerCollider;
     private List<Collider2D> ignoredColliders = new List<Collider2D>();
+    private Animator playAnimator;
+    public Animator hitUIAnimator;
 
     private void Awake()
     {
+        playAnimator = GetComponent<Animator>();
         material = GetComponent<Renderer>().material;
         playerCollider = GetComponent<Collider2D>();
 
@@ -160,7 +163,7 @@ public class Player : MonoBehaviour
         constText.SetActive(true);
 
         // temp sprint visual effects
-        material.EnableKeyword("GLOW_ON");
+        playAnimator.Play("Sprint");
 
 
         // invincible & move speed
@@ -195,7 +198,7 @@ public class Player : MonoBehaviour
 
         IgnoreEnemyCollisions(false);
         // flag -- YH: for test
-        material.DisableKeyword("GLOW_ON");
+        playAnimator.Play("Idle");
         constText.SetActive(false);
     }
 
@@ -203,7 +206,6 @@ public class Player : MonoBehaviour
     {
         if (!GameManager.Instance.isGameContinue) return;
 
-        // ���콺 ��ġ
         Vector2 mousePosition = Mouse.current.position.ReadValue();
         Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane));
         
@@ -219,6 +221,9 @@ public class Player : MonoBehaviour
     {
         if (isInvincible) return; // if invincible -> do not take any damage
         damageNumber.Spawn(transform.position, damage);
+        playAnimator.Play("TakeDamage");
+        hitUIAnimator.Play("HitUI");
+
         // game over: destroy
         playerCurHp -= damage;
         if (playerCurHp <= 0)

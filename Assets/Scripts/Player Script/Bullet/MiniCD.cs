@@ -8,6 +8,8 @@ public class MiniCD : PlayerBullet
 
     private SpriteRenderer spriteRenderer;
 
+    public ParticleSystem CDparticle;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -23,6 +25,7 @@ public class MiniCD : PlayerBullet
             var enemyComponent = collision.GetComponent<Enemy>();
             if (enemyComponent != null)
             {
+                Instantiate(CDparticle, transform.position, Quaternion.identity);
                 enemyComponent.TakeDamage(player.playerAtk * 0.5f);
                 ScoreManager.instance.UpdateDamage("CD", player.playerAtk * 0.5f);
             }
