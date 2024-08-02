@@ -104,7 +104,7 @@ public class ScoreManager : MonoBehaviour
 
         scoreData.character = SceneManager.GetActiveScene().name;
         // 씬 이름 최종결정 시 삭제
-        if (scoreData.character == "UDD_Scene")
+        if (scoreData.character == "UDD")
         {
             scoreData.character = "Python";
         }
