@@ -21,9 +21,8 @@ public class PytorchBullet : PlayerBullet
 
     private Vector2 targetPos;
 
-    // lasting dmg vars
-    private float bulletLastingDamage;
-    private Color pytorchColor = new Color(238, 68, 34);
+    private bool isPowerWeapon;
+    public GameObject subBullet;
 
     // vfx
     public ParticleSystem particle;
@@ -40,11 +39,11 @@ public class PytorchBullet : PlayerBullet
         transform.Translate(bulletVector * bulletSpeed * Time.deltaTime);
     }
 
-    public void SetPytorchBullet(Vector2 fallPos, float explodeRange, float lastingDmg)
+    public void SetPytorchBullet(Vector2 fallPos, float explodeRange, bool power)
     {
         targetPos = fallPos;
         bulletExplodeRange = explodeRange;
-        bulletLastingDamage = lastingDmg;
+        isPowerWeapon = power;
     }
 
     private async UniTask BulletOrbit()
@@ -84,13 +83,26 @@ public class PytorchBullet : PlayerBullet
         // effects needed
         WaitVFX().Forget();
 
-        if (enemies == null) return;
-        
-        foreach (var enemy in enemies)
+        if (enemies != null)
         {
-            enemy.GetComponent<Enemy>().TakeDamage(bulletDamage);
-            ScoreManager.instance.UpdateDamage("Pytorch", bulletDamage);
-            // enemy.GetComponent<Enemy>().LastingDamage(bulletLastingDamage, 3, pytorchColor);
+            foreach (var enemy in enemies)
+            {
+                enemy.GetComponent<Enemy>().TakeDamage(bulletDamage);
+                ScoreManager.instance.UpdateDamage("Pytorch", bulletDamage);
+                // enemy.GetComponent<Enemy>().LastingDamage(bulletLastingDamage, 3, pytorchColor);
+            }
+        }
+        if (isPowerWeapon) ClusterSpread();
+    }
+
+    private void ClusterSpread()
+    {
+        float angle = 0f;
+        for (int i = 0; i < 4; i++)
+        {
+            angle = 90 * i;
+            var tempBullet = Instantiate(subBullet, transform.position, Quaternion.Euler(0f, 0f, angle));
+            tempBullet.GetComponent<PlayerBullet>().Init(bulletDamage / 4);
         }
     }
 
@@ -101,7 +113,7 @@ public class PytorchBullet : PlayerBullet
         spriteRenderer.color = tempColor;
         particle.Play();
         await UniTask.WaitForSeconds(1f);
-        GameObject.Destroy(gameObject);
+        Destroy(gameObject);
     }
 
     // dummy

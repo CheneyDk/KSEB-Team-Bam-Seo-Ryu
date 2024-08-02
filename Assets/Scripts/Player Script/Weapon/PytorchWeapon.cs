@@ -11,14 +11,14 @@ public class PytorchWeapon : PlayerWeapon
     public float pytorchFireInterval;
     // private float lastingDamageRate;
 
-    private float weaponLastingDamageRate;
-
     private float bulletFallRange;
     private float bulletExplodeRange;
     private float fireRateRevisingValue; // 공속 보정값
 
     private Transform playerPos;
     private SpriteRenderer weaponSprite;
+    private SpriteRenderer bulletSprite;
+    private Color pytorchColor;
 
     private bool isDestroyed = false;
 
@@ -26,13 +26,11 @@ public class PytorchWeapon : PlayerWeapon
     private void Start()
     {
         weaponDamageRate = 1f;
-        weaponLastingDamageRate = 0.2f;
 
         fireRateRevisingValue = 15f;
         // when playerAtkSpeed = 1, fireRate = 20
         // when playerAtkSpeed = 2, fireRate = 17.5
         weaponFireRate = 5f * MathF.Pow(2f, player.playerAtkSpeed - 1f) + fireRateRevisingValue;
-        // lastingDamageRate = 0.2f;
         pytorchFireInterval = 0.25f; // 1: 0.25
         bulletNum = 20; // 1: 10
 
@@ -42,6 +40,15 @@ public class PytorchWeapon : PlayerWeapon
         playerPos = player.transform;
 
         weaponSprite = gameObject.GetComponent<SpriteRenderer>();
+        bulletSprite = bullet.GetComponent<SpriteRenderer>();
+
+        pytorchColor = new Color(1f, 0.2f, 0f);
+        bulletSprite.color = pytorchColor;
+
+        isPowerWeapon = false;
+        matchPassive = "Overclock";
+
+        SpriteChange().Forget();
 
         // async routine
         Fire();
@@ -84,7 +91,7 @@ public class PytorchWeapon : PlayerWeapon
                 var tempBullet = Instantiate(bullet, transform.position, Quaternion.identity);
                 tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
                 // set bullet drop pos
-                tempBullet.GetComponent<PytorchBullet>().SetPytorchBullet(bulletFallPos, bulletExplodeRange, player.playerAtk * weaponLastingDamageRate);
+                tempBullet.GetComponent<PytorchBullet>().SetPytorchBullet(bulletFallPos, bulletExplodeRange, isPowerWeapon);
 
                 await UniTask.WaitForSeconds(pytorchFireInterval);
             }
@@ -140,9 +147,25 @@ public class PytorchWeapon : PlayerWeapon
         weaponSprite.color = tempColor;
     }
 
+    private async UniTask SpriteChange()
+    {
+        await UniTask.WaitUntil(() => isPowerWeapon);
+        if (isDestroyed) return;
+        weaponSprite.sprite = powerWeaponSprite;
+        var tempColor = weaponSprite.color;
+        tempColor = new Color(1f, 1f, 1f, tempColor.a);
+        weaponSprite.color = tempColor;
+
+        bulletSprite.sprite = powerWeaponSprite;
+        tempColor.a = 1f;
+        bulletSprite.color = tempColor;
+    }
+
     private void OnDestroy()
     {
         isDestroyed = true;
+        bulletSprite.sprite = normalWeaponSprite;
+        bulletSprite.color = pytorchColor;
     }
 
     // dummy
