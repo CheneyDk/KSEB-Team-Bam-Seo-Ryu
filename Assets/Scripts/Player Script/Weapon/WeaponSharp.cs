@@ -75,6 +75,13 @@ public class WeaponSharp : PlayerWeapon
         {
             var tempBullet = Instantiate(bullet, muzzle.position, muzzle.rotation);
             tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+            int random = Random.Range(0, 100);
+            if (isPowerWeapon && random > 45)
+            {
+                var randPos = muzzle.position + new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f));
+                tempBullet = Instantiate(bullet, muzzle.position, muzzle.rotation);
+                tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+            }
             await UniTask.WaitForSeconds(weaponSharpFireInterval);
         }
     }
@@ -93,6 +100,11 @@ public class WeaponSharp : PlayerWeapon
         bulletNum += 1;
 
         if (weaponLevel > 4) isMaxLevel = true;
+    }
+
+    public void isPowerWeaponTrue()
+    {
+        isPowerWeapon = true;
     }
 
     // dummy override

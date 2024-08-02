@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 899c0feaacad30f448216b9dfa40a7b7
+guid: 46037a3ed3e8f5041b49f1fa91f3d241
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -108,18 +108,62 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: PowerPytorch_0
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 280
+        width: 152
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea52389b485baf34d90c8db69cdd5cb1
+      internalID: 1972222978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PowerPytorch_1
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 84
+        width: 44
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec862d0ee1719fc4da19d7dccaf1f325
+      internalID: 2082495629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 8f22d4243a290ed4584f176492818496
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PowerPytorch_0: 1972222978
+      PowerPytorch_1: 2082495629
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

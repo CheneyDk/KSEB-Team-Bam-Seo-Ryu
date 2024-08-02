@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3778869461903562941}
   - component: {fileID: 6739224976897554993}
   m_Layer: 0
-  m_Name: PytorchBulletTest
+  m_Name: PytorchBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2bac56dd8c539e140a7dd97a7e014725, type: 3}
-  m_Color: {r: 0.91372555, g: 0.2627451, b: 0.12941177, a: 1}
+  m_Color: {r: 1, g: 0.2, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 0
+  subBullet: {fileID: 599657670075773915, guid: 82c6b44af550c284191b7ce884329376, type: 3}
   particle: {fileID: 2252413664233768104}
 --- !u!1001 &2252413664215554920
 PrefabInstance:

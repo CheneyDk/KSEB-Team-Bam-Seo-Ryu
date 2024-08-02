@@ -18,7 +18,7 @@ public class WeaponInternet : PlayerWeapon
         weaponLevel = 1;
         bulletRadius = 15f; // max 25
         isPowerWeapon = false;
-        matchPassive = "WiFi";
+        matchPassive = "Wifi";
 
         // can fire imediately
         fireRateTimer = weaponFireRate;
