@@ -12,15 +12,11 @@ public abstract class SaveData
     [SerializeField] public int money;
 
     [SerializeField]
-    public List<item> items = new List<item>
-    {
-        new item("CD", false),
-        new item("W2", false),
-        new item("W3", false),
-        new item("P1", false),
-        new item("P2", false),
-        new item("P3", false)
-    };
+    public List<string> installedItems = new List<string>();
+
+    [SerializeField]
+    public bool isPet;
+    public bool isPetUpgrade;
 
     public SaveData(string _fileName, string _directory)
     {
@@ -75,17 +71,4 @@ public class WeaponDamagesData
 {
     public string weaponName;
     public float damage;
-}
-
-[System.Serializable]
-public class item
-{
-    public string itemName;
-    public bool isBought;
-
-    public item(string itemName, bool isBought)
-    {
-        this.itemName = itemName;
-        this.isBought = isBought;
-    }
 }

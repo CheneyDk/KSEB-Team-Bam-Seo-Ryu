@@ -18,9 +18,9 @@ public class UpgradeManager : MonoBehaviour
 
     // 전체 무기, 템들
     [Header("Weapon and Passive")]
+    public List<WeaponData> allWeaponDataList;
     public List<WeaponData> weaponDataList;
     public List<WeaponData> passiveDataList;
-    public List<WeaponData> buyWeaponDataList;
     // 선택지로 나오는 템들 (Max템이 있으면 제거 할라는 용도)
     private List<WeaponData> listForWeapons;
     private List<WeaponData> listForPassives;
@@ -53,14 +53,18 @@ public class UpgradeManager : MonoBehaviour
 
     private Animator animator;
 
+    public Dictionary<string, WeaponData> weaponDataDict = new Dictionary<string, WeaponData>();
+
     private void Awake()
     {
-        foreach (var data in ScoreManager.instance.recordData.items)
+        foreach(var data in allWeaponDataList)
         {
-            if (data.isBought)
-            {
-                weaponDataList.Add(buyWeaponDataList[ScoreManager.instance.match[data.itemName]]);
-            }
+            weaponDataDict.Add(data.name, data);
+        }
+
+        foreach (string name in ScoreManager.instance.recordData.installedItems)
+        {
+            weaponDataList.Add(weaponDataDict[name]);
         }
 
         listForWeapons = new (weaponDataList);
