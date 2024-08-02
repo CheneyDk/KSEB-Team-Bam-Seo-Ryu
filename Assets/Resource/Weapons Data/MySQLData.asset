@@ -16,7 +16,9 @@ MonoBehaviour:
   itemImage: {fileID: 21300000, guid: 4d4e940847fdb2047aaf0ab2e7d1f132, type: 3}
   itemName: MySQL
   itemDesc: '{ MySQL }'
-  passiveForPowerWeapon: 
-  powerImage: {fileID: 0}
-  powerName: 
-  powerDesc: 
+  powerImage: {fileID: 21300000, guid: 4a9cd4a1f2e19f6499b5d11092542c1c, type: 3}
+  powerName: MyOrcale++
+  powerDesc: '{ Orca ! }'
+  curImage: {fileID: 21300000, guid: 4d4e940847fdb2047aaf0ab2e7d1f132, type: 3}
+  curName: MySQL
+  curDesc: '{ MySQL }'

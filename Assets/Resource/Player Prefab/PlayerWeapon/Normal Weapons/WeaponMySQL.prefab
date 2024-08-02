@@ -97,7 +97,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59faf7f60b5cb95429c61693100dc366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletNum: 1
+  weaponDamageRate: 0
+  weaponLevel: 1
   isMaxLevel: 0
+  isPowerWeapon: 0
+  matchPassive: 
   muzzle: {fileID: 8100203599619735773, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
+  muzzle_sub: {fileID: 0}
   bullet: {fileID: 1935871724421768294, guid: f11264c38bb77f649babae0f0c2e278d, type: 3}
+  bullet_sub: {fileID: 0}
+  normalWeaponSprite: {fileID: 21300000, guid: 4d4e940847fdb2047aaf0ab2e7d1f132, type: 3}
+  powerWeaponSprite: {fileID: 21300000, guid: 4a9cd4a1f2e19f6499b5d11092542c1c, type: 3}
+  powerBullet: {fileID: 4677788163814867121, guid: 89d6ea0fd0bda2341bc4cd1c93e65914, type: 3}

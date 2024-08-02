@@ -9,6 +9,7 @@ public class WeaponMySQL : PlayerWeapon
     private float bulletFireInterval = 0.5f;
     private Quaternion rotateRight = new(0f, 180f, 0f, 1f);
     private Quaternion rotateLeft = new(0f, 0f, 0f, 1f);
+    public GameObject powerBullet;
 
     private void Start()
     {
@@ -46,21 +47,43 @@ public class WeaponMySQL : PlayerWeapon
 
     private async UniTask ThrowSQL()
     {
-        // right side
-        for (int i = 0; i < bulletNum; i++)
+        if (isPowerWeapon)
         {
-            var tempBulletRight = Instantiate(bullet, muzzle.position, rotateRight);
-            tempBulletRight.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
-        }
-        
-        await UniTask.WaitForSeconds(bulletFireInterval); // 0.5f
+            for (int j = 0; j < 2; j++)
+            {
+                // first shot
+                for (int i = 0; i < bulletNum; i++)
+                {
+                    var tempBulletRight = Instantiate(powerBullet, muzzle.position, rotateRight);
+                    tempBulletRight.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+                    var tempBulletLeft = Instantiate(powerBullet, muzzle.position, rotateLeft);
+                    tempBulletLeft.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+                }
 
-        // left side
-        for (int i = 0;i < bulletNum;i++)
-        {
-            var tempBulletLeft = Instantiate(bullet, muzzle.position, rotateLeft);
-            tempBulletLeft.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+                await UniTask.WaitForSeconds(bulletFireInterval); // 0.5f
+            }
+            
         }
+        else
+        {
+            // right side
+            for (int i = 0; i < bulletNum; i++)
+            {
+                var tempBulletRight = Instantiate(bullet, muzzle.position, rotateRight);
+                tempBulletRight.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+            }
+
+            await UniTask.WaitForSeconds(bulletFireInterval); // 0.5f
+
+            // left side
+            for (int i = 0; i < bulletNum; i++)
+            {
+                var tempBulletLeft = Instantiate(bullet, muzzle.position, rotateLeft);
+                tempBulletLeft.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+            }
+
+        }
+
     }
 
     public override void Upgrade()
