@@ -34,7 +34,7 @@ public class CDWeapon : PlayerWeapon
                 yield return new WaitForSeconds(fireRate);
                 for (int i = 0; i < 5; i++)
                 {
-                    float angle = i * (360f / 5f);
+                    float angle = i * ((360f / 4f) + 30);
                     Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
                 }
             }
