@@ -441,84 +441,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1001 &148343760
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 897920589}
-    m_Modifications:
-    - target: {fileID: 22164144533359997, guid: 3dda3ce8bd115b748b261adb9527ac97, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22164144533359997, guid: 3dda3ce8bd115b748b261adb9527ac97, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 22164144533359997, guid: 3dda3ce8bd115b748b261adb9527ac97, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22164144533359997, guid: 3dda3ce8bd115b748b261adb9527ac97, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 22164144533359997, guid: 3dda3ce8bd115b748b261adb9527ac97, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22164144533359997, guid: 3dda3ce8bd115b748b261adb9527ac97, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22164144533359997, guid: 3dda3ce8bd115b748b261adb9527ac97, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22164144533359997, guid: 3dda3ce8bd115b748b261adb9527ac97, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22164144533359997, guid: 3dda3ce8bd115b748b261adb9527ac97, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22164144533359997, guid: 3dda3ce8bd115b748b261adb9527ac97, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 641089805458191687, guid: 3dda3ce8bd115b748b261adb9527ac97, type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 641089805458191687, guid: 3dda3ce8bd115b748b261adb9527ac97, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 641089805458191687, guid: 3dda3ce8bd115b748b261adb9527ac97, type: 3}
-      propertyPath: m_Color.g
-      value: 0.1932027
-      objectReference: {fileID: 0}
-    - target: {fileID: 641089805458191687, guid: 3dda3ce8bd115b748b261adb9527ac97, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5735838364107986111, guid: 3dda3ce8bd115b748b261adb9527ac97, type: 3}
-      propertyPath: m_Name
-      value: PytorchWeapon
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3dda3ce8bd115b748b261adb9527ac97, type: 3}
---- !u!4 &148343761 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 22164144533359997, guid: 3dda3ce8bd115b748b261adb9527ac97, type: 3}
-  m_PrefabInstance: {fileID: 148343760}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &152243163
 GameObject:
   m_ObjectHideFlags: 0
@@ -1791,6 +1713,7 @@ MonoBehaviour:
   - {fileID: 1061011219}
   - {fileID: 329539613}
   - {fileID: 323863506}
+  allWeaponDataList: []
   weaponDataList:
   - {fileID: 11400000, guid: e5b18c6f5617be843a9268bc415424d7, type: 2}
   - {fileID: 11400000, guid: 3ee98229c68a2bf4cb1d765a4e720f74, type: 2}
@@ -1808,7 +1731,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 13adf7aa9830564439ca00fd6997293f, type: 2}
   - {fileID: 11400000, guid: df894a11d49451e47ae7752a547654f1, type: 2}
   - {fileID: 11400000, guid: bf27f4b7d137e2547badad8dfcbe3e09, type: 2}
-  buyWeaponDataList: []
   playerWeaponList: []
   playerPassiveList: []
   maxItemNumber: 4
@@ -15260,6 +15182,18 @@ PrefabInstance:
       propertyPath: damageNumber
       value: 
       objectReference: {fileID: 850405986135239423, guid: 1ac856c4fab6fbf439c9afc37ab8dafa, type: 3}
+    - target: {fileID: 6395288554825539790, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
+      propertyPath: isPowerWeapon
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6395288554825539790, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
+      propertyPath: powerWeaponSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 304d837736d4fad4293e751120f580f3, type: 3}
+    - target: {fileID: 6395288554825539790, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
+      propertyPath: normalWeaponSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 05e6f8c3049364a41a3bd9d7d93fa3cf, type: 3}
     - target: {fileID: 8100203599619735773, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -15300,12 +15234,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8568103285300378644, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
+      propertyPath: m_Size.x
+      value: 2.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 8568103285300378644, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
+      propertyPath: m_Size.y
+      value: 2.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 8568103285300378644, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 05e6f8c3049364a41a3bd9d7d93fa3cf, type: 3}
+    - target: {fileID: 8568103285300378644, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 6025502528629382335, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 148343761}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 944808390979848710, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
       insertIndex: -1

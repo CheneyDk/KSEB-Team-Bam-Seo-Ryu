@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class BulletSharp : PlayerBullet
 {
+    bool isPowerBullet;
+
+    private SpriteRenderer spriteRenderer;
+    public Sprite normalBullet;
+    public Sprite powerBullet;
+
     private void Start()
     {
         // go straight
         bulletVector = Vector2.right;
         bulletSpeed = 70f;
         bulletLifeTime = 1.5f;
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         Destroy(gameObject, bulletLifeTime);
+        PowerSprite();
     }
 
     private void Update()
@@ -35,9 +43,18 @@ public class BulletSharp : PlayerBullet
         }
     }
 
-    public override void ChangeSprite(Sprite powerWeapon)
+    public void IsPower(bool power)
     {
+        isPowerBullet = power;
     }
+
+    private void PowerSprite()
+    {
+        if (!isPowerBullet) return;
+        spriteRenderer.sprite = powerBullet;
+    }
+
+    public override void ChangeSprite(Sprite powerWeapon){}
 }
 
 
