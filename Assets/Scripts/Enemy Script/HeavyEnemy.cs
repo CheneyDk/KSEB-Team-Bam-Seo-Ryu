@@ -53,6 +53,8 @@ public class HeavyEnemy : Enemy
 
     private bool isDead = false;
 
+    private AudioManager audioManager;
+
     private void OnEnable()
     {
         StopCoroutine("TakeLastingDamage");
@@ -62,6 +64,7 @@ public class HeavyEnemy : Enemy
     private void Awake()
     {
         curSR = this.GetComponent<SpriteRenderer>();
+        audioManager = FindObjectOfType<AudioManager>();
         originColor = curSR.color;
         HeavyEnemyCurtHP = HeavyEnemyMaxHp;
 
@@ -137,6 +140,7 @@ public class HeavyEnemy : Enemy
         isDead = true;
         heavyAni.SetBool("isDead", true);
         StartCoroutine("SetActiveToFalse");
+        audioManager.HeavyEnemyDamagedClip();
         DropEXP(dropExpNumber);
         ChanceToDropApple(1);
         ChanceToDropRedBlue(0);

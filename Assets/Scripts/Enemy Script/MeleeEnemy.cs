@@ -47,6 +47,8 @@ public class MeleeEnemy : Enemy
 
     private bool isDead = false;
 
+    private AudioManager audioManager;
+
     private void OnEnable()
     {
         StopAllCoroutines();
@@ -55,6 +57,7 @@ public class MeleeEnemy : Enemy
     private void Awake()
     {
         curSR = this.GetComponent<SpriteRenderer>();
+        audioManager = FindObjectOfType<AudioManager>();
         originColor = curSR.color;
         MeleeEnemyCurtHP = MeleeEnemyMaxHp;
         meleeAni = GetComponent<Animator>();
@@ -105,6 +108,7 @@ public class MeleeEnemy : Enemy
         isDead = true;
         meleeAni.SetBool("isDead", true);
         StartCoroutine("SetActiveToFalse");
+        audioManager.NormalEnemyDamagedClip();
         DropEXP(dropExpNumber);
         ChanceToDropApple(1);
         ChanceToDropRedBlue(0);

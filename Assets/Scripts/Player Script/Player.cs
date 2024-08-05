@@ -77,11 +77,14 @@ public class Player : MonoBehaviour
     private Animator playAnimator;
     public Animator hitUIAnimator;
 
+    private AudioManager audioManager;
+
     private void Awake()
     {
         playAnimator = GetComponent<Animator>();
         material = GetComponent<Renderer>().material;
         playerCollider = GetComponent<Collider2D>();
+        audioManager = FindObjectOfType<AudioManager>();
 
         // player stat init
         playerCurHp = playerMaxHp; // make current hp max
@@ -223,6 +226,7 @@ public class Player : MonoBehaviour
         damageNumber.Spawn(transform.position, damage);
         playAnimator.Play("TakeDamage");
         hitUIAnimator.Play("HitUI");
+        audioManager.PlayerDamagedClip();
 
         // game over: destroy
         playerCurHp -= damage;

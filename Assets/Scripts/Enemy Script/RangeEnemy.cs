@@ -56,6 +56,8 @@ public class RangeEnemy : Enemy
 
     private bool isDead = false;
 
+    private AudioManager audioManager;
+
     private void OnEnable()
     {
         StopAllCoroutines();
@@ -64,6 +66,7 @@ public class RangeEnemy : Enemy
     private void Awake()
     {
         curSR = this.GetComponent<SpriteRenderer>();
+        audioManager = FindObjectOfType<AudioManager>();
         originColor = curSR.color;
         RangeEnemyCurtHP = RangeEnemyMaxHp;
         rangeAni = GetComponent<Animator>();
@@ -140,6 +143,7 @@ public class RangeEnemy : Enemy
         isDead = true;
         rangeAni.SetBool("isDead", true);
         StartCoroutine("SetActiveToFalse");
+        audioManager.NormalEnemyDamagedClip();
         DropEXP(dropExpNumber);
         ChanceToDropApple(1);
         ChanceToDropRedBlue(0);

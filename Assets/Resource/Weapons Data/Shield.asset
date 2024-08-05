@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca71ca24a078264b9780d1aee7c37ec, type: 3}
   m_Name: Shield
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
-  itemImage: {fileID: 0}
-  itemName: 
-  itemDesc: 
-  powerImage: {fileID: 0}
-  powerName: 
-  powerDesc: 
-  curImage: {fileID: 0}
-  curName: 
-  curDesc: 
+  item: {fileID: 8491723749737695113, guid: 04d82ac94c278944281d08997e985c6b, type: 3}
+  itemImage: {fileID: 21300000, guid: 79831d8fb8682f7439578395ec0ec93e, type: 3}
+  itemName: Shield
+  itemDesc: '{ Shield }'
+  powerImage: {fileID: 21300000, guid: 8dac6c32c332a4848b83ace2e55f44aa, type: 3}
+  powerName: Power Shield
+  powerDesc: '{ Power Shield }'
+  curImage: {fileID: 21300000, guid: 79831d8fb8682f7439578395ec0ec93e, type: 3}
+  curName: Shield
+  curDesc: '{ Shield }'
