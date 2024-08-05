@@ -71,6 +71,7 @@ public class LoadingWeapon : PlayerWeapon
         {
             weaponLevel++;
             weaponDamageRate += 0.5f;
+            damage = player.playerAtk * weaponDamageRate;
             transform.localScale += new Vector3(0.5f, 0.5f, 0f);
         }
         if (weaponLevel > 4)

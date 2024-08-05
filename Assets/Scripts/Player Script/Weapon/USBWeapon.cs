@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CDWeapon : PlayerWeapon
+public class USBWeapon : PlayerWeapon
 {
     public float fireRate = 3.5f;
 
@@ -11,7 +11,7 @@ public class CDWeapon : PlayerWeapon
     {
         Fire();
         weaponLevel = 1;
-        weaponDamageRate = 1f;
+        weaponDamageRate = 0.5f;
         isMaxLevel = false;
         isPowerWeapon = false;
         matchPassive = "BlueTooth";
@@ -25,34 +25,30 @@ public class CDWeapon : PlayerWeapon
             {
                 bullet.GetComponent<PlayerBullet>().ChangeSprite(normalWeaponSprite);
                 yield return new WaitForSeconds(fireRate);
-                var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+                for (int i = 0; i < 10; i++)
+                {
+                    float angle = i * (360f / 10f);
+                    var addBullet = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
+                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+                }
             }
-            else if(isPowerWeapon)
+            else if (isPowerWeapon)
             {
                 bullet.GetComponent<PlayerBullet>().ChangeSprite(powerWeaponSprite);
                 yield return new WaitForSeconds(fireRate);
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 10; i++)
                 {
-                    float angle = i * ((360f / 4f) + 30);
+                    float angle = i * (360f / 10f);
                     var addBullet = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
-                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk);
                 }
             }
         }
     }
 
-    private void Update()
-    {
-        if (isPowerWeapon)
-        {
-            bullet.GetComponent<PlayerBullet>().ChangeSprite(powerWeaponSprite);
-        }
-    }
-
     protected override void Fire()
     {
-       StartCoroutine(FireBullet());
+        StartCoroutine(FireBullet());
     }
 
 

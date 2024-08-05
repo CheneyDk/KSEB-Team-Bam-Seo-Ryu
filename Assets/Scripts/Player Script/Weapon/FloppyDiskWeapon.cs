@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CDWeapon : PlayerWeapon
+public class FloppyDiskWeapon : PlayerWeapon
 {
-    public float fireRate = 3.5f;
+    public float fireRate = 2f;
 
     void Start()
     {
         Fire();
         weaponLevel = 1;
         weaponDamageRate = 1f;
+        bulletNum = 1;
         isMaxLevel = false;
         isPowerWeapon = false;
         matchPassive = "BlueTooth";
@@ -28,14 +29,14 @@ public class CDWeapon : PlayerWeapon
                 var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
                 addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
             }
-            else if(isPowerWeapon)
+            else if (isPowerWeapon)
             {
                 bullet.GetComponent<PlayerBullet>().ChangeSprite(powerWeaponSprite);
                 yield return new WaitForSeconds(fireRate);
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < bulletNum; i++)
                 {
-                    float angle = i * ((360f / 4f) + 30);
-                    var addBullet = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
+                    yield return new WaitForSeconds(0.2f);
+                    var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
                     addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
                 }
             }
@@ -52,7 +53,7 @@ public class CDWeapon : PlayerWeapon
 
     protected override void Fire()
     {
-       StartCoroutine(FireBullet());
+        StartCoroutine(FireBullet());
     }
 
 
@@ -61,7 +62,7 @@ public class CDWeapon : PlayerWeapon
         if (weaponLevel < 5)
         {
             weaponLevel++;
-            fireRate -= 0.5f;
+            bulletNum += 1;
         }
         if (weaponLevel > 4)
         {
@@ -71,4 +72,5 @@ public class CDWeapon : PlayerWeapon
 
 
     public override void Fire(InputAction.CallbackContext context) { }
+
 }
