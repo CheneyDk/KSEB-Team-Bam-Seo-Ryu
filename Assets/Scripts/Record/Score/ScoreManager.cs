@@ -157,9 +157,9 @@ public class ScoreManager : MonoBehaviour
         {
             for (int i = 0; i < recordData.enemiesDeafeatedData.Count; i++)
             {
-                if (recordData.enemiesDeafeatedData[i].Item1 == kvp.Key)
+                if (recordData.enemiesDeafeatedData[i].type == kvp.Key)
                 {
-                    recordData.enemiesDeafeatedData[i] = (recordData.enemiesDeafeatedData[i].Item1, recordData.enemiesDeafeatedData[i].Item2 + kvp.Value);
+                    recordData.enemiesDeafeatedData[i] = new enemiesDeafeatedData(recordData.enemiesDeafeatedData[i].type, recordData.enemiesDeafeatedData[i].kills + kvp.Value);
                 }
             }
         }

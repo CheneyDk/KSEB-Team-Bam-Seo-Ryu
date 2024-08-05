@@ -55,7 +55,7 @@ public class RecordManager : MonoBehaviour
 
         foreach (var value in ScoreManager.instance.recordData.enemiesDeafeatedData)
         {
-            data[value.Item1] = value.Item2;
+            data[value.type] = value.kills;
         }
 
         for (int i = 0; i < texts.Length; i++)

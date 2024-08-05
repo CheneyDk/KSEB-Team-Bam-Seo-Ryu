@@ -15,13 +15,13 @@ public abstract class SaveData
     public List<string> installedItems = new List<string>();
 
     [SerializeField]
-    public List<(string, int)> enemiesDeafeatedData = new List<(string, int)>
+    public List<enemiesDeafeatedData> enemiesDeafeatedData = new List<enemiesDeafeatedData>
     {
-        ("meleeEnemyDefeated", 0 ),
-        ("rangeEnemyDefeated", 0 ),
-        ("heavyEnemyDefeated", 0 ),
-        ("runtimeErrorDeafeated", 0 ),
-        ("logicErrorDeafeated", 0 )
+        new enemiesDeafeatedData("meleeEnemyDefeated", 0 ),
+        new enemiesDeafeatedData("rangeEnemyDefeated", 0),
+        new enemiesDeafeatedData("heavyEnemyDefeated", 0),
+        new enemiesDeafeatedData("runtimeErrorDeafeated", 0),
+        new enemiesDeafeatedData("logicErrorDeafeated", 0)
     };
 
     [SerializeField]
@@ -83,4 +83,17 @@ public class WeaponDamagesData
 {
     public string weaponName;
     public float damage;
+}
+
+[System.Serializable]
+public class enemiesDeafeatedData
+{
+    public string type;
+    public int kills;
+
+    public enemiesDeafeatedData(string type, int kills)
+    {
+        this.type = type;
+        this.kills = kills;
+    }
 }
