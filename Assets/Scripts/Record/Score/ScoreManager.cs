@@ -18,6 +18,15 @@ public class ScoreManager : MonoBehaviour
     private Dictionary<string, float> tempWeaponDamages = new Dictionary<string, float>();
     public IReadOnlyDictionary<string, float> WeaponDamages => tempWeaponDamages;
 
+    private Dictionary<string, int> enemyKills = new Dictionary<string, int>
+    {
+        {"MeleeEnemyDefeated",0 },
+        {"RangeEnemyDefeated",0 },
+        {"HeavyEnemyDefeated",0 },
+        {"RuntimeErrorDeafeated",0 },
+        {"LogicErrorDeafeated",0 }
+    };
+
     private DateTime timer;
 
     private void Awake()
@@ -104,8 +113,9 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public void UpdateEnemiesDeafeated()
+    public void UpdateEnemiesDeafeated(string type)
     {
+        enemyKills[type]++;
         scoreData.enemiesDeafeated++;
     }
 
@@ -133,21 +143,31 @@ public class ScoreManager : MonoBehaviour
         scoreData.isClear = clear;
         if (clear) { scoreData.waveReached--; }
 
-        List<WeaponDamagesData> list = new List<WeaponDamagesData>();
+        List<WeaponDamagesData> list1 = new List<WeaponDamagesData>();
         foreach (KeyValuePair<string, float> kvp in tempWeaponDamages)
         {
-            list.Add(new WeaponDamagesData { weaponName = kvp.Key, damage = kvp.Value });
+            list1.Add(new WeaponDamagesData { weaponName = kvp.Key, damage = kvp.Value });
         }
-        scoreData.weaponDamagesData = list;
-
+        scoreData.weaponDamagesData = list1;
         recordData.scoreDataList.Add(scoreData);
 
         SaveLoadHelper.Save(recordData);
 
+        foreach(KeyValuePair<string, int> kvp in enemyKills)
+        {
+            for (int i = 0; i < recordData.enemiesDeafeatedData.Count; i++)
+            {
+                if (recordData.enemiesDeafeatedData[i].Item1 == kvp.Key)
+                {
+                    recordData.enemiesDeafeatedData[i] = (recordData.enemiesDeafeatedData[i].Item1, recordData.enemiesDeafeatedData[i].Item2 + kvp.Value);
+                }
+            }
+        }
+
         Debug.Log("Save Success!");
     }
 
-    public int GerSurvived()
+    public int GetSurvived()
     {
         return scoreData.survived;
     }

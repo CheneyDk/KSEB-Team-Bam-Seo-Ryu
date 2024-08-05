@@ -10,24 +10,6 @@ public class RecordManager : MonoBehaviour
 
     public TextMeshProUGUI[] texts;
 
-    private int totalSurvived = 0;
-    private float totalDamageSum = 0;
-    private int totalEnemiesDeafeated = 0;
-
-    //private int runtimeErrorDeafeated = 0;
-    //private int logicErrorDeafeated = 0;
-
-    private int bestSurvived = 0;
-    private int bestWaveReached = 0;
-    private int bestLevelReached = 0;
-    private int bestEnemiesDeafeated = 0;
-    private float bestTotalDamage = 0;
-
-    private int leastClearTime = int.MaxValue;
-
-    private int[] values = new int[14];
-    //private List<int> values = new List<int>(14);
-
     private void Awake()
     {
         instance = this;
@@ -35,83 +17,50 @@ public class RecordManager : MonoBehaviour
 
     public void Calc()
     {
-        Reset();
+        Dictionary<string, int> data = new Dictionary<string, int>
+        {
+            {"TotalSurvived", 0 },
+            {"TotalEnemiesDeafeated", 0 },
+            {"TotalDamage", 0 },
+            {"MeleeEnemyDefeated", 0 },
+            {"RangeEnemyDefeated", 0 },
+            {"HeavyEnemyDefeated", 0 },
+            {"RuntimeErrorDeafeated", 0 },
+            {"LogicErrorDeafeated", 0 },
+            {"BestSurvived", 0 },
+            {"BestWaveReached", 0 },
+            {"BestLevelReached", 0 },
+            {"BestEnemiesDeafeated", 0 },
+            {"BestTotalDamage", 0 },
+            {"LeastClearTime", int.MaxValue }
+        };
 
         foreach (ScoreData score in ScoreManager.instance.recordData.scoreDataList)
         {
-            totalSurvived += score.survived;
-            totalEnemiesDeafeated += score.enemiesDeafeated;
-            totalDamageSum += score.totalDamage;
+            data["TotalSurvived"] += score.survived;
+            data["TotalEnemiesDeafeated"] += score.enemiesDeafeated;
+            data["TotalDamage"] += (int)score.totalDamage;
 
-            bestSurvived = Math.Max(bestSurvived, score.survived);
-            bestWaveReached = Math.Max(bestWaveReached, score.waveReached);
-            bestLevelReached = Math.Max(bestLevelReached, score.levelReached);
-            bestEnemiesDeafeated = Math.Max(bestEnemiesDeafeated, score.enemiesDeafeated);
-            bestTotalDamage = Math.Max(bestTotalDamage, score.totalDamage);
+            data["BestSurvived"] = Math.Max(data["BestSurvived"], score.survived);
+            data["BestWaveReached"] = Math.Max(data["BestWaveReached"], score.waveReached);
+            data["BestLevelReached"] = Math.Max(data["BestLevelReached"], score.levelReached);
+            data["BestEnemiesDeafeated"] = Math.Max(data["BestEnemiesDeafeated"], score.enemiesDeafeated);
+            data["BestTotalDamage"] = (int)Math.Max(data["BestTotalDamage"], score.totalDamage);
 
             if (score.isClear)
             {
-                leastClearTime = Math.Min(leastClearTime, score.survived);
+                data["leastClearTime"] = Math.Min(data["leastClearTime"], score.survived);
             }
         }
 
-        ToList();
-
-        for (int i = 0; i < 14; i++)
+        foreach (var value in ScoreManager.instance.recordData.enemiesDeafeatedData)
         {
-            if (3 <= i && i <= 7)
-            {
-                continue;
-            }
-
-            texts[i].text = values[i].ToString();
-            texts[i + 14].text = values[i].ToString();
-
-            // least clear time
-            if (i == 13)
-            {
-                if (values[i] == int.MaxValue)
-                {
-                    texts[i].text = "-";
-                    texts[i + 14].text = "-";
-                }
-            }
+            data[value.Item1] = value.Item2;
         }
-    }
 
-    private void Reset()
-    {
-        totalSurvived = 0;
-        totalDamageSum = 0;
-        totalEnemiesDeafeated = 0;
-
-        //runtimeErrorDeafeated = 0;
-        //logicErrorDeafeated = 0;
-
-        bestSurvived = 0;
-        bestWaveReached = 0;
-        bestLevelReached = 0;
-        bestEnemiesDeafeated = 0;
-        bestTotalDamage = 0;
-
-        leastClearTime = int.MaxValue;
-    }
-
-    private void ToList()
-    {
-        values[0] = totalSurvived;
-        values[1] = (int)totalDamageSum;
-        values[2] = totalEnemiesDeafeated;
-        //values[3] = totalSurvived;
-        //values[4] = totalSurvived;
-        //values[5] = totalSurvived;
-        //values[6] = totalSurvived;
-        //values[7] = totalSurvived;
-        values[8] = bestSurvived;
-        values[9] = bestWaveReached;
-        values[10] = bestLevelReached;
-        values[11] = bestEnemiesDeafeated;
-        values[12] = (int)bestTotalDamage;
-        values[13] = leastClearTime;
+        for (int i = 0; i < texts.Length; i++)
+        {
+            texts[i].text = data[texts[i].name] != int.MaxValue ? data[texts[i].name].ToString() : "-";
+        }
     }
 }

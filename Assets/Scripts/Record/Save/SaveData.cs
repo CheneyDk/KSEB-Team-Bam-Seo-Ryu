@@ -15,8 +15,20 @@ public abstract class SaveData
     public List<string> installedItems = new List<string>();
 
     [SerializeField]
-    public bool isPet;
-    public bool isPetUpgrade;
+    public List<(string, int)> enemiesDeafeatedData = new List<(string, int)>
+    {
+        ("meleeEnemyDefeated", 0 ),
+        ("rangeEnemyDefeated", 0 ),
+        ("heavyEnemyDefeated", 0 ),
+        ("runtimeErrorDeafeated", 0 ),
+        ("logicErrorDeafeated", 0 )
+    };
+
+    [SerializeField]
+    public bool isPet; // 펫 구매 여부
+    public bool isPetUpgrade; // 펫 업그레이드 여부
+    public bool isCUpgrade; // C기본무기 업그레이드 여부
+    public bool isPythonUpgrade; // Python기본무기 업그레이드 여부
 
     public SaveData(string _fileName, string _directory)
     {

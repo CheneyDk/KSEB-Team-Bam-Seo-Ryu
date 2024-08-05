@@ -143,7 +143,7 @@ public class RangeEnemy : Enemy
         DropEXP(dropExpNumber);
         ChanceToDropApple(1);
         ChanceToDropRedBlue(0);
-        ScoreManager.instance.UpdateEnemiesDeafeated();
+        ScoreManager.instance.UpdateEnemiesDeafeated("RangeEnemyDefeated");
     }
 
     private IEnumerator SetActiveToFalse()

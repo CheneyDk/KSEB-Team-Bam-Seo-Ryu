@@ -109,7 +109,7 @@ public class MeleeEnemy : Enemy
         ChanceToDropApple(1);
         ChanceToDropRedBlue(0);
 
-        ScoreManager.instance.UpdateEnemiesDeafeated();
+        ScoreManager.instance.UpdateEnemiesDeafeated("MeleeEnemyDefeated");
     }
 
     private IEnumerator SetActiveToFalse()
