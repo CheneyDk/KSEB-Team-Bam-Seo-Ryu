@@ -52,7 +52,7 @@ public class WeaponMySQL : PlayerWeapon
             for (int j = 0; j < 2; j++)
             {
                 // first shot
-                for (int i = 0; i < bulletNum; i++)
+                for (int i = 0; i < bulletNum - 1; i++)
                 {
                     var tempBulletRight = Instantiate(powerBullet, muzzle.position, rotateRight);
                     tempBulletRight.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);

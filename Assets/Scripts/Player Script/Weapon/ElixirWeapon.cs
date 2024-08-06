@@ -19,8 +19,8 @@ public class ElixirWeapon : PlayerWeapon
         weaponFireRate = 3f;
         fireRateTimer = 8f;
         autoTargetRange = 15f;
-        explodeRange = 10f;
-        debuffAddDamageRate = 0.1f;
+        explodeRange = 5f;
+        debuffAddDamageRate = 0.2f;
         debuffLastingTime = 5f;
 
         weaponLevel = 1;
@@ -91,8 +91,8 @@ public class ElixirWeapon : PlayerWeapon
     {
         if (isMaxLevel) return;
 
-        debuffAddDamageRate += 0.02f;
-        explodeRange += 2f;
+        debuffAddDamageRate += 0.06f;
+        explodeRange += 1f;
         weaponLevel += 1;
         debuffLastingTime += 1f;
 

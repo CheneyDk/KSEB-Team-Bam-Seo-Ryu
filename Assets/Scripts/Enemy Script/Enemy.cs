@@ -7,6 +7,7 @@ public abstract class Enemy : MonoBehaviour
 {
     protected float elixirLastingTime;
     protected float elixirAdditionalDamageRate = 0f;
+    protected bool isDestroyed = false;
 
     public abstract void EnemyMovement();
     public abstract void TakeDamage(float damage);
@@ -40,8 +41,14 @@ public abstract class Enemy : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().color = tempSp.color;
 
         await UniTask.WaitForSeconds(elixirLastingTime);
+        if (isDestroyed) return;
         elixirAdditionalDamageRate = 0f;
         tempSp.color = new(1f, 1f, 1f);
         gameObject.GetComponent<SpriteRenderer>().color = tempSp.color;
+    }
+
+    private void OnDestroy()
+    {
+        isDestroyed = true;
     }
 }

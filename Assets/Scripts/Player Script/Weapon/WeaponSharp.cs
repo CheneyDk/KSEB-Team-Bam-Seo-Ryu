@@ -12,6 +12,8 @@ public class WeaponSharp : PlayerWeapon
     // this stat means time interval between round and round.
     private float weaponSharpFireInterval = 0.1f;
 
+    private bool isDestroyed;
+
     // Auto Fire Control
     private CancellationTokenSource cancelFire;
 
@@ -24,6 +26,7 @@ public class WeaponSharp : PlayerWeapon
         weaponFireRate = 1f;
         bulletNum = 3;
         weaponLevel = 1;
+        isDestroyed = false;
 
         // player can fire imediately
         fireRateTimer = weaponFireRate;
@@ -92,6 +95,7 @@ public class WeaponSharp : PlayerWeapon
                 tempBullet.GetComponent<BulletSharp>().IsPower(isPowerWeapon);
             }
             await UniTask.WaitForSeconds(weaponSharpFireInterval);
+            if (isDestroyed) return;
         }
     }
 
@@ -115,6 +119,11 @@ public class WeaponSharp : PlayerWeapon
     public void isPowerWeaponTrue()
     {
         isPowerWeapon = true;
+    }
+
+    private void OnDestroy()
+    {
+        isDestroyed = true;
     }
 
     // dummy override

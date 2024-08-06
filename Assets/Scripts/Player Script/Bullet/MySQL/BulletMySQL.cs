@@ -14,7 +14,7 @@ public class BulletMySQL : PlayerBullet
     private Rigidbody2D rigid;
 
     // flags
-    private bool isExist = true;
+    private bool isDestroy = false;
 
     private void Awake()
     {
@@ -56,11 +56,11 @@ public class BulletMySQL : PlayerBullet
 
     private async UniTask DolphineRotate()
     {
-        while (isExist)
+        while (!isDestroy)
         {
             await UniTask.Yield();
             await UniTask.WaitUntil(() => GameManager.Instance.isGameContinue);
-            if (!isExist) return;
+            if (isDestroy) return;
             transform.Rotate(Vector3.forward, rotateSpeed);
         }
     }
@@ -68,8 +68,13 @@ public class BulletMySQL : PlayerBullet
     private async UniTask ObjDestroyTimer()
     {
         await UniTask.WaitForSeconds(bulletLifeTime);
-        isExist = false;
+        if(isDestroy) return;
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        isDestroy = true;
     }
 
     public override void ChangeSprite(Sprite powerWeapon)
