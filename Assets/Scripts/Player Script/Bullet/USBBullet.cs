@@ -32,6 +32,7 @@ public class USBBullet : PlayerBullet
             {
                 Instantiate(USBParticle, transform.position, Quaternion.identity);
                 enemyComponent.TakeDamage(bulletDamage);
+                ScoreManager.instance.UpdateDamage("USB", bulletDamage);
             }
 
         }

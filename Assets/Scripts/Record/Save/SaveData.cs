@@ -38,13 +38,6 @@ public abstract class SaveData
 
     public string GetFullPath() => GetDirectory() + "/" + fileName + ".json";
     public string GetDirectory() => Application.persistentDataPath + "/" + directory;
-
-    public void plusMoney(int price)
-    {
-        money += price;
-    }
-
-    public int GetMoney() { return money; }
 }
 
 public class RecordData : SaveData

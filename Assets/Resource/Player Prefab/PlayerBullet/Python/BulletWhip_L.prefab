@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 335976810723247266}
   - component: {fileID: 1493943391571368378}
   - component: {fileID: -2883697371620557882}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BulletWhip_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}

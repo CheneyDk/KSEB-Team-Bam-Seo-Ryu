@@ -27,7 +27,8 @@ public class ScoreManager : MonoBehaviour
         {"LogicErrorDeafeated",0 }
     };
 
-    private DateTime timer;
+    //private DateTime timer;
+    private float timer;
 
     private void Awake()
     {
@@ -99,7 +100,7 @@ public class ScoreManager : MonoBehaviour
             { "Basic", 0.0f }
         };
 
-        timer = DateTime.Now;
+        timer = Time.time;
 
         scoreData.character = SceneManager.GetActiveScene().name;
         // 씬 이름 최종결정 시 삭제
@@ -137,7 +138,7 @@ public class ScoreManager : MonoBehaviour
 
     public void SaveData(bool clear)
     {
-        scoreData.survived = (int)(DateTime.Now - timer).TotalSeconds;
+        scoreData.survived = (int)(Time.time - timer);
         scoreData.playDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         scoreData.totalDamage = GetTotalDamages();
         scoreData.isClear = clear;
@@ -153,7 +154,7 @@ public class ScoreManager : MonoBehaviour
 
         SaveLoadHelper.Save(recordData);
 
-        foreach(KeyValuePair<string, int> kvp in enemyKills)
+        foreach (KeyValuePair<string, int> kvp in enemyKills)
         {
             for (int i = 0; i < recordData.enemiesDeafeatedData.Count; i++)
             {
@@ -163,6 +164,12 @@ public class ScoreManager : MonoBehaviour
                 }
             }
         }
+
+        recordData.money += scoreData.survived / 100 * 10;
+        recordData.money += scoreData.waveReached * 10;
+        recordData.money += (scoreData.levelReached / 10 + 1) * 10;
+        recordData.money += (scoreData.enemiesDeafeated / 100) * 10;
+        recordData.money += (int)scoreData.totalDamage / 100;
 
         Debug.Log("Save Success!");
     }
