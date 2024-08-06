@@ -50,10 +50,12 @@ public class MouseWeapon : PlayerWeapon
                 if (!isPowerWeapon)
                 {
                     EnemyComponent.TakeDamage(damage);
+                    ScoreManager.instance.UpdateDamage("Mouse", damage);
                 }
                 else if (isPowerWeapon)
                 {
                     EnemyComponent.TakeDamage(player.playerAtk);
+                    ScoreManager.instance.UpdateDamage("Mouse", player.playerAtk);
                 }
                 
             }

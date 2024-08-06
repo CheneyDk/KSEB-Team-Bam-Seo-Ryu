@@ -368,7 +368,7 @@ public class SnakeLogicError : Enemy
         // StartCoroutine("SetActiveToFalse"); // YH - dead motion wait?
         DropEXP(dropExpNumber);
 
-        ScoreManager.instance.UpdateEnemiesDeafeated();
+        ScoreManager.instance.UpdateEnemiesDeafeated("LogicErrorDeafeated");
     }
 
     private async UniTask CallDeadFunc()

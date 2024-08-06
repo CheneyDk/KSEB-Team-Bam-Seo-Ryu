@@ -15,8 +15,20 @@ public abstract class SaveData
     public List<string> installedItems = new List<string>();
 
     [SerializeField]
-    public bool isPet;
-    public bool isPetUpgrade;
+    public List<enemiesDeafeatedData> enemiesDeafeatedData = new List<enemiesDeafeatedData>
+    {
+        new enemiesDeafeatedData("meleeEnemyDefeated", 0 ),
+        new enemiesDeafeatedData("rangeEnemyDefeated", 0),
+        new enemiesDeafeatedData("heavyEnemyDefeated", 0),
+        new enemiesDeafeatedData("runtimeErrorDeafeated", 0),
+        new enemiesDeafeatedData("logicErrorDeafeated", 0)
+    };
+
+    [SerializeField]
+    public bool isPet; // 펫 구매 여부
+    public bool isPetUpgrade; // 펫 업그레이드 여부
+    public bool isCUpgrade; // C기본무기 업그레이드 여부
+    public bool isPythonUpgrade; // Python기본무기 업그레이드 여부
 
     public SaveData(string _fileName, string _directory)
     {
@@ -71,4 +83,17 @@ public class WeaponDamagesData
 {
     public string weaponName;
     public float damage;
+}
+
+[System.Serializable]
+public class enemiesDeafeatedData
+{
+    public string type;
+    public int kills;
+
+    public enemiesDeafeatedData(string type, int kills)
+    {
+        this.type = type;
+        this.kills = kills;
+    }
 }

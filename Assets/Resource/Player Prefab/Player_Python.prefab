@@ -43,6 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3275481477621040725}
   - component: {fileID: 6516415060301865627}
+  - component: {fileID: 4153489483306856980}
   - component: {fileID: 5042763741499704291}
   - component: {fileID: 1705643140420884914}
   - component: {fileID: 2615487855624723305}
@@ -94,7 +95,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: bf0b7813ff8e2b344af8a5e7d22ae5a5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -126,6 +127,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4153489483306856980
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882131698887295749}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b0a412c917225b443822ba954467be58, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!50 &5042763741499704291
 Rigidbody2D:
   serializedVersion: 4
@@ -217,6 +239,7 @@ MonoBehaviour:
   energyDrinkDuration: 10
   damageNumber: {fileID: 850405986135239423, guid: 1ac856c4fab6fbf439c9afc37ab8dafa, type: 3}
   levelUp: {fileID: 8335586952449206777, guid: 97eb3258d86dffc4caa0d8b3d57db1ae, type: 3}
+  hitUIAnimator: {fileID: 0}
 --- !u!114 &3384030768185287080
 MonoBehaviour:
   m_ObjectHideFlags: 0

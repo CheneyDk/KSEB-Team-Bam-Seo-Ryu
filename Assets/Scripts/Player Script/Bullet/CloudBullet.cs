@@ -25,6 +25,7 @@ public class CloudBullet : PlayerBullet
         var enemyComp = enemy.GetComponent<Enemy>();
         Instantiate(CloudParticle, enemy.transform.position, Quaternion.Euler(-90f,0,0));
         enemyComp.TakeDamage(bulletDamage);
+        ScoreManager.instance.UpdateDamage("Cloud", bulletDamage);
     }
 
     public void PowerWeapoonDamage()
@@ -39,6 +40,7 @@ public class CloudBullet : PlayerBullet
             var enemyComp = enemy.GetComponent<Enemy>();
             Instantiate(powerCloudParticle, enemy.transform.position, Quaternion.Euler(-90f, 0, 0));
             enemyComp.TakeDamage(bulletDamage);
+            ScoreManager.instance.UpdateDamage("Cloud", bulletDamage);
         }
     }
 

@@ -224,7 +224,7 @@ public class RunTimeError : Enemy
         Destroy(gameObject, runtimeAni.GetCurrentAnimatorStateInfo(0).length + 4f);
         DropEXP(dropExpNumber);
 
-            ScoreManager.instance.UpdateEnemiesDeafeated();
+            ScoreManager.instance.UpdateEnemiesDeafeated("RuntimeErrorDeafeated");
     }
 
     public override void ResetEnemy(){}

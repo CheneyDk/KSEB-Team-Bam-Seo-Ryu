@@ -25,4 +25,11 @@ public class ItemSetter : MonoBehaviour
         itemPrice[0].text = "$-\nInstalled";
         itemPrice[1].text = "$-\nInstalled";
     }
+
+    public void ChangeUpdatePage() {
+        itemName.text = "PowerPet";
+        itemImage.sprite = Resources.Load<Sprite>("PowerPet");
+        itemPrice[0].text = "$500\nInstall";
+        itemPrice[1].text = "$500\nInstall";
+    }
 }
