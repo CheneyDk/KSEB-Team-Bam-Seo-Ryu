@@ -17,7 +17,7 @@ public class ElixirWeapon : PlayerWeapon
     {
         weaponDamageRate = 0f;
         weaponFireRate = 3f;
-        fireRateTimer = 3f;
+        fireRateTimer = 8f;
         autoTargetRange = 15f;
         explodeRange = 10f;
         debuffAddDamageRate = 0.1f;
@@ -28,7 +28,9 @@ public class ElixirWeapon : PlayerWeapon
         isDestroyed = false;
         isMaxLevel = false;
         isPowerWeapon = false;
-        matchPassive = "Wifi";
+        matchPassive = "GPU";
+
+        AutoFire().Forget();
     }
 
 
@@ -37,7 +39,7 @@ public class ElixirWeapon : PlayerWeapon
     {
         var tempBullet = Instantiate(bullet, transform.position, Quaternion.identity);
         tempBullet.GetComponent<PlayerBullet>().Init(weaponDamageRate);
-        tempBullet.GetComponent<ElixirBullet>().SetVec(bulletVector, debuffAddDamageRate, explodeRange, debuffLastingTime);
+        tempBullet.GetComponent<ElixirBullet>().SetElixir(bulletVector, debuffAddDamageRate, explodeRange, debuffLastingTime, isPowerWeapon);
     }
 
     private async UniTask AutoFire()
@@ -50,7 +52,7 @@ public class ElixirWeapon : PlayerWeapon
             var targetPos = FindNearestEnemy();
             if (targetPos == Vector2.zero) continue;
 
-            bulletVector = (targetPos - (Vector2)transform.position).normalized;
+            bulletVector = (targetPos - (Vector2)transform.position);
 
             Fire();
             await UniTask.WaitForSeconds(weaponFireRate);

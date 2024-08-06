@@ -349,6 +349,7 @@ public class SnakeLogicError : Enemy
     public override void TakeDamage(float damage)
     {
         snakeCurHP -= damage;
+        // ScoreManager flag
         if (snakeCurHP <= 0)
         {
             SnakeDead();

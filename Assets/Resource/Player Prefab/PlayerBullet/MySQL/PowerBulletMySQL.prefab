@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1090995240851911085}
   - component: {fileID: 2209468456582616361}
   - component: {fileID: 7582199088114517929}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PowerBulletMySQL
   m_TagString: Untagged
   m_Icon: {fileID: 0}

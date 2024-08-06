@@ -126,9 +126,13 @@ public class HeavyEnemy : Enemy
     public override void TakeDamage(float damage)
     {
         Instantiate(hitParticle, transform.position, Quaternion.identity);
+        damage *= (1f + elixirAdditionalDamageRate);
         damageNumber.Spawn(transform.position, damage);
-        HeavyEnemyCurtHP -= damage * (1f + elixirAdditionalDamageRate);
-        //ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
+        HeavyEnemyCurtHP -= damage;
+        if (elixirAdditionalDamageRate > 0)
+        {
+            ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
+        }
         if (HeavyEnemyCurtHP <= 0)
         {
             EnemyDead();
