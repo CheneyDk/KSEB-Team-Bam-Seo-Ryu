@@ -12,16 +12,16 @@ public class ShopManager : MonoBehaviour
 
     private List<(string, int)> itemList = new List<(string, int)>
     {
-        ("CD", 100),
-        ("Internet", 50),
-        ("MySQL", 30),
-        ("Pytorch", 70),
-        ("React", 50),
-        ("Swift", 30),
-        ("Loading", 30),
-        ("C", 100),
-        ("Python", 100),
-        ("Pet", 300)
+        ("Mouse", 500),
+        ("Shield", 500),
+        ("Elixir", 500),
+        ("Pytorch", 500),
+        ("React", 500),
+        ("CD", 500),
+        ("Internet", 500),
+        ("C", 700),
+        ("Python", 700),
+        ("Pet", 700)
     };
 
     private void Awake()
@@ -83,13 +83,13 @@ public class ShopManager : MonoBehaviour
 
     public void InstallPet(int idx)
     {
-        if (itemList[idx].Item2 == 300)
+        if (itemList[idx].Item1 == "Pet")
         {
             if (ScoreManager.instance.recordData.money >= itemList[idx].Item2)
             {
                 ScoreManager.instance.recordData.money -= itemList[idx].Item2;
                 itemSetter[idx].ChangeUpdatePage();
-                itemList[idx] = ("PowerPet", 500);
+                itemList[idx] = ("PowerPet", 700);
                 ScoreManager.instance.recordData.isPet = true;
             }
             else
@@ -97,7 +97,7 @@ public class ShopManager : MonoBehaviour
                 Alert();
             }
         }
-        else if (itemList[idx].Item2 == 500)
+        else
         {
             if (ScoreManager.instance.recordData.money >= itemList[idx].Item2)
             {

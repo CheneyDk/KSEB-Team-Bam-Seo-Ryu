@@ -37,6 +37,7 @@ public class USBBullet : PlayerBullet
                 audioSource.PlayOneShot(audioClip);
 
                 enemyComponent.TakeDamage(bulletDamage);
+                ScoreManager.instance.UpdateDamage("USB", bulletDamage);
             }
 
         }
