@@ -27,7 +27,7 @@ public class ShieldWeapon : PlayerWeapon
         damage = player.playerAtk * weaponDamageRate;
         isMaxLevel = false;
         isPowerWeapon = false;
-        matchPassive = "CPU";
+        matchPassive = "Cooler";
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

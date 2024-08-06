@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4378560584750793101}
   - component: {fileID: 4818856435857178451}
   - component: {fileID: -2845697022459550639}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ShieldWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

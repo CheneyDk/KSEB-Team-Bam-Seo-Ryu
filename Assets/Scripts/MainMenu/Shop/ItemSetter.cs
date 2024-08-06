@@ -29,7 +29,7 @@ public class ItemSetter : MonoBehaviour
     public void ChangeUpdatePage() {
         itemName.text = "PowerPet";
         itemImage.sprite = Resources.Load<Sprite>("PowerPet");
-        itemPrice[0].text = "$700\nInstall";
-        itemPrice[1].text = "$700\nInstall";
+        itemPrice[0].text = "$1000\nInstall";
+        itemPrice[1].text = "$1000\nInstall";
     }
 }

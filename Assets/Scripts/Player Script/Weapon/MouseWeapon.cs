@@ -16,7 +16,7 @@ public class MouseWeapon : PlayerWeapon
         damage = player.playerAtk * weaponDamageRate;
         isMaxLevel = false;
         isPowerWeapon = false;
-        matchPassive = "CPU";
+        matchPassive = "Bluetooth";
     }
 
     private void Update()

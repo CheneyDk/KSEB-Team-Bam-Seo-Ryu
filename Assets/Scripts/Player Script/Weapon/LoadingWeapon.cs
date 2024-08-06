@@ -23,7 +23,7 @@ public class LoadingWeapon : PlayerWeapon
         damage = player.playerAtk * weaponDamageRate;
         isMaxLevel = false;
         isPowerWeapon = false;
-        matchPassive = "CPU";
+        matchPassive = "Cooler";
     }
 
     private void Update()

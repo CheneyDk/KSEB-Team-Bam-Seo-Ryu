@@ -15,7 +15,7 @@ public class FloppyDiskWeapon : PlayerWeapon
         bulletNum = 1;
         isMaxLevel = false;
         isPowerWeapon = false;
-        matchPassive = "BlueTooth";
+        matchPassive = "SSD";
     }
 
     IEnumerator FireBullet()

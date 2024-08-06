@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     // class import
     [SerializeField]
     public Player player;
+    public GameObject pet;
     private PauseWindow pauseWindow;
 
     [Header("- Mouse Cursor")]
@@ -45,6 +46,11 @@ public class GameManager : MonoBehaviour
         PauseUI.SetActive(false);
         UpgradeUI.SetActive(false);
         Time.timeScale = 1f; // init
+
+        if (ScoreManager.instance.recordData.isPet)
+        {
+            pet.SetActive(true);
+        }
     }
 
     private void Start()
