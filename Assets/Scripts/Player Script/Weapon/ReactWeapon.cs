@@ -13,7 +13,7 @@ public class ReactWeapon : PlayerWeapon
         weaponDamageRate = 0.5f;
         isMaxLevel = false;
         isPowerWeapon = false;
-        matchPassive = "Overclock";
+        matchPassive = "CPU";
     }
 
     IEnumerator FireBullet()

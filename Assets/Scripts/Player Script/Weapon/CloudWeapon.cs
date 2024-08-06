@@ -17,7 +17,7 @@ public class CloudWeapon : PlayerWeapon
         weaponDamageRate = 1f;
         isMaxLevel = false;
         isPowerWeapon = false;
-        matchPassive = "BlueTooth";
+        matchPassive = "Wifi";
     }
 
     IEnumerator FireBullet()

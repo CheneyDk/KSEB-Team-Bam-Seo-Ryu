@@ -16,7 +16,7 @@ public class SwiftWeapon : PlayerWeapon
         weaponDamageRate = 1f;
         isMaxLevel = false;
         isPowerWeapon = false;
-        matchPassive = "GPU";
+        matchPassive = "CPU";
     }
 
     IEnumerator FireBullet()

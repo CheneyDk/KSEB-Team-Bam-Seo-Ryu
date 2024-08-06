@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1517094428053155452}
-  - component: {fileID: 4308200546060926783}
+  - component: {fileID: 5839518586274947507}
   m_Layer: 0
   m_Name: CPU
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4308200546060926783
+--- !u!114 &5839518586274947507
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,8 +41,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4309293738989804150}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d62a8c9c90cff8e47ad042c2245e860e, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f15079e93d794a4b8944e9fbc73ab31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  passiveLevel: 0
   isMaxLevel: 0
   totalValue: 0

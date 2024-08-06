@@ -14,7 +14,7 @@ public class CDWeapon : PlayerWeapon
         weaponDamageRate = 1f;
         isMaxLevel = false;
         isPowerWeapon = false;
-        matchPassive = "BlueTooth";
+        matchPassive = "SSD";
     }
 
     IEnumerator FireBullet()
