@@ -67,8 +67,6 @@ public class ElixirBullet : PlayerBullet
             parabolaVector = parabolaHeight * new Vector2(0f, parabolaY);
         }
         parabolaYTimer = bulletFloatingTime;
-
-        if (isPowerWeapon && isNotBounced) return;
         parabolaVector = Vector2.zero;
     }
 

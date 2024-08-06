@@ -14471,9 +14471,11 @@ MonoBehaviour:
   playerDamagedClip: {fileID: 8300000, guid: cdce4cab55c739c42bba87a3f418fd2d, type: 3}
   normalEnemyDamagedClip: {fileID: 8300000, guid: dc31bda23a603d04b83a719317148806, type: 3}
   heavyEnemyDamagedClip: {fileID: 8300000, guid: 3b9a9e6ab5fc07142a3a4dbe306aca2b, type: 3}
+  buttonClip: {fileID: 0}
   playerDamagedVolume: 1
   normalEnemyDamagedVolume: 1
   heavyEnemyDamagedVolume: 1
+  buttonVolume: 1
 --- !u!82 &2029606400
 AudioSource:
   m_ObjectHideFlags: 0
