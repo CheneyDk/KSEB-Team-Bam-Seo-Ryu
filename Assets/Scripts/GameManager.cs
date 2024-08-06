@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
         timeScaleProduct = 0f;
         isGameContinue = false;
 
-        BGMAudio.GetComponent<AudioSource>().volume = 0.2f;
+        BGMAudio.GetComponent<AudioSource>().volume = 0.15f;
 
         // 3. acition map toggle -> before call this func
         // 4. Setting Stats texts
@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
         UpgradeUI.SetActive(true);
         ChangeMouseCursor(normalCursor);
         UpgradeUI.GetComponent<UpgradeManager>().OnUpgrade(true);
-        BGMAudio.GetComponent<AudioSource>().volume = 0.2f;
+        BGMAudio.GetComponent<AudioSource>().volume = 0.15f;
         timeScaleProduct = 0f;
         isGameContinue = false;
     }
@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
         UpgradeUI.SetActive(true);
         ChangeMouseCursor(normalCursor);
         UpgradeUI.GetComponent<UpgradeManager>().OnUpgrade(false);
-        BGMAudio.GetComponent<AudioSource>().volume = 0.2f;
+        BGMAudio.GetComponent<AudioSource>().volume = 0.15f;
         timeScaleProduct = 0f;
         isGameContinue = false;
 

@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 
 public class PauseWindow : MonoBehaviour
 {
+    public GameObject volumWindow;
+    private bool volumOpen = false;
+
     // texts
     public TextMeshProUGUI hpVal;
     public TextMeshProUGUI atkVal;
@@ -13,5 +16,24 @@ public class PauseWindow : MonoBehaviour
     public TextMeshProUGUI critPerVal;
     public TextMeshProUGUI critDamageVal;
     public TextMeshProUGUI moveSpeedVal;
+
+    private void OnEnable()
+    {
+        volumOpen = false;
+        volumWindow.SetActive(false);
+    }
+
+    public void OpenVolumSetting()
+    {
+        volumOpen = !volumOpen;
+        if (volumOpen)
+        {
+            volumWindow.SetActive(true);
+        }
+        else
+        {
+            volumWindow.SetActive(false);
+        }
+    }
 
 }

@@ -19,7 +19,16 @@ public class BGM : MonoBehaviour
     }
 
 
-    public void PlayClip(AudioClip clip)
+    private void Update()
+    {
+        if (!audioSource.isPlaying)
+        {
+            var randomMusicNumber = Random.Range(0, BGMClip.Length);
+            PlayClip(BGMClip[randomMusicNumber]);
+        }
+    }
+
+    private void PlayClip(AudioClip clip)
     {
         if (clip != null)
         {
