@@ -43,4 +43,9 @@ public abstract class Item : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, playerTrans.position, itemMagneticMoveSpeed * Time.deltaTime);
         }
     }
+
+    private void OnDestroy()
+    {
+        isDestroyed = true;
+    }
 }
