@@ -32,6 +32,7 @@ public class ElixirBullet : PlayerBullet
     private SpriteRenderer spriteRenderer;
     public ParticleSystem normalParticle;
     public ParticleSystem powerParticle;
+    private Vector3 particleScale;
 
     void Start()
     {
@@ -44,6 +45,10 @@ public class ElixirBullet : PlayerBullet
         bulletFloatingTime = 1f; // 2sec
 
         bulletRotateVec = new(0f, 0f, 1f);
+
+        particleScale = new(explodeRange * 2f / 5f, explodeRange * 2f / 5f, explodeRange * 2f / 5f);
+        normalParticle.transform.localScale = particleScale;
+        powerParticle.transform.localScale = particleScale;
 
         ParabolaYFactor().Forget();
         BulletRotate().Forget();
@@ -102,9 +107,10 @@ public class ElixirBullet : PlayerBullet
         // Bounce
         if (isPowerWeapon && isNotBounced)
         {
-            bulletVector /= 1.5f;
-            bulletFloatingTime /= 1.5f;
-            parabolaHeight /= 1.5f;
+            //bulletVector *= 0.7f;
+            //parabolaHeight *= 0.7f;
+            bulletFloatingTime *= 0.5f;
+
             isNotBounced = false;
             ParabolaYFactor().Forget();
             await BottleExplode();
