@@ -38,6 +38,7 @@ public class ShieldWeapon : PlayerWeapon
             if (EnemyComponent != null)
             {
                 EnemyComponent.TakeDamage(damage);
+                ScoreManager.instance.UpdateDamage("Shield", damage);
 
                 if (!isPowerWeapon)
                 {
