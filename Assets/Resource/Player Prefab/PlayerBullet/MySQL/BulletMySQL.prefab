@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6385945303170100477}
   - component: {fileID: 3283670306351780212}
   - component: {fileID: 855698461869445845}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BulletMySQL
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -129,9 +129,13 @@ public class RangeEnemy : Enemy
     public override void TakeDamage(float damage)
     {
         Instantiate(hitParticle, transform.position, Quaternion.identity);
+        damage *= (1f + elixirAdditionalDamageRate);
         damageNumber.Spawn(transform.position, damage);
-        RangeEnemyCurtHP -= damage * (1f + elixirAdditionalDamageRate);
-        ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
+        RangeEnemyCurtHP -= damage;
+        if (elixirAdditionalDamageRate > 0)
+        {
+            ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
+        }
         if (RangeEnemyCurtHP <= 0)
         {
             EnemyDead();

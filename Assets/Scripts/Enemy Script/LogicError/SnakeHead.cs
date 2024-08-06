@@ -60,8 +60,13 @@ public class SnakeHead : SnakePart
     public override void TakeDamage(float damage)
     {
         hitParticle.Play();
+        damage *= (1f + elixirAdditionalDamageRate);
         damageNumber.Spawn(transform.position, damage);
         snakePartCurHp -= damage;
+        if (elixirAdditionalDamageRate > 0)
+        {
+            ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
+        }
         snakeMain.TakeDamage(damage); // head dont need to got a damage
     }
 

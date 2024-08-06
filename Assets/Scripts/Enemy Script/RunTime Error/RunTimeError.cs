@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using DamageNumbersPro;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -21,6 +22,11 @@ public class RunTimeError : Enemy
     public GameObject bulletPrefab;
 
     private Transform player;
+
+    [SerializeField]
+    private DamageNumber damageNumber;
+    [SerializeField]
+    private DamageNumber lastingDamageNumber;
 
     [Header("Exp")]
     [SerializeField]
@@ -184,6 +190,7 @@ public class RunTimeError : Enemy
         while (damageTimer < totalDamageTime)
         {
             yield return new WaitForSeconds(1f);
+            lastingDamageNumber.Spawn(transform.position, damage);
             RunTimeErrorCurtHP -= damage;
             damageTimer += 1f;
         }
@@ -199,8 +206,14 @@ public class RunTimeError : Enemy
 
     public override void TakeDamage(float damage)
     {
-        RunTimeErrorCurtHP -= damage * (1f + elixirAdditionalDamageRate);
-        ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
+        damage *= (1f + elixirAdditionalDamageRate);
+        damageNumber.Spawn(transform.position, damage);
+
+        RunTimeErrorCurtHP -= damage;
+        if (elixirAdditionalDamageRate > 0)
+        {
+            ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
+        }
         if (RunTimeErrorCurtHP <= 0)
         {
             RunTimeErrorDestroy();

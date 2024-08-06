@@ -14,6 +14,8 @@ public class SnakeBody : SnakePart
     private float snakeFireRate = 8f;
     private float fireRateRamdom;
 
+
+
     private CancellationTokenSource cancelFire;
 
     private void Start()
@@ -49,9 +51,15 @@ public class SnakeBody : SnakePart
     {
         hitParticle.Play();
 
+        damage *= (1f + elixirAdditionalDamageRate);
+
         if (isDestroyed) damage /= 2f;
         damageNumber.Spawn(transform.position, damage);
         snakePartCurHp -= damage;
+        if (elixirAdditionalDamageRate > 0)
+        {
+            ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
+        }
         snakeMain.TakeDamage(damage);
         if (snakePartCurHp <= 0)
         {

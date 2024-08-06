@@ -23,12 +23,25 @@ public abstract class Enemy : MonoBehaviour
 
     public abstract void ResetEnemy();
 
-    public async UniTask ActivateElixirDebuff(float lastingTime, float additionalDamageRate)
+    public async UniTask ActivateElixirDebuff(float lastingTime, float additionalDamageRate, bool isPower)
     {
         elixirAdditionalDamageRate = additionalDamageRate;
         elixirLastingTime = lastingTime;
 
+        var tempSp = gameObject.GetComponent<SpriteRenderer>();
+        if (isPower)
+        {
+            tempSp.color = new(1f, 0.2f, 0.2f);
+        }
+        else
+        {
+            tempSp.color = new(0.35f, 0f, 1f);
+        }
+        gameObject.GetComponent<SpriteRenderer>().color = tempSp.color;
+
         await UniTask.WaitForSeconds(elixirLastingTime);
         elixirAdditionalDamageRate = 0f;
+        tempSp.color = new(1f, 1f, 1f);
+        gameObject.GetComponent<SpriteRenderer>().color = tempSp.color;
     }
 }

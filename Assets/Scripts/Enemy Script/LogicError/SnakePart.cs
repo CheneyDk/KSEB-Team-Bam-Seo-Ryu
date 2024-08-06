@@ -26,13 +26,6 @@ public abstract class SnakePart : Enemy
 
     protected bool isDestroyed;
 
-
-    /// <summary>
-    /// RangeEnemyCurtHP -= damage * (1f + elixirAdditionalDamageRate);
-    /// ScoreManager.instance.UpdateDamage("Elixir", damage* elixirAdditionalDamageRate)
-    /// </summary>
-
-
     private void Awake()
     {
         snakeMain = GameObject.FindGameObjectWithTag("SnakeMain").GetComponent<SnakeLogicError>();

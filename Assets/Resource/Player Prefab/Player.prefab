@@ -184,6 +184,7 @@ MonoBehaviour:
   energyDrinkDuration: 10
   damageNumber: {fileID: 0}
   levelUp: {fileID: 0}
+  hitUIAnimator: {fileID: 0}
 --- !u!114 &404201160916649962
 MonoBehaviour:
   m_ObjectHideFlags: 0

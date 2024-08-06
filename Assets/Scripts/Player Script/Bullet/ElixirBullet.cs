@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using VHierarchy.Libs;
 
 public class ElixirBullet : PlayerBullet
 {
@@ -22,32 +23,41 @@ public class ElixirBullet : PlayerBullet
     private float damageAddRate;
     private float lastingTime;
 
+    private bool isPowerWeapon;
+    private bool isNotBounced;
+
     private bool isDestroyed;
-    
+
+    public Sprite PowerBullet;
+    private SpriteRenderer spriteRenderer;
+    public ParticleSystem normalParticle;
+    public ParticleSystem powerParticle;
+
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        PowerSprite();
         isDestroyed = false;
-        bulletRoateSpeed = 1f;
-        parabolaYTimer = 0f;
+        isNotBounced = true;
+        bulletRoateSpeed = 2f;
         parabolaHeight = 4f;
-        bulletSpeed = 0f;
-        bulletFloatingTime = 2f; // 2sec
+        bulletFloatingTime = 1f; // 2sec
 
         bulletRotateVec = new(0f, 0f, 1f);
 
         ParabolaYFactor().Forget();
         BulletRotate().Forget();
+        BottleExplode().Forget();
     }
-
-
 
     void Update()
     {
-        gameObject.transform.Translate((bulletVector + parabolaVector) * Time.deltaTime);
+        gameObject.transform.Translate((bulletVector + parabolaVector) * bulletSpeed * Time.deltaTime, Space.World);
     }
 
     private async UniTask ParabolaYFactor()
     {
+        parabolaYTimer = 0f;
         while (parabolaYTimer < bulletFloatingTime)
         {
             await UniTask.Yield();
@@ -57,6 +67,9 @@ public class ElixirBullet : PlayerBullet
             parabolaVector = parabolaHeight * new Vector2(0f, parabolaY);
         }
         parabolaYTimer = bulletFloatingTime;
+
+        if (isPowerWeapon && isNotBounced) return;
+        parabolaVector = Vector2.zero;
     }
 
     private async UniTask BulletRotate()
@@ -64,32 +77,99 @@ public class ElixirBullet : PlayerBullet
         while (true)
         {
             await UniTask.Yield();
+            await UniTask.WaitUntil(() => GameManager.Instance.isGameContinue);
             if (isDestroyed) return;
-            gameObject.transform.Rotate(bulletRotateVec * bulletRoateSpeed * Time.deltaTime);
+            transform.Rotate(Vector3.forward, bulletRoateSpeed);
         }
     }
 
     private async UniTask BottleExplode()
     {
         await UniTask.WaitUntil(() => parabolaYTimer == bulletFloatingTime);
+        if(isDestroyed) return;
 
         var enemies = Physics2D.OverlapCircleAll(transform.position, explodeRange, 1 << 8);
-        if (enemies.Length < 1) return;
+        
+        // particle play
+        ParticleInstantiate().Forget();
 
-        foreach(var enemy in enemies)
+        if (enemies.Length > 0)
         {
-            // enemy.gameObject.GetComponent<>();
+            foreach (var enemy in enemies)
+            {
+                enemy.GetComponent<Enemy>().ActivateElixirDebuff(lastingTime, damageAddRate, isPowerWeapon).Forget();
+            }
         }
+
+        // Bounce
+        if (isPowerWeapon && isNotBounced)
+        {
+            bulletVector /= 1.5f;
+            bulletFloatingTime /= 1.5f;
+            parabolaHeight /= 1.5f;
+            isNotBounced = false;
+            ParabolaYFactor().Forget();
+            await BottleExplode();
+        }
+
+        DelayedDestroy().Forget();
     }
 
-    public void SetVec(Vector3 vec, float damageRate, float explodeRng, float lasting)
+    private async UniTask ParticleInstantiate()
+    {
+        if (!(isPowerWeapon && isNotBounced))
+        {
+            bulletVector = Vector3.zero;
+            isDestroyed = true; // to stop rotation
+
+            var tempColor = spriteRenderer.color;
+            tempColor.a = 0;
+            spriteRenderer.color = tempColor;
+        }
+
+        
+
+        ParticleSystem tempParticle;
+        if (isPowerWeapon)
+        {
+            tempParticle = Instantiate(powerParticle, transform.position, Quaternion.Euler(90f, 0f, 0f));
+        }
+        else
+        {
+            tempParticle = Instantiate(normalParticle, transform.position, Quaternion.Euler(90f, 0f, 0f));
+        }
+        await UniTask.WaitForSeconds(1f);
+        tempParticle.gameObject.Destroy();
+    }
+
+    private async UniTask DelayedDestroy()
+    {
+        await UniTask.WaitForSeconds(1f);
+        Destroy(gameObject);
+    }
+
+    public void SetElixir(Vector3 vec, float damageRate, float explodeRng, float lasting, bool power)
     {
         bulletVector = vec;
         explodeRange = explodeRng;
         damageAddRate = damageRate;
         lastingTime = lasting;
+        isPowerWeapon = power;
+
+        // speed distance calc - only 1 sec takes to reach out target position.
+        // but it can change in 2 or 3 sec
+        bulletSpeed = bulletVector.magnitude;
+        bulletVector.Normalize();
     }
-    
+
+    private void PowerSprite()
+    {
+        if (isPowerWeapon)
+        {
+            spriteRenderer.sprite = PowerBullet;
+        }
+    }
+
     private void OnDestroy()
     {
         isDestroyed = true;

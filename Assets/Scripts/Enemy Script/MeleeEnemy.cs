@@ -94,9 +94,13 @@ public class MeleeEnemy : Enemy
     public override void TakeDamage(float damage)
     {
         Instantiate(hitParticle, transform.position, Quaternion.identity);
+        damage *= (1f + elixirAdditionalDamageRate);
         damageNumber.Spawn(transform.position, damage);
-        MeleeEnemyCurtHP -= damage * (1f + elixirAdditionalDamageRate);
-        ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
+        MeleeEnemyCurtHP -= damage;
+        if (elixirAdditionalDamageRate > 0)
+        {
+            ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
+        }
         if (MeleeEnemyCurtHP <= 0)
         {
             EnemyDead();
