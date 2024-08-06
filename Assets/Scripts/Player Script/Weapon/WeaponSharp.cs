@@ -15,6 +15,8 @@ public class WeaponSharp : PlayerWeapon
     // Auto Fire Control
     private CancellationTokenSource cancelFire;
 
+    private SpriteRenderer spriteRenderer;
+
     private void Start()
     {
         // init stats
@@ -25,6 +27,10 @@ public class WeaponSharp : PlayerWeapon
 
         // player can fire imediately
         fireRateTimer = weaponFireRate;
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        // Upgrade(); // YH ; activate after merge
+        PowerWeaponSpriteChange();
     }
     
     private void Update()
@@ -71,35 +77,39 @@ public class WeaponSharp : PlayerWeapon
     // instantiate bullet for 3 ~ 8 times
     private async UniTask SharpFire()
     {
+        int random = 0;
         for (int i = 0; i < bulletNum; i++)
         {
             var tempBullet = Instantiate(bullet, muzzle.position, muzzle.rotation);
             tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
-            int random = Random.Range(0, 100);
-            if (isPowerWeapon && random > 45)
+            tempBullet.GetComponent<BulletSharp>().IsPower(isPowerWeapon);
+            random = Random.Range(0, 101);
+            if (isPowerWeapon && random > 50)
             {
-                var randPos = muzzle.position + new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f));
-                tempBullet = Instantiate(bullet, muzzle.position, muzzle.rotation);
+                var randPos = muzzle.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
+                tempBullet = Instantiate(bullet, randPos, muzzle.rotation);
                 tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+                tempBullet.GetComponent<BulletSharp>().IsPower(isPowerWeapon);
             }
             await UniTask.WaitForSeconds(weaponSharpFireInterval);
         }
     }
 
+    private void PowerWeaponSpriteChange()
+    {
+        if (isPowerWeapon)
+        {
+            spriteRenderer.sprite = powerWeaponSprite;
+        }
+        else
+        {
+            spriteRenderer.sprite = normalWeaponSprite;
+        }
+    }
+
     public override void Upgrade()
     {
-        // max level?
-        if (isMaxLevel) return;
-
-        // level up 1
-        weaponLevel += 1;
-
-        // stat change - damage rate, fireRate, bulletNum, etc.
-        weaponDamageRate += 0.1f;
-        weaponSharpFireInterval -= 0.004f;
-        bulletNum += 1;
-
-        if (weaponLevel > 4) isMaxLevel = true;
+        // isPowerWeapon = ScoreManager.instance.recordData.isCUpgrade;
     }
 
     public void isPowerWeaponTrue()
