@@ -12,6 +12,7 @@ public class BGM : MonoBehaviour
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        audioSource.volume = 0.3f;
 
         var randomMusicNumber = Random.Range(0, BGMClip.Length);
         PlayClip(BGMClip[randomMusicNumber]);

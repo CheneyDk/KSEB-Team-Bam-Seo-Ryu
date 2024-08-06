@@ -15,6 +15,9 @@ public class ShieldWeapon : PlayerWeapon
 
     private BoxCollider2D colider;
 
+    public AudioSource audioSource;
+    public AudioClip audioClip;
+
     void Start()
     {
         shieldAnimator = GetComponent<Animator>();
@@ -39,11 +42,13 @@ public class ShieldWeapon : PlayerWeapon
                 if (!isPowerWeapon)
                 {
                     shieldAnimator.Play("Shield Hit");
+                    audioSource.PlayOneShot(audioClip);
                     StartCoroutine(WaitForShield(shieldTime));
                 }
                 else if (isPowerWeapon)
                 {
                     shieldAnimator.Play("Power Shield Hit");
+                    audioSource.PlayOneShot(audioClip);
                     StartCoroutine(WaitForShield(shieldTime/2f));
                 }
             }

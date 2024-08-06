@@ -29,8 +29,12 @@ public class GameManager : MonoBehaviour
     public Texture2D aimCursor;
     public Texture2D normalCursor;
 
+    private BGM BGMAudio;
+
     private void Awake()
     {
+        BGMAudio = FindObjectOfType<BGM>();
+
         ChangeMouseCursor(aimCursor);
 
         Instance = this; // singleton
@@ -56,6 +60,7 @@ public class GameManager : MonoBehaviour
 
     public void SetPlayerDead()
     {
+        BGMAudio.GetComponent<AudioSource>().Stop();
         GameoverUI.gameObject.SetActive(true);
         ChangeMouseCursor(normalCursor);
         timeScaleProduct = 0f;
@@ -89,6 +94,8 @@ public class GameManager : MonoBehaviour
         timeScaleProduct = 0f;
         isGameContinue = false;
 
+        BGMAudio.GetComponent<AudioSource>().volume = 0.2f;
+
         // 3. acition map toggle -> before call this func
         // 4. Setting Stats texts
         InitStatsText();
@@ -100,6 +107,8 @@ public class GameManager : MonoBehaviour
         PauseUI.gameObject.SetActive(false);
 
         ChangeMouseCursor(aimCursor);
+
+        BGMAudio.GetComponent<AudioSource>().volume = 0.3f;
 
         // 2. TimeScale 1
         timeScaleProduct = 1f;
@@ -122,6 +131,7 @@ public class GameManager : MonoBehaviour
         UpgradeUI.SetActive(true);
         ChangeMouseCursor(normalCursor);
         UpgradeUI.GetComponent<UpgradeManager>().OnUpgrade(true);
+        BGMAudio.GetComponent<AudioSource>().volume = 0.2f;
         timeScaleProduct = 0f;
         isGameContinue = false;
     }
@@ -131,6 +141,7 @@ public class GameManager : MonoBehaviour
         UpgradeUI.SetActive(true);
         ChangeMouseCursor(normalCursor);
         UpgradeUI.GetComponent<UpgradeManager>().OnUpgrade(false);
+        BGMAudio.GetComponent<AudioSource>().volume = 0.2f;
         timeScaleProduct = 0f;
         isGameContinue = false;
 
@@ -142,6 +153,7 @@ public class GameManager : MonoBehaviour
         UpgradeUI.gameObject.SetActive(false);
         ChangeMouseCursor(aimCursor);
         player.SwitchToPlayerControl();
+        BGMAudio.GetComponent<AudioSource>().volume = 0.3f;
         timeScaleProduct = 1f;
         isGameContinue = true;
     }

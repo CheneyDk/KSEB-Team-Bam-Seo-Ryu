@@ -12,6 +12,9 @@ public class LoadingWeapon : PlayerWeapon
 
     private SpriteRenderer sprite;
 
+    public AudioSource audioSource;
+    public AudioClip audioClip;
+
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
@@ -55,6 +58,7 @@ public class LoadingWeapon : PlayerWeapon
             if (EnemyComponent != null)
             {
                 EnemyComponent.TakeDamage(damage);
+                audioSource.PlayOneShot(audioClip);
 
                 ScoreManager.instance.UpdateDamage("Loading", damage);
             }

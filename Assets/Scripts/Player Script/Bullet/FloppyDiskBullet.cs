@@ -13,7 +13,7 @@ public class FloppyDiskwBullet : PlayerBullet
 
     public SpriteRenderer spriteRenderer;
 
-    public ParticleSystem unityParticle;
+    public ParticleSystem FloppyDiskParticle;
 
     private void Start()
     {
@@ -46,7 +46,7 @@ public class FloppyDiskwBullet : PlayerBullet
             if (enemyComponent != null)
             {
                 Explode();
-                Instantiate(unityParticle, transform.position, Quaternion.identity);
+                Instantiate(FloppyDiskParticle, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
         }

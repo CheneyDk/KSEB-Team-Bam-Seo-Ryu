@@ -11,6 +11,9 @@ public class USBBullet : PlayerBullet
 
     public ParticleSystem USBParticle;
 
+    public AudioSource audioSource;
+    public AudioClip audioClip;
+
     private void Start()
     {
         bulletSpeed = 20f;
@@ -31,6 +34,8 @@ public class USBBullet : PlayerBullet
             if (enemyComponent != null)
             {
                 Instantiate(USBParticle, transform.position, Quaternion.identity);
+                audioSource.PlayOneShot(audioClip);
+
                 enemyComponent.TakeDamage(bulletDamage);
             }
 

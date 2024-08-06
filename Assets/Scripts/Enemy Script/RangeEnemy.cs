@@ -131,7 +131,7 @@ public class RangeEnemy : Enemy
         Instantiate(hitParticle, transform.position, Quaternion.identity);
         damageNumber.Spawn(transform.position, damage);
         RangeEnemyCurtHP -= damage * (1f + elixirAdditionalDamageRate);
-        ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
+        //ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
         if (RangeEnemyCurtHP <= 0)
         {
             EnemyDead();

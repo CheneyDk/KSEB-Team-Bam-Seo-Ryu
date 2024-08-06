@@ -6,6 +6,9 @@ public class GithubBullet : PlayerBullet
 {
     private Vector2 target;
 
+    public AudioSource audioSource;
+    public AudioClip audioClip;
+
     private void Start()
     {
         bulletSpeed = 10f;
@@ -63,6 +66,7 @@ public class GithubBullet : PlayerBullet
             if (enemyComponent != null)
             {
                 enemyComponent.TakeDamage(bulletDamage);
+                audioSource.PlayOneShot(audioClip);
             }
         }
     }

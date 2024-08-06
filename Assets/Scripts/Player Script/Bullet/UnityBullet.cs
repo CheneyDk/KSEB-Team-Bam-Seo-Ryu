@@ -13,6 +13,9 @@ public class UnityBullet : PlayerBullet
 
     public ParticleSystem unityParticle;
 
+    public AudioSource audioSource;
+    public AudioClip audioClip;
+
     private void Start()
     {
         bulletSpeed = 5f;
@@ -45,6 +48,7 @@ public class UnityBullet : PlayerBullet
             {
                 enemyComponent.TakeDamage(bulletDamage);
                 Instantiate(unityParticle, transform.position, Quaternion.identity);
+                audioSource.PlayOneShot(audioClip);
 
                 ScoreManager.instance.UpdateDamage("Unity", bulletDamage);
             }

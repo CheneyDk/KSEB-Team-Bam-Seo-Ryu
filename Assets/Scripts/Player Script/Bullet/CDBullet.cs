@@ -15,6 +15,9 @@ public class CDBullet : PlayerBullet
 
     public ParticleSystem CDParticle;
 
+    public AudioSource audioSource;
+    public AudioClip audioClip;
+
     private void Start()
     {
         bulletSpeed = 5f;
@@ -43,8 +46,8 @@ public class CDBullet : PlayerBullet
             if (enemyComponent != null)
             {
                 Instantiate(CDParticle, transform.position, Quaternion.identity);
+                audioSource.PlayOneShot(audioClip);
                 enemyComponent.TakeDamage(bulletDamage);
-                ScoreManager.instance.UpdateDamage("CD", bulletDamage);
             }
         }
     }

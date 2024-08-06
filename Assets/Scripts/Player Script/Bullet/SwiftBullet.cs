@@ -15,6 +15,9 @@ public class SwiftBullet : PlayerBullet
 
     public ParticleSystem swiftParticle;
 
+    public AudioSource audioSource;
+    public AudioClip audioClip;
+
     private void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -48,6 +51,7 @@ public class SwiftBullet : PlayerBullet
             {
                 enemyComponent.TakeDamage(bulletDamage);
                 Instantiate(swiftParticle, transform.position, Quaternion.identity);
+                audioSource.PlayOneShot(audioClip);
 
                 ScoreManager.instance.UpdateDamage("Swift", bulletDamage);
             }

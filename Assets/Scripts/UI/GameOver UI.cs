@@ -7,6 +7,19 @@ using UnityEngine.UI;
 
 public class GameOverUI : MonoBehaviour
 {
+    private AudioSource audioSource;
+
+    public AudioClip gameOverClip;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    private void OnEnable()
+    {
+        audioSource.PlayOneShot(gameOverClip);
+    }
 
     public void MainMenuButtonDown()
     {

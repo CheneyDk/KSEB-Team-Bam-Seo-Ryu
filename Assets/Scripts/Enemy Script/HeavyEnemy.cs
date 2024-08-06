@@ -128,7 +128,7 @@ public class HeavyEnemy : Enemy
         Instantiate(hitParticle, transform.position, Quaternion.identity);
         damageNumber.Spawn(transform.position, damage);
         HeavyEnemyCurtHP -= damage * (1f + elixirAdditionalDamageRate);
-        ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
+        //ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
         if (HeavyEnemyCurtHP <= 0)
         {
             EnemyDead();

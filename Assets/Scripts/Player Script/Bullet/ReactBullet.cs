@@ -10,6 +10,9 @@ public class ReactBullet : PlayerBullet
 
     public ParticleSystem reactParticle;
 
+    public AudioSource audioSource;
+    public AudioClip audioClip;
+
     private void Start()
     {
         myCollider = GetComponent<CircleCollider2D>();
@@ -31,6 +34,7 @@ public class ReactBullet : PlayerBullet
     private void ParticleStart()
     {
         Instantiate(reactParticle, transform.position, Quaternion.identity);
+        audioSource.PlayOneShot(audioClip);
     }
 
     private void DestroyBullet()

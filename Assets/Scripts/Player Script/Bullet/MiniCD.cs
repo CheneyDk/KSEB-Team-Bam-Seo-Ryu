@@ -10,6 +10,9 @@ public class MiniCD : PlayerBullet
 
     public ParticleSystem CDparticle;
 
+    public AudioSource audioSource;
+    public AudioClip audioClip;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -26,8 +29,8 @@ public class MiniCD : PlayerBullet
             if (enemyComponent != null)
             {
                 Instantiate(CDparticle, transform.position, Quaternion.identity);
+                audioSource.PlayOneShot(audioClip);
                 enemyComponent.TakeDamage(player.playerAtk * 0.5f);
-                ScoreManager.instance.UpdateDamage("CD", player.playerAtk * 0.5f);
             }
 
         }

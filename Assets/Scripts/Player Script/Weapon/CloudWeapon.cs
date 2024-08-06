@@ -7,6 +7,9 @@ public class CloudWeapon : PlayerWeapon
 {
     public float fireRate = 3.5f;
 
+    public AudioSource audioSource;
+    public AudioClip audioClip;
+
     void Start()
     {
         Fire();
@@ -25,12 +28,14 @@ public class CloudWeapon : PlayerWeapon
             {
                 bullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
                 bullet.GetComponent<CloudBullet>().GiveDamagea();
+                audioSource.PlayOneShot(audioClip);
                 yield return new WaitForSeconds(fireRate);
             }
             else if (isPowerWeapon)
             {
                 bullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
                 bullet.GetComponent<CloudBullet>().PowerWeapoonDamage();
+                audioSource.PlayOneShot(audioClip);
                 yield return new WaitForSeconds(2f);
             }
         }

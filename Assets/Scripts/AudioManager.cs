@@ -9,14 +9,17 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip playerDamagedClip;
     [SerializeField] AudioClip normalEnemyDamagedClip;
     [SerializeField] AudioClip heavyEnemyDamagedClip;
+    [SerializeField] AudioClip buttonClip;
 
     [Foldout("Volume")]
     [SerializeField][Range(0f, 1f)] float playerDamagedVolume = 1f;
     [SerializeField][Range(0f, 1f)] float normalEnemyDamagedVolume = 1f;
     [SerializeField][Range(0f, 1f)] float heavyEnemyDamagedVolume = 1f;
+    [SerializeField][Range(0f, 1f)] float buttonVolume = 1f;
     [EndFoldout]
 
-    static AudioManager instance;
+    private static AudioManager instance;
+    private AudioSource audioSource;
 
     void Awake()
     {
@@ -35,6 +38,7 @@ public class AudioManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void PlayerDamagedClip()
@@ -52,12 +56,16 @@ public class AudioManager : MonoBehaviour
         PlayClip(heavyEnemyDamagedClip, heavyEnemyDamagedVolume);
     }
 
+    public void ButtonClip()
+    {
+        PlayClip(buttonClip, buttonVolume);
+    }
+
     public void PlayClip(AudioClip clip, float volume)
     {
         if (clip != null)
         {
-            Vector3 cameraPos = Camera.main.transform.position;
-            AudioSource.PlayClipAtPoint(clip, cameraPos, volume);
+            audioSource.PlayOneShot(clip, volume);
         }
     }
 }

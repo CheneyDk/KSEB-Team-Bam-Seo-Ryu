@@ -107,7 +107,7 @@ MonoBehaviour:
   range: 20
   damageRange: 2
   spriteRenderer: {fileID: 7939553711535033596}
-  unityParticle: {fileID: 7583006493178195182, guid: 341ad662ce3dcc94b92cc02b7d0cadd3, type: 3}
+  FloppyDiskParticle: {fileID: 7583006493178195182, guid: 341ad662ce3dcc94b92cc02b7d0cadd3, type: 3}
 --- !u!1 &8057024510287149651
 GameObject:
   m_ObjectHideFlags: 0
