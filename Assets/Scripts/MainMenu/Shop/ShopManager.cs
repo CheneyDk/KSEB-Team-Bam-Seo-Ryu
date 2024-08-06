@@ -89,7 +89,7 @@ public class ShopManager : MonoBehaviour
             {
                 ScoreManager.instance.recordData.money -= itemList[idx].Item2;
                 itemSetter[idx].ChangeUpdatePage();
-                itemList[idx] = ("PowerPet", 700);
+                itemList[idx] = ("PowerPet", 1000);
                 ScoreManager.instance.recordData.isPet = true;
             }
             else
