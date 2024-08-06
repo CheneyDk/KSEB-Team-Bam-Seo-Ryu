@@ -143,12 +143,14 @@ public class ElixirBullet : PlayerBullet
             tempParticle = Instantiate(normalParticle, transform.position, Quaternion.Euler(90f, 0f, 0f));
         }
         await UniTask.WaitForSeconds(1f);
+        if (isDestroyed) return;
         tempParticle.gameObject.Destroy();
     }
 
     private async UniTask DelayedDestroy()
     {
         await UniTask.WaitForSeconds(1f);
+        if (isDestroyed) return;
         Destroy(gameObject);
     }
 

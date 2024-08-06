@@ -2893,7 +2893,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &386310399
 Transform:
   m_ObjectHideFlags: 0
@@ -7980,6 +7980,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1027488518}
   m_CullTransparentMesh: 1
+--- !u!1001 &1042663482
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 897920589}
+    m_Modifications:
+    - target: {fileID: 5720480184027430710, guid: 6ff662e717953a04eb0c4874a751a13d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5720480184027430710, guid: 6ff662e717953a04eb0c4874a751a13d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5720480184027430710, guid: 6ff662e717953a04eb0c4874a751a13d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5720480184027430710, guid: 6ff662e717953a04eb0c4874a751a13d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5720480184027430710, guid: 6ff662e717953a04eb0c4874a751a13d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5720480184027430710, guid: 6ff662e717953a04eb0c4874a751a13d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5720480184027430710, guid: 6ff662e717953a04eb0c4874a751a13d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5720480184027430710, guid: 6ff662e717953a04eb0c4874a751a13d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5720480184027430710, guid: 6ff662e717953a04eb0c4874a751a13d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5720480184027430710, guid: 6ff662e717953a04eb0c4874a751a13d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6965413860734168168, guid: 6ff662e717953a04eb0c4874a751a13d, type: 3}
+      propertyPath: m_Name
+      value: ElixirWeapon
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6ff662e717953a04eb0c4874a751a13d, type: 3}
 --- !u!1 &1059208265
 GameObject:
   m_ObjectHideFlags: 0
@@ -9820,6 +9877,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1309141685}
   m_CullTransparentMesh: 1
+--- !u!4 &1333932915 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5720480184027430710, guid: 6ff662e717953a04eb0c4874a751a13d, type: 3}
+  m_PrefabInstance: {fileID: 1042663482}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1340869015
 GameObject:
   m_ObjectHideFlags: 0
@@ -14457,7 +14519,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1987470288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14472,7 +14534,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNumber: 10
   curWave: 1
-  waveTime: 60
+  waveTime: 20
   waveInterval: 2
   time: 0
   magneticTime: 3
@@ -15806,7 +15868,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6025502528629382335, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1333932915}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 944808390979848710, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
       insertIndex: 2
