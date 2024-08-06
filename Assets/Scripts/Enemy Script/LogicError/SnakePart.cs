@@ -24,8 +24,6 @@ public abstract class SnakePart : Enemy
     protected SpriteRenderer curSR;
     protected Color originColor;
 
-    protected bool isDestroyed;
-
     private void Awake()
     {
         snakeMain = GameObject.FindGameObjectWithTag("SnakeMain").GetComponent<SnakeLogicError>();
