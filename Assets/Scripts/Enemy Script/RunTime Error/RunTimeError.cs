@@ -199,7 +199,8 @@ public class RunTimeError : Enemy
 
     public override void TakeDamage(float damage)
     {
-        RunTimeErrorCurtHP -= damage;
+        RunTimeErrorCurtHP -= damage * (1f + elixirAdditionalDamageRate);
+        ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
         if (RunTimeErrorCurtHP <= 0)
         {
             RunTimeErrorDestroy();

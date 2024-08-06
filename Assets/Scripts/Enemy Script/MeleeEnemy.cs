@@ -95,7 +95,8 @@ public class MeleeEnemy : Enemy
     {
         Instantiate(hitParticle, transform.position, Quaternion.identity);
         damageNumber.Spawn(transform.position, damage);
-        MeleeEnemyCurtHP -= damage; 
+        MeleeEnemyCurtHP -= damage * (1f + elixirAdditionalDamageRate);
+        ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
         if (MeleeEnemyCurtHP <= 0)
         {
             EnemyDead();
