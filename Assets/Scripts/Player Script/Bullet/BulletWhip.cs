@@ -44,7 +44,7 @@ public class BulletWhip : PlayerBullet
             var EnemyComponent = collision.GetComponent<Enemy>();
             if (EnemyComponent != null)
             {
-                EnemyComponent.TakeDamage(bulletDamage);
+                EnemyComponent.TakeDamage(bulletDamage, critOccur);
 
                 ScoreManager.instance.UpdateDamage("Basic", bulletDamage);
             }

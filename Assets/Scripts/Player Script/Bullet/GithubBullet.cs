@@ -65,7 +65,7 @@ public class GithubBullet : PlayerBullet
             var enemyComponent = collision.GetComponent<Enemy>();
             if (enemyComponent != null)
             {
-                enemyComponent.TakeDamage(bulletDamage);
+                enemyComponent.TakeDamage(bulletDamage, 0);
                 audioSource.PlayOneShot(audioClip);
             }
         }

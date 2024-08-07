@@ -23,7 +23,6 @@ public class WeaponSharp : PlayerWeapon
     private int critOccur;
     private float critDamage;
 
-    // int random;
     // int critOccur;
     // float critDamage;
 
@@ -88,8 +87,6 @@ public class WeaponSharp : PlayerWeapon
     // instantiate bullet for 3 ~ 8 times
     private async UniTask SharpFire()
     {
-        
-        
         for (int i = 0; i < bulletNum; i++)
         {
             critOccur = IsCritOccur(player.playerCritPer);

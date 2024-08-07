@@ -44,6 +44,8 @@ public class HeavyEnemy : Enemy
     private DamageNumber damageNumber;
     [SerializeField]
     private DamageNumber lastingDamageNumber;
+    [SerializeField]
+    private DamageNumber critDamageNumber;
 
     private Animator heavyAni;
     private Collider2D heavyCollider;
@@ -123,11 +125,18 @@ public class HeavyEnemy : Enemy
         EnemyMovement();
     }
 
-    public override void TakeDamage(float damage)
+    public override void TakeDamage(float damage, int critOccur)
     {
         Instantiate(hitParticle, transform.position, Quaternion.identity);
         damage *= (1f + elixirAdditionalDamageRate);
-        damageNumber.Spawn(transform.position, damage);
+        if (critOccur == 1)
+        {
+            critDamageNumber.Spawn(transform.position, damage);
+        }
+        else
+        {
+            damageNumber.Spawn(transform.position, damage);
+        }
         HeavyEnemyCurtHP -= damage;
         if (elixirAdditionalDamageRate > 0)
         {

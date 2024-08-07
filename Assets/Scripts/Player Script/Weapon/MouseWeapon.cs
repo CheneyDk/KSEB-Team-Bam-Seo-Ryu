@@ -9,6 +9,9 @@ public class MouseWeapon : PlayerWeapon
 
     public Material material;
 
+    private int critOccur;
+    private float critDamage;
+
     void Start()
     {
         weaponLevel = 1;
@@ -47,14 +50,16 @@ public class MouseWeapon : PlayerWeapon
             var EnemyComponent = collision.GetComponent<Enemy>();
             if (EnemyComponent != null)
             {
+                critOccur = IsCritOccur(player.playerCritPer);
+                critDamage = player.playerCritDmg * critOccur;
                 if (!isPowerWeapon)
                 {
-                    EnemyComponent.TakeDamage(damage);
+                    EnemyComponent.TakeDamage(damage * (1f + critDamage), critOccur);
                     ScoreManager.instance.UpdateDamage("Mouse", damage);
                 }
                 else if (isPowerWeapon)
                 {
-                    EnemyComponent.TakeDamage(player.playerAtk);
+                    EnemyComponent.TakeDamage(player.playerAtk * (1f + critDamage), critOccur);
                     ScoreManager.instance.UpdateDamage("Mouse", player.playerAtk);
                 }
                 

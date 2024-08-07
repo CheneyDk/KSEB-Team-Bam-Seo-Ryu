@@ -17,6 +17,7 @@ public abstract class SnakePart : Enemy
     [SerializeField] protected ParticleSystem hitParticle;
     [SerializeField] protected DamageNumber damageNumber;
     [SerializeField] protected DamageNumber lastingDamageNumber;
+    [SerializeField] protected DamageNumber critDamageNumber;
 
     protected Animator snakePartAni;
     protected Collider2D snakePartCollider;
@@ -44,6 +45,7 @@ public abstract class SnakePart : Enemy
     {
         snakePartCollider.enabled = false;
         gameObject.SetActive(false);
+        // need dead motion
 
     }
 

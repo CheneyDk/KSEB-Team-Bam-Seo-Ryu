@@ -117,6 +117,7 @@ MonoBehaviour:
   hitParticle: {fileID: 5887403672603289517, guid: 0b91319fbe427db4b8121f5e8db42064, type: 3}
   damageNumber: {fileID: 1848622758658849530, guid: 1928df38c9c7b7342a2a95eeab8f991d, type: 3}
   lastingDamageNumber: {fileID: 1848622758658849530, guid: 94b7e5789fc284b4eba92f18cad04c72, type: 3}
+  critDamageNumber: {fileID: 1718539329463334811, guid: a76e0657b7bd45f4a98ff48f62de521a, type: 3}
   bullet: {fileID: 6381758804468079586, guid: 6c46260b4e394c047b75df60a5cb0da7, type: 3}
 --- !u!50 &-6512544203900851676
 Rigidbody2D:

@@ -25,7 +25,7 @@ public class SubPytorchBullet : PlayerBullet
             var EnemyComponent = collision.GetComponent<Enemy>();
             if (EnemyComponent != null)
             {
-                EnemyComponent.TakeDamage(bulletDamage);
+                EnemyComponent.TakeDamage(bulletDamage, critOccur);
                 Destroy(gameObject);
 
                 ScoreManager.instance.UpdateDamage("Pytorch", bulletDamage);

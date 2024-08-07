@@ -10,7 +10,7 @@ public abstract class Enemy : MonoBehaviour
     protected bool isDestroyed = false;
 
     public abstract void EnemyMovement();
-    public abstract void TakeDamage(float damage);
+    public abstract void TakeDamage(float damage, int critOccur);
 
     public void TakeLastingDamage(float damage, int totalDamageTime, Color color)
     {

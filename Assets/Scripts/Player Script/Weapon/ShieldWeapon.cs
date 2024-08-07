@@ -18,6 +18,9 @@ public class ShieldWeapon : PlayerWeapon
     public AudioSource audioSource;
     public AudioClip audioClip;
 
+    private int critOccur;
+    private float critDamage; 
+
     void Start()
     {
         shieldAnimator = GetComponent<Animator>();
@@ -37,8 +40,11 @@ public class ShieldWeapon : PlayerWeapon
             var EnemyComponent = collision.GetComponent<Enemy>();
             if (EnemyComponent != null)
             {
-                EnemyComponent.TakeDamage(damage);
-                ScoreManager.instance.UpdateDamage("Shield", damage);
+                critOccur = IsCritOccur(player.playerCritPer);
+                critDamage = player.playerCritDmg * critOccur;
+
+                EnemyComponent.TakeDamage(damage * (1f + critDamage), critOccur);
+                ScoreManager.instance.UpdateDamage("Shield", damage * (1f + critDamage));
 
                 if (!isPowerWeapon)
                 {

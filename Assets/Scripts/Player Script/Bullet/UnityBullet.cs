@@ -46,7 +46,7 @@ public class UnityBullet : PlayerBullet
             var enemyComponent = collision.GetComponent<Enemy>();
             if (enemyComponent != null)
             {
-                enemyComponent.TakeDamage(bulletDamage);
+                enemyComponent.TakeDamage(bulletDamage, critOccur);
                 Instantiate(unityParticle, transform.position, Quaternion.identity);
                 audioSource.PlayOneShot(audioClip);
 

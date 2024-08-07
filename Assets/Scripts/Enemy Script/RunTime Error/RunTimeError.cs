@@ -27,6 +27,8 @@ public class RunTimeError : Enemy
     private DamageNumber damageNumber;
     [SerializeField]
     private DamageNumber lastingDamageNumber;
+    [SerializeField]
+    private DamageNumber critDamageNumber;
 
     [Header("Exp")]
     [SerializeField]
@@ -204,10 +206,18 @@ public class RunTimeError : Enemy
 
 
 
-    public override void TakeDamage(float damage)
+    public override void TakeDamage(float damage, int critOccur)
     {
         damage *= (1f + elixirAdditionalDamageRate);
-        damageNumber.Spawn(transform.position, damage);
+
+        if (critOccur == 1)
+        {
+            critDamageNumber.Spawn(transform.position, damage);
+        }
+        else
+        {
+            damageNumber.Spawn(transform.position, damage);
+        }
 
         RunTimeErrorCurtHP -= damage;
         if (elixirAdditionalDamageRate > 0)

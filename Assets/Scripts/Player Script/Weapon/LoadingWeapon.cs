@@ -15,6 +15,9 @@ public class LoadingWeapon : PlayerWeapon
     public AudioSource audioSource;
     public AudioClip audioClip;
 
+    private int critOccur;
+    private float critDamage;
+
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
@@ -57,7 +60,10 @@ public class LoadingWeapon : PlayerWeapon
             var EnemyComponent = collision.GetComponent<Enemy>();
             if (EnemyComponent != null)
             {
-                EnemyComponent.TakeDamage(damage);
+                critOccur = IsCritOccur(player.playerCritPer);
+                critDamage = player.playerCritDmg * critOccur;
+
+                EnemyComponent.TakeDamage(damage * (1f + critDamage), critOccur);
                 audioSource.PlayOneShot(audioClip);
 
                 ScoreManager.instance.UpdateDamage("Loading", damage);
