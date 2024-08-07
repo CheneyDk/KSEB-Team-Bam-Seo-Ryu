@@ -5,12 +5,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using VInspector;
 using static UnityEngine.UI.Image;
 
 public class MainMenuManager : MonoBehaviour
 {
     public static MainMenuManager instance;
-    
+
+    [Foldout("Icon")]
     public GameObject window;
     public GameObject log;
     public GameObject detail;
@@ -22,6 +24,7 @@ public class MainMenuManager : MonoBehaviour
     public GameObject I_33;
     public GameObject I_0;
     public GameObject I_Except;
+    [EndFoldout]
 
     public Texture2D normalCursor;
 
@@ -29,9 +32,15 @@ public class MainMenuManager : MonoBehaviour
 
     private float Origin = 100;
 
+    private AudioSource audioSource;
+    public AudioClip startMenuClip;
+    public AudioClip mouseClickClip;
+
     void Awake()
     {
         Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
+        audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(startMenuClip);
         instance = this;
     }
 
@@ -179,6 +188,14 @@ public class MainMenuManager : MonoBehaviour
         else if (panel == "Shop")
         {
             shop.SetActive(false);
+        }
+    }
+
+    public void MouseClickSound(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            audioSource.PlayOneShot(mouseClickClip);
         }
     }
 }

@@ -9,12 +9,18 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip playerDamagedClip;
     [SerializeField] AudioClip normalEnemyDamagedClip;
     [SerializeField] AudioClip heavyEnemyDamagedClip;
+    [SerializeField] AudioClip sharpClip;
+    [SerializeField] AudioClip appleClip;
+    [SerializeField] AudioClip redblueClip;
     [SerializeField] AudioClip buttonClip;
 
     [Foldout("Volume")]
     [SerializeField][Range(0f, 1f)] float playerDamagedVolume = 1f;
     [SerializeField][Range(0f, 1f)] float normalEnemyDamagedVolume = 1f;
     [SerializeField][Range(0f, 1f)] float heavyEnemyDamagedVolume = 1f;
+    [SerializeField][Range(0f, 1f)] float sharpVolume = 1f;
+    [SerializeField][Range(0f, 1f)] float appleVolume = 1f;
+    [SerializeField][Range(0f, 1f)] float redblueVolume = 1f;
     [SerializeField][Range(0f, 1f)] float buttonVolume = 1f;
     [EndFoldout]
 
@@ -54,6 +60,21 @@ public class AudioManager : MonoBehaviour
     public void HeavyEnemyDamagedClip()
     {
         PlayClip(heavyEnemyDamagedClip, heavyEnemyDamagedVolume);
+    }
+
+    public void SharpClip()
+    {
+        PlayClip(sharpClip, sharpVolume);
+    }
+
+    public void AppleClip()
+    {
+        PlayClip(appleClip, appleVolume);
+    }
+
+    public void RedBlueClip()
+    {
+        PlayClip(redblueClip, redblueVolume);
     }
 
     public void ButtonClip()

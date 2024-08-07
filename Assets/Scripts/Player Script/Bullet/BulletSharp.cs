@@ -10,6 +10,9 @@ public class BulletSharp : PlayerBullet
     public Sprite normalBullet;
     public Sprite powerBullet;
 
+    private AudioManager audioManager;
+
+
     private void Start()
     {
         // go straight
@@ -17,6 +20,7 @@ public class BulletSharp : PlayerBullet
         bulletSpeed = 70f;
         bulletLifeTime = 1.5f;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioManager = FindObjectOfType<AudioManager>();
 
         Destroy(gameObject, bulletLifeTime);
         PowerSprite();
@@ -36,6 +40,7 @@ public class BulletSharp : PlayerBullet
             if (EnemyComponent != null)
             {
                 EnemyComponent.TakeDamage(bulletDamage);
+                audioManager.SharpClip();
                 Destroy(gameObject);
 
                 ScoreManager.instance.UpdateDamage("Basic", bulletDamage);

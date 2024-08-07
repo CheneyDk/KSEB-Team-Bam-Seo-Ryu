@@ -19,6 +19,7 @@ public class WeaponSharp : PlayerWeapon
 
     private SpriteRenderer spriteRenderer;
 
+
     private void Start()
     {
         // init stats

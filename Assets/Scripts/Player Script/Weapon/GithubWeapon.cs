@@ -2,34 +2,31 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GithubWeapon : PlayerWeapon
+public class GithubWeapon : MonoBehaviour
 {
-    public int bulletNumber;
+    [SerializeField]
+    private GameObject bullet;
+
     public float playerRange = 8f;
     public float moveSpeed = 5f;
     public float stopDistance = 1f;
 
     private Transform playerPos;
-    private Player players;
     private Animator animator;
     private bool isMoving = false;
     private bool isInRange = false;
     private Coroutine attackCoroutine;
 
+    public bool isUpgraded = false;
+
+    private AudioSource audioSource;
+    public AudioClip githubFire;
+
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
-        players = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-    }
-
-    private void Start()
-    {
-        weaponLevel = 1;
-        weaponDamageRate = 0.5f;
-        isMaxLevel = false;
-        isPowerWeapon = false;
-        matchPassive = "Google";
     }
 
     private void Update()
@@ -65,38 +62,34 @@ public class GithubWeapon : PlayerWeapon
     {
         while (true)
         {
-            if (!isPowerWeapon)
+            if (!isUpgraded)
             {
                 animator.Play("Github Attack");
+                bullet.GetComponent<GithubBullet>().bulletDamage = 10;
                 yield return new WaitForSeconds(1f);
-                for (int i = 0; i < bulletNumber; i++)
-                {
-                    var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                    addBullet.GetComponent<PlayerBullet>().Init(players.playerAtk * weaponDamageRate);
-                    yield return new WaitForSeconds(1f);
-                }
+                var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+                audioSource.PlayOneShot(githubFire);
+                yield return new WaitForSeconds(1f);
             }
-            else if(isPowerWeapon)
+            else if(isUpgraded)
             {
                 animator.Play("Power Github Attack");
+                bullet.GetComponent<GithubBullet>().bulletDamage = 15;
                 yield return new WaitForSeconds(0.5f);
-                for (int i = 0; i < bulletNumber; i++)
-                {
-                    var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                    addBullet.GetComponent<PlayerBullet>().Init(players.playerAtk * weaponDamageRate);
-                    yield return new WaitForSeconds(0.5f);
-                }
+                var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+                audioSource.PlayOneShot(githubFire);
+                yield return new WaitForSeconds(0.5f);
             }
         }
     }
 
     private void MoveToPlayer()
     {
-        if (!isPowerWeapon)
+        if (!isUpgraded)
         {
             animator.Play("Github Move");
         }
-        else if (isPowerWeapon)
+        else if (isUpgraded)
         {
             animator.Play("Power Github Move");
         }
@@ -110,27 +103,6 @@ public class GithubWeapon : PlayerWeapon
         else
         {
             isMoving = false;
-        }
-    }
-
-    protected override void Fire()
-    {
-    }
-
-    public override void Fire(InputAction.CallbackContext context)
-    {
-    }
-
-    public override void Upgrade()
-    {
-        if (weaponLevel < 5)
-        {
-            weaponLevel++;
-            bulletNumber += 1;
-        }
-        if (weaponLevel > 4)
-        {
-            isMaxLevel = true;
         }
     }
 }

@@ -10,9 +10,12 @@ public class ShopManager : MonoBehaviour
     public TextMeshProUGUI[] curMoney;
     public ItemSetter[] itemSetter;
 
+    private AudioSource audioSource;
+    public AudioClip noMoneyClip;
+
     private List<(string, int)> itemList = new List<(string, int)>
     {
-        ("Mouse", 500),
+        ("Mouse", 0),
         ("Shield", 500),
         ("Elixir", 500),
         ("Pytorch", 500),
@@ -26,6 +29,8 @@ public class ShopManager : MonoBehaviour
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
+
         for (int i = 0; i < itemList.Count; i++)
         {
             itemSetter[i].Set(itemList[i].Item1, itemList[i].Item2);
@@ -114,6 +119,7 @@ public class ShopManager : MonoBehaviour
 
     private void Alert()
     {
+        audioSource.PlayOneShot(noMoneyClip);
         Debug.Log("Insufficient funds");
     }
 }

@@ -19231,9 +19231,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dedd3029b0e1584c9cbaa60ec2a17a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 0
+  bulletSpeed: 10
+  bulletLifeTime: 5
+  bulletDamage: 10
   audioSource: {fileID: 6443571392232571126}
-  audioClip: {fileID: 8300000, guid: 835478b5b2993c74d93c6befae12d94e, type: 3}
+  audioClip: {fileID: 8300000, guid: bc001407d3e3f4e4990964fb6dbee732, type: 3}
 --- !u!82 &6443571392232571126
 AudioSource:
   m_ObjectHideFlags: 0

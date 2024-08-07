@@ -277,6 +277,7 @@ public class Player : MonoBehaviour
     // apple
     public void GetHpPotion(float heal)
     {
+        audioManager.AppleClip();
         if (playerCurHp > playerMaxHp - heal)
         {
             playerCurHp = playerMaxHp;
@@ -290,6 +291,7 @@ public class Player : MonoBehaviour
     // RedBull
     public void GetEnergyDrink(float value)
     {
+        audioManager.RedBlueClip();
         GetHigh(value).Forget();
     }
 

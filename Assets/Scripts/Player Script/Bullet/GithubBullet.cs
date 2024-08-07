@@ -2,8 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GithubBullet : PlayerBullet
+public class GithubBullet : MonoBehaviour
 {
+    public float bulletSpeed = 10f;
+    public float bulletLifeTime = 5f;
+
+    public int bulletDamage = 10;
+
     private Vector2 target;
 
     public AudioSource audioSource;
@@ -11,16 +16,13 @@ public class GithubBullet : PlayerBullet
 
     private void Start()
     {
-        bulletSpeed = 10f;
-        bulletLifeTime = 5f;
-
         target = FindNearestEnemy();
         if (target == Vector2.zero)
         {
             gameObject.SetActive(false);
             Destroy(gameObject);
         }
-        Destroy(gameObject, bulletLifeTime); // Destroy bullet after 5 seconds if it doesn't hit anything
+        Destroy(gameObject, bulletLifeTime);
     }
 
     private void Update()
@@ -58,7 +60,7 @@ public class GithubBullet : PlayerBullet
         return Vector2.zero;
     }
 
-    protected override void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
         {
@@ -69,9 +71,5 @@ public class GithubBullet : PlayerBullet
                 audioSource.PlayOneShot(audioClip);
             }
         }
-    }
-
-    public override void ChangeSprite(Sprite powerWeapon)
-    {
     }
 }

@@ -9,6 +9,9 @@ public class MouseWeapon : PlayerWeapon
 
     public Material material;
 
+    public AudioSource audioSource;
+    public AudioClip clip;
+
     void Start()
     {
         weaponLevel = 1;
@@ -49,11 +52,13 @@ public class MouseWeapon : PlayerWeapon
             {
                 if (!isPowerWeapon)
                 {
+                    audioSource.PlayOneShot(clip);
                     EnemyComponent.TakeDamage(damage);
                     ScoreManager.instance.UpdateDamage("Mouse", damage);
                 }
                 else if (isPowerWeapon)
                 {
+                    audioSource.PlayOneShot(clip);
                     EnemyComponent.TakeDamage(player.playerAtk);
                     ScoreManager.instance.UpdateDamage("Mouse", player.playerAtk);
                 }

@@ -47,10 +47,10 @@ public class GameManager : MonoBehaviour
         UpgradeUI.SetActive(false);
         Time.timeScale = 1f; // init
 
-        if (ScoreManager.instance.recordData.isPet)
-        {
-            pet.SetActive(true);
-        }
+        //if (ScoreManager.instance.recordData.isPet)
+        //{
+        //    pet.SetActive(true);
+        //}
     }
 
     private void Start()
