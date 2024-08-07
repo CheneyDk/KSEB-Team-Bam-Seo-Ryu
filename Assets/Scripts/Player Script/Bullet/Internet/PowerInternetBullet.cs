@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PowerInternetBulllet : PlayerBullet
 {
-    private float dotDamageTimeInterval = 1f;
+    private float dotDamageTimeInterval = 0.8f;
     private float damageTimer;
     private float bulletRadius;
 
@@ -20,11 +20,10 @@ public class PowerInternetBulllet : PlayerBullet
     {
         bulletLifeTime = 8f;
         bulletSpeed = 5f;
-        bulletRadius = 5f;
 
         radiusBiggerRate = 0.5f;
         additionalRadius = 10f;
-        bulletBiggerSize = new(bulletRadius, bulletRadius, 0f);
+        
         isDestroyed = false;
         
         damageTimer = dotDamageTimeInterval;
@@ -34,12 +33,13 @@ public class PowerInternetBulllet : PlayerBullet
     {
         // time delayed destroy
         Destroy(gameObject, bulletLifeTime);
+        bulletBiggerSize = new(bulletRadius, bulletRadius, 0f);
     }
 
     public void SetBulletInternet(Vector2 bulletV, float radius)
     {
         bulletVector = bulletV;
-        bulletRadius = radius / 2;
+        bulletRadius = radius / 2f;
     }
 
     void Update()
@@ -68,7 +68,7 @@ public class PowerInternetBulllet : PlayerBullet
         // if bullet does not become bigger yet, fast return
         if (transform.localScale.x < bulletRadius) return;
 
-        var targetEnemies = Physics2D.OverlapCircleAll(transform.position, transform.localScale.x * 4, 1 << 8);
+        var targetEnemies = Physics2D.OverlapCircleAll(transform.position, transform.localScale.x, 1 << 8);
 
         // if there are no enemy, fast return
         if (targetEnemies.Length < 1) return;
@@ -92,6 +92,7 @@ public class PowerInternetBulllet : PlayerBullet
             await UniTask.Yield();
             if (isDestroyed) return;
         }
+        bulletRadius = additionalRadius;
         transform.localScale = new(additionalRadius, additionalRadius, 0f);
     }
 

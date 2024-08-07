@@ -16,7 +16,7 @@ public class BulletInternet : PlayerBullet
         bulletLifeTime = 8f;
         bulletSpeed = 5f;
         bulletRadius = 20f;
-        bulletBiggerSize = new(bulletRadius, bulletRadius, 0f);
+        
 
         damageTimer = dotDamageTimeInterval;
     }
@@ -25,6 +25,7 @@ public class BulletInternet : PlayerBullet
     {
         // time delayed destroy
         Destroy(gameObject, bulletLifeTime);
+        bulletBiggerSize = new(bulletRadius, bulletRadius, 0f);
     }
 
     public void SetBulletInternet(Vector2 bulletV, float radius)

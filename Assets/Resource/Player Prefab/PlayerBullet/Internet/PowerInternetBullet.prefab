@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8309866452203404007}
   - component: {fileID: 323882112375910409}
   - component: {fileID: 4447590031340559372}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PowerInternetBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

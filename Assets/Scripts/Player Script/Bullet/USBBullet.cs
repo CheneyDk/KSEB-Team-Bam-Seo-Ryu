@@ -17,7 +17,7 @@ public class USBBullet : PlayerBullet
     private void Start()
     {
         bulletSpeed = 20f;
-        bulletLifeTime = 2f;
+        Destroy(gameObject, 2f);
     }
 
     private void Update()
