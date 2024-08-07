@@ -7592,6 +7592,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pause Window
       objectReference: {fileID: 0}
+    - target: {fileID: 3510744565938202247, guid: f762c3c74a1852c46904a89cee9b309a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 65655187}
+    - target: {fileID: 3510744565938202247, guid: f762c3c74a1852c46904a89cee9b309a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ContinueGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510744565938202247, guid: f762c3c74a1852c46904a89cee9b309a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5213393608178365387, guid: f762c3c74a1852c46904a89cee9b309a, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -7671,6 +7683,22 @@ PrefabInstance:
     - target: {fileID: 5213393608178365387, guid: f762c3c74a1852c46904a89cee9b309a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038162708586465035, guid: f762c3c74a1852c46904a89cee9b309a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 65655187}
+    - target: {fileID: 6038162708586465035, guid: f762c3c74a1852c46904a89cee9b309a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoMainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 7631441000381210126, guid: f762c3c74a1852c46904a89cee9b309a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 65655187}
+    - target: {fileID: 7631441000381210126, guid: f762c3c74a1852c46904a89cee9b309a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResetGame
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
