@@ -108,7 +108,7 @@ public class ScoreManager : MonoBehaviour
         {
             scoreData.character = "Python";
         }
-        else if (scoreData.character == "MainScene 1")
+        else if (scoreData.character == "CSharpGame")
         {
             scoreData.character = "C";
         }
