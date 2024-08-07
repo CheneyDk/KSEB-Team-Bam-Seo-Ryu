@@ -16,7 +16,7 @@ public class WeaponInternet : PlayerWeapon
     void Start()
     {
         // Init stats
-        weaponDamageRate = 0.5f;
+        weaponDamageRate = 0.25f;
         weaponFireRate = 5f;
         weaponLevel = 1;
         bulletRadius = 15f; // max 25
@@ -41,7 +41,6 @@ public class WeaponInternet : PlayerWeapon
 
         weaponLevel++;
         weaponDamageRate += 0.05f;
-        bulletRadius += 1f;
 
         if (weaponLevel > 4) isMaxLevel = true;
 
