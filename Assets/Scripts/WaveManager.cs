@@ -62,7 +62,7 @@ public class WaveManager : MonoBehaviour
                 time = waveTime;
             }
         }
-        Debug.Log("All Wave Clear!");
+        GameInfoManager.Instance.DisplayGameInfo("All Wave Clear");
         ScoreManager.instance.SaveData(true);
     }
 
