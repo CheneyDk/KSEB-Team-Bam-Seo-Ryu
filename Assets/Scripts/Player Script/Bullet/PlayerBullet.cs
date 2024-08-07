@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class PlayerBullet : MonoBehaviour
@@ -7,6 +8,7 @@ public abstract class PlayerBullet : MonoBehaviour
     // bullet stats / initialize needed
     
     protected float bulletDamage;
+    protected int critOccur;
     public float bulletSpeed;
 
     protected Vector2 bulletVector;
@@ -17,9 +19,10 @@ public abstract class PlayerBullet : MonoBehaviour
 
     // YH - call Init func in Start func
 
-    public void Init(float damage)
+    public void Init(float damage, int crit)
     {
         bulletDamage = damage;
+        critOccur = crit;
     }
 
     // if stay triggered, give damage

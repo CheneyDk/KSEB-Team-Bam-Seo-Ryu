@@ -6,11 +6,11 @@ public class CritPerPassive : PlayerPassive
 {
     // total amount that this passive raise
     public float totalValue;
-    private float increaseRate;
+    private int increaseRate;
     private void OnEnable()
     {
         passiveLevel = 1;
-        increaseRate = 0.1f;
+        increaseRate = 10;
         totalValue = 0f;
     }
 

@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     public float playerAtk { get; set; }
     public float playerAtkSpeed { get; set; }
     public float playerMoveSpeed;
-    public float playerCritPer { get; set; }
+    public int playerCritPer { get; set; }
     public float playerCritDmg { get; set; }
 
     // magnetic range
@@ -93,8 +93,15 @@ public class Player : MonoBehaviour
         playerAtkSpeed = 1f;
         playerMoveSpeed = 10f;
         playerCritPer = 0f;
-        playerCritDmg = 2f;
+        playerCritDmg = 1f; // CritDmg 1f == actual damage x2
 
+        /********************************************************************************************
+        // More Explaination about how critical damage is calculated
+        // >> GetComponent<PlayerBullet>().Init(playerAtk * weaponDamageRate * (1 + criticalDamageRate))
+        // and look at the last part of bullet Initialize method.
+        // if critical does not occur, criticalDamageRate becomes 0 value. (by multiply 0)
+        // the function "IsCritOccur" make a decision multiply 0 or 1 (this func is in PlayerWeapon script)
+        *********************************************************************************************/
         // player Magnetic Range
         playerMagneticRange = 5f;
         

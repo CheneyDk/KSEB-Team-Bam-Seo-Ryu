@@ -35,7 +35,7 @@ public class BulletSharp : PlayerBullet
             var EnemyComponent = collision.GetComponent<Enemy>();
             if (EnemyComponent != null)
             {
-                EnemyComponent.TakeDamage(bulletDamage);
+                EnemyComponent.TakeDamage(bulletDamage, critOccur);
                 Destroy(gameObject);
 
                 ScoreManager.instance.UpdateDamage("Basic", bulletDamage);
