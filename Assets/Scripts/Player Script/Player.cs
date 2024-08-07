@@ -92,7 +92,7 @@ public class Player : MonoBehaviour
         playerAtk = 10f;
         playerAtkSpeed = 1f;
         playerMoveSpeed = 10f;
-        playerCritPer = 0f;
+        playerCritPer = 0;
         playerCritDmg = 1f; // CritDmg 1f == actual damage x2
 
         /********************************************************************************************

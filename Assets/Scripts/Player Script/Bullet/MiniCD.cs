@@ -19,6 +19,15 @@ public class MiniCD : PlayerBullet
 
         spriteRenderer = GetComponent<SpriteRenderer>();
 
+        int chance = Random.Range(0, 100);
+        if (chance > player.playerCritPer)
+        {
+            critOccur = 0;
+        }
+        else
+        {
+            critOccur = 1;
+        }
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
@@ -30,7 +39,7 @@ public class MiniCD : PlayerBullet
             {
                 Instantiate(CDparticle, transform.position, Quaternion.identity);
                 audioSource.PlayOneShot(audioClip);
-                enemyComponent.TakeDamage(player.playerAtk * 0.5f);
+                enemyComponent.TakeDamage(player.playerAtk * (1f + player.playerCritDmg * critOccur) * 0.5f);
             }
 
         }

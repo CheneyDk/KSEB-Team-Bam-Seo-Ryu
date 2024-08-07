@@ -77,6 +77,8 @@ public class PytorchWeapon : PlayerWeapon
 
     private async UniTask AutoFire()
     {
+        int critOccur;
+        float critDamage;
         while (true)
         {
             await Active();
@@ -88,8 +90,11 @@ public class PytorchWeapon : PlayerWeapon
                 var bulletFallPos = new Vector2 (UnityEngine.Random.Range(playerPos.position.x - bulletFallRange, playerPos.position.x + bulletFallRange),
                                     UnityEngine.Random.Range(playerPos.position.y - bulletFallRange, playerPos.position.y + bulletFallRange));
 
+                critOccur = IsCritOccur(player.playerCritPer);
+                critDamage = player.playerCritDmg * critOccur;
+
                 var tempBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+                tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
                 // set bullet drop pos
                 tempBullet.GetComponent<PytorchBullet>().SetPytorchBullet(bulletFallPos, bulletExplodeRange, isPowerWeapon);
 

@@ -102,7 +102,7 @@ public class PytorchBullet : PlayerBullet
         {
             angle = 90 * i;
             var tempBullet = Instantiate(subBullet, transform.position, Quaternion.Euler(0f, 0f, angle));
-            tempBullet.GetComponent<PlayerBullet>().Init(bulletDamage / 4);
+            tempBullet.GetComponent<PlayerBullet>().Init(bulletDamage / 4, critOccur);
         }
     }
 

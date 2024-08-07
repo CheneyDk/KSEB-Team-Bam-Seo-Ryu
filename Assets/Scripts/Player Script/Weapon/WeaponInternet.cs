@@ -10,6 +10,9 @@ public class WeaponInternet : PlayerWeapon
     private float bulletRadius;
     public GameObject powerBullet;
 
+    private int critOccur;
+    private float critDamage;
+
     void Start()
     {
         // Init stats
@@ -59,16 +62,19 @@ public class WeaponInternet : PlayerWeapon
             // reset Timer
             fireRateTimer = 0f;
 
+            critOccur = IsCritOccur(player.playerCritPer);
+            critDamage = player.playerCritDmg * critOccur;
+
             if (isPowerWeapon)
             {
                 var tempBullet = Instantiate(powerBullet, transform.position, Quaternion.identity);
-                tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+                tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
                 tempBullet.GetComponent<PowerInternetBulllet>().SetBulletInternet(bulletVector, bulletRadius);
             }
             else
             {
                 var tempBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+                tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
                 tempBullet.GetComponent<BulletInternet>().SetBulletInternet(bulletVector, bulletRadius);
             }
 

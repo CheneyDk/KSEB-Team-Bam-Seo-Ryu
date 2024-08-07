@@ -72,7 +72,7 @@ public class GithubWeapon : PlayerWeapon
                 for (int i = 0; i < bulletNumber; i++)
                 {
                     var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                    addBullet.GetComponent<PlayerBullet>().Init(players.playerAtk * weaponDamageRate);
+                    addBullet.GetComponent<PlayerBullet>().Init(players.playerAtk * weaponDamageRate, 0);
                     yield return new WaitForSeconds(1f);
                 }
             }
@@ -83,7 +83,7 @@ public class GithubWeapon : PlayerWeapon
                 for (int i = 0; i < bulletNumber; i++)
                 {
                     var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                    addBullet.GetComponent<PlayerBullet>().Init(players.playerAtk * weaponDamageRate);
+                    addBullet.GetComponent<PlayerBullet>().Init(players.playerAtk * weaponDamageRate, 0);
                     yield return new WaitForSeconds(0.5f);
                 }
             }
