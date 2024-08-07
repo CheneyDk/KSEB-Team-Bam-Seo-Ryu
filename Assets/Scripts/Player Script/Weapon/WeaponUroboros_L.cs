@@ -9,6 +9,9 @@ public class WeaponUroboros_L : PlayerWeapon
 {
     private CancellationTokenSource cancelFire;
 
+    private int critOccur;
+    private float critDamage;
+
     private void Start()
     {
         // init stats
@@ -55,9 +58,12 @@ public class WeaponUroboros_L : PlayerWeapon
         {
             Vector3 tmp = muzzle.position - muzzle.right * 3.3f;
 
+            critOccur = IsCritOccur(player.playerCritPer);
+            critDamage = player.playerCritDmg * critOccur;
+
             // Debug.Log(bullet.GetComponent<PlayerBullet>().bulletDamage);
             var tempBullet = Instantiate(bullet, tmp, muzzle.rotation);
-            tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+            tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
 
             await UniTask.WaitForSeconds(weaponFireRate / player.playerAtkSpeed, cancellationToken: cancelFire.Token);
         }

@@ -66,7 +66,7 @@ public class BulletInternet : PlayerBullet
         damageTimer = 0f;
         foreach(var enemy in targetEnemies)
         {
-            enemy.GetComponent<Enemy>().TakeDamage(bulletDamage);
+            enemy.GetComponent<Enemy>().TakeDamage(bulletDamage, critOccur);
             ScoreManager.instance.UpdateDamage("Internet", bulletDamage);
         }
     }

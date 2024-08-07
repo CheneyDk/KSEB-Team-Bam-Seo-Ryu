@@ -108,6 +108,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6193504377320133229, guid: d8d4958a034201c4ebc6e96b15fe4ee1, type: 3}
   damageNumber: {fileID: 1848622758658849530, guid: 1928df38c9c7b7342a2a95eeab8f991d, type: 3}
   lastingDamageNumber: {fileID: 1848622758658849530, guid: 94b7e5789fc284b4eba92f18cad04c72, type: 3}
+  critDamageNumber: {fileID: 1718539329463334811, guid: a76e0657b7bd45f4a98ff48f62de521a, type: 3}
   Exp: {fileID: 2828242351688375285, guid: 9f21b77202f043d45a40df1d9c28c4d8, type: 3}
   dropExpNumber: 3
   rotateBullet: {fileID: 6193504377320133229, guid: d8d4958a034201c4ebc6e96b15fe4ee1, type: 3}

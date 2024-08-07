@@ -12,6 +12,9 @@ public class MouseWeapon : PlayerWeapon
     public AudioSource audioSource;
     public AudioClip clip;
 
+    private int critOccur;
+    private float critDamage;
+
     void Start()
     {
         weaponLevel = 1;
@@ -50,16 +53,18 @@ public class MouseWeapon : PlayerWeapon
             var EnemyComponent = collision.GetComponent<Enemy>();
             if (EnemyComponent != null)
             {
+                critOccur = IsCritOccur(player.playerCritPer);
+                critDamage = player.playerCritDmg * critOccur;
                 if (!isPowerWeapon)
                 {
+                    EnemyComponent.TakeDamage(damage * (1f + critDamage), critOccur);
                     audioSource.PlayOneShot(clip);
-                    EnemyComponent.TakeDamage(damage);
                     ScoreManager.instance.UpdateDamage("Mouse", damage);
                 }
                 else if (isPowerWeapon)
                 {
+                    EnemyComponent.TakeDamage(player.playerAtk * (1f + critDamage), critOccur);
                     audioSource.PlayOneShot(clip);
-                    EnemyComponent.TakeDamage(player.playerAtk);
                     ScoreManager.instance.UpdateDamage("Mouse", player.playerAtk);
                 }
                 

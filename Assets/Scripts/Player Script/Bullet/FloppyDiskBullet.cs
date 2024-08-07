@@ -63,7 +63,7 @@ public class FloppyDiskwBullet : PlayerBullet
                 var enemyComponent = enemy.GetComponent<Enemy>();
                 if (enemyComponent != null)
                 {
-                    enemyComponent.TakeDamage(bulletDamage);
+                    enemyComponent.TakeDamage(bulletDamage, critOccur);
                     ScoreManager.instance.UpdateDamage("FD", bulletDamage);
                 }
             }

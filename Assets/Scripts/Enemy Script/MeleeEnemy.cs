@@ -35,6 +35,9 @@ public class MeleeEnemy : Enemy
     private DamageNumber damageNumber;
     [SerializeField]
     private DamageNumber lastingDamageNumber;
+    [SerializeField]
+    private DamageNumber critDamageNumber;
+
 
     private Animator meleeAni;
     private Collider2D meleeCollider;
@@ -91,11 +94,18 @@ public class MeleeEnemy : Enemy
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
-    public override void TakeDamage(float damage)
+    public override void TakeDamage(float damage, int critOccur)
     {
         Instantiate(hitParticle, transform.position, Quaternion.identity);
         damage *= (1f + elixirAdditionalDamageRate);
-        damageNumber.Spawn(transform.position, damage);
+        if (critOccur == 1)
+        {
+            critDamageNumber.Spawn(transform.position, damage);
+        }
+        else
+        {
+            damageNumber.Spawn(transform.position, damage);
+        }
         MeleeEnemyCurtHP -= damage;
         if (elixirAdditionalDamageRate > 0)
         {

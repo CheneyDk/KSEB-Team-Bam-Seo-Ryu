@@ -346,7 +346,7 @@ public class SnakeLogicError : Enemy
         yield return null;
     }
 
-    public override void TakeDamage(float damage)
+    public override void TakeDamage(float damage, int critOccur)
     {
         snakeCurHP -= damage;
         // ScoreManager flag

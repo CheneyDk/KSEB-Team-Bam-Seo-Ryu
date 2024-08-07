@@ -19,8 +19,12 @@ public class USBWeapon : PlayerWeapon
 
     IEnumerator FireBullet()
     {
+        int critOccur;
+        float critDamage;
         while (true)
         {
+            critOccur = IsCritOccur(player.playerCritPer);
+            critDamage = player.playerCritDmg * critOccur;
             if (!isPowerWeapon)
             {
                 bullet.GetComponent<PlayerBullet>().ChangeSprite(normalWeaponSprite);
@@ -29,7 +33,7 @@ public class USBWeapon : PlayerWeapon
                 {
                     float angle = i * (360f / 10f);
                     var addBullet = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
-                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
                 }
             }
             else if (isPowerWeapon)
@@ -40,7 +44,7 @@ public class USBWeapon : PlayerWeapon
                 {
                     float angle = i * (360f / 10f);
                     var addBullet = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
-                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk);
+                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * (1f + critDamage), critOccur);
                 }
             }
         }

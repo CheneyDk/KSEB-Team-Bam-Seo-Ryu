@@ -20,14 +20,18 @@ public class FloppyDiskWeapon : PlayerWeapon
 
     IEnumerator FireBullet()
     {
+        int critOccur;
+        float critDamage;
         while (true)
         {
+            critOccur = IsCritOccur(player.playerCritPer);
+            critDamage = player.playerCritDmg * critOccur;
             if (!isPowerWeapon)
             {
                 bullet.GetComponent<PlayerBullet>().ChangeSprite(normalWeaponSprite);
                 yield return new WaitForSeconds(fireRate);
                 var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * weaponDamageRate * (1f + critDamage), critOccur);
             }
             else if (isPowerWeapon)
             {
@@ -37,7 +41,7 @@ public class FloppyDiskWeapon : PlayerWeapon
                 {
                     yield return new WaitForSeconds(0.2f);
                     var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * weaponDamageRate * (1f + critDamage), critOccur);
                 }
             }
         }

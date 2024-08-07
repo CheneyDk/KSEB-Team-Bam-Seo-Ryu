@@ -22,18 +22,23 @@ public class CloudWeapon : PlayerWeapon
 
     IEnumerator FireBullet()
     {
+        int critOccur;
+        float critDamage;
+
         while (true)
         {
+            critOccur = IsCritOccur(player.playerCritPer);
+            critDamage = player.playerCritDmg * critOccur;
             if (!isPowerWeapon)
             {
-                bullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+                bullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
                 bullet.GetComponent<CloudBullet>().GiveDamagea();
                 audioSource.PlayOneShot(audioClip);
                 yield return new WaitForSeconds(fireRate);
             }
             else if (isPowerWeapon)
             {
-                bullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+                bullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
                 bullet.GetComponent<CloudBullet>().PowerWeapoonDamage();
                 audioSource.PlayOneShot(audioClip);
                 yield return new WaitForSeconds(2f);

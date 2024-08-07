@@ -47,6 +47,8 @@ public class RangeEnemy : Enemy
     private DamageNumber damageNumber;
     [SerializeField]
     private DamageNumber lastingDamageNumber;
+    [SerializeField]
+    private DamageNumber critDamageNumber;
 
     private Animator rangeAni;
     private Collider2D rangeCollider;
@@ -126,11 +128,19 @@ public class RangeEnemy : Enemy
         canAttack = true;
     }
 
-    public override void TakeDamage(float damage)
+    public override void TakeDamage(float damage, int critOccur)
     {
         Instantiate(hitParticle, transform.position, Quaternion.identity);
         damage *= (1f + elixirAdditionalDamageRate);
-        damageNumber.Spawn(transform.position, damage);
+        if (critOccur == 1)
+        {
+            critDamageNumber.Spawn(transform.position, damage);
+        }
+        else
+        {
+            damageNumber.Spawn(transform.position, damage);
+        }
+        
         RangeEnemyCurtHP -= damage;
         if (elixirAdditionalDamageRate > 0)
         {

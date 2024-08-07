@@ -19,6 +19,12 @@ public class WeaponSharp : PlayerWeapon
 
     private SpriteRenderer spriteRenderer;
 
+    private int random;
+    private int critOccur;
+    private float critDamage;
+
+    // int critOccur;
+    // float critDamage;
 
     private void Start()
     {
@@ -81,18 +87,19 @@ public class WeaponSharp : PlayerWeapon
     // instantiate bullet for 3 ~ 8 times
     private async UniTask SharpFire()
     {
-        int random = 0;
         for (int i = 0; i < bulletNum; i++)
         {
+            critOccur = IsCritOccur(player.playerCritPer);
+            critDamage = player.playerCritDmg * critOccur;
             var tempBullet = Instantiate(bullet, muzzle.position, muzzle.rotation);
-            tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+            tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
             tempBullet.GetComponent<BulletSharp>().IsPower(isPowerWeapon);
             random = Random.Range(0, 101);
             if (isPowerWeapon && random > 50)
             {
                 var randPos = muzzle.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
                 tempBullet = Instantiate(bullet, randPos, muzzle.rotation);
-                tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+                tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
                 tempBullet.GetComponent<BulletSharp>().IsPower(isPowerWeapon);
             }
             await UniTask.WaitForSeconds(weaponSharpFireInterval);

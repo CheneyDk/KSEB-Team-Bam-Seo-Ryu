@@ -43,4 +43,17 @@ public abstract class PlayerWeapon : MonoBehaviour // abstract class·Î ÀüÈ¯! + ¾
 
     // Upgrade func
     public abstract void Upgrade();
+
+    protected int IsCritOccur(float prob)
+    {
+        int chance = Random.Range(0, 100);
+        if (chance > prob)
+        {
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
+    }
 }

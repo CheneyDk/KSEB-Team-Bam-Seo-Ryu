@@ -49,7 +49,7 @@ public class SwiftBullet : PlayerBullet
             var enemyComponent = collision.GetComponent<Enemy>();
             if (enemyComponent != null)
             {
-                enemyComponent.TakeDamage(bulletDamage);
+                enemyComponent.TakeDamage(bulletDamage, critOccur);
                 Instantiate(swiftParticle, transform.position, Quaternion.identity);
                 audioSource.PlayOneShot(audioClip);
 

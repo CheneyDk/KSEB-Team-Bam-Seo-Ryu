@@ -57,17 +57,24 @@ public class SnakeHead : SnakePart
 
 
     // abstract override
-    public override void TakeDamage(float damage)
+    public override void TakeDamage(float damage, int critOccur)
     {
         hitParticle.Play();
         damage *= (1f + elixirAdditionalDamageRate);
-        damageNumber.Spawn(transform.position, damage);
+        if (critOccur == 1)
+        {
+            critDamageNumber.Spawn(transform.position, damage);
+        }
+        else
+        {
+            damageNumber.Spawn(transform.position, damage);
+        }
         snakePartCurHp -= damage;
         if (elixirAdditionalDamageRate > 0)
         {
             ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
         }
-        snakeMain.TakeDamage(damage); // head dont need to got a damage
+        snakeMain.TakeDamage(damage, -1); // head dont need to got a damage
     }
 
     public override IEnumerator LastingDamage(float damage, int totalDamageTime, Color color)
@@ -80,7 +87,7 @@ public class SnakeHead : SnakePart
             yield return new WaitForSeconds(1f);
             hitParticle.Play();
             lastingDamageNumber.Spawn(transform.position, damage);
-            snakeMain.TakeDamage(damage);
+            snakeMain.TakeDamage(damage, -1);
             damageTimer += 1f;
 
             ScoreManager.instance.UpdateDamage("React", damage);

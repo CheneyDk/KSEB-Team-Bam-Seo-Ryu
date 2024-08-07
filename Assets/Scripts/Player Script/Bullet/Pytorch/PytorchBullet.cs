@@ -87,7 +87,7 @@ public class PytorchBullet : PlayerBullet
         {
             foreach (var enemy in enemies)
             {
-                enemy.GetComponent<Enemy>().TakeDamage(bulletDamage);
+                enemy.GetComponent<Enemy>().TakeDamage(bulletDamage, critOccur);
                 ScoreManager.instance.UpdateDamage("Pytorch", bulletDamage);
                 // enemy.GetComponent<Enemy>().LastingDamage(bulletLastingDamage, 3, pytorchColor);
             }
@@ -102,7 +102,7 @@ public class PytorchBullet : PlayerBullet
         {
             angle = 90 * i;
             var tempBullet = Instantiate(subBullet, transform.position, Quaternion.Euler(0f, 0f, angle));
-            tempBullet.GetComponent<PlayerBullet>().Init(bulletDamage / 4);
+            tempBullet.GetComponent<PlayerBullet>().Init(bulletDamage / 4, critOccur);
         }
     }
 

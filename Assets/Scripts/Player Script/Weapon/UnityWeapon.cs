@@ -18,14 +18,18 @@ public class UnityWeapon : PlayerWeapon
 
     IEnumerator FireBullet()
     {
+        int critOccur;
+        float critDamage;
         while (true)
         {
+            critOccur = IsCritOccur(player.playerCritPer);
+            critDamage = player.playerCritDmg * critOccur;
             if (!isPowerWeapon)
             {
                 bullet.GetComponent<PlayerBullet>().ChangeSprite(normalWeaponSprite);
                 yield return new WaitForSeconds(fireRate);
                 var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
 
             }
             else if (isPowerWeapon)
@@ -36,7 +40,7 @@ public class UnityWeapon : PlayerWeapon
                 {
                     float angle = -30f + (i * 30f);
                     var addBullet = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
-                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate);
+                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
                 }
             }
         }
