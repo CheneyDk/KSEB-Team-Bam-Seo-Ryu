@@ -39,7 +39,7 @@ public class BulletSharp : PlayerBullet
             var EnemyComponent = collision.GetComponent<Enemy>();
             if (EnemyComponent != null)
             {
-                EnemyComponent.TakeDamage(bulletDamage);
+                EnemyComponent.TakeDamage(bulletDamage, critOccur);
                 audioManager.SharpClip();
                 Destroy(gameObject);
 
