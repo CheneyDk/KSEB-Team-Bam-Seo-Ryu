@@ -36,8 +36,16 @@ public class MainMenuManager : MonoBehaviour
     public AudioClip startMenuClip;
     public AudioClip mouseClickClip;
 
+    public GameObject loadingWindow;
+    public GameObject[] loadBarBlock;
+
     void Awake()
     {
+        loadingWindow.SetActive(false);
+        foreach(var item in loadBarBlock)
+        {
+            item.gameObject.SetActive(false);
+        }
         Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
         audioSource = GetComponent<AudioSource>();
         audioSource.PlayOneShot(startMenuClip);
@@ -66,7 +74,33 @@ public class MainMenuManager : MonoBehaviour
 
     public void MoveScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        StartCoroutine(LoadYourAsyncScene(sceneName));
+    }
+
+    IEnumerator LoadYourAsyncScene(string sceneName)
+    {
+        loadingWindow.SetActive(true);
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+
+        while (!asyncLoad.isDone)
+        {
+            var loadTime = 0f;
+            loadTime += asyncLoad.progress * 100;
+            if (loadTime > 5f)
+            {
+                for (int i = 0; i < loadBarBlock.Length; i++)
+                {
+                    if (!loadBarBlock[i].activeSelf)
+                    {
+                        loadBarBlock[i].SetActive(true);
+                    }
+                }
+                loadTime = 0f;
+            }
+
+            yield return null;
+        }
     }
 
     public void ChangeIcon(float value)

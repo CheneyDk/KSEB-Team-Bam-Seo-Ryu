@@ -16,9 +16,14 @@ public class LoginSceneManager : MonoBehaviour
     public AudioClip mouseClickClip;
     public AudioClip[] keyboardClip;
 
+    private bool introOpen = false;
+    public GameObject teamIntroductionWindow;
+
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        introOpen = false;
+        teamIntroductionWindow.SetActive(false);
         Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
         instance = this;
     }
@@ -75,5 +80,18 @@ public class LoginSceneManager : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    public void OpenTeamIntroduction()
+    {
+        introOpen = !introOpen;
+        if (introOpen)
+        {
+            teamIntroductionWindow.SetActive(true);
+        }
+        else if (!introOpen)
+        {
+            teamIntroductionWindow.SetActive(false);
+        }
     }
 }
