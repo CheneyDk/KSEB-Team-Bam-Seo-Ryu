@@ -19,13 +19,21 @@ public class LoginSceneManager : MonoBehaviour
     private bool introOpen = false;
     public GameObject teamIntroductionWindow;
 
+    public GameObject logoWindow;
+
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         introOpen = false;
         teamIntroductionWindow.SetActive(false);
+        logoWindow.SetActive(false);
         Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
         instance = this;
+    }
+
+    private void Start()
+    {
+        StartCoroutine(ShowLogo());
     }
 
     private IEnumerator StartLogin()
@@ -53,6 +61,13 @@ public class LoginSceneManager : MonoBehaviour
         PlayRandomClip();
         SceneManager.LoadScene("MainMenuScene");
     }
+    private IEnumerator ShowLogo()
+    {
+        logoWindow.SetActive(true);
+        yield return new WaitForSeconds(3.5f);
+        logoWindow.SetActive(false);
+    }
+
 
     private void PlayRandomClip()
     {

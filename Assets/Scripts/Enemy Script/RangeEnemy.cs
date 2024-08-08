@@ -11,8 +11,6 @@ public class RangeEnemy : Enemy
     [SerializeField]
     private float RangeEnemyMaxHp = 10f;
     [SerializeField]
-    private float RangeEnemyCurtHP;
-    [SerializeField]
     private float RangeEnemyAtk = 3f;
     [SerializeField]
     private float RangeEnemyMoveSpeed = 7f;
@@ -23,6 +21,8 @@ public class RangeEnemy : Enemy
     [SerializeField]
     private float bulletSpeed = 5f;
     private float rotationSpeed = 10f;
+    [SerializeField] private float RangeEnemyCurHP;
+    [SerializeField] private float RangeEnemyCurAtk;
     [EndFoldout]
 
     public GameObject bulletPrefab;
@@ -60,6 +60,8 @@ public class RangeEnemy : Enemy
 
     private AudioManager audioManager;
 
+    private EnemySpawner enemySpawner;
+
     private void OnEnable()
     {
         StopAllCoroutines();
@@ -69,11 +71,13 @@ public class RangeEnemy : Enemy
     {
         curSR = this.GetComponent<SpriteRenderer>();
         audioManager = FindObjectOfType<AudioManager>();
+        enemySpawner = FindAnyObjectByType<EnemySpawner>();
         originColor = curSR.color;
-        RangeEnemyCurtHP = RangeEnemyMaxHp;
+        RangeEnemyCurHP = RangeEnemyMaxHp;
         rangeAni = GetComponent<Animator>();
         rangeCollider = GetComponent<CircleCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        bulletPrefab.GetComponent<RangeEnemyBullet>().Init(5);
     }
 
 
@@ -141,12 +145,12 @@ public class RangeEnemy : Enemy
             damageNumber.Spawn(transform.position, damage);
         }
         
-        RangeEnemyCurtHP -= damage;
+        RangeEnemyCurHP -= damage;
         if (elixirAdditionalDamageRate > 0)
         {
             ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
         }
-        if (RangeEnemyCurtHP <= 0)
+        if (RangeEnemyCurHP <= 0)
         {
             EnemyDead();
         }
@@ -178,7 +182,7 @@ public class RangeEnemy : Enemy
             var playerComponent = collision.GetComponent<Player>();
             if (playerComponent != null)
             {
-                playerComponent.TakeDamage(RangeEnemyAtk);
+                playerComponent.TakeDamage(RangeEnemyCurAtk);
 
                 if (playerComponent.playerCurHp <= 0)
                 {
@@ -207,13 +211,13 @@ public class RangeEnemy : Enemy
             yield return new WaitForSeconds(1f);
             hitParticle.Play();
             lastingDamageNumber.Spawn(transform.position, damage);
-            RangeEnemyCurtHP -= damage;
+            RangeEnemyCurHP -= damage;
             damageTimer += 1f;
 
             ScoreManager.instance.UpdateDamage("React", damage);
         }
 
-        if (RangeEnemyCurtHP <= 0)
+        if (RangeEnemyCurHP <= 0)
         {
             EnemyDead();
         }
@@ -239,11 +243,29 @@ public class RangeEnemy : Enemy
 
     public override void ResetEnemy()
     {
-        rangeAni.SetBool("isDead", false);
-        curSR.color = originColor;
-        RangeEnemyCurtHP = RangeEnemyMaxHp;
-        rangeCollider.enabled = true;
-        isDead = false;
-        canAttack = true;
+        if (enemySpawner.PowerEnemy())
+        {
+            rangeAni.SetBool("isDead", false);
+            originColor += new Color(0, -0.1f, -0.1f);
+            curSR.color = originColor;
+            RangeEnemyMaxHp *= 1.5f;
+            RangeEnemyCurHP = RangeEnemyMaxHp;
+            RangeEnemyAtk *= 1.5f;
+            RangeEnemyCurAtk = RangeEnemyAtk;
+            bulletPrefab.GetComponent<RangeEnemyBullet>().bulletDamage += 3;
+            rangeCollider.enabled = true;
+            isDead = false;
+            canAttack = true;
+        }
+        else
+        {
+            rangeAni.SetBool("isDead", false);
+            curSR.color = originColor;
+            RangeEnemyCurHP = RangeEnemyMaxHp;
+            RangeEnemyCurAtk = RangeEnemyAtk;
+            rangeCollider.enabled = true;
+            isDead = false;
+            canAttack = true;
+        }
     }
 }

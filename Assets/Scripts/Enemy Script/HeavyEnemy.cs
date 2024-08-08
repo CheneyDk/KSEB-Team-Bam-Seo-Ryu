@@ -10,11 +10,11 @@ public class HeavyEnemy : Enemy
     [SerializeField]
     private float HeavyEnemyMaxHp = 40f;
     [SerializeField]
-    private float HeavyEnemyCurtHP;
-    [SerializeField]
     private float HeavyEnemyAtk = 10f;
     [SerializeField]
     private float HeavyEnemyMoveSpeed = 5f;
+    [SerializeField] private float HeavyEnemyCurHP;
+    [SerializeField] private float HeavyEnemyCurAtk;
     [EndFoldout]
 
     [Header("Dash")]
@@ -57,6 +57,9 @@ public class HeavyEnemy : Enemy
 
     private AudioManager audioManager;
 
+    private EnemySpawner enemySpawner;
+
+
     private void OnEnable()
     {
         StopCoroutine("TakeLastingDamage");
@@ -65,10 +68,11 @@ public class HeavyEnemy : Enemy
 
     private void Awake()
     {
-        curSR = this.GetComponent<SpriteRenderer>();
+        curSR = GetComponentInChildren<SpriteRenderer>();
         audioManager = FindObjectOfType<AudioManager>();
+        enemySpawner = FindAnyObjectByType<EnemySpawner>();
         originColor = curSR.color;
-        HeavyEnemyCurtHP = HeavyEnemyMaxHp;
+        HeavyEnemyCurHP = HeavyEnemyMaxHp;
 
         heavyAni = GetComponent<Animator>();
         heavyCollider = GetComponent<CircleCollider2D>();
@@ -137,12 +141,12 @@ public class HeavyEnemy : Enemy
         {
             damageNumber.Spawn(transform.position, damage);
         }
-        HeavyEnemyCurtHP -= damage;
+        HeavyEnemyCurHP -= damage;
         if (elixirAdditionalDamageRate > 0)
         {
             ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
         }
-        if (HeavyEnemyCurtHP <= 0)
+        if (HeavyEnemyCurHP <= 0)
         {
             EnemyDead();
         }
@@ -175,7 +179,7 @@ public class HeavyEnemy : Enemy
             var playerComponent = collision.GetComponent<Player>();
             if (playerComponent != null)
             {
-                playerComponent.TakeDamage(HeavyEnemyAtk);
+                playerComponent.TakeDamage(HeavyEnemyCurAtk);
 
                 if (playerComponent.playerCurHp <= 0)
                 {
@@ -221,13 +225,13 @@ public class HeavyEnemy : Enemy
             yield return new WaitForSeconds(1f);
             hitParticle.Play();
             lastingDamageNumber.Spawn(transform.position, damage);
-            HeavyEnemyCurtHP -= damage;
+            HeavyEnemyCurHP -= damage;
             damageTimer += 1f;
 
             ScoreManager.instance.UpdateDamage("React", damage);
         }
 
-        if (HeavyEnemyCurtHP <= 0)
+        if (HeavyEnemyCurHP <= 0)
         {
             EnemyDead();
         }
@@ -236,11 +240,28 @@ public class HeavyEnemy : Enemy
 
     public override void ResetEnemy()
     {
-        heavyAni.SetBool("isDead", false);
-        curSR.color = originColor;
-        HeavyEnemyCurtHP = HeavyEnemyMaxHp;
-        heavyCollider.enabled = true;
-        canDash = false;
-        isDead = false;
+        if (enemySpawner.PowerEnemy())
+        {
+            heavyAni.SetBool("isDead", false);
+            originColor += new Color(0, -0.1f, -0.1f);
+            curSR.color = originColor;
+            HeavyEnemyMaxHp *= 1.5f;
+            HeavyEnemyCurHP = HeavyEnemyMaxHp;
+            HeavyEnemyAtk *= 1.5f;
+            HeavyEnemyCurAtk = HeavyEnemyAtk;
+            heavyCollider.enabled = true;
+            canDash = false;
+            isDead = false;
+        }
+        else
+        {
+            heavyAni.SetBool("isDead", false);
+            curSR.color = originColor;
+            HeavyEnemyCurHP = HeavyEnemyMaxHp;
+            HeavyEnemyCurAtk = HeavyEnemyAtk;
+            heavyCollider.enabled = true;
+            canDash = false;
+            isDead = false;
+        }
     }
 }

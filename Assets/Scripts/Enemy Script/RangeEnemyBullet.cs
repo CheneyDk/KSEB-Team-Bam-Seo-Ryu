@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RangeEnemyBullet : MonoBehaviour
 {
-    public float bulletDamage = 5f;
+    public int bulletDamage;
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -15,5 +15,10 @@ public class RangeEnemyBullet : MonoBehaviour
             player.TakeDamage(bulletDamage);
             Destroy(gameObject);
         }
+    }
+
+    public void Init(int damage)
+    {
+        bulletDamage = damage;
     }
 }

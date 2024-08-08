@@ -9,17 +9,16 @@ public class EnemySpawner : MonoBehaviour
 {
     private bool GameOver = false;
     private bool Spawning = false;
+    private WaveManager waveManager;
 
+    [Foldout("Prefab")]
     public GameObject MeleeEnemyPrefab;
     public GameObject RangeEnemyPrefab;
     public GameObject HeavyEnemyPrefab;
+    public GameObject midBossPrefab;
+    public GameObject finalBossPrefab;
     public GameObject WarningPrefab;
-    private WaveManager waveManager;
-
-    [Foldout("Max Enemy Number")]
-    public int MaxMeleeEnemy = 3;
-    public int MaxRangeEnemy = 3;
-    public int MaxHeavyEnemy = 3;
+    public GameObject bossWarningPrefab;
     [EndFoldout]
 
     [Tab("Melee Enemy")]
@@ -60,10 +59,18 @@ public class EnemySpawner : MonoBehaviour
     private List<GameObject> pooledHeavyEnemies = new List<GameObject>();
     [EndFoldout]
 
+    private int MaxMeleeEnemy = 1;
+    private int MaxRangeEnemy = 1;
+    private int MaxHeavyEnemy = 1;
+
     private void Awake()
     {
         waveManager = GetComponent<WaveManager>();
         nowWave = waveManager.curWave;
+
+        MaxMeleeEnemy = MESpawnNumber;
+        MaxRangeEnemy = RESpawnNumber;
+        MaxHeavyEnemy = HESpawnNumber;
 
         //Pooling
         PutEnemiesToPool(pooledMeleeEnemies, MeleeEnemyPrefab);
@@ -122,6 +129,40 @@ public class EnemySpawner : MonoBehaviour
             StartCoroutine(EnemiesSpawn(pooledMeleeEnemies, MESpawnStartTime, MESpawnRate, MESpawnNumber, MESpawnGroupRadius));
             StartCoroutine(EnemiesSpawn(pooledRangeEnemies, RESpawnStartTime, RESpawnRate, RESpawnNumber, RESpawnGroupRadius));
             StartCoroutine(EnemiesSpawn(pooledHeavyEnemies, HESpawnStartTime, HESpawnRate, HESpawnNumber, HESpawnGroupRadius));
+
+            if (waveManager.curWave == 10)
+            {
+                StartCoroutine(BossSpawn(midBossPrefab));
+            }
+            else if (waveManager.curWave == 20)
+            {
+                StartCoroutine(BossSpawn(finalBossPrefab));
+            }
+        }
+    }
+
+    public bool PowerEnemy()
+    {
+        if (waveManager.curWave % 1 == 0)
+        {
+            if (MaxMeleeEnemy < 7)
+            {
+                MaxMeleeEnemy += 1;
+            }
+            if (MaxRangeEnemy < 5)
+            {
+                MaxRangeEnemy += 1;
+            }
+            if (MaxHeavyEnemy < 3)
+            {
+                MaxHeavyEnemy += 1;
+            }
+
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
@@ -176,5 +217,41 @@ public class EnemySpawner : MonoBehaviour
 
             yield return new WaitForSeconds(spawnRate);
         }
+    }
+
+    private IEnumerator BossSpawn(GameObject boss)
+    {
+        Vector2 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+
+        Vector2 spawnPosition;
+        do
+        {
+            spawnPosition = playerPosition + (Vector2)Random.insideUnitCircle * EnemySpawnRange;
+        }
+        while (Vector2.Distance(spawnPosition, playerPosition) < noSpawnRange);
+
+        Vector2 finalSpawnPosition = spawnPosition;
+        finalSpawnPosition.x = Mathf.Clamp(finalSpawnPosition.x, -25f, 25f);
+        finalSpawnPosition.y = Mathf.Clamp(finalSpawnPosition.y, -25f, 25f);
+        Vector2 limitSpawnPosition = new Vector2(finalSpawnPosition.x, finalSpawnPosition.y);
+
+        GameObject warning = Instantiate(bossWarningPrefab, limitSpawnPosition, Quaternion.identity);
+        Destroy(warning, warningTime);
+
+        yield return new WaitForSeconds(warningTime);
+
+        Instantiate(boss, limitSpawnPosition, Quaternion.identity);
+    }
+
+    [Button]
+    public void SpawnMidBoss()
+    {
+        StartCoroutine(BossSpawn(midBossPrefab));
+    }
+
+    [Button]
+    public void SpawnFinalBoss()
+    {
+        StartCoroutine(BossSpawn(finalBossPrefab));
     }
 }

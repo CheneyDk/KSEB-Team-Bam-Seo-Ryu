@@ -11,11 +11,11 @@ public class MeleeEnemy : Enemy
     [SerializeField]
     private float MeleeEnemyMaxHp = 20f;
     [SerializeField]
-    private float MeleeEnemyCurtHP;
-    [SerializeField]
     private float MeleeEnemyAtk = 5f;
     [SerializeField]
     private float MeleeEnemyMoveSpeed =10f;
+    [SerializeField] private float MeleeEnemyCurHP;
+    [SerializeField] private float MeleeEnemyCurAtk;
     [EndFoldout]
 
     [Header("Exp")]
@@ -52,6 +52,8 @@ public class MeleeEnemy : Enemy
 
     private AudioManager audioManager;
 
+    private EnemySpawner enemySpawner;
+
     private void OnEnable()
     {
         StopAllCoroutines();
@@ -61,8 +63,9 @@ public class MeleeEnemy : Enemy
     {
         curSR = this.GetComponent<SpriteRenderer>();
         audioManager = FindObjectOfType<AudioManager>();
+        enemySpawner = FindAnyObjectByType<EnemySpawner>();
         originColor = curSR.color;
-        MeleeEnemyCurtHP = MeleeEnemyMaxHp;
+        MeleeEnemyCurHP = MeleeEnemyMaxHp;
         meleeAni = GetComponent<Animator>();
         meleeCollider = GetComponent<CircleCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -106,12 +109,12 @@ public class MeleeEnemy : Enemy
         {
             damageNumber.Spawn(transform.position, damage);
         }
-        MeleeEnemyCurtHP -= damage;
+        MeleeEnemyCurHP -= damage;
         if (elixirAdditionalDamageRate > 0)
         {
             ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
         }
-        if (MeleeEnemyCurtHP <= 0)
+        if (MeleeEnemyCurHP <= 0)
         {
             EnemyDead();
         }
@@ -144,7 +147,7 @@ public class MeleeEnemy : Enemy
             var playerComponent = collision.GetComponent<Player>();
             if (playerComponent != null)
             {
-                playerComponent.TakeDamage(MeleeEnemyAtk);
+                playerComponent.TakeDamage(MeleeEnemyCurAtk);
 
                 if (playerComponent.playerCurHp <= 0)
                 {
@@ -173,13 +176,13 @@ public class MeleeEnemy : Enemy
             yield return new WaitForSeconds(1f);
             hitParticle.Play();
             lastingDamageNumber.Spawn(transform.position, damage);
-            MeleeEnemyCurtHP -= damage;
+            MeleeEnemyCurHP -= damage;
             damageTimer += 1f;
 
             ScoreManager.instance.UpdateDamage("React", damage);
         }
 
-        if (MeleeEnemyCurtHP <= 0)
+        if (MeleeEnemyCurHP <= 0)
         {
             EnemyDead();
         }
@@ -205,10 +208,26 @@ public class MeleeEnemy : Enemy
 
     public override void ResetEnemy()
     {
-        meleeAni.SetBool("isDead", false);
-        curSR.color = originColor;
-        MeleeEnemyCurtHP = MeleeEnemyMaxHp;
-        meleeCollider.enabled = true;
-        isDead = false;
+        if (enemySpawner.PowerEnemy())
+        {
+            meleeAni.SetBool("isDead", false);
+            originColor += new Color(0, -0.1f, -0.1f);
+            curSR.color = originColor;
+            MeleeEnemyMaxHp *= 1.5f;
+            MeleeEnemyCurHP = MeleeEnemyMaxHp;
+            MeleeEnemyAtk *= 1.5f;
+            MeleeEnemyCurAtk = MeleeEnemyAtk;
+            meleeCollider.enabled = true;
+            isDead = false;
+        }
+        else
+        {
+            meleeAni.SetBool("isDead", false);
+            curSR.color = originColor;
+            MeleeEnemyCurHP = MeleeEnemyMaxHp;
+            MeleeEnemyCurAtk = MeleeEnemyAtk;
+            meleeCollider.enabled = true;
+            isDead = false;
+        }
     }
 }

@@ -270,9 +270,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HeavyEnemyMaxHp: 40
-  HeavyEnemyCurtHP: 0
   HeavyEnemyAtk: 10
   HeavyEnemyMoveSpeed: 7
+  HeavyEnemyCurHP: 0
+  HeavyEnemyCurAtk: 0
   dashSpeed: 15
   dashRange: 15
   dashDelay: 1
@@ -284,6 +285,7 @@ MonoBehaviour:
   damageNumber: {fileID: 1848622758658849530, guid: 1928df38c9c7b7342a2a95eeab8f991d, type: 3}
   lastingDamageNumber: {fileID: 1848622758658849530, guid: 94b7e5789fc284b4eba92f18cad04c72, type: 3}
   critDamageNumber: {fileID: 1718539329463334811, guid: a76e0657b7bd45f4a98ff48f62de521a, type: 3}
+  curSR: {fileID: 5784326634792710147}
 --- !u!58 &7133866450221708888
 CircleCollider2D:
   m_ObjectHideFlags: 0
