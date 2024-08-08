@@ -19,8 +19,10 @@ public abstract class PlayerBullet : MonoBehaviour
 
     // YH - call Init func in Start func
 
-    public void Init(float damage, int crit)
+    public void Init(/*Vector3 pos, Quaternion rot,*/float damage, int crit)
     {
+        //transform.position = pos;
+        //transform.rotation = rot;
         bulletDamage = damage;
         critOccur = crit;
     }
