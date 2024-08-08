@@ -10,11 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8100203599619735773}
   - component: {fileID: 4308183405267347774}
+  - component: {fileID: 2912370266617322789}
   - component: {fileID: 7508109349755562331}
   - component: {fileID: 3429033707377483252}
   - component: {fileID: 6260638533341849288}
   - component: {fileID: 404201160916649962}
-  - component: {fileID: 4896552538103405306}
+  - component: {fileID: 7465448545828914718}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -61,7 +62,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: bf0b7813ff8e2b344af8a5e7d22ae5a5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -93,6 +94,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2912370266617322789
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944808390979848710}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b0a412c917225b443822ba954467be58, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!50 &7508109349755562331
 Rigidbody2D:
   serializedVersion: 4
@@ -169,11 +191,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMaxHp: 100
   playerCurHp: 0
-  playerLevel: 0
+  playerLevel: 1
   playerMaxExp: 10
   playerCurExp: 0
   playerMoveSpeed: 10
-  playerMagneticRange: 1
+  playerMagneticRange: 5
   sprintTime: 0.5
   sprintCoolDown: 2
   playerAccelerate: 2.5
@@ -182,8 +204,8 @@ MonoBehaviour:
   constText: {fileID: 3070960400511700439}
   energyDrinkTimer: 0
   energyDrinkDuration: 10
-  damageNumber: {fileID: 0}
-  levelUp: {fileID: 0}
+  damageNumber: {fileID: 850405986135239423, guid: 1ac856c4fab6fbf439c9afc37ab8dafa, type: 3}
+  levelUp: {fileID: 8335586952449206777, guid: 97eb3258d86dffc4caa0d8b3d57db1ae, type: 3}
   hitUIAnimator: {fileID: 0}
 --- !u!114 &404201160916649962
 MonoBehaviour:
@@ -283,7 +305,7 @@ MonoBehaviour:
   m_DefaultActionMap: playerMove
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &4896552538103405306
+--- !u!114 &7465448545828914718
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -295,7 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shaderTypes: 4
+  shaderTypes: 0
   normalStrength: 5
   normalSmoothing: 1
   computingNormal: 0
@@ -627,7 +649,7 @@ PrefabInstance:
     - target: {fileID: 7136139226923845902, guid: 6d00445b44043c94fbe2d2c545b404aa, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 4cb1c0571c30fb74fb308e6a282ba95c, type: 3}
+      objectReference: {fileID: 21300000, guid: 05e6f8c3049364a41a3bd9d7d93fa3cf, type: 3}
     - target: {fileID: 7136139226923845902, guid: 6d00445b44043c94fbe2d2c545b404aa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
