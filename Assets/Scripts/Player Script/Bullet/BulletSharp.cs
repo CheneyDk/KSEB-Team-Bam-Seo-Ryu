@@ -12,6 +12,9 @@ public class BulletSharp : PlayerBullet
 
     private AudioManager audioManager;
 
+    private BulletPool bulletPool;
+    private WaitForSeconds waitForPush;
+
 
     private void Start()
     {
@@ -21,8 +24,11 @@ public class BulletSharp : PlayerBullet
         bulletLifeTime = 1.5f;
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioManager = FindObjectOfType<AudioManager>();
+        waitForPush = new WaitForSeconds(bulletLifeTime);
 
-        Destroy(gameObject, bulletLifeTime);
+
+        // Destroy(gameObject, bulletLifeTime);
+        StartCoroutine(PushToPool()); // instead destroy
         PowerSprite();
     }
 
@@ -48,6 +54,14 @@ public class BulletSharp : PlayerBullet
         }
     }
 
+    // YH - add this two params to <PlayerBullet> class method "Init" later
+    public void PoolingTestFunc(Vector3 pos, Quaternion rot, BulletPool pool)
+    {
+        transform.position = pos;
+        transform.rotation = rot;
+        bulletPool = pool;
+    }
+
     public void IsPower(bool power)
     {
         isPowerBullet = power;
@@ -57,6 +71,12 @@ public class BulletSharp : PlayerBullet
     {
         if (!isPowerBullet) return;
         spriteRenderer.sprite = powerBullet;
+    }
+
+    private IEnumerator PushToPool()
+    {
+        yield return waitForPush;
+        bulletPool.SetObj(this);
     }
 
     public override void ChangeSprite(Sprite powerWeapon){}

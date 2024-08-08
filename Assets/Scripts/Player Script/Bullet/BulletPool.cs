@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class BulletPool : MonoBehaviour
 {
-    [SerializeField] private int poolSize;
     public GameObject bullet;
 
     // stack
-    [SerializeField] private Stack<PlayerBullet> bulletStack = new Stack<PlayerBullet>();
+    [SerializeField] private int poolSize;
+    [SerializeField] public Stack<PlayerBullet> bulletStack = new Stack<PlayerBullet>();
 
     // this class should activate first. before others move.
     void Awake()
     {
         for (int i = 0; i < poolSize; i++)
         {
-
+            GenerateBullet();
         }
     }
 
@@ -23,6 +23,7 @@ public class BulletPool : MonoBehaviour
     {
         var tempObj = Instantiate(bullet);
         tempObj.SetActive(false);
+        tempObj.transform.parent = transform;
 
         var tempBullet = tempObj.GetComponent<PlayerBullet>();
         bulletStack.Push(tempBullet);
