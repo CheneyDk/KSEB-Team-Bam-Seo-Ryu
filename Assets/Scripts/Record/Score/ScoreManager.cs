@@ -178,4 +178,9 @@ public class ScoreManager : MonoBehaviour
     {
         return scoreData.survived;
     }
+
+    public void GetMoney(int money)
+    {
+        recordData.money += money;
+    }
 }
