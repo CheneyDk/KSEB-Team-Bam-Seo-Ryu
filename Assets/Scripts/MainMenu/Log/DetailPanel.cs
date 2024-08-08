@@ -21,7 +21,7 @@ public class DetailPanel : MonoBehaviour
         wave.text = data.waveReached.ToString();
         level.text = data.levelReached.ToString();
         kills.text = data.enemiesDeafeated.ToString();
-        damage.text = data.totalDamage.ToString();
+        damage.text = ((int)data.totalDamage).ToString();
         dateTime.text = data.playDateTime.ToString();
 
         int idx = 4;
@@ -32,7 +32,7 @@ public class DetailPanel : MonoBehaviour
 
         foreach(WeaponDamagesData damageData in data.weaponDamagesData)
         {
-            setters[idx++].SetAll(damageData, data.totalDamage, data.character);
+            setters[idx++].SetAll(damageData, (int)data.totalDamage, data.character);
         }
     }
 }
