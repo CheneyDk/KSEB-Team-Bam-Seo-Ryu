@@ -28,8 +28,9 @@ public class CDWeapon : PlayerWeapon
                 critDamage = player.playerCritDmg * critOccur;
                 bullet.GetComponent<PlayerBullet>().ChangeSprite(normalWeaponSprite);
                 yield return new WaitForSeconds(fireRate);
-                var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
+                var addBullet = bulletPool.GetBullet();
+                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                    transform.position, Quaternion.identity, bulletPool);
             }
             else if(isPowerWeapon)
             {
@@ -40,8 +41,9 @@ public class CDWeapon : PlayerWeapon
                 for (int i = 0; i < 3; i++)
                 {
                     float angle = i * ((360f / 4f) + 30);
-                    var addBullet = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
-                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
+                    var addBullet = bulletPool.GetBullet(); ;
+                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                        transform.position, Quaternion.identity, bulletPool);
                 }
             }
         }

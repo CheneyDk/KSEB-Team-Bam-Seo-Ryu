@@ -33,7 +33,7 @@ public class BulletWhip : PlayerBullet
         timeCounter += Time.deltaTime;
         if (timeCounter > bulletLifeTime)
         {
-            Destroy(gameObject);
+            bulletPool.SetObj(this);
         }
     }
 

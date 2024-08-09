@@ -32,8 +32,9 @@ public class USBWeapon : PlayerWeapon
                 for (int i = 0; i < 10; i++)
                 {
                     float angle = i * (360f / 10f);
-                    var addBullet = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
-                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
+                    var addBullet = bulletPool.GetBullet();
+                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                        transform.position, Quaternion.Euler(0, 0, angle), bulletPool);
                 }
             }
             else if (isPowerWeapon)
@@ -43,8 +44,9 @@ public class USBWeapon : PlayerWeapon
                 for (int i = 0; i < 10; i++)
                 {
                     float angle = i * (360f / 10f);
-                    var addBullet = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
-                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * (1f + critDamage), critOccur);
+                    var addBullet = bulletPool.GetBullet();
+                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                        transform.position, Quaternion.Euler(0, 0, angle), bulletPool);
                 }
             }
         }

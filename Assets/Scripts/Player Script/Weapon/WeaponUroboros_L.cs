@@ -62,8 +62,9 @@ public class WeaponUroboros_L : PlayerWeapon
             critDamage = player.playerCritDmg * critOccur;
 
             // Debug.Log(bullet.GetComponent<PlayerBullet>().bulletDamage);
-            var tempBullet = Instantiate(bullet, tmp, muzzle.rotation);
-            tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
+            var tempBullet = bulletPool.GetBullet();
+            tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                tmp, muzzle.rotation, bulletPool);
 
             await UniTask.WaitForSeconds(weaponFireRate / player.playerAtkSpeed, cancellationToken: cancelFire.Token);
         }

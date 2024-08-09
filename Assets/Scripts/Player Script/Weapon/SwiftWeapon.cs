@@ -32,16 +32,18 @@ public class SwiftWeapon : PlayerWeapon
                 bullet.GetComponent<PlayerBullet>().ChangeSprite(normalWeaponSprite);
                 bullet.transform.localScale = new Vector3(1f, 1f, 1f);
                 yield return new WaitForSeconds(fireRate);
-                var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
+                var addBullet = bulletPool.GetBullet();
+                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                    transform.position, Quaternion.identity, bulletPool);
             }
             else if (isPowerWeapon)
             {
                 bullet.GetComponent<PlayerBullet>().ChangeSprite(powerWeaponSprite);
                 bullet.transform.localScale = new Vector3(2f, 2f, 1f);
                 yield return new WaitForSeconds(fireRate);
-                var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
+                var addBullet = bulletPool.GetBullet();
+                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                    transform.position, Quaternion.identity, bulletPool);
             }
         }
     }

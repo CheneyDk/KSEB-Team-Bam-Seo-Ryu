@@ -36,7 +36,7 @@ public class ReactBullet : PlayerBullet
 
     private void DestroyBullet()
     {
-        Destroy(gameObject);
+        bulletPool.SetObj(this);
     }
 
 

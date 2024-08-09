@@ -11,6 +11,7 @@ public class WeaponMySQL : PlayerWeapon
     private Quaternion rotateLeft = new(0f, 0f, 0f, 1f);
     public GameObject powerBullet;
 
+    [SerializeField] private BulletPool powerBulletPool;
     private void Start()
     {
         // init stats
@@ -58,10 +59,12 @@ public class WeaponMySQL : PlayerWeapon
                 {
                     critOccur = IsCritOccur(player.playerCritPer);
                     critDamage = player.playerCritDmg * critOccur;
-                    var tempBulletRight = Instantiate(powerBullet, muzzle.position, rotateRight);
-                    tempBulletRight.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
-                    var tempBulletLeft = Instantiate(powerBullet, muzzle.position, rotateLeft);
-                    tempBulletLeft.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
+                    var tempBulletRight = powerBulletPool.GetBullet();
+                    tempBulletRight.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                        player.transform.position, rotateRight, bulletPool);
+                    var tempBulletLeft = powerBulletPool.GetBullet();
+                    tempBulletLeft.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                        player.transform.position, rotateLeft, bulletPool);
                 }
 
                 await UniTask.WaitForSeconds(bulletFireInterval); // 0.5f
@@ -75,8 +78,9 @@ public class WeaponMySQL : PlayerWeapon
             {
                 critOccur = IsCritOccur(player.playerCritPer);
                 critDamage = player.playerCritDmg * critOccur;
-                var tempBulletRight = Instantiate(bullet, muzzle.position, rotateRight);
-                tempBulletRight.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
+                var tempBulletRight = bulletPool.GetBullet();
+                tempBulletRight.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                    player.transform.position, rotateRight, bulletPool);
             }
 
             await UniTask.WaitForSeconds(bulletFireInterval); // 0.5f
@@ -86,8 +90,9 @@ public class WeaponMySQL : PlayerWeapon
             {
                 critOccur = IsCritOccur(player.playerCritPer);
                 critDamage = player.playerCritDmg * critOccur;
-                var tempBulletLeft = Instantiate(bullet, muzzle.position, rotateLeft);
-                tempBulletLeft.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
+                var tempBulletLeft = bulletPool.GetBullet();
+                tempBulletLeft.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                    player.transform.position, rotateLeft, bulletPool);
             }
 
         }

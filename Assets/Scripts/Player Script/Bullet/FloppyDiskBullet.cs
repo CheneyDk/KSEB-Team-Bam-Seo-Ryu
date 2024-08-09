@@ -17,8 +17,6 @@ public class FloppyDiskwBullet : PlayerBullet
 
     private WaitForSeconds waitForPush;
 
-    private bool isDestroyed = false;
-
     private void Start()
     {
         bulletSpeed = 5f;
@@ -35,7 +33,6 @@ public class FloppyDiskwBullet : PlayerBullet
     private IEnumerator PushToPool()
     {
         yield return waitForPush;
-        if (isDestroyed) ;
         bulletPool.SetObj(this);
     }
 

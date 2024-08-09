@@ -30,7 +30,7 @@ public class FloppyDiskWeapon : PlayerWeapon
             {
                 bullet.GetComponent<PlayerBullet>().ChangeSprite(normalWeaponSprite);
                 yield return new WaitForSeconds(fireRate);
-                var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+                var addBullet = bulletPool.GetBullet();
                 addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * weaponDamageRate * (1f + critDamage), critOccur,
                     transform.position, Quaternion.identity, bulletPool);
             }
@@ -41,9 +41,9 @@ public class FloppyDiskWeapon : PlayerWeapon
                 for (int i = 0; i < bulletNum; i++)
                 {
                     yield return new WaitForSeconds(0.2f);
-                    var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+                    var addBullet = bulletPool.GetBullet();
                     addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * weaponDamageRate * (1f + critDamage), critOccur,
-                        Vector3.zero, Quaternion.identity, bulletPool);
+                        transform.position, Quaternion.identity, bulletPool);
                 }
             }
         }

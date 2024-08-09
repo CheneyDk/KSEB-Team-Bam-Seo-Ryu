@@ -18,11 +18,14 @@ public class SwiftBullet : PlayerBullet
     public AudioSource audioSource;
     public AudioClip audioClip;
 
+    private WaitForSeconds waitForPush;
+
     private void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
         bulletSpeed = 3f;
         bulletLifeTime = 10f;
+        waitForPush = new(bulletLifeTime);
 
         Destroy(gameObject, bulletLifeTime);
     }
@@ -58,6 +61,11 @@ public class SwiftBullet : PlayerBullet
         }
     }
 
+    private IEnumerator PushToPool()
+    {
+        yield return waitForPush;
+        bulletPool.SetObj(this);
+    }
     public override void ChangeSprite(Sprite powerWeapon)
     {
         spriteRenderer.sprite = powerWeapon;

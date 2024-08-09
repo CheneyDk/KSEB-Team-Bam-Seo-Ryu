@@ -15,24 +15,30 @@ public class PowerInternetBulllet : PlayerBullet
     private Vector3 bulletBiggerSize;
     private bool isDestroyed;
 
-    // Start is called before the first frame update
-    private void Awake()
-    {
-        bulletLifeTime = 8f;
-        bulletSpeed = 5f;
+    private WaitForSeconds waitForPush;
 
-        radiusBiggerRate = 0.5f;
-        additionalRadius = 10f;
-        
+    private void OnEnable()
+    {
         isDestroyed = false;
-        
-        damageTimer = dotDamageTimeInterval;
     }
 
     void Start()
     {
+        bulletLifeTime = 8f;
+        bulletSpeed = 5f;
+
+
+        radiusBiggerRate = 0.5f;
+        additionalRadius = 10f;
+
+        isDestroyed = false;
+
+        damageTimer = dotDamageTimeInterval;
+
+        waitForPush = new WaitForSeconds(bulletLifeTime);
+
         // time delayed destroy
-        Destroy(gameObject, bulletLifeTime);
+        StartCoroutine(PushToPool());
         bulletBiggerSize = new(bulletRadius, bulletRadius, 0f);
     }
 
@@ -99,6 +105,13 @@ public class PowerInternetBulllet : PlayerBullet
     private void OnDestroy()
     {
         isDestroyed = true;
+    }
+
+    private IEnumerator PushToPool()
+    {
+        yield return waitForPush;
+        isDestroyed = true;
+        bulletPool.SetObj(this);
     }
 
     public override void ChangeSprite(Sprite powerWeapon)
