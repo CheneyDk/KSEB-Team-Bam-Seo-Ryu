@@ -30,7 +30,7 @@ public class CDWeapon : PlayerWeapon
                 yield return new WaitForSeconds(fireRate);
                 var addBullet = bulletPool.GetBullet();
                 addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
-                    transform.position, Quaternion.identity, bulletPool);
+                    player.transform.position, Quaternion.identity, bulletPool);
             }
             else if(isPowerWeapon)
             {

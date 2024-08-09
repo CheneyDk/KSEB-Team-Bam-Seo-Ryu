@@ -14,20 +14,16 @@ public class BulletMySQL : PlayerBullet
     private Rigidbody2D rigid;
 
     // flags
-    private bool isDestroy = false;
+    private bool isDestroy;
 
-    private void Awake()
+    private void Start()
     {
         SQLVector = new Vector2(Random.Range(-0.5f, -3f), Random.Range(2f, 4f));
         rigid = GetComponent<Rigidbody2D>();
         bulletVector = transform.TransformDirection(SQLVector);
 
-    }
-
-    private void Start()
-    {
         // throw in parabola (Æ÷¹°¼±)
-        
+
         bulletLifeTime = 5f;
 
         // bullet move
@@ -38,6 +34,11 @@ public class BulletMySQL : PlayerBullet
 
         // Destroy
         ObjDestroyTimer().Forget();
+    }
+
+    private void OnEnable()
+    {
+        isDestroy = false;
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
@@ -69,7 +70,8 @@ public class BulletMySQL : PlayerBullet
     {
         await UniTask.WaitForSeconds(bulletLifeTime);
         if(isDestroy) return;
-        Destroy(gameObject);
+        isDestroy = true;
+        bulletPool.SetObj(this);
     }
 
     private void OnDestroy()

@@ -13,7 +13,7 @@ public class PowerMySQLBullet : PlayerBullet
     private Rigidbody2D rigid;
 
     // flags
-    private bool isExist = true;
+    private bool isDestroyed;
 
     private void Start()
     {
@@ -37,6 +37,11 @@ public class PowerMySQLBullet : PlayerBullet
         ObjDestroyTimer().Forget();
     }
 
+    private void OnEnable()
+    {
+        isDestroyed = false;
+    }
+
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
@@ -53,11 +58,11 @@ public class PowerMySQLBullet : PlayerBullet
 
     private async UniTask DolphineRotate()
     {
-        while (isExist)
+        while (!isDestroyed)
         {
             await UniTask.Yield();
             await UniTask.WaitUntil(() => GameManager.Instance.isGameContinue);
-            if (!isExist) return;
+            if (isDestroyed) return;
             transform.Rotate(Vector3.forward, rotateSpeed);
         }
     }
@@ -65,8 +70,13 @@ public class PowerMySQLBullet : PlayerBullet
     private async UniTask ObjDestroyTimer()
     {
         await UniTask.WaitForSeconds(bulletLifeTime);
-        isExist = false;
+        isDestroyed = true;
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        isDestroyed = true;
     }
 
     public override void ChangeSprite(Sprite powerWeapon)
