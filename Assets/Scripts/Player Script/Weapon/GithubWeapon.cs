@@ -29,6 +29,14 @@ public class GithubWeapon : MonoBehaviour
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
+    private void Start()
+    {
+        if (ScoreManager.instance.recordData.isPetUpgrade)
+        {
+            isUpgraded = true;
+        }
+    }
+
     private void Update()
     {
         float distanceToPlayer = Vector2.Distance(transform.position, playerPos.position);
