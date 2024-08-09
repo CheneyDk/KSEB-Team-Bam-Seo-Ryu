@@ -25,5 +25,17 @@ public class WeaponData : ScriptableObject
     [HideInInspector]
     public string curDesc;
 
+    private void Awake()
+    {
+        ResetToNew();
+    }
+
+    public void ResetToNew()
+    {
+        curDesc = itemDesc;
+        curImage = itemImage;
+        curName = itemName;
+    }
+
 }
 

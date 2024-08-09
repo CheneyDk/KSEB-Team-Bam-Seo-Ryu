@@ -76,7 +76,7 @@ public class WaveManager : MonoBehaviour
         }
         foreach (GameObject bullet in bullets)
         {
-            Destroy(bullet);
+            bullet.SetActive(false);
         }
     }
 }
