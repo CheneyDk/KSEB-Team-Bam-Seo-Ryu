@@ -9593,7 +9593,7 @@ MonoBehaviour:
   bullet: {fileID: 0}
   bullet_sub: {fileID: 0}
   normalWeaponSprite: {fileID: 0}
-  powerWeaponSprite: {fileID: 0}
+  powerWeaponSprite: {fileID: 21300000, guid: b8638f8723fdc0548ab58cccbd051acc, type: 3}
   damage: 0
   material: {fileID: 2100000, guid: 150aee38b5d848b42b75593618992bb7, type: 2}
   audioSource: {fileID: -5812941807956682125}

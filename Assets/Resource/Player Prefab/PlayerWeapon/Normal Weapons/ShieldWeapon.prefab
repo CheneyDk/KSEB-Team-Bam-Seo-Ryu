@@ -193,7 +193,7 @@ MonoBehaviour:
   bullet: {fileID: 0}
   bullet_sub: {fileID: 0}
   normalWeaponSprite: {fileID: 0}
-  powerWeaponSprite: {fileID: 0}
+  powerWeaponSprite: {fileID: 21300000, guid: 79831d8fb8682f7439578395ec0ec93e, type: 3}
   fireRate: 2
   rotationSpeed: 100
   damage: 0

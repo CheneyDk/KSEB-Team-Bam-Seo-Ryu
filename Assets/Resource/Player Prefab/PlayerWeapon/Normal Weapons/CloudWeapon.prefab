@@ -55,7 +55,7 @@ MonoBehaviour:
   bullet: {fileID: 8802644732269000983, guid: 321693915149fd346a612fc0c0dac8ae, type: 3}
   bullet_sub: {fileID: 0}
   normalWeaponSprite: {fileID: 0}
-  powerWeaponSprite: {fileID: 0}
+  powerWeaponSprite: {fileID: 21300000, guid: d3466b91a153f964f8f6c2572ecbf7ad, type: 3}
   fireRate: 3.5
   audioSource: {fileID: 1733191681996269292}
   audioClip: {fileID: 8300000, guid: 8721f1d872cbb6d409114c15eff7a9bb, type: 3}
