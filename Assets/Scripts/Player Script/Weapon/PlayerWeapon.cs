@@ -31,7 +31,8 @@ public abstract class PlayerWeapon : MonoBehaviour // abstract class·Î ÀüÈ¯! + ¾
     public Sprite normalWeaponSprite;
     public Sprite powerWeaponSprite;
 
-    [SerializeField] protected BulletPool bulletPool;
+    [SerializeField] protected GameObject bulletPoolObj;
+    protected BulletPool bulletPool;
 
 
     private void Awake()

@@ -7,6 +7,10 @@ public class CDWeapon : PlayerWeapon
 {
     public float fireRate = 3.5f;
 
+    private Transform parent;
+    [SerializeField] private GameObject subBulletPoolObj;
+    private BulletPool subBulletPool;
+
     void Start()
     {
         Fire();
@@ -15,6 +19,19 @@ public class CDWeapon : PlayerWeapon
         isMaxLevel = false;
         isPowerWeapon = false;
         matchPassive = "SSD";
+
+        parent = GameObject.FindWithTag("PlayerBulletPool").transform;
+        InitPool();
+    }
+
+    private void InitPool()
+    {
+        var tempPool = Instantiate(bulletPoolObj, Vector3.zero, Quaternion.identity);
+        tempPool.transform.parent = parent;
+        bulletPool = tempPool.GetComponent<BulletPool>();
+        tempPool = Instantiate(subBulletPoolObj, Vector3.zero, Quaternion.identity);
+        tempPool.transform.parent = parent;
+        subBulletPool = tempPool.GetComponent<BulletPool>();
     }
 
     IEnumerator FireBullet()
@@ -31,6 +48,7 @@ public class CDWeapon : PlayerWeapon
                 var addBullet = bulletPool.GetBullet();
                 addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
                     player.transform.position, Quaternion.identity, bulletPool);
+                addBullet.GetComponent<CDBullet>().PassSubPool(subBulletPool);
             }
             else if(isPowerWeapon)
             {
@@ -43,7 +61,8 @@ public class CDWeapon : PlayerWeapon
                     float angle = i * ((360f / 4f) + 30);
                     var addBullet = bulletPool.GetBullet(); ;
                     addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
-                        transform.position, Quaternion.identity, bulletPool);
+                        player.transform.position, Quaternion.identity, bulletPool);
+                    addBullet.GetComponent<CDBullet>().PassSubPool(subBulletPool);
                 }
             }
         }

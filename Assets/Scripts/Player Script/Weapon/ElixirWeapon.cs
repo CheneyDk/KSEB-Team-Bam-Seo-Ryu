@@ -13,6 +13,8 @@ public class ElixirWeapon : PlayerWeapon
     private float debuffAddDamageRate;
     private float debuffLastingTime;
 
+    private Transform parent;
+
     void Start()
     {
         weaponDamageRate = 0f;
@@ -30,15 +32,23 @@ public class ElixirWeapon : PlayerWeapon
         isPowerWeapon = false;
         matchPassive = "GPU";
 
+        parent = GameObject.FindWithTag("PlayerBulletPool").transform;
+        InitPool();
+
         AutoFire().Forget();
     }
 
-
+    private void InitPool()
+    {
+        var tempPool = Instantiate(bulletPoolObj, Vector3.zero, Quaternion.identity);
+        tempPool.transform.parent = parent;
+        bulletPool = tempPool.GetComponent<BulletPool>();
+    }
 
     protected override void Fire()
     {
-        var tempBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-        tempBullet.GetComponent<PlayerBullet>().Init(weaponDamageRate, 0, transform.position, Quaternion.identity, bulletPool);
+        var tempBullet = bulletPool.GetBullet();
+        tempBullet.GetComponent<PlayerBullet>().Init(weaponDamageRate, 0, player.transform.position, Quaternion.identity, bulletPool);
         tempBullet.GetComponent<ElixirBullet>().SetElixir(bulletVector, debuffAddDamageRate, explodeRange, debuffLastingTime, isPowerWeapon);
     }
 

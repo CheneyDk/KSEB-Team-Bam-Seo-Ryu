@@ -24,9 +24,16 @@ public class PytorchBullet : PlayerBullet
 
     public BulletPool subBulletPool;
 
+    private bool isDestroyed;
+
     // vfx
     public ParticleSystem particle;
     private SpriteRenderer spriteRenderer;
+
+    private void OnEnable()
+    {
+        isDestroyed = false;
+    }
 
     private void Start()
     {
@@ -51,8 +58,10 @@ public class PytorchBullet : PlayerBullet
     {
         BulletRise();
         await UniTask.WaitForSeconds(bulletRiseTime);
+        if(isDestroyed) return;
         BulletFall();
         await UniTask.WaitForSeconds(bulletFallTime);
+        if (isDestroyed) return;
         BulletExplode();
     }
 
@@ -82,7 +91,7 @@ public class PytorchBullet : PlayerBullet
         var enemies = Physics2D.OverlapCircleAll(transform.position, bulletExplodeRange, 1 << 8);
 
         // effects needed
-        WaitVFX().Forget();
+        WaitVFXandDelayedDestroy().Forget();
 
         if (enemies != null)
         {
@@ -109,14 +118,21 @@ public class PytorchBullet : PlayerBullet
         }
     }
 
-    private async UniTask WaitVFX()
+    private async UniTask WaitVFXandDelayedDestroy()
     {
         var tempColor = spriteRenderer.color;
         tempColor.a = 0f;
         spriteRenderer.color = tempColor;
         particle.Play();
         await UniTask.WaitForSeconds(1f);
+        if (isDestroyed) return;
+        isDestroyed = true;
         bulletPool.SetObj(this);
+    }
+
+    private void OnDestroy()
+    {
+        isDestroyed = true;
     }
 
     // dummy

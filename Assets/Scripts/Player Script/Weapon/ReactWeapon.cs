@@ -6,6 +6,8 @@ public class ReactWeapon : PlayerWeapon
 {
     public float fireRate = 5f;
 
+    private Transform parent;
+
     void Start()
     {
         Fire();
@@ -14,6 +16,16 @@ public class ReactWeapon : PlayerWeapon
         isMaxLevel = false;
         isPowerWeapon = false;
         matchPassive = "CPU";
+
+        parent = GameObject.FindWithTag("PlayerBulletPool").transform;
+        InitPool();
+    }
+
+    private void InitPool()
+    {
+        var tempPool = Instantiate(bulletPoolObj, Vector3.zero, Quaternion.identity);
+        tempPool.transform.parent = parent;
+        bulletPool = tempPool.GetComponent<BulletPool>();
     }
 
     IEnumerator FireBullet()

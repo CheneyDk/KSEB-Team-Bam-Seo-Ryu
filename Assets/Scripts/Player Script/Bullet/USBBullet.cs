@@ -21,6 +21,10 @@ public class USBBullet : PlayerBullet
         bulletSpeed = 20f;
         bulletLifeTime = 2f;
         waitForPush = new WaitForSeconds(bulletLifeTime);
+    }
+
+    private void OnEnable()
+    {
         StartCoroutine(PushToPool());
     }
 

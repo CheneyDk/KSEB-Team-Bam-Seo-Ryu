@@ -21,7 +21,7 @@ public class CDBullet : PlayerBullet
 
     private WaitForSeconds waitForPush;
 
-    [SerializeField] private BulletPool subBulletPool;
+    private BulletPool subBulletPool;
 
     private void Start()
     {
@@ -34,6 +34,10 @@ public class CDBullet : PlayerBullet
         direction = (targetPosition - (Vector2)transform.position).normalized;
 
         StartCoroutine("FireCD");
+    }
+
+    private void OnEnable()
+    {
         StartCoroutine(PushToPool());
     }
 
@@ -71,6 +75,11 @@ public class CDBullet : PlayerBullet
             }
             yield return new WaitForSeconds(3f);
         }
+    }
+
+    public void PassSubPool(BulletPool pool)
+    {
+        subBulletPool = pool;
     }
 
     private IEnumerator PushToPool()

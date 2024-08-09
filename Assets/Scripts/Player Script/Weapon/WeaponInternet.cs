@@ -13,7 +13,9 @@ public class WeaponInternet : PlayerWeapon
     private int critOccur;
     private float critDamage;
 
-    [SerializeField] private BulletPool powerBulletPool;
+    private Transform parent;
+    [SerializeField] private GameObject powerBulletPoolObj;
+    private BulletPool powerBulletPool;
 
     void Start()
     {
@@ -27,6 +29,17 @@ public class WeaponInternet : PlayerWeapon
 
         // can fire imediately
         fireRateTimer = weaponFireRate;
+        parent = GameObject.FindWithTag("PlayerBulletPool").transform;
+        InitPool();
+    }
+    private void InitPool()
+    {
+        var tempPool = Instantiate(bulletPoolObj, Vector3.zero, Quaternion.identity);
+        tempPool.transform.parent = parent;
+        bulletPool = tempPool.GetComponent<BulletPool>();
+        tempPool = Instantiate(powerBulletPoolObj, Vector3.zero, Quaternion.identity);
+        tempPool.transform.parent = parent;
+        powerBulletPool = tempPool.GetComponent<BulletPool>();
     }
 
     void Update()

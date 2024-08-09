@@ -55,4 +55,6 @@ MonoBehaviour:
   bullet_sub: {fileID: 0}
   normalWeaponSprite: {fileID: 21300000, guid: d5d00890c1a26ec4badc1a8c546619e0, type: 3}
   powerWeaponSprite: {fileID: 21300000, guid: bbdc18e317c2c2044897bd6e10c3e08c, type: 3}
+  bulletPoolObj: {fileID: 4285602609384838038, guid: 90d1fa936db6903448165a1bb6add150, type: 3}
   fireRate: 3.5
+  subBulletPoolObj: {fileID: 7549088964646397647, guid: 7ee0ddd65ef114a45a310ade32629476, type: 3}

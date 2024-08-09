@@ -39,6 +39,7 @@ public class BulletMySQL : PlayerBullet
     private void OnEnable()
     {
         isDestroy = false;
+        transform.rotation = Quaternion.identity;
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)

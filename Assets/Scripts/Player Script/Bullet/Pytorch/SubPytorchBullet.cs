@@ -12,9 +12,12 @@ public class SubPytorchBullet : PlayerBullet
         bulletVector = Vector2.down;
         bulletLifeTime = 3f;
         bulletSpeed = 10f;
-        waitForPush = new WaitForSeconds(bulletLifeTime);
+        waitForPush = new WaitForSeconds(bulletLifeTime);  
+    }
 
-        StartCoroutine(PushToPool());   
+    private void OnEnable()
+    {
+        StartCoroutine(PushToPool());
     }
 
     void Update()

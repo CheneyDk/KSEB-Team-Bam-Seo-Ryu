@@ -22,8 +22,14 @@ public class BulletInternet : PlayerBullet
         damageTimer = dotDamageTimeInterval;
 
         // time delayed destroy
-        StartCoroutine(PushToPool());
+        
         bulletBiggerSize = new(bulletRadius, bulletRadius, 0f);
+    }
+
+    private void OnEnable()
+    {
+        transform.localScale = new(5f, 5f, 5f);
+        StartCoroutine(PushToPool());
     }
 
     public void SetBulletInternet(Vector2 bulletV, float radius)

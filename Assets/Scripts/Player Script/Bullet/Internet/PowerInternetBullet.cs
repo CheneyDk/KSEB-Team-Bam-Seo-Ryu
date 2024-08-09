@@ -17,9 +17,13 @@ public class PowerInternetBulllet : PlayerBullet
 
     private WaitForSeconds waitForPush;
 
+    
+
     private void OnEnable()
     {
+        transform.localScale = new(1f, 1f, 1f); // reset
         isDestroyed = false;
+        StartCoroutine(PushToPool());
     }
 
     void Start()
@@ -37,8 +41,6 @@ public class PowerInternetBulllet : PlayerBullet
 
         waitForPush = new WaitForSeconds(bulletLifeTime);
 
-        // time delayed destroy
-        StartCoroutine(PushToPool());
         bulletBiggerSize = new(bulletRadius, bulletRadius, 0f);
     }
 

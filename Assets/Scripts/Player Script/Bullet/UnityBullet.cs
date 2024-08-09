@@ -27,8 +27,10 @@ public class UnityBullet : PlayerBullet
         Vector2 targetPosition = FindNearestEnemy();
         
         direction = (targetPosition - (Vector2)transform.position).normalized;
+    }
 
-
+    private void OnEnable()
+    {
         StartCoroutine(PushToPool());
     }
 

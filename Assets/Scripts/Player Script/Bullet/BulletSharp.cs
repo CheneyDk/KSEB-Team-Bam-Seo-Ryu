@@ -25,10 +25,14 @@ public class BulletSharp : PlayerBullet
         audioManager = FindObjectOfType<AudioManager>();
         waitForPush = new WaitForSeconds(bulletLifeTime);
 
-
-        // Destroy(gameObject, bulletLifeTime);
-        StartCoroutine(PushToPool()); // instead destroy
         PowerSprite();
+    }
+
+    private void OnEnable()
+    {
+        // Destroy(gameObject, bulletLifeTime);
+        // instead destroy
+        StartCoroutine(PushToPool());
     }
 
     private void Update()
@@ -60,7 +64,11 @@ public class BulletSharp : PlayerBullet
 
     private void PowerSprite()
     {
-        if (!isPowerBullet) return;
+        if (!isPowerBullet)
+        {
+            spriteRenderer.sprite = normalBullet;
+            return;
+        }
         spriteRenderer.sprite = powerBullet;
     }
 

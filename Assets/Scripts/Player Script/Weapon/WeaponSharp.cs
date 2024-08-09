@@ -23,6 +23,8 @@ public class WeaponSharp : PlayerWeapon
     private int critOccur;
     private float critDamage;
 
+    private Transform parent;
+
     private void Start()
     {
         // init stats
@@ -35,11 +37,20 @@ public class WeaponSharp : PlayerWeapon
         // player can fire imediately
         fireRateTimer = weaponFireRate;
 
+        parent = GameObject.FindWithTag("PlayerBulletPool").transform;
+        InitPool();
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         // Upgrade(); // YH ; activate after merge
         PowerWeaponSpriteChange();
     }
-    
+    private void InitPool()
+    {
+        var tempPool = Instantiate(bulletPoolObj, Vector3.zero, Quaternion.identity);
+        tempPool.transform.parent = parent;
+        bulletPool = tempPool.GetComponent<BulletPool>();
+    }
+
     private void Update()
     {
         fireRateTimer += Time.deltaTime;

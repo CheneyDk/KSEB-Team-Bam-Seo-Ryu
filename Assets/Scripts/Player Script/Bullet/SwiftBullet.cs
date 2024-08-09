@@ -26,9 +26,13 @@ public class SwiftBullet : PlayerBullet
         bulletSpeed = 3f;
         bulletLifeTime = 10f;
         waitForPush = new(bulletLifeTime);
-
-        Destroy(gameObject, bulletLifeTime);
     }
+
+    private void OnEnable()
+    {
+        StartCoroutine(PushToPool());
+    }
+
 
     private void Update()
     {

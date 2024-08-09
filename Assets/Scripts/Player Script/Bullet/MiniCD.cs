@@ -33,7 +33,10 @@ public class MiniCD : PlayerBullet
         {
             critOccur = 1;
         }
+    }
 
+    private void OnEnable()
+    {
         StartCoroutine(PushToPool());
     }
 

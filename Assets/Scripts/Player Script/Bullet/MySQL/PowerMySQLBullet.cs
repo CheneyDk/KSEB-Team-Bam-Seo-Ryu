@@ -40,6 +40,7 @@ public class PowerMySQLBullet : PlayerBullet
     private void OnEnable()
     {
         isDestroyed = false;
+        transform.rotation = Quaternion.identity;
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)

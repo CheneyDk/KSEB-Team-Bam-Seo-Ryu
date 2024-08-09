@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class FloppyDiskWeapon : PlayerWeapon
 {
     public float fireRate = 2f;
+    private Transform parent;
 
     void Start()
     {
@@ -16,9 +17,19 @@ public class FloppyDiskWeapon : PlayerWeapon
         isMaxLevel = false;
         isPowerWeapon = false;
         matchPassive = "SSD";
+
+        parent = GameObject.FindWithTag("PlayerBulletPool").transform;
+        InitPool();
     }
 
-    IEnumerator FireBullet()
+    private void InitPool()
+    {
+        var tempPool = Instantiate(bulletPoolObj, Vector3.zero, Quaternion.identity);
+        tempPool.transform.parent = parent;
+        bulletPool = tempPool.GetComponent<BulletPool>();
+    }
+
+        IEnumerator FireBullet()
     {
         int critOccur;
         float critDamage;
