@@ -6,8 +6,6 @@ using UnityEngine.UIElements;
 
 public class PytorchBullet : PlayerBullet
 {
-    
-
     // bullet rise vars
     private float bulletTimer;
     private Vector2 bulletRiseVector = Vector2.up;
@@ -24,6 +22,8 @@ public class PytorchBullet : PlayerBullet
     private bool isPowerWeapon;
     public GameObject subBullet;
 
+    public BulletPool subBulletPool;
+
     // vfx
     public ParticleSystem particle;
     private SpriteRenderer spriteRenderer;
@@ -39,11 +39,12 @@ public class PytorchBullet : PlayerBullet
         transform.Translate(bulletVector * bulletSpeed * Time.deltaTime);
     }
 
-    public void SetPytorchBullet(Vector2 fallPos, float explodeRange, bool power)
+    public void SetPytorchBullet(Vector2 fallPos, float explodeRange, bool power, BulletPool pool)
     {
         targetPos = fallPos;
         bulletExplodeRange = explodeRange;
         isPowerWeapon = power;
+        subBulletPool = pool;
     }
 
     private async UniTask BulletOrbit()
@@ -101,8 +102,10 @@ public class PytorchBullet : PlayerBullet
         for (int i = 0; i < 4; i++)
         {
             angle = 90 * i;
-            var tempBullet = Instantiate(subBullet, transform.position, Quaternion.Euler(0f, 0f, angle));
-            tempBullet.GetComponent<PlayerBullet>().Init(bulletDamage / 4, critOccur);
+            var tempBullet = subBulletPool.GetBullet();
+            // var tempBullet = Instantiate(subBullet, transform.position, Quaternion.Euler(0f, 0f, angle));
+            tempBullet.GetComponent<PlayerBullet>().Init(bulletDamage / 4, critOccur,
+                transform.position, Quaternion.Euler(0f, 0f, angle), subBulletPool);
         }
     }
 
@@ -113,7 +116,7 @@ public class PytorchBullet : PlayerBullet
         spriteRenderer.color = tempColor;
         particle.Play();
         await UniTask.WaitForSeconds(1f);
-        Destroy(gameObject);
+        bulletPool.SetObj(this);
     }
 
     // dummy

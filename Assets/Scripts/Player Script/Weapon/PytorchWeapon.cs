@@ -22,6 +22,8 @@ public class PytorchWeapon : PlayerWeapon
 
     private bool isDestroyed = false;
 
+    [SerializeField] private BulletPool subBulletPool;
+
     // init stats
     private void Start()
     {
@@ -93,11 +95,12 @@ public class PytorchWeapon : PlayerWeapon
 
                 critOccur = IsCritOccur(player.playerCritPer);
                 critDamage = player.playerCritDmg * critOccur;
-
-                var tempBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
+                var tempBullet = subBulletPool.GetBullet();
+                // var tempBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+                tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                    transform.position, Quaternion.identity, subBulletPool);
                 // set bullet drop pos
-                tempBullet.GetComponent<PytorchBullet>().SetPytorchBullet(bulletFallPos, bulletExplodeRange, isPowerWeapon);
+                tempBullet.GetComponent<PytorchBullet>().SetPytorchBullet(bulletFallPos, bulletExplodeRange, isPowerWeapon, subBulletPool);
 
                 await UniTask.WaitForSeconds(pytorchFireInterval);
                 if (isDestroyed) return;

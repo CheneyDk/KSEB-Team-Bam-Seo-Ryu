@@ -31,7 +31,8 @@ public class FloppyDiskWeapon : PlayerWeapon
                 bullet.GetComponent<PlayerBullet>().ChangeSprite(normalWeaponSprite);
                 yield return new WaitForSeconds(fireRate);
                 var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * weaponDamageRate * (1f + critDamage), critOccur);
+                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * weaponDamageRate * (1f + critDamage), critOccur,
+                    transform.position, Quaternion.identity, bulletPool);
             }
             else if (isPowerWeapon)
             {
@@ -41,7 +42,8 @@ public class FloppyDiskWeapon : PlayerWeapon
                 {
                     yield return new WaitForSeconds(0.2f);
                     var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * weaponDamageRate * (1f + critDamage), critOccur);
+                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * weaponDamageRate * (1f + critDamage), critOccur,
+                        Vector3.zero, Quaternion.identity, bulletPool);
                 }
             }
         }

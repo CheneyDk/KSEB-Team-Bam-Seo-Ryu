@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public abstract class PlayerBullet : MonoBehaviour
 {
@@ -17,14 +18,17 @@ public abstract class PlayerBullet : MonoBehaviour
     protected float timeCounter = 0f;
     protected float bulletLifeTime = 5f;
 
+    [SerializeField] protected BulletPool bulletPool;
+
     // YH - call Init func in Start func
 
-    public void Init(/*Vector3 pos, Quaternion rot,*/float damage, int crit)
+    public void Init(float damage, int crit, Vector3 pos, Quaternion rot, BulletPool pool)
     {
-        //transform.position = pos;
-        //transform.rotation = rot;
         bulletDamage = damage;
         critOccur = crit;
+        transform.position = pos;
+        transform.rotation = rot;
+        bulletPool = pool;
     }
 
     // if stay triggered, give damage

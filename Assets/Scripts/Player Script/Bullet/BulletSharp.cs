@@ -12,7 +12,6 @@ public class BulletSharp : PlayerBullet
 
     private AudioManager audioManager;
 
-    private BulletPool bulletPool;
     private WaitForSeconds waitForPush;
 
 
@@ -47,19 +46,11 @@ public class BulletSharp : PlayerBullet
             {
                 EnemyComponent.TakeDamage(bulletDamage, critOccur);
                 audioManager.SharpClip();
-                Destroy(gameObject);
+                bulletPool.SetObj(this);
 
                 ScoreManager.instance.UpdateDamage("Basic", bulletDamage);
             }
         }
-    }
-
-    // YH - add this two params to <PlayerBullet> class method "Init" later
-    public void PoolingTestFunc(Vector3 pos, Quaternion rot, BulletPool pool)
-    {
-        transform.position = pos;
-        transform.rotation = rot;
-        bulletPool = pool;
     }
 
     public void IsPower(bool power)

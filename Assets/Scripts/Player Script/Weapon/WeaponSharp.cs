@@ -23,8 +23,6 @@ public class WeaponSharp : PlayerWeapon
     private int critOccur;
     private float critDamage;
 
-    public BulletPool bulletPool;
-
     private void Start()
     {
         // init stats
@@ -92,16 +90,16 @@ public class WeaponSharp : PlayerWeapon
             critDamage = player.playerCritDmg * critOccur;
             // var tempBullet = Instantiate(bullet, muzzle.position, muzzle.rotation);
             var tempBullet = bulletPool.GetBullet();
-            tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
-            tempBullet.GetComponent<BulletSharp>().PoolingTestFunc(muzzle.position, muzzle.rotation, bulletPool);
+            tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                muzzle.position, muzzle.rotation, bulletPool);
             tempBullet.GetComponent<BulletSharp>().IsPower(isPowerWeapon);
-            random = Random.Range(0, 101);
+            random = Random.Range(0, 100);
             if (isPowerWeapon && random > 50)
             {
                 var randPos = muzzle.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
                 tempBullet = bulletPool.GetBullet();
-                tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
-                tempBullet.GetComponent<BulletSharp>().PoolingTestFunc(muzzle.position, muzzle.rotation, bulletPool);
+                tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                muzzle.position, muzzle.rotation, bulletPool);
                 tempBullet.GetComponent<BulletSharp>().IsPower(isPowerWeapon);
             }
             await UniTask.WaitForSeconds(weaponSharpFireInterval);

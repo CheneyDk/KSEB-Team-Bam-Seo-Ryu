@@ -31,6 +31,9 @@ public abstract class PlayerWeapon : MonoBehaviour // abstract class·Î ÀüÈ¯! + ¾
     public Sprite normalWeaponSprite;
     public Sprite powerWeaponSprite;
 
+    [SerializeField] protected BulletPool bulletPool;
+
+
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();

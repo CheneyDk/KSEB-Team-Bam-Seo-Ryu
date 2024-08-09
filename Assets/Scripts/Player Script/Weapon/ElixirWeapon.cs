@@ -38,7 +38,7 @@ public class ElixirWeapon : PlayerWeapon
     protected override void Fire()
     {
         var tempBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-        tempBullet.GetComponent<PlayerBullet>().Init(weaponDamageRate, 0);
+        tempBullet.GetComponent<PlayerBullet>().Init(weaponDamageRate, 0, transform.position, Quaternion.identity, bulletPool);
         tempBullet.GetComponent<ElixirBullet>().SetElixir(bulletVector, debuffAddDamageRate, explodeRange, debuffLastingTime, isPowerWeapon);
     }
 
