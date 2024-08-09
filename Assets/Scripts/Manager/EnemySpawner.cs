@@ -63,6 +63,8 @@ public class EnemySpawner : MonoBehaviour
     private int MaxRangeEnemy = 1;
     private int MaxHeavyEnemy = 1;
 
+    public float powerEnemyRate = 1f;
+
     private void Awake()
     {
         waveManager = GetComponent<WaveManager>();
@@ -130,6 +132,8 @@ public class EnemySpawner : MonoBehaviour
             StartCoroutine(EnemiesSpawn(pooledRangeEnemies, RESpawnStartTime, RESpawnRate, RESpawnNumber, RESpawnGroupRadius));
             StartCoroutine(EnemiesSpawn(pooledHeavyEnemies, HESpawnStartTime, HESpawnRate, HESpawnNumber, HESpawnGroupRadius));
 
+
+
             if (waveManager.curWave == 10)
             {
                 StartCoroutine(BossSpawn(midBossPrefab));
@@ -141,9 +145,9 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public bool PowerEnemy()
+    public void PowerEnemy()
     {
-        if (waveManager.curWave % 1 == 0)
+        if (waveManager.curWave % 3 == 0)
         {
             if (MaxMeleeEnemy < 7)
             {
@@ -158,11 +162,7 @@ public class EnemySpawner : MonoBehaviour
                 MaxHeavyEnemy += 1;
             }
 
-            return true;
-        }
-        else
-        {
-            return false;
+            powerEnemyRate += 0.5f;
         }
     }
 
@@ -170,6 +170,7 @@ public class EnemySpawner : MonoBehaviour
     public void StopSpawning()
     {
         Spawning = false;
+        PowerEnemy();
         StopAllCoroutines();
     }
 

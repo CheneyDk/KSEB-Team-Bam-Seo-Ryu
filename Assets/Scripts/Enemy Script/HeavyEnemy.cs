@@ -240,28 +240,17 @@ public class HeavyEnemy : Enemy
 
     public override void ResetEnemy()
     {
-        if (enemySpawner.PowerEnemy())
-        {
-            heavyAni.SetBool("isDead", false);
-            originColor += new Color(0, -0.1f, -0.1f);
-            curSR.color = originColor;
-            HeavyEnemyMaxHp *= 1.5f;
-            HeavyEnemyCurHP = HeavyEnemyMaxHp;
-            HeavyEnemyAtk *= 1.5f;
-            HeavyEnemyCurAtk = HeavyEnemyAtk;
-            heavyCollider.enabled = true;
-            canDash = false;
-            isDead = false;
-        }
-        else
-        {
-            heavyAni.SetBool("isDead", false);
-            curSR.color = originColor;
-            HeavyEnemyCurHP = HeavyEnemyMaxHp;
-            HeavyEnemyCurAtk = HeavyEnemyAtk;
-            heavyCollider.enabled = true;
-            canDash = false;
-            isDead = false;
-        }
+        heavyAni.SetBool("isDead", false);
+        ChangeEnemyState(enemySpawner.powerEnemyRate);
+        heavyCollider.enabled = true;
+        canDash = false;
+        isDead = false;
+    }
+
+    private void ChangeEnemyState(float num)
+    {
+        HeavyEnemyCurHP = HeavyEnemyMaxHp * num;
+        HeavyEnemyCurAtk = HeavyEnemyAtk * num;
+        originColor += (num - 1) * new Color(0, -0.1f, -0.1f);
     }
 }

@@ -208,26 +208,16 @@ public class MeleeEnemy : Enemy
 
     public override void ResetEnemy()
     {
-        if (enemySpawner.PowerEnemy())
-        {
-            meleeAni.SetBool("isDead", false);
-            originColor += new Color(0, -0.1f, -0.1f);
-            curSR.color = originColor;
-            MeleeEnemyMaxHp *= 1.5f;
-            MeleeEnemyCurHP = MeleeEnemyMaxHp;
-            MeleeEnemyAtk *= 1.5f;
-            MeleeEnemyCurAtk = MeleeEnemyAtk;
-            meleeCollider.enabled = true;
-            isDead = false;
-        }
-        else
-        {
-            meleeAni.SetBool("isDead", false);
-            curSR.color = originColor;
-            MeleeEnemyCurHP = MeleeEnemyMaxHp;
-            MeleeEnemyCurAtk = MeleeEnemyAtk;
-            meleeCollider.enabled = true;
-            isDead = false;
-        }
+        meleeAni.SetBool("isDead", false);
+        ChangeEnemyState(enemySpawner.powerEnemyRate);
+        meleeCollider.enabled = true;
+        isDead = false;
+    }
+
+    private void ChangeEnemyState(float num)
+    {
+        MeleeEnemyCurHP = MeleeEnemyMaxHp * num;
+        MeleeEnemyCurAtk = MeleeEnemyAtk * num; 
+        originColor += (num - 1) * new Color(0, -0.1f, -0.1f);
     }
 }

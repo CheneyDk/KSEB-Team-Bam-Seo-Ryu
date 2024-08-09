@@ -243,29 +243,18 @@ public class RangeEnemy : Enemy
 
     public override void ResetEnemy()
     {
-        if (enemySpawner.PowerEnemy())
-        {
-            rangeAni.SetBool("isDead", false);
-            originColor += new Color(0, -0.1f, -0.1f);
-            curSR.color = originColor;
-            RangeEnemyMaxHp *= 1.5f;
-            RangeEnemyCurHP = RangeEnemyMaxHp;
-            RangeEnemyAtk *= 1.5f;
-            RangeEnemyCurAtk = RangeEnemyAtk;
-            bulletPrefab.GetComponent<RangeEnemyBullet>().bulletDamage += 3;
-            rangeCollider.enabled = true;
-            isDead = false;
-            canAttack = true;
-        }
-        else
-        {
-            rangeAni.SetBool("isDead", false);
-            curSR.color = originColor;
-            RangeEnemyCurHP = RangeEnemyMaxHp;
-            RangeEnemyCurAtk = RangeEnemyAtk;
-            rangeCollider.enabled = true;
-            isDead = false;
-            canAttack = true;
-        }
+        rangeAni.SetBool("isDead", false);
+        ChangeEnemyState(enemySpawner.powerEnemyRate);
+        rangeCollider.enabled = true;
+        isDead = false;
+        canAttack = true;
+    }
+
+    private void ChangeEnemyState(float num)
+    {
+        RangeEnemyCurHP = RangeEnemyMaxHp * num;
+        RangeEnemyCurAtk = RangeEnemyAtk * num;
+        bulletPrefab.GetComponent<RangeEnemyBullet>().bulletDamage += ((int)num - 1) * 3;
+        originColor += (num - 1) * new Color(0, -0.1f, -0.1f);
     }
 }
