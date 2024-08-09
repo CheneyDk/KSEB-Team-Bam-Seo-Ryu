@@ -70,6 +70,7 @@ public class WaveManager : MonoBehaviour
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         GameObject[] bullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+        GameObject[] warning = GameObject.FindGameObjectsWithTag("Warning Mark");
         foreach (GameObject enemy in enemies)
         {
             enemy.SetActive(false);
@@ -77,6 +78,10 @@ public class WaveManager : MonoBehaviour
         foreach (GameObject bullet in bullets)
         {
             bullet.SetActive(false);
+        }
+        foreach (GameObject warn in warning)
+        {
+            warn.SetActive(false);
         }
     }
 }

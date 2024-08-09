@@ -54,8 +54,7 @@ public class EnemySpawner : MonoBehaviour
     private int numberToPool;
     [SerializeField]
     private Transform enemiesPoolingZone;
-    [SerializeField]
-    private Transform warningMarkPoolZone;
+    public Transform warningMarkPoolZone;
     private List<GameObject> pooledMeleeEnemies = new List<GameObject>();
     private List<GameObject> pooledRangeEnemies = new List<GameObject>();
     private List<GameObject> pooledHeavyEnemies = new List<GameObject>();
@@ -233,15 +232,8 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator DeActiveWarn(GameObject warn)
     {
-        if(!Spawning)
-        {
-            warn.SetActive(false);
-        }
-        else
-        {
-            yield return new WaitForSeconds(warningTime);
-            warn.SetActive(false);
-        }
+        yield return new WaitForSeconds(warningTime);
+        warn.SetActive(false);
     }
 
     private IEnumerator BossSpawn(GameObject boss)
