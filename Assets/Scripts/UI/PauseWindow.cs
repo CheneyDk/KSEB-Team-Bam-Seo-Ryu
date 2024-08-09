@@ -10,12 +10,18 @@ public class PauseWindow : MonoBehaviour
     private bool volumOpen = false;
 
     // texts
+    public TextMeshProUGUI character;
     public TextMeshProUGUI hpVal;
     public TextMeshProUGUI atkVal;
     public TextMeshProUGUI atkSpeedVal;
     public TextMeshProUGUI critPerVal;
     public TextMeshProUGUI critDamageVal;
     public TextMeshProUGUI moveSpeedVal;
+
+    private void Start()
+    {
+        character.text = ScoreManager.instance.GetCharacter() + " Stats";
+    }
 
     private void OnEnable()
     {

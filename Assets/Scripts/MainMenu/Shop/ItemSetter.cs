@@ -12,14 +12,6 @@ public class ItemSetter : MonoBehaviour
     public Button button;
     public TextMeshProUGUI[] itemPrice;
 
-    private AudioSource audioSource;
-    public AudioClip buyClip;
-
-    private void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
-
     public void Set(string name, int price)
     {
         itemName.text = name;
@@ -30,13 +22,11 @@ public class ItemSetter : MonoBehaviour
 
     public void Installed() {
         button.interactable = false;
-        audioSource.PlayOneShot(buyClip);
         itemPrice[0].text = "$-\nInstalled";
         itemPrice[1].text = "$-\nInstalled";
     }
 
     public void ChangeUpdatePage() {
-        audioSource.PlayOneShot(buyClip);
         itemName.text = "PowerPet";
         itemImage.sprite = Resources.Load<Sprite>("PowerPet");
         itemPrice[0].text = "$1000\nInstall";

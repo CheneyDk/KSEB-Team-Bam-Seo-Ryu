@@ -24,11 +24,10 @@ public abstract class SaveData
         new enemiesDeafeatedData("logicErrorDeafeated", 0)
     };
 
-    [SerializeField]
-    public bool isPet; // 펫 구매 여부
-    public bool isPetUpgrade; // 펫 업그레이드 여부
-    public bool isCUpgrade; // C기본무기 업그레이드 여부
-    public bool isPythonUpgrade; // Python기본무기 업그레이드 여부
+    [SerializeField] public bool isCUpgrade; // C기본무기 업그레이드 여부
+    [SerializeField] public bool isPythonUpgrade; // Python기본무기 업그레이드 여부
+    [SerializeField] public bool isPet; // 펫 구매 여부
+    [SerializeField] public bool isPetUpgrade; // 펫 업그레이드 여부
 
     public SaveData(string _fileName, string _directory)
     {
