@@ -12,6 +12,7 @@ public class ShopManager : MonoBehaviour
 
     private AudioSource audioSource;
     public AudioClip noMoneyClip;
+    public AudioClip buyClip;
 
     private List<(string, int)> itemList = new List<(string, int)>
     {
@@ -31,7 +32,7 @@ public class ShopManager : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
 
-        for (int i = 0; i < itemList.Count; i++)
+        for (int i = 0; i < 7; i++)
         {
             itemSetter[i].Set(itemList[i].Item1, itemList[i].Item2);
             foreach(string name in ScoreManager.instance.recordData.installedItems)
@@ -42,6 +43,18 @@ public class ShopManager : MonoBehaviour
                 }
             }
         }
+
+        itemSetter[7].Set(itemList[7].Item1, itemList[7].Item2);
+        if (ScoreManager.instance.recordData.isCUpgrade) { itemSetter[7].Installed(); }
+        itemSetter[8].Set(itemList[8].Item1, itemList[8].Item2);
+        if (ScoreManager.instance.recordData.isPythonUpgrade) { itemSetter[8].Installed(); }
+        itemSetter[9].Set(itemList[9].Item1, itemList[9].Item2);
+        if (ScoreManager.instance.recordData.isPet)
+        { 
+            itemSetter[9].ChangeUpdatePage();
+            itemList[9] = ("PowerPet", 1000);
+        }
+        if (ScoreManager.instance.recordData.isPetUpgrade) { itemSetter[9].Installed(); }
     }
 
     private void Update()
@@ -57,10 +70,11 @@ public class ShopManager : MonoBehaviour
             ScoreManager.instance.recordData.money -= itemList[idx].Item2;
             itemSetter[idx].Installed();
             ScoreManager.instance.recordData.installedItems.Add(itemList[idx].Item1);
+            Alert("success");
         }
         else
         {
-            Alert();
+            Alert("failure");
         }
     }
 
@@ -79,10 +93,11 @@ public class ShopManager : MonoBehaviour
             {
                 ScoreManager.instance.recordData.isPythonUpgrade = true;
             }
+            Alert("success");
         }
         else
         {
-            Alert();
+            Alert("failure");
         }
     }
 
@@ -96,10 +111,11 @@ public class ShopManager : MonoBehaviour
                 itemSetter[idx].ChangeUpdatePage();
                 itemList[idx] = ("PowerPet", 1000);
                 ScoreManager.instance.recordData.isPet = true;
+                Alert("success");
             }
             else
             {
-                Alert();
+                Alert("failure");
             }
         }
         else
@@ -109,17 +125,25 @@ public class ShopManager : MonoBehaviour
                 ScoreManager.instance.recordData.money -= itemList[idx].Item2;
                 itemSetter[idx].Installed();
                 ScoreManager.instance.recordData.isPetUpgrade = true;
+                Alert("success");
             }
             else
             {
-                Alert();
+                Alert("failure");
             }
         }
     }
 
-    private void Alert()
+    private void Alert(string result)
     {
-        audioSource.PlayOneShot(noMoneyClip);
-        Debug.Log("Insufficient funds");
+        if (result == "failure")
+        {
+            audioSource.PlayOneShot(noMoneyClip);
+            Debug.Log("Insufficient funds");
+        }
+        else if (result == "success")
+        {
+            audioSource.PlayOneShot(buyClip);
+        }
     }
 }
