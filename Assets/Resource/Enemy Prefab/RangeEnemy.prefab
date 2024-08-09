@@ -185,12 +185,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RangeEnemyMaxHp: 10
-  RangeEnemyCurtHP: 0
   RangeEnemyAtk: 5
   RangeEnemyMoveSpeed: 4
   playerEnemyRange: 30
   attackCooldown: 3
-  bulletSpeed: 5
+  rotationSpeed: 10
+  RangeEnemyCurHP: 0
+  RangeEnemyCurAtk: 0
   bulletPrefab: {fileID: 4296012918434823456, guid: efb09630e56b75d4d9ed06da5e657f34, type: 3}
   Exp: {fileID: 2828242351688375285, guid: 9f21b77202f043d45a40df1d9c28c4d8, type: 3}
   dropExpNumber: 1
@@ -200,6 +201,8 @@ MonoBehaviour:
   damageNumber: {fileID: 1848622758658849530, guid: 1928df38c9c7b7342a2a95eeab8f991d, type: 3}
   lastingDamageNumber: {fileID: 1848622758658849530, guid: 94b7e5789fc284b4eba92f18cad04c72, type: 3}
   critDamageNumber: {fileID: 1718539329463334811, guid: a76e0657b7bd45f4a98ff48f62de521a, type: 3}
+  numberToPool: 5
+  bulletPoolingZone: {fileID: 0}
 --- !u!58 &-8953597660637280224
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -11,6 +11,8 @@ TagManager:
   - HorizontalWall
   - SnakeMain
   - Enemy Bullet
+  - Enemy Bullet Pool
+  - Other Pool
   layers:
   - Default
   - TransparentFX

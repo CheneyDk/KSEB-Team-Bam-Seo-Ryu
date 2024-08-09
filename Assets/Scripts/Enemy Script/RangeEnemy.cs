@@ -3,6 +3,7 @@ using DamageNumbersPro;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using VInspector;
 
 public class RangeEnemy : Enemy
@@ -19,7 +20,6 @@ public class RangeEnemy : Enemy
     [SerializeField]
     private float attackCooldown = 1f;
     [SerializeField]
-    private float bulletSpeed = 5f;
     private float rotationSpeed = 10f;
     [SerializeField] private float RangeEnemyCurHP;
     [SerializeField] private float RangeEnemyCurAtk;
@@ -62,6 +62,10 @@ public class RangeEnemy : Enemy
 
     private EnemySpawner enemySpawner;
 
+    // pooling
+    public int numberToPool = 5;
+    private List<GameObject> pooledEnemyBullet = new List<GameObject>();
+
     private void OnEnable()
     {
         StopAllCoroutines();
@@ -78,6 +82,11 @@ public class RangeEnemy : Enemy
         rangeCollider = GetComponent<CircleCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         bulletPrefab.GetComponent<RangeEnemyBullet>().Init(5);
+    }
+
+    private void Start()
+    {
+        PutBulletsToPool(pooledEnemyBullet, bulletPrefab);
     }
 
 
@@ -122,10 +131,13 @@ public class RangeEnemy : Enemy
     {
         canAttack = false;
 
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-        Destroy(bullet, 10f);
-        Vector2 direction = (player.position - transform.position).normalized;
-        bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
+        GameObject bullet = GetPooledEnemies(pooledEnemyBullet);
+        if (bullet != null)
+        {
+            bullet.transform.position = transform.position;
+            bullet.transform.rotation = Quaternion.identity;
+            bullet.SetActive(true);
+        }
 
         yield return new WaitForSeconds(attackCooldown);
 
@@ -239,6 +251,32 @@ public class RangeEnemy : Enemy
         {
             ItemPooling.Instance.GetRedBlue(transform.position);
         }
+    }
+
+
+    // pooling
+    private void PutBulletsToPool(List<GameObject> poolList, GameObject enemyPrefab)
+    {
+        for (int i = 0; i < numberToPool; i++)
+        {
+            var tmp = Instantiate(enemyPrefab);
+            tmp.transform.parent = GameObject.FindGameObjectWithTag("Enemy Bullet Pool").transform;
+            tmp.SetActive(false);
+            poolList.Add(tmp);
+        }
+    }
+
+    // Get bullet from pooling list
+    public GameObject GetPooledEnemies(List<GameObject> poolList)
+    {
+        for (int i = 0; i < poolList.Count; i++)
+        {
+            if (!poolList[i].activeInHierarchy)
+            {
+                return poolList[i];
+            }
+        }
+        return null;
     }
 
     public override void ResetEnemy()

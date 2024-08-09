@@ -25,12 +25,5 @@ public class WeaponData : ScriptableObject
     [HideInInspector]
     public string curDesc;
 
-
-    private void OnEnable()
-    {
-        curImage = itemImage;
-        curName = itemName;
-        curDesc = itemDesc;
-    }
 }
 

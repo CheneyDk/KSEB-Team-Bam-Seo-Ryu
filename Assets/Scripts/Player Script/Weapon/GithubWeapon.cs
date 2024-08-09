@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,6 +23,8 @@ public class GithubWeapon : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip githubFire;
 
+    private List<GameObject> bulletPool = new List<GameObject>();
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -35,6 +38,7 @@ public class GithubWeapon : MonoBehaviour
         {
             isUpgraded = true;
         }
+        PutBulletsToPool(bulletPool);
     }
 
     private void Update()
@@ -75,7 +79,13 @@ public class GithubWeapon : MonoBehaviour
                 animator.Play("Github Attack");
                 bullet.GetComponent<GithubBullet>().bulletDamage = 10;
                 yield return new WaitForSeconds(1f);
-                var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+                var addBullet = GetPooledBullet(bulletPool);
+                if (addBullet != null)
+                {
+                    addBullet.transform.position = transform.position;
+                    addBullet.transform.rotation = Quaternion.identity;
+                    addBullet.SetActive(true);
+                }
                 audioSource.PlayOneShot(githubFire);
                 yield return new WaitForSeconds(1f);
             }
@@ -84,7 +94,13 @@ public class GithubWeapon : MonoBehaviour
                 animator.Play("Power Github Attack");
                 bullet.GetComponent<GithubBullet>().bulletDamage = 15;
                 yield return new WaitForSeconds(0.5f);
-                var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+                var addBullet = GetPooledBullet(bulletPool);
+                if (addBullet != null)
+                {
+                    addBullet.transform.position = transform.position;
+                    addBullet.transform.rotation = Quaternion.identity;
+                    addBullet.SetActive(true);
+                }
                 audioSource.PlayOneShot(githubFire);
                 yield return new WaitForSeconds(0.5f);
             }
@@ -112,5 +128,29 @@ public class GithubWeapon : MonoBehaviour
         {
             isMoving = false;
         }
+    }
+
+    private void PutBulletsToPool(List<GameObject> poolList)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            var tmp = Instantiate(bullet);
+            tmp.transform.parent = GameObject.FindGameObjectWithTag("Other Pool").transform;
+            tmp.SetActive(false);
+            poolList.Add(tmp);
+        }
+    }
+
+    // Get bullet from pooling list
+    public GameObject GetPooledBullet(List<GameObject> poolList)
+    {
+        for (int i = 0; i < poolList.Count; i++)
+        {
+            if (!poolList[i].activeInHierarchy)
+            {
+                return poolList[i];
+            }
+        }
+        return null;
     }
 }

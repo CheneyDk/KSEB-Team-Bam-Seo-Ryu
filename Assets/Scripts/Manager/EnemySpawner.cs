@@ -54,9 +54,12 @@ public class EnemySpawner : MonoBehaviour
     private int numberToPool;
     [SerializeField]
     private Transform enemiesPoolingZone;
+    [SerializeField]
+    private Transform warningMarkPoolZone;
     private List<GameObject> pooledMeleeEnemies = new List<GameObject>();
     private List<GameObject> pooledRangeEnemies = new List<GameObject>();
     private List<GameObject> pooledHeavyEnemies = new List<GameObject>();
+    private List<GameObject> pooledMark = new List<GameObject>();
     [EndFoldout]
 
     private int MaxMeleeEnemy = 1;
@@ -78,6 +81,7 @@ public class EnemySpawner : MonoBehaviour
         PutEnemiesToPool(pooledMeleeEnemies, MeleeEnemyPrefab);
         PutEnemiesToPool(pooledRangeEnemies, RangeEnemyPrefab);
         PutEnemiesToPool(pooledHeavyEnemies, HeavyEnemyPrefab);
+        PutMarkToPool(pooledMark, WarningPrefab);
     }
 
     // Put enemies in pooling list
@@ -199,11 +203,18 @@ public class EnemySpawner : MonoBehaviour
                 Vector2 limitSpawnPosition = new Vector2(finalSpawnPosition.x, finalSpawnPosition.y);
                 spawnPositions.Add(limitSpawnPosition);
 
-                GameObject warning = Instantiate(WarningPrefab, limitSpawnPosition, Quaternion.identity);
-                Destroy(warning, warningTime);
+                var warnMark = GetPooledMark(pooledMark);
+                if (warnMark != null)
+                {
+                    warnMark.transform.position = limitSpawnPosition;
+                    warnMark.transform.rotation = Quaternion.identity;
+                    warnMark.SetActive(true);
+                }
+                StartCoroutine(DeActiveWarn(warnMark));
             }
 
             yield return new WaitForSeconds(warningTime);
+
 
             foreach (var position in spawnPositions)
             {
@@ -218,6 +229,12 @@ public class EnemySpawner : MonoBehaviour
 
             yield return new WaitForSeconds(spawnRate);
         }
+    }
+
+    IEnumerator DeActiveWarn(GameObject warn)
+    {
+        yield return new WaitForSeconds(warningTime);
+        warn.SetActive(false);
     }
 
     private IEnumerator BossSpawn(GameObject boss)
@@ -242,6 +259,30 @@ public class EnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(warningTime);
 
         Instantiate(boss, limitSpawnPosition, Quaternion.identity);
+    }
+
+    private void PutMarkToPool(List<GameObject> poolList, GameObject enemyPrefab)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            var tmp = Instantiate(enemyPrefab);
+            tmp.transform.parent = warningMarkPoolZone;
+            tmp.SetActive(false);
+            poolList.Add(tmp);
+        }
+    }
+
+    // Get bullet from pooling list
+    public GameObject GetPooledMark(List<GameObject> poolList)
+    {
+        for (int i = 0; i < poolList.Count; i++)
+        {
+            if (!poolList[i].activeInHierarchy)
+            {
+                return poolList[i];
+            }
+        }
+        return null;
     }
 
     [Button]

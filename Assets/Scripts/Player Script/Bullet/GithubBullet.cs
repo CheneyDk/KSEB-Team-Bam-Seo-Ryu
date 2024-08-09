@@ -20,9 +20,8 @@ public class GithubBullet : MonoBehaviour
         if (target == Vector2.zero)
         {
             gameObject.SetActive(false);
-            Destroy(gameObject);
         }
-        Destroy(gameObject, bulletLifeTime);
+        OffActive();
     }
 
     private void Update()
@@ -32,8 +31,14 @@ public class GithubBullet : MonoBehaviour
 
         if (Vector2.Distance(transform.position, target) < 0.1f)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
+    }
+
+    IEnumerator OffActive()
+    {
+        yield return new WaitForSeconds(bulletLifeTime);
+        gameObject.SetActive(false);
     }
 
     private Vector2 FindNearestEnemy()
