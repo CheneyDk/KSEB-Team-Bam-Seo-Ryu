@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75491408f29ca9f4ab4882f9700df418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMaxHp: 10
+  playerMaxHp: 100
   playerCurHp: 0
   playerLevel: 0
   playerMaxExp: 10
@@ -455,7 +455,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: '{const}'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 399033dfbde0b734f8c90a034616ba70, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
