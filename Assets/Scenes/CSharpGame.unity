@@ -10520,6 +10520,7 @@ MonoBehaviour:
   warningTime: 1
   numberToPool: 20
   enemiesPoolingZone: {fileID: 646352766}
+  powerEnemyRate: 1
 --- !u!222 &2030385431
 CanvasRenderer:
   m_ObjectHideFlags: 0
