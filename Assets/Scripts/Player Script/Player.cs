@@ -50,6 +50,8 @@ public class Player : MonoBehaviour
     // GameObjects
     [Header("- GameObjects")]
     public Transform playerArm;
+    public Transform playerArm_1;
+    public Transform playerArm_2;
     public GameObject weapon; // list needed
     public GameObject constText;
 
@@ -123,6 +125,10 @@ public class Player : MonoBehaviour
 
         // playerArmMove
         playerArmRotate();
+        if (ScoreManager.instance.GetCharacter() == "Python")
+        {
+            playerArmRotate_Sub();
+        }
 
         // Item Magnetic func
         CheckItemInRange();
@@ -224,6 +230,23 @@ public class Player : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         playerArm.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+    }
+
+    private void playerArmRotate_Sub()
+    {
+        if (!GameManager.Instance.isGameContinue) return;
+
+        Vector2 mousePosition = Mouse.current.position.ReadValue();
+        Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane));
+
+
+        Vector3 direction = worldMousePosition - playerArm.transform.position;
+        float mouseAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float angle1 = mouseAngle + 45;
+        float angle2 = mouseAngle - 45;
+
+        playerArm_1.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle1));
+        playerArm_2.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle2));
     }
 
     // playerTakeDamage
