@@ -26,7 +26,7 @@ public class WeaponData : ScriptableObject
     public string curDesc;
 
 
-    private void OnEnable()
+    public void ResetImage()
     {
         curImage = itemImage;
         curName = itemName;

@@ -72,6 +72,14 @@ public class UpgradeManager : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        foreach (var data in allWeaponDataList)
+        {
+            data.ResetImage();
+        }
+    }
+
     private IEnumerator OpenUI(bool TorF)
     {
         animator.SetBool("isOpen", TorF);
