@@ -233,8 +233,15 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator DeActiveWarn(GameObject warn)
     {
-        yield return new WaitForSeconds(warningTime);
-        warn.SetActive(false);
+        if(!Spawning)
+        {
+            warn.SetActive(false);
+        }
+        else
+        {
+            yield return new WaitForSeconds(warningTime);
+            warn.SetActive(false);
+        }
     }
 
     private IEnumerator BossSpawn(GameObject boss)
