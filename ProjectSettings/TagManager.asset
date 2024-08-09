@@ -13,6 +13,7 @@ TagManager:
   - Enemy Bullet
   - Enemy Bullet Pool
   - Other Pool
+  - Warning Mark
   layers:
   - Default
   - TransparentFX
