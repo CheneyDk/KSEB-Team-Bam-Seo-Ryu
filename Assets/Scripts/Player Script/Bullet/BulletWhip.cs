@@ -10,7 +10,7 @@ public class BulletWhip : PlayerBullet
 
     private void Start()
     {
-        bulletLifeTime = 0.3f;
+        bulletLifeTime = fadeDuration;
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
