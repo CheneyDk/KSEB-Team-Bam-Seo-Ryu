@@ -12,24 +12,31 @@ public class BulletSharp : PlayerBullet
 
     private AudioManager audioManager;
 
-    private BulletPool bulletPool;
     private WaitForSeconds waitForPush;
 
+    private void Awake()
+    {
+        bulletLifeTime = 1.5f;
+        waitForPush = new WaitForSeconds(bulletLifeTime);
+    }
 
     private void Start()
     {
         // go straight
         bulletVector = Vector2.right;
         bulletSpeed = 70f;
-        bulletLifeTime = 1.5f;
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioManager = FindObjectOfType<AudioManager>();
-        waitForPush = new WaitForSeconds(bulletLifeTime);
+        
 
-
-        // Destroy(gameObject, bulletLifeTime);
-        StartCoroutine(PushToPool()); // instead destroy
         PowerSprite();
+    }
+
+    private void OnEnable()
+    {
+        // Destroy(gameObject, bulletLifeTime);
+        // instead destroy
+        StartCoroutine(PushToPool());
     }
 
     private void Update()
@@ -47,19 +54,11 @@ public class BulletSharp : PlayerBullet
             {
                 EnemyComponent.TakeDamage(bulletDamage, critOccur);
                 audioManager.SharpClip();
-                Destroy(gameObject);
+                bulletPool.SetObj(this);
 
                 ScoreManager.instance.UpdateDamage("Basic", bulletDamage);
             }
         }
-    }
-
-    // YH - add this two params to <PlayerBullet> class method "Init" later
-    public void PoolingTestFunc(Vector3 pos, Quaternion rot, BulletPool pool)
-    {
-        transform.position = pos;
-        transform.rotation = rot;
-        bulletPool = pool;
     }
 
     public void IsPower(bool power)
@@ -69,7 +68,11 @@ public class BulletSharp : PlayerBullet
 
     private void PowerSprite()
     {
-        if (!isPowerBullet) return;
+        if (!isPowerBullet)
+        {
+            spriteRenderer.sprite = normalBullet;
+            return;
+        }
         spriteRenderer.sprite = powerBullet;
     }
 

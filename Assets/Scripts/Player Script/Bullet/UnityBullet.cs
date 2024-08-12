@@ -16,18 +16,29 @@ public class UnityBullet : PlayerBullet
     public AudioSource audioSource;
     public AudioClip audioClip;
 
+    private WaitForSeconds waitForPush;
+
+    private void Awake()
+    {
+        bulletLifeTime = 5f;
+        waitForPush = new(bulletLifeTime);
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(PushToPool());
+    }
+
     private void Start()
     {
         bulletSpeed = 5f;
-        bulletLifeTime = 5f;
-
+        
         Vector2 targetPosition = FindNearestEnemy();
         
         direction = (targetPosition - (Vector2)transform.position).normalized;
-        
-
-        Destroy(gameObject, bulletLifeTime);
     }
+
+    
 
     private void Update()
     {
@@ -85,5 +96,11 @@ public class UnityBullet : PlayerBullet
         Vector2 mousePosition = Mouse.current.position.ReadValue();
         Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane));
         return new Vector2(worldMousePosition.x, worldMousePosition.y);
+    }
+
+    private IEnumerator PushToPool()
+    {
+        yield return waitForPush;
+        bulletPool.SetObj(this);
     }
 }

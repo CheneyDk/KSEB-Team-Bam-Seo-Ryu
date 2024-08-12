@@ -6,17 +6,15 @@ using UnityEngine.UIElements;
 
 public class PytorchBullet : PlayerBullet
 {
-    
-
     // bullet rise vars
     private float bulletTimer;
     private Vector2 bulletRiseVector = Vector2.up;
     private float bulletInitSpeed = 100f;
-    private float bulletRiseTime = 0.5f;
+    private float bulletRiseTime;
 
     // bullet fall vars
     private Vector2 bulletFallVector;
-    private float bulletFallTime = 0.5f;
+    private float bulletFallTime;
     private float bulletExplodeRange; // physics2d overlap circle needed
 
     private Vector2 targetPos;
@@ -24,13 +22,24 @@ public class PytorchBullet : PlayerBullet
     private bool isPowerWeapon;
     public GameObject subBullet;
 
+    public BulletPool subBulletPool;
+
+    private bool isDestroyed;
+
     // vfx
     public ParticleSystem particle;
     private SpriteRenderer spriteRenderer;
 
-    private void Start()
+    private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void OnEnable()
+    {
+        bulletRiseTime = 0.5f;
+        bulletFallTime = 0.5f;
+        isDestroyed = false;
         BulletOrbit().Forget();
     }
 
@@ -39,19 +48,22 @@ public class PytorchBullet : PlayerBullet
         transform.Translate(bulletVector * bulletSpeed * Time.deltaTime);
     }
 
-    public void SetPytorchBullet(Vector2 fallPos, float explodeRange, bool power)
+    public void SetPytorchBullet(Vector2 fallPos, float explodeRange, bool power, BulletPool pool)
     {
         targetPos = fallPos;
         bulletExplodeRange = explodeRange;
         isPowerWeapon = power;
+        subBulletPool = pool;
     }
 
     private async UniTask BulletOrbit()
     {
         BulletRise();
         await UniTask.WaitForSeconds(bulletRiseTime);
+        if(isDestroyed) return;
         BulletFall();
         await UniTask.WaitForSeconds(bulletFallTime);
+        if (isDestroyed) return;
         BulletExplode();
     }
 
@@ -81,7 +93,7 @@ public class PytorchBullet : PlayerBullet
         var enemies = Physics2D.OverlapCircleAll(transform.position, bulletExplodeRange, 1 << 8);
 
         // effects needed
-        WaitVFX().Forget();
+        WaitVFXandDelayedDestroy().Forget();
 
         if (enemies != null)
         {
@@ -101,19 +113,28 @@ public class PytorchBullet : PlayerBullet
         for (int i = 0; i < 4; i++)
         {
             angle = 90 * i;
-            var tempBullet = Instantiate(subBullet, transform.position, Quaternion.Euler(0f, 0f, angle));
-            tempBullet.GetComponent<PlayerBullet>().Init(bulletDamage / 4, critOccur);
+            var tempBullet = subBulletPool.GetBullet();
+            // var tempBullet = Instantiate(subBullet, transform.position, Quaternion.Euler(0f, 0f, angle));
+            tempBullet.GetComponent<PlayerBullet>().Init(bulletDamage / 4, critOccur,
+                transform.position, Quaternion.Euler(0f, 0f, angle), subBulletPool);
         }
     }
 
-    private async UniTask WaitVFX()
+    private async UniTask WaitVFXandDelayedDestroy()
     {
         var tempColor = spriteRenderer.color;
         tempColor.a = 0f;
         spriteRenderer.color = tempColor;
         particle.Play();
         await UniTask.WaitForSeconds(1f);
-        Destroy(gameObject);
+        if (isDestroyed) return;
+        isDestroyed = true;
+        bulletPool.SetObj(this);
+    }
+
+    private void OnDestroy()
+    {
+        isDestroyed = true;
     }
 
     // dummy

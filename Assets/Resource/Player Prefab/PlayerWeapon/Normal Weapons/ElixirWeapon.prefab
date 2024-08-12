@@ -108,3 +108,4 @@ MonoBehaviour:
   bullet_sub: {fileID: 0}
   normalWeaponSprite: {fileID: 21300000, guid: 523449a48fe02844cb4a8f91202ece84, type: 3}
   powerWeaponSprite: {fileID: 21300000, guid: 9929c3660cfbd4e44b2911b2ce6db7ad, type: 3}
+  bulletPoolObj: {fileID: 3875142900888274809, guid: 3c2084c7bf6af434da27c521885ec878, type: 3}

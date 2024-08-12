@@ -6,6 +6,8 @@ public class UnityWeapon : PlayerWeapon
 {
     public float fireRate = 3f;
 
+    private Transform parent;
+
     void Start()
     {
         Fire();
@@ -14,6 +16,16 @@ public class UnityWeapon : PlayerWeapon
         isMaxLevel = false;
         isPowerWeapon = false;
         matchPassive = "GPU";
+
+        parent = GameObject.FindWithTag("PlayerBulletPool").transform;
+        InitPool();
+    }
+
+    private void InitPool()
+    {
+        var tempPool = Instantiate(bulletPoolObj, Vector3.zero, Quaternion.identity);
+        tempPool.transform.parent = parent;
+        bulletPool = tempPool.GetComponent<BulletPool>();
     }
 
     IEnumerator FireBullet()
@@ -28,8 +40,9 @@ public class UnityWeapon : PlayerWeapon
             {
                 bullet.GetComponent<PlayerBullet>().ChangeSprite(normalWeaponSprite);
                 yield return new WaitForSeconds(fireRate);
-                var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
+                var addBullet = bulletPool.GetBullet();
+                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                    transform.position, Quaternion.identity, bulletPool);
 
             }
             else if (isPowerWeapon)
@@ -39,8 +52,9 @@ public class UnityWeapon : PlayerWeapon
                 for (int i = 0; i < 3; i++)
                 {
                     float angle = -30f + (i * 30f);
-                    var addBullet = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
-                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
+                    var addBullet = bulletPool.GetBullet();
+                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                        transform.position, Quaternion.Euler(0, 0, angle), bulletPool);
                 }
             }
         }

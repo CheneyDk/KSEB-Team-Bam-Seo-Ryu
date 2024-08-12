@@ -6,20 +6,32 @@ using UnityEngine.InputSystem;
 public class FloppyDiskWeapon : PlayerWeapon
 {
     public float fireRate = 2f;
+    private Transform parent;
 
     void Start()
     {
-        Fire();
         weaponLevel = 1;
         weaponDamageRate = 1f;
         bulletNum = 1;
         isMaxLevel = false;
         isPowerWeapon = false;
         matchPassive = "SSD";
+
+        parent = GameObject.FindWithTag("PlayerBulletPool").transform;
+        InitPool();
+
+        Fire();
     }
 
-    IEnumerator FireBullet()
+    private void InitPool()
     {
+        var tempPool = Instantiate(bulletPoolObj, Vector3.zero, Quaternion.identity);
+        tempPool.transform.parent = parent;
+        bulletPool = tempPool.GetComponent<BulletPool>();
+    }
+
+        IEnumerator FireBullet()
+        {   
         int critOccur;
         float critDamage;
         while (true)
@@ -30,8 +42,9 @@ public class FloppyDiskWeapon : PlayerWeapon
             {
                 bullet.GetComponent<PlayerBullet>().ChangeSprite(normalWeaponSprite);
                 yield return new WaitForSeconds(fireRate);
-                var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * weaponDamageRate * (1f + critDamage), critOccur);
+                var addBullet = bulletPool.GetBullet();
+                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * weaponDamageRate * (1f + critDamage), critOccur,
+                    transform.position, Quaternion.identity, bulletPool);
             }
             else if (isPowerWeapon)
             {
@@ -40,8 +53,9 @@ public class FloppyDiskWeapon : PlayerWeapon
                 for (int i = 0; i < bulletNum; i++)
                 {
                     yield return new WaitForSeconds(0.2f);
-                    var addBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * weaponDamageRate * (1f + critDamage), critOccur);
+                    var addBullet = bulletPool.GetBullet();
+                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * weaponDamageRate * (1f + critDamage), critOccur,
+                        transform.position, Quaternion.identity, bulletPool);
                 }
             }
         }

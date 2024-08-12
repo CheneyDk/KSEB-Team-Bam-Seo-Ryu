@@ -15,17 +15,34 @@ public class FloppyDiskwBullet : PlayerBullet
 
     public ParticleSystem FloppyDiskParticle;
 
+    private WaitForSeconds waitForPush;
+
+    private Transform parent;
+
+    private void Awake()
+    {
+        bulletLifeTime = 5f;
+        waitForPush = new WaitForSeconds(bulletLifeTime);
+    }
+
     private void Start()
     {
         bulletSpeed = 5f;
-        bulletLifeTime = 5f;
-
+        
         Vector2 targetPosition = FindNearestEnemy();
 
         direction = (targetPosition - (Vector2)transform.position).normalized;
+    }
 
+    private void OnEnable()
+    {
+        StartCoroutine(PushToPool());
+    }
 
-        Destroy(gameObject, bulletLifeTime);
+    private IEnumerator PushToPool()
+    {
+        yield return waitForPush;
+        bulletPool.SetObj(this);
     }
 
     private void Update()
@@ -47,7 +64,7 @@ public class FloppyDiskwBullet : PlayerBullet
             {
                 Explode();
                 Instantiate(FloppyDiskParticle, transform.position, Quaternion.identity);
-                Destroy(gameObject);
+                bulletPool.SetObj(this);
             }
         }
     }

@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class BulletWhip : PlayerBullet
 {
-    public float fadeDuration = 0.3f; // »ç¶óÁö´Â µ¥ °É¸®´Â ½Ã°£ (ÃÊ)
+    public float fadeDuration = 0.3f; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½É¸ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ (ï¿½ï¿½)
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
 
+    private void Awake()
+    {
+        bulletLifeTime = 0.3f;
+    }
+    private void OnEnable()
+    {
+        StartFadeOut();
+    }
+
     private void Start()
     {
-        bulletLifeTime = fadeDuration;
-
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
@@ -20,9 +27,7 @@ public class BulletWhip : PlayerBullet
         else
         {
             Debug.LogError("SpriteRenderer component not found on the GameObject.");
-        }
-
-        StartFadeOut();
+        } 
     }
 
     private void Update()
@@ -33,7 +38,7 @@ public class BulletWhip : PlayerBullet
         timeCounter += Time.deltaTime;
         if (timeCounter > bulletLifeTime)
         {
-            Destroy(gameObject);
+            bulletPool.SetObj(this);
         }
     }
 
@@ -73,10 +78,10 @@ public class BulletWhip : PlayerBullet
             yield return null;
         }
 
-        // ¿ÏÀüÈ÷ Åõ¸íÇÏ°Ô µÇ¾úÀ» ¶§
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½ ï¿½ï¿½
         color.a = 0.0f;
         spriteRenderer.color = color;
-        gameObject.SetActive(false); // ¿ÀºêÁ§Æ®¸¦ ºñÈ°¼ºÈ­
+        gameObject.SetActive(false); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
     }
 
     public override void ChangeSprite(Sprite powerWeapon)

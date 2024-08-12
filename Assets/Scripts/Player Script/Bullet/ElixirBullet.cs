@@ -151,7 +151,7 @@ public class ElixirBullet : PlayerBullet
     {
         await UniTask.WaitForSeconds(1f);
         if (isDestroyed) return;
-        Destroy(gameObject);
+        bulletPool.SetObj(this);
     }
 
     public void SetElixir(Vector3 vec, float damageRate, float explodeRng, float lasting, bool power)

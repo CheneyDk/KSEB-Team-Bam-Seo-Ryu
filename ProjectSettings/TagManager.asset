@@ -14,6 +14,8 @@ TagManager:
   - Enemy Bullet Pool
   - Other Pool
   - Warning Mark
+  - PlayerBulletPool
+  - Missile
   layers:
   - Default
   - TransparentFX

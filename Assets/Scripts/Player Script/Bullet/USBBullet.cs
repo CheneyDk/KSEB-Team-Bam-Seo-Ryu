@@ -14,10 +14,21 @@ public class USBBullet : PlayerBullet
     public AudioSource audioSource;
     public AudioClip audioClip;
 
+    private WaitForSeconds waitForPush;
+
+    private void Awake()
+    {
+        bulletLifeTime = 2f;
+        waitForPush = new WaitForSeconds(bulletLifeTime);
+    }
+    private void OnEnable()
+    {
+        StartCoroutine(PushToPool());
+    }
+
     private void Start()
     {
         bulletSpeed = 20f;
-        Destroy(gameObject, 2f);
     }
 
     private void Update()
@@ -43,6 +54,11 @@ public class USBBullet : PlayerBullet
         }
     }
 
+    private IEnumerator PushToPool()
+    {
+        yield return waitForPush;
+        bulletPool.SetObj(this);
+    }
 
     public override void ChangeSprite(Sprite powerWeapon)
     {

@@ -13,6 +13,14 @@ public class MiniCD : PlayerBullet
     public AudioSource audioSource;
     public AudioClip audioClip;
 
+    private WaitForSeconds waitForPush;
+
+    private void Awake()
+    {
+        bulletLifeTime = 2f;
+        waitForPush = new(bulletLifeTime);
+    }
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -30,6 +38,11 @@ public class MiniCD : PlayerBullet
         }
     }
 
+    private void OnEnable()
+    {
+        StartCoroutine(PushToPool());
+    }
+
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
@@ -39,7 +52,7 @@ public class MiniCD : PlayerBullet
             {
                 Instantiate(CDparticle, transform.position, Quaternion.identity);
                 audioSource.PlayOneShot(audioClip);
-                enemyComponent.TakeDamage(player.playerAtk * (1f + player.playerCritDmg * critOccur) * 0.5f, critOccur);
+                enemyComponent.TakeDamage(bulletDamage, critOccur);
             }
 
         }
@@ -48,11 +61,17 @@ public class MiniCD : PlayerBullet
     void Update()
     {
         transform.Translate(Vector2.up * 10f * Time.deltaTime);
-        Destroy(gameObject, 2f);
     }
 
     public override void ChangeSprite(Sprite powerWeapon)
     {
         spriteRenderer.sprite = powerWeapon;
     }
+
+    private IEnumerator PushToPool()
+    {
+        yield return waitForPush;
+        bulletPool.SetObj(this);
+    }
+
 }

@@ -13,6 +13,10 @@ public class WeaponInternet : PlayerWeapon
     private int critOccur;
     private float critDamage;
 
+    private Transform parent;
+    [SerializeField] private GameObject powerBulletPoolObj;
+    private BulletPool powerBulletPool;
+
     void Start()
     {
         // Init stats
@@ -25,6 +29,17 @@ public class WeaponInternet : PlayerWeapon
 
         // can fire imediately
         fireRateTimer = weaponFireRate;
+        parent = GameObject.FindWithTag("PlayerBulletPool").transform;
+        InitPool();
+    }
+    private void InitPool()
+    {
+        var tempPool = Instantiate(bulletPoolObj, Vector3.zero, Quaternion.identity);
+        tempPool.transform.parent = parent;
+        bulletPool = tempPool.GetComponent<BulletPool>();
+        tempPool = Instantiate(powerBulletPoolObj, Vector3.zero, Quaternion.identity);
+        tempPool.transform.parent = parent;
+        powerBulletPool = tempPool.GetComponent<BulletPool>();
     }
 
     void Update()
@@ -66,14 +81,16 @@ public class WeaponInternet : PlayerWeapon
 
             if (isPowerWeapon)
             {
-                var tempBullet = Instantiate(powerBullet, transform.position, Quaternion.identity);
-                tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
+                var tempBullet = powerBulletPool.GetBullet();
+                tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                    player.transform.position, Quaternion.identity, powerBulletPool);
                 tempBullet.GetComponent<PowerInternetBulllet>().SetBulletInternet(bulletVector, bulletRadius);
             }
             else
             {
-                var tempBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
+                var tempBullet = bulletPool.GetBullet();
+                tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                    player.transform.position, Quaternion.identity, bulletPool);
                 tempBullet.GetComponent<BulletInternet>().SetBulletInternet(bulletVector, bulletRadius);
             }
 

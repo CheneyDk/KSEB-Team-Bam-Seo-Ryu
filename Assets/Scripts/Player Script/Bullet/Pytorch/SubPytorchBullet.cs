@@ -4,13 +4,24 @@ using UnityEngine;
 
 public class SubPytorchBullet : PlayerBullet
 {
+    private WaitForSeconds waitForPush;
+
     // Start is called before the first frame update
     void Start()
     {
         bulletVector = Vector2.down;
+        bulletSpeed = 10f; 
+    }
+
+    private void Awake()
+    {
         bulletLifeTime = 3f;
-        bulletSpeed = 10f;
-        Destroy(gameObject, bulletLifeTime);    
+        waitForPush = new WaitForSeconds(bulletLifeTime);
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(PushToPool());
     }
 
     void Update()
@@ -26,13 +37,18 @@ public class SubPytorchBullet : PlayerBullet
             if (EnemyComponent != null)
             {
                 EnemyComponent.TakeDamage(bulletDamage, critOccur);
-                Destroy(gameObject);
+                bulletPool.SetObj(this);
 
                 ScoreManager.instance.UpdateDamage("Pytorch", bulletDamage);
             }
         }
     }
 
+    private IEnumerator PushToPool()
+    {
+        yield return waitForPush;
+        bulletPool.SetObj(this);
+    }
 
     public override void ChangeSprite(Sprite powerWeapon) { }
 }

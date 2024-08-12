@@ -22,6 +22,10 @@ public class PytorchWeapon : PlayerWeapon
 
     private bool isDestroyed = false;
 
+    private Transform parent;
+    [SerializeField] private GameObject subBulletPoolObj;
+    private BulletPool subBulletPool;
+
     // init stats
     private void Start()
     {
@@ -48,15 +52,24 @@ public class PytorchWeapon : PlayerWeapon
         isPowerWeapon = false;
         matchPassive = "Overclock";
 
+        parent = GameObject.FindWithTag("PlayerBulletPool").transform;
+        InitPool();
+
         SpriteChange().Forget();
 
         // async routine
         Fire();
     }
 
-    // active func
-
-    // inactive func
+    private void InitPool()
+    {
+        var tempPool = Instantiate(bulletPoolObj, Vector3.zero, Quaternion.identity);
+        tempPool.transform.parent = parent;
+        bulletPool = tempPool.GetComponent<BulletPool>();
+        tempPool = Instantiate(subBulletPoolObj, Vector3.zero, Quaternion.identity);
+        tempPool.transform.parent = parent;
+        subBulletPool = tempPool.GetComponent<BulletPool>();
+    }
 
     public override void Upgrade()
     {
@@ -93,11 +106,12 @@ public class PytorchWeapon : PlayerWeapon
 
                 critOccur = IsCritOccur(player.playerCritPer);
                 critDamage = player.playerCritDmg * critOccur;
-
-                var tempBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
+                var tempBullet = bulletPool.GetBullet();
+                // var tempBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+                tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                    transform.position, Quaternion.identity, bulletPool);
                 // set bullet drop pos
-                tempBullet.GetComponent<PytorchBullet>().SetPytorchBullet(bulletFallPos, bulletExplodeRange, isPowerWeapon);
+                tempBullet.GetComponent<PytorchBullet>().SetPytorchBullet(bulletFallPos, bulletExplodeRange, isPowerWeapon, subBulletPool);
 
                 await UniTask.WaitForSeconds(pytorchFireInterval);
                 if (isDestroyed) return;

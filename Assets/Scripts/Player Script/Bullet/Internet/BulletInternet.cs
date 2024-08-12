@@ -10,22 +10,31 @@ public class BulletInternet : PlayerBullet
     private float bulletRadius;
     private Vector3 bulletBiggerSize;
 
-    // Start is called before the first frame update
+    private WaitForSeconds waitForPush;
+
     private void Awake()
     {
         bulletLifeTime = 8f;
-        bulletSpeed = 5f;
-        bulletRadius = 20f;
-        
-
-        damageTimer = dotDamageTimeInterval;
+        waitForPush = new WaitForSeconds(bulletLifeTime);
     }
 
     void Start()
     {
+        
+        bulletSpeed = 5f;
+        bulletRadius = 20f;
+
+        damageTimer = dotDamageTimeInterval;
+
         // time delayed destroy
-        Destroy(gameObject, bulletLifeTime);
+        
         bulletBiggerSize = new(bulletRadius, bulletRadius, 0f);
+    }
+
+    private void OnEnable()
+    {
+        transform.localScale = new(5f, 5f, 5f);
+        StartCoroutine(PushToPool());
     }
 
     public void SetBulletInternet(Vector2 bulletV, float radius)
@@ -70,6 +79,12 @@ public class BulletInternet : PlayerBullet
             enemy.GetComponent<Enemy>().TakeDamage(bulletDamage, critOccur);
             ScoreManager.instance.UpdateDamage("Internet", bulletDamage);
         }
+    }
+
+    private IEnumerator PushToPool()
+    {
+        yield return waitForPush;
+        bulletPool.SetObj(this);
     }
 
     public override void ChangeSprite(Sprite powerWeapon)
