@@ -82,26 +82,30 @@ public class MainMenuManager : MonoBehaviour
         loadingWindow.SetActive(true);
 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+        asyncLoad.allowSceneActivation = false;
+
+        float loadPerBar = 1f / loadBarBlock.Length;
 
         while (!asyncLoad.isDone)
         {
-            var loadTime = 0f;
-            loadTime += asyncLoad.progress * 100;
-            if (loadTime > 5f)
+            float progress = asyncLoad.progress / 0.9f;
+
+            int activeBars = Mathf.CeilToInt(progress / loadPerBar);
+
+            for (int i = 0; i < loadBarBlock.Length; i++)
             {
-                for (int i = 0; i < loadBarBlock.Length; i++)
-                {
-                    if (!loadBarBlock[i].activeSelf)
-                    {
-                        loadBarBlock[i].SetActive(true);
-                    }
-                }
-                loadTime = 0f;
+                loadBarBlock[i].SetActive(i < activeBars);
+            }
+
+            if (progress >= 1f)
+            {
+                asyncLoad.allowSceneActivation = true;
             }
 
             yield return null;
         }
     }
+
 
     public void ChangeIcon(float value)
     {

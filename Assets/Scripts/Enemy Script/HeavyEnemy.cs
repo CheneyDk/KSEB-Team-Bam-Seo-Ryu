@@ -251,6 +251,7 @@ public class HeavyEnemy : Enemy
     {
         HeavyEnemyCurHP = HeavyEnemyMaxHp * num;
         HeavyEnemyCurAtk = HeavyEnemyAtk * num;
-        originColor += (num - 1) * new Color(0, -0.1f, -0.1f);
+        originColor += ((num - 1) / 0.5f) * new Color(0, -0.1f, -0.1f);
+        curSR.color = originColor;
     }
 }

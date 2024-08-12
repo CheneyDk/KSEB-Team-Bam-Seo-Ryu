@@ -96,7 +96,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
     // Get enemies from pooling list
-    public GameObject GetPooledEnemies(List<GameObject> poolList)
+    public GameObject GetPooledEnemies(List<GameObject> poolList, GameObject enemyPrefab)
     {
         for (int i = 0; i < numberToPool; i++)
         {
@@ -106,7 +106,12 @@ public class EnemySpawner : MonoBehaviour
                 return poolList[i];
             }
         }
-        return null;
+        var newEnemy = Instantiate(enemyPrefab);
+        newEnemy.transform.parent = warningMarkPoolZone;
+        newEnemy.SetActive(false);
+        poolList.Add(newEnemy);
+
+        return newEnemy;
     }
 
     // Start spawn enemies
@@ -131,9 +136,9 @@ public class EnemySpawner : MonoBehaviour
                 }
                 nowWave = waveManager.curWave;
             }
-            StartCoroutine(EnemiesSpawn(pooledMeleeEnemies, MESpawnStartTime, MESpawnRate, MESpawnNumber, MESpawnGroupRadius));
-            StartCoroutine(EnemiesSpawn(pooledRangeEnemies, RESpawnStartTime, RESpawnRate, RESpawnNumber, RESpawnGroupRadius));
-            StartCoroutine(EnemiesSpawn(pooledHeavyEnemies, HESpawnStartTime, HESpawnRate, HESpawnNumber, HESpawnGroupRadius));
+            StartCoroutine(EnemiesSpawn(pooledMeleeEnemies, MESpawnStartTime, MESpawnRate, MESpawnNumber, MESpawnGroupRadius, MeleeEnemyPrefab));
+            StartCoroutine(EnemiesSpawn(pooledRangeEnemies, RESpawnStartTime, RESpawnRate, RESpawnNumber, RESpawnGroupRadius, RangeEnemyPrefab));
+            StartCoroutine(EnemiesSpawn(pooledHeavyEnemies, HESpawnStartTime, HESpawnRate, HESpawnNumber, HESpawnGroupRadius, HeavyEnemyPrefab));
 
 
 
@@ -178,7 +183,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
     // Spawn enemies and warning mark
-    private IEnumerator EnemiesSpawn(List<GameObject> enemyPoolList, float spawnStartTime, float spawnRate, int spawnNumber, float spawnGroupRadius)
+    private IEnumerator EnemiesSpawn(List<GameObject> enemyPoolList, float spawnStartTime, float spawnRate, int spawnNumber, float spawnGroupRadius, GameObject enemyPrefab)
     {
         yield return new WaitForSeconds(spawnStartTime);
         while (Spawning && !GameOver)
@@ -202,7 +207,7 @@ public class EnemySpawner : MonoBehaviour
                 Vector2 limitSpawnPosition = new Vector2(finalSpawnPosition.x, finalSpawnPosition.y);
                 spawnPositions.Add(limitSpawnPosition);
 
-                var warnMark = GetPooledMark(pooledMark);
+                var warnMark = GetPooledMark(pooledMark, WarningPrefab);
                 if (warnMark != null)
                 {
                     warnMark.transform.position = limitSpawnPosition;
@@ -217,7 +222,7 @@ public class EnemySpawner : MonoBehaviour
 
             foreach (var position in spawnPositions)
             {
-                GameObject enemies = GetPooledEnemies(enemyPoolList);
+                GameObject enemies = GetPooledEnemies(enemyPoolList, enemyPrefab);
                 if (enemies != null)
                 {
                     enemies.transform.position = position;
@@ -260,11 +265,11 @@ public class EnemySpawner : MonoBehaviour
         Instantiate(boss, limitSpawnPosition, Quaternion.identity);
     }
 
-    private void PutMarkToPool(List<GameObject> poolList, GameObject enemyPrefab)
+    private void PutMarkToPool(List<GameObject> poolList, GameObject mark)
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 20; i++)
         {
-            var tmp = Instantiate(enemyPrefab);
+            var tmp = Instantiate(mark);
             tmp.transform.parent = warningMarkPoolZone;
             tmp.SetActive(false);
             poolList.Add(tmp);
@@ -272,7 +277,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
     // Get bullet from pooling list
-    public GameObject GetPooledMark(List<GameObject> poolList)
+    public GameObject GetPooledMark(List<GameObject> poolList, GameObject mark)
     {
         for (int i = 0; i < poolList.Count; i++)
         {
@@ -281,7 +286,12 @@ public class EnemySpawner : MonoBehaviour
                 return poolList[i];
             }
         }
-        return null;
+        var newMark = Instantiate(mark);
+        newMark.transform.parent = warningMarkPoolZone;
+        newMark.SetActive(false);
+        poolList.Add(newMark);
+
+        return newMark;
     }
 
     [Button]

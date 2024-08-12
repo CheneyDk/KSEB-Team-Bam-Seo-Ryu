@@ -79,8 +79,12 @@ public class Player : MonoBehaviour
 
     private AudioManager audioManager;
 
+    private AudioSource audioSource;
+    public AudioClip levelUpClip;
+
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         playAnimator = GetComponent<Animator>();
         material = GetComponent<Renderer>().material;
         playerCollider = GetComponent<Collider2D>();
@@ -283,6 +287,7 @@ public class Player : MonoBehaviour
     public void PlayerLevelUp()
     {
         playerLevel += 1;
+        audioSource.PlayOneShot(levelUpClip);
         // LevelUp func needed // from GM
         playerCurExp -= playerMaxExp;
         playerMaxExp += 5;

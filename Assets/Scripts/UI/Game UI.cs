@@ -14,11 +14,11 @@ public class GameUI : MonoBehaviour
 
     [Header("Bar")]
     [SerializeField]
-    private Slider healthBar;
+    private GameObject[] healthBar;
     [SerializeField]
     private TextMeshProUGUI healthText;
     [SerializeField]
-    private Slider expBar;
+    private GameObject[] expBar;
     [SerializeField]
     private TextMeshProUGUI expText;
 
@@ -40,19 +40,53 @@ public class GameUI : MonoBehaviour
 
     private void Awake()
     {
-        waveNumber.text = "WAVE : " + waveManager.curWave.ToString();
-        waveTimer.text = waveManager.time.ToString("N0");
-        healthBar.value = healthBar.maxValue;
+        UpdateNumber();
     }
 
     private void Update()
     {
+        UpdateNumber();
+        ChangeHPBar();
+        ChangeEXPBar();
+    }
+
+    private void UpdateNumber()
+    {
         waveNumber.text = "WAVE : " + waveManager.curWave.ToString();
         waveTimer.text = waveManager.time.ToString("N0");
-        healthText.text = player.playerCurHp.ToString("N0") + " / " + player.playerMaxHp.ToString("N0");
-        expText.text = player.playerCurExp.ToString("N0") + " / " + player.playerMaxExp.ToString("N0");
-        healthBar.value = healthBar.maxValue * (player.playerCurHp / player.playerMaxHp);
-        expBar.value = expBar.maxValue * (player.playerCurExp / player.playerMaxExp);
+        healthText.text = ($"{player.playerCurHp.ToString("N0")}GB free of {player.playerMaxExp}GB");
+        expText.text = ($"{player.playerCurExp}BTC free of {player.playerMaxExp}BTC");
+    }
+
+    public void ChangeHPBar()
+    {
+        float maxHp = player.playerMaxHp;
+        float curHp = player.playerCurHp;
+
+        float hpPerBar = maxHp / healthBar.Length;
+
+        int activeBars = Mathf.CeilToInt(curHp / hpPerBar);
+
+        for (int i = 0; i < healthBar.Length; i++)
+        {
+            healthBar[i].SetActive(i < activeBars);
+        }
+    }
+
+
+    public void ChangeEXPBar()
+    {
+        float maxExp = player.playerMaxExp;
+        float curExp = player.playerCurExp;
+
+        float expPerBar = maxExp / expBar.Length;
+
+        int activeBars = Mathf.CeilToInt(curExp / expPerBar);
+
+        for (int i = 0; i < expBar.Length; i++)
+        {
+            expBar[i].SetActive(i < activeBars);
+        }
     }
 
     public void WeaponIconList(List<WeaponData> dataList)

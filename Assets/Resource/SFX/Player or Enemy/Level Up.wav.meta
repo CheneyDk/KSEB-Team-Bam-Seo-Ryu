@@ -1,12 +1,6 @@
 fileFormatVersion: 2
-guid: 7bd6b897eb5ca4b7d88a205c4a51640c
-labels:
-- Audio
-- Casual
-- Sound
-- SFX
-- Effect
-timeCreated: 1453238766
+guid: 948ac9103cbdd6a4a907586cf7fa10a7
+timeCreated: 1500469447
 licenseType: Store
 AudioImporter:
   serializedVersion: 6

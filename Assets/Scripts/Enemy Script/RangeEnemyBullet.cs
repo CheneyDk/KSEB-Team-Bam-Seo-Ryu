@@ -15,10 +15,7 @@ public class RangeEnemyBullet : MonoBehaviour
     private void OnEnable()
     {
         StartCoroutine(BulletTime());
-    }
 
-    private void Start()
-    {
         player = FindAnyObjectByType<Player>();
 
         direction = (player.transform.position - transform.position).normalized;

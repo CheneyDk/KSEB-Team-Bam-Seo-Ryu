@@ -16,8 +16,13 @@ public class WaveManager : MonoBehaviour
 
     private EnemySpawner enemySpawner;
 
+    private AudioSource audioSource;
+    public AudioClip waveEndClip;
+
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
         time = waveTime;
         enemySpawner = GetComponent<EnemySpawner>();
         if (enemySpawner == null)
@@ -68,6 +73,7 @@ public class WaveManager : MonoBehaviour
 
     private void DestroyAllEnemies()
     {
+        audioSource.PlayOneShot(waveEndClip);
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         GameObject[] bullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
         GameObject[] warning = GameObject.FindGameObjectsWithTag("Warning Mark");

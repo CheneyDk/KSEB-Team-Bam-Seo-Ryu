@@ -217,7 +217,8 @@ public class MeleeEnemy : Enemy
     private void ChangeEnemyState(float num)
     {
         MeleeEnemyCurHP = MeleeEnemyMaxHp * num;
-        MeleeEnemyCurAtk = MeleeEnemyAtk * num; 
-        originColor += (num - 1) * new Color(0, -0.1f, -0.1f);
+        MeleeEnemyCurAtk = MeleeEnemyAtk * num;
+        originColor += ((num - 1) / 0.5f) * new Color(0, -0.1f, -0.1f);
+        curSR.color = originColor;
     }
 }
