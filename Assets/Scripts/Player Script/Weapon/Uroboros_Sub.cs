@@ -77,27 +77,33 @@ public class Uroboros_Sub : PlayerWeapon
 
                 var bulletMidFront = Instantiate(bulletPowerFront, midFront, muzzleMidFront.rotation);
                 bulletMidFront.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage) * 0.5f, critOccur);
+                bulletMidFront.transform.parent = player.transform;
 
                 var bulletMidBack = Instantiate(bulletPowerBack, midBack, muzzleMidBack.rotation);
                 bulletMidBack.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage) * 0.5f, critOccur);
+                bulletMidBack.transform.parent = player.transform;
 
                 Vector3 topFront = muzzleTopFront.position + muzzleTopFront.right * 3f - muzzleTopFront.up * 2;
                 Vector3 topBack = muzzleTopBack.position - muzzleTopBack.right * 3f + muzzleTopBack.up * 2; ;
 
-                var topFrontBullet = Instantiate(bulletPowerFront, topFront, muzzleTopFront.rotation);
-                topFrontBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage) * 0.5f, critOccur);
+                var bulletTopFront = Instantiate(bulletPowerFront, topFront, muzzleTopFront.rotation);
+                bulletTopFront.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage) * 0.5f, critOccur);
+                bulletTopFront.transform.parent = player.transform;
 
-                var topBackBullet = Instantiate(bulletPowerBack, topBack, muzzleTopBack.rotation);
-                topBackBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage) * 0.5f, critOccur);
+                var bulletTopBack = Instantiate(bulletPowerBack, topBack, muzzleTopBack.rotation);
+                bulletTopBack.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage) * 0.5f, critOccur);
+                bulletTopBack.transform.parent = player.transform;
 
                 Vector3 botFront = muzzleBotFront.position + muzzleBotFront.right * 2.5f;
                 Vector3 botBack = muzzleBotBack.position - muzzleBotBack.right * 2.5f;
 
-                var botFrontBullet = Instantiate(bulletPowerFront, botFront, muzzleBotFront.rotation);
-                botFrontBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage) * 0.5f, critOccur);
+                var bulletBotFront = Instantiate(bulletPowerFront, botFront, muzzleBotFront.rotation);
+                bulletBotFront.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage) * 0.5f, critOccur);
+                bulletBotFront.transform.parent = player.transform;
 
-                var botBackBullet = Instantiate(bulletPowerBack, botBack, muzzleBotBack.rotation);
-                botBackBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage) * 0.5f, critOccur);
+                var bulletBotBack = Instantiate(bulletPowerBack, botBack, muzzleBotBack.rotation);
+                bulletBotBack.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage) * 0.5f, critOccur);
+                bulletBotBack.transform.parent = player.transform;
             }
 
             else
@@ -107,9 +113,11 @@ public class Uroboros_Sub : PlayerWeapon
 
                 var bulletMidFront = Instantiate(bulletFront, midFront, muzzleMidFront.rotation);
                 bulletMidFront.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
+                bulletMidFront.transform.parent = player.transform;
 
                 var bulletMidBack = Instantiate(bulletBack, midBack, muzzleMidBack.rotation);
                 bulletMidBack.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
+                bulletMidBack.transform.parent = player.transform;
             }
 
             await UniTask.WaitForSeconds(weaponFireRate / player.playerAtkSpeed, cancellationToken: cancelFire.Token);
