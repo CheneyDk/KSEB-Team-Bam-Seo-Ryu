@@ -10,11 +10,11 @@ public class PytorchBullet : PlayerBullet
     private float bulletTimer;
     private Vector2 bulletRiseVector = Vector2.up;
     private float bulletInitSpeed = 100f;
-    private float bulletRiseTime = 0.5f;
+    private float bulletRiseTime;
 
     // bullet fall vars
     private Vector2 bulletFallVector;
-    private float bulletFallTime = 0.5f;
+    private float bulletFallTime;
     private float bulletExplodeRange; // physics2d overlap circle needed
 
     private Vector2 targetPos;
@@ -30,14 +30,16 @@ public class PytorchBullet : PlayerBullet
     public ParticleSystem particle;
     private SpriteRenderer spriteRenderer;
 
-    private void OnEnable()
-    {
-        isDestroyed = false;
-    }
-
-    private void Start()
+    private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void OnEnable()
+    {
+        bulletRiseTime = 0.5f;
+        bulletFallTime = 0.5f;
+        isDestroyed = false;
         BulletOrbit().Forget();
     }
 

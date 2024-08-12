@@ -20,15 +20,17 @@ public abstract class PlayerBullet : MonoBehaviour
 
     [SerializeField] protected BulletPool bulletPool;
 
+    protected bool isInited = false;
+
     // YH - call Init func in Start func
 
     public void Init(float damage, int crit, Vector3 pos, Quaternion rot, BulletPool pool)
     {
         bulletDamage = damage;
         critOccur = crit;
-        transform.position = pos;
-        transform.rotation = rot;
+        transform.SetPositionAndRotation(pos, rot);
         bulletPool = pool;
+        isInited = true;
     }
 
     // if stay triggered, give damage

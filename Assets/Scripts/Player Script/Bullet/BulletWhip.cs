@@ -8,10 +8,17 @@ public class BulletWhip : PlayerBullet
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
 
-    private void Start()
+    private void Awake()
     {
         bulletLifeTime = 0.3f;
+    }
+    private void OnEnable()
+    {
+        StartFadeOut();
+    }
 
+    private void Start()
+    {
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
@@ -20,9 +27,7 @@ public class BulletWhip : PlayerBullet
         else
         {
             Debug.LogError("SpriteRenderer component not found on the GameObject.");
-        }
-
-        StartFadeOut();
+        } 
     }
 
     private void Update()

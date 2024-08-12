@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6000383902930882699}
   m_Layer: 0
   m_Name: InternetBulletPool
-  m_TagString: Untagged
+  m_TagString: PlayerBulletPool
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 5295338718600896418, guid: 2906ba70b2b603542adafe91addc01ec, type: 3}
-  poolSize: 5
+  poolSize: 3

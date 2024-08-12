@@ -7,6 +7,8 @@ public class USBWeapon : PlayerWeapon
 {
     public float fireRate = 3.5f;
 
+    private Transform parent;
+
     void Start()
     {
         Fire();
@@ -15,6 +17,16 @@ public class USBWeapon : PlayerWeapon
         isMaxLevel = false;
         isPowerWeapon = false;
         matchPassive = "BlueTooth";
+
+        parent = GameObject.FindWithTag("PlayerBulletPool").transform;
+        InitPool();
+    }
+
+    private void InitPool()
+    {
+        var tempPool = Instantiate(bulletPoolObj, Vector3.zero, Quaternion.identity);
+        tempPool.transform.parent = parent;
+        bulletPool = tempPool.GetComponent<BulletPool>();
     }
 
     IEnumerator FireBullet()

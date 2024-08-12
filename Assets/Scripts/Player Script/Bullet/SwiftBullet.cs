@@ -20,19 +20,24 @@ public class SwiftBullet : PlayerBullet
 
     private WaitForSeconds waitForPush;
 
+
+    private void Awake()
+    {
+        bulletLifeTime = 10f;
+        waitForPush = new(bulletLifeTime);
+    }
+    private void OnEnable()
+    {
+        StartCoroutine(PushToPool());
+        elapsedTime = 0f;
+    }
+
     private void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
         bulletSpeed = 3f;
-        bulletLifeTime = 10f;
-        waitForPush = new(bulletLifeTime);
+        
     }
-
-    private void OnEnable()
-    {
-        StartCoroutine(PushToPool());
-    }
-
 
     private void Update()
     {

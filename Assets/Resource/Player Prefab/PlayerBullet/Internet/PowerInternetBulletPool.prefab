@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8005824079165239262}
   m_Layer: 0
   m_Name: PowerInternetBulletPool
-  m_TagString: Untagged
+  m_TagString: PlayerBulletPool
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 901424708731885982, guid: fdd893a35797e924885410e5a0ad15ef, type: 3}
-  poolSize: 5
+  poolSize: 3

@@ -10,7 +10,6 @@ public class FloppyDiskWeapon : PlayerWeapon
 
     void Start()
     {
-        Fire();
         weaponLevel = 1;
         weaponDamageRate = 1f;
         bulletNum = 1;
@@ -20,6 +19,8 @@ public class FloppyDiskWeapon : PlayerWeapon
 
         parent = GameObject.FindWithTag("PlayerBulletPool").transform;
         InitPool();
+
+        Fire();
     }
 
     private void InitPool()
@@ -30,7 +31,7 @@ public class FloppyDiskWeapon : PlayerWeapon
     }
 
         IEnumerator FireBullet()
-    {
+        {   
         int critOccur;
         float critDamage;
         while (true)

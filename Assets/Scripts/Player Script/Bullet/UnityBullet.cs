@@ -18,21 +18,27 @@ public class UnityBullet : PlayerBullet
 
     private WaitForSeconds waitForPush;
 
-    private void Start()
+    private void Awake()
     {
-        bulletSpeed = 5f;
         bulletLifeTime = 5f;
         waitForPush = new(bulletLifeTime);
-
-        Vector2 targetPosition = FindNearestEnemy();
-        
-        direction = (targetPosition - (Vector2)transform.position).normalized;
     }
 
     private void OnEnable()
     {
         StartCoroutine(PushToPool());
     }
+
+    private void Start()
+    {
+        bulletSpeed = 5f;
+        
+        Vector2 targetPosition = FindNearestEnemy();
+        
+        direction = (targetPosition - (Vector2)transform.position).normalized;
+    }
+
+    
 
     private void Update()
     {

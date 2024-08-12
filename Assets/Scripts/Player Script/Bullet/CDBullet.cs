@@ -23,12 +23,15 @@ public class CDBullet : PlayerBullet
 
     private BulletPool subBulletPool;
 
+    private void Awake()
+    {
+        bulletLifeTime = 7f;
+        waitForPush = new(bulletLifeTime);
+    }
+
     private void Start()
     {
         bulletSpeed = 5f;
-        bulletLifeTime = 7f;
-        waitForPush = new(bulletLifeTime);
-
         Vector2 targetPosition = MouseAim();
 
         direction = (targetPosition - (Vector2)transform.position).normalized;

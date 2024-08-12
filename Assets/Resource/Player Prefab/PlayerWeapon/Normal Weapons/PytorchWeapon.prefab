@@ -110,4 +110,4 @@ MonoBehaviour:
   powerWeaponSprite: {fileID: 1972222978, guid: 46037a3ed3e8f5041b49f1fa91f3d241, type: 3}
   bulletPoolObj: {fileID: 8884460861617551158, guid: 43e014db65f260144994121ca3701479, type: 3}
   pytorchFireInterval: 0
-  subBulletPoolObj: {fileID: 599657670075773915, guid: 82c6b44af550c284191b7ce884329376, type: 3}
+  subBulletPoolObj: {fileID: 9036186932846269834, guid: e53d0cf173da60d4e9fe972d7372eeb3, type: 3}

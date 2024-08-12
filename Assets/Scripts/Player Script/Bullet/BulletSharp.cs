@@ -14,16 +14,20 @@ public class BulletSharp : PlayerBullet
 
     private WaitForSeconds waitForPush;
 
+    private void Awake()
+    {
+        bulletLifeTime = 1.5f;
+        waitForPush = new WaitForSeconds(bulletLifeTime);
+    }
 
     private void Start()
     {
         // go straight
         bulletVector = Vector2.right;
         bulletSpeed = 70f;
-        bulletLifeTime = 1.5f;
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioManager = FindObjectOfType<AudioManager>();
-        waitForPush = new WaitForSeconds(bulletLifeTime);
+        
 
         PowerSprite();
     }

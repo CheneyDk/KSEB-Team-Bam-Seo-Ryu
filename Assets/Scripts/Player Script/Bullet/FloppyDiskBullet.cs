@@ -19,31 +19,24 @@ public class FloppyDiskwBullet : PlayerBullet
 
     private Transform parent;
 
+    private void Awake()
+    {
+        bulletLifeTime = 5f;
+        waitForPush = new WaitForSeconds(bulletLifeTime);
+    }
+
     private void Start()
     {
         bulletSpeed = 5f;
-        bulletLifeTime = 5f;
-
+        
         Vector2 targetPosition = FindNearestEnemy();
 
         direction = (targetPosition - (Vector2)transform.position).normalized;
-        waitForPush = new WaitForSeconds(bulletLifeTime);
-
-        parent = GameObject.FindWithTag("PlayerBulletPool").transform;
-        InitPool();
-
-        
     }
+
     private void OnEnable()
     {
         StartCoroutine(PushToPool());
-    }
-
-    private void InitPool()
-    {
-        var tempPool = Instantiate(bulletPool, Vector3.zero, Quaternion.identity);
-        tempPool.transform.parent = parent;
-        bulletPool = tempPool.GetComponent<BulletPool>();
     }
 
     private IEnumerator PushToPool()

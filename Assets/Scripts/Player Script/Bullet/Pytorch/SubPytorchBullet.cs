@@ -10,9 +10,13 @@ public class SubPytorchBullet : PlayerBullet
     void Start()
     {
         bulletVector = Vector2.down;
+        bulletSpeed = 10f; 
+    }
+
+    private void Awake()
+    {
         bulletLifeTime = 3f;
-        bulletSpeed = 10f;
-        waitForPush = new WaitForSeconds(bulletLifeTime);  
+        waitForPush = new WaitForSeconds(bulletLifeTime);
     }
 
     private void OnEnable()

@@ -99,7 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 0
+  bulletPool: {fileID: 0}
   subBullet: {fileID: 599657670075773915, guid: 82c6b44af550c284191b7ce884329376, type: 3}
+  subBulletPool: {fileID: 0}
   particle: {fileID: 2252413664233768104}
 --- !u!1001 &2252413664215554920
 PrefabInstance:

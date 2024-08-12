@@ -16,16 +16,19 @@ public class USBBullet : PlayerBullet
 
     private WaitForSeconds waitForPush;
 
-    private void Start()
+    private void Awake()
     {
-        bulletSpeed = 20f;
         bulletLifeTime = 2f;
         waitForPush = new WaitForSeconds(bulletLifeTime);
     }
-
     private void OnEnable()
     {
         StartCoroutine(PushToPool());
+    }
+
+    private void Start()
+    {
+        bulletSpeed = 20f;
     }
 
     private void Update()

@@ -12,12 +12,17 @@ public class BulletInternet : PlayerBullet
 
     private WaitForSeconds waitForPush;
 
-    void Start()
+    private void Awake()
     {
         bulletLifeTime = 8f;
+        waitForPush = new WaitForSeconds(bulletLifeTime);
+    }
+
+    void Start()
+    {
+        
         bulletSpeed = 5f;
         bulletRadius = 20f;
-        waitForPush = new WaitForSeconds(bulletLifeTime);
 
         damageTimer = dotDamageTimeInterval;
 

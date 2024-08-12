@@ -31,9 +31,9 @@ public abstract class PlayerWeapon : MonoBehaviour // abstract class·Î ÀüÈ¯! + ¾
     public Sprite normalWeaponSprite;
     public Sprite powerWeaponSprite;
 
+    // bullet Pool
     [SerializeField] protected GameObject bulletPoolObj;
     protected BulletPool bulletPool;
-
 
     private void Awake()
     {
@@ -48,7 +48,7 @@ public abstract class PlayerWeapon : MonoBehaviour // abstract class·Î ÀüÈ¯! + ¾
     // Upgrade func
     public abstract void Upgrade();
 
-    protected int IsCritOccur(float prob)
+    protected int IsCritOccur(int prob)
     {
         int chance = Random.Range(0, 100);
         if (chance > prob)

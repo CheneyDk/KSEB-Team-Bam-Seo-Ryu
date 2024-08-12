@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 599657670075773915, guid: 82c6b44af550c284191b7ce884329376, type: 3}
-  poolSize: 200
+  poolSize: 100

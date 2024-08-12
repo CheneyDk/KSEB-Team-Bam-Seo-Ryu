@@ -44,6 +44,7 @@ public class WeaponSharp : PlayerWeapon
         // Upgrade(); // YH ; activate after merge
         PowerWeaponSpriteChange();
     }
+
     private void InitPool()
     {
         var tempPool = Instantiate(bulletPoolObj, Vector3.zero, Quaternion.identity);

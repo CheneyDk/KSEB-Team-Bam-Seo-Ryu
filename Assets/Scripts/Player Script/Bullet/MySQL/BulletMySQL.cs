@@ -16,31 +16,39 @@ public class BulletMySQL : PlayerBullet
     // flags
     private bool isDestroy;
 
-    private void Start()
+    private void Awake()
     {
-        SQLVector = new Vector2(Random.Range(-0.5f, -3f), Random.Range(2f, 4f));
         rigid = GetComponent<Rigidbody2D>();
-        bulletVector = transform.TransformDirection(SQLVector);
-
-        // throw in parabola (Æ÷¹°¼±)
-
         bulletLifeTime = 5f;
-
-        // bullet move
-        rigid.AddForce(bulletVector * bulletSpeed, ForceMode2D.Impulse);
-
-        // rotation
-        DolphineRotate().Forget();
-
-        // Destroy
-        ObjDestroyTimer().Forget();
+        bulletSpeed = 1f;
     }
 
     private void OnEnable()
     {
+        rigid.simulated = true;
+        rigid.velocity = Vector2.zero;
+        rotateSpeed = Random.Range(0.8f, 1.2f);
+        
+        waitInitAndAddForce().Forget();
+
         isDestroy = false;
-        transform.rotation = Quaternion.identity;
+        // Pooling
+        ObjPoolingTimer().Forget();
     }
+
+    private async UniTask waitInitAndAddForce()
+    {
+        await UniTask.WaitUntil(() => isInited);
+        SQLVector = new Vector2(Random.Range(-2f, -4f), Random.Range(10f, 12f));
+        bulletVector = transform.TransformDirection(SQLVector);
+
+        DolphineRotate().Forget();
+
+        // bullet move
+        rigid.AddForce(bulletVector * bulletSpeed * 50f);
+    }
+
+    // private void Start(){}
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
@@ -67,12 +75,18 @@ public class BulletMySQL : PlayerBullet
         }
     }
 
-    private async UniTask ObjDestroyTimer()
+    private async UniTask ObjPoolingTimer()
     {
         await UniTask.WaitForSeconds(bulletLifeTime);
         if(isDestroy) return;
         isDestroy = true;
         bulletPool.SetObj(this);
+    }
+
+    private void OnDisable()
+    {
+        rigid.simulated = false;
+        isDestroy = true;
     }
 
     private void OnDestroy()

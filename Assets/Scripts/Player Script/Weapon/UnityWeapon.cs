@@ -6,6 +6,8 @@ public class UnityWeapon : PlayerWeapon
 {
     public float fireRate = 3f;
 
+    private Transform parent;
+
     void Start()
     {
         Fire();
@@ -14,6 +16,16 @@ public class UnityWeapon : PlayerWeapon
         isMaxLevel = false;
         isPowerWeapon = false;
         matchPassive = "GPU";
+
+        parent = GameObject.FindWithTag("PlayerBulletPool").transform;
+        InitPool();
+    }
+
+    private void InitPool()
+    {
+        var tempPool = Instantiate(bulletPoolObj, Vector3.zero, Quaternion.identity);
+        tempPool.transform.parent = parent;
+        bulletPool = tempPool.GetComponent<BulletPool>();
     }
 
     IEnumerator FireBullet()

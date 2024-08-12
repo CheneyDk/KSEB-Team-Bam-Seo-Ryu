@@ -110,4 +110,4 @@ MonoBehaviour:
   powerWeaponSprite: {fileID: -410068970, guid: 536315ee559dada408388d66c4b2aa7f, type: 3}
   bulletPoolObj: {fileID: 2568068554070931748, guid: 2df596448ca78c64ba1f73ad2c794ebd, type: 3}
   powerBullet: {fileID: 901424708731885982, guid: fdd893a35797e924885410e5a0ad15ef, type: 3}
-  powerBulletPool: {fileID: 8005824079165239262, guid: 0d4973f40f9e4ab409e973fae2f8444c, type: 3}
+  powerBulletPoolObj: {fileID: 7933943917167852596, guid: 0d4973f40f9e4ab409e973fae2f8444c, type: 3}

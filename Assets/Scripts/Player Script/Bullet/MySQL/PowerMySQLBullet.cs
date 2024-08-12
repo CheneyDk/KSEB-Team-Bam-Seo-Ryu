@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PowerMySQLBullet : PlayerBullet
@@ -15,33 +16,40 @@ public class PowerMySQLBullet : PlayerBullet
     // flags
     private bool isDestroyed;
 
-    private void Start()
+    private void Awake()
     {
-        rotateSpeed = Random.Range(0.8f, 1.2f);
-        SQLVector = new Vector2(Random.Range(-3f, -10f), Random.Range(22f, 25f));
-        rigid = GetComponent<Rigidbody2D>();
-        bulletVector = transform.TransformDirection(SQLVector);
-        bulletSpeed = 1f;
-
-        // throw in parabola (Æ÷¹°¼±)
-
         bulletLifeTime = 5f;
-
-        // bullet move
-        rigid.AddForce(bulletVector * bulletSpeed, ForceMode2D.Impulse);
-
-        // rotation
-        DolphineRotate().Forget();
-
-        // Destroy
-        ObjDestroyTimer().Forget();
+        bulletSpeed = 1f;
+        rigid = GetComponent<Rigidbody2D>();
     }
+
+    // private void Start(){}
 
     private void OnEnable()
     {
+        rigid.velocity = Vector2.zero;
+        rotateSpeed = Random.Range(0.8f, 1.2f);
+
+        waitInitAndAddForce().Forget();
+
         isDestroyed = false;
-        transform.rotation = Quaternion.identity;
+        // Pooling
+        ObjPoolingTimer().Forget();
     }
+
+    private async UniTask waitInitAndAddForce()
+    {
+        await UniTask.WaitUntil(() => isInited);
+        SQLVector = new Vector2(Random.Range(-3f, -10f), Random.Range(22f, 25f));
+        bulletVector = transform.TransformDirection(SQLVector);
+
+        DolphineRotate().Forget();
+
+        // bullet move
+        rigid.AddForce(bulletVector * bulletSpeed, ForceMode2D.Impulse);
+    }
+
+
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
@@ -68,11 +76,19 @@ public class PowerMySQLBullet : PlayerBullet
         }
     }
 
-    private async UniTask ObjDestroyTimer()
+    private async UniTask ObjPoolingTimer()
     {
         await UniTask.WaitForSeconds(bulletLifeTime);
+        if (isDestroyed)
+        {
+            return;
+        }
+        bulletPool.SetObj(this);
+    }
+
+    private void OnDisable()
+    {
         isDestroyed = true;
-        Destroy(gameObject);
     }
 
     private void OnDestroy()

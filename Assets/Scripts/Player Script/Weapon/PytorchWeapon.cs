@@ -106,7 +106,7 @@ public class PytorchWeapon : PlayerWeapon
 
                 critOccur = IsCritOccur(player.playerCritPer);
                 critDamage = player.playerCritDmg * critOccur;
-                var tempBullet = subBulletPool.GetBullet();
+                var tempBullet = bulletPool.GetBullet();
                 // var tempBullet = Instantiate(bullet, transform.position, Quaternion.identity);
                 tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
                     transform.position, Quaternion.identity, bulletPool);

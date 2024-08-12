@@ -7,11 +7,14 @@ using UnityEngine.InputSystem;
 public class WeaponMySQL : PlayerWeapon
 {
     private float bulletFireInterval = 0.5f;
-    private Quaternion rotateRight = new(0f, 180f, 0f, 1f);
-    private Quaternion rotateLeft = new(0f, 0f, 0f, 1f);
+    private Quaternion rotateRight;
+    private Quaternion rotateLeft;
     public GameObject powerBullet;
+    
+    private Transform parent;
+    private BulletPool powerBulletPool;
+    [SerializeField] private GameObject powerBulletPoolObj;
 
-    [SerializeField] private BulletPool powerBulletPool;
     private void Start()
     {
         // init stats
@@ -21,11 +24,27 @@ public class WeaponMySQL : PlayerWeapon
         weaponLevel = 1;
         isPowerWeapon = false;
         matchPassive = "Overclock";
-            
+
+        rotateRight = Quaternion.Euler(0f, 180f, 0f);
+        rotateLeft = Quaternion.Euler(0f, 0f, 0f);
+
         // player can fire imediately
         fireRateTimer = weaponFireRate;
 
         muzzle = GameObject.FindGameObjectWithTag("Player").transform;
+
+        parent = GameObject.FindWithTag("PlayerBulletPool").transform;
+        InitPool();
+    }
+
+    private void InitPool()
+    {
+        var tempPool = Instantiate(bulletPoolObj, Vector3.zero, Quaternion.identity);
+        tempPool.transform.parent = parent;
+        bulletPool = tempPool.GetComponent<BulletPool>();
+        tempPool = Instantiate(powerBulletPoolObj, Vector3.zero, Quaternion.identity);
+        tempPool.transform.parent = parent;
+        powerBulletPool = tempPool.GetComponent<BulletPool>();
     }
 
     private void Update()
@@ -61,10 +80,10 @@ public class WeaponMySQL : PlayerWeapon
                     critDamage = player.playerCritDmg * critOccur;
                     var tempBulletRight = powerBulletPool.GetBullet();
                     tempBulletRight.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
-                        player.transform.position, rotateRight, bulletPool);
+                        player.transform.position, rotateRight, powerBulletPool);
                     var tempBulletLeft = powerBulletPool.GetBullet();
                     tempBulletLeft.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
-                        player.transform.position, rotateLeft, bulletPool);
+                        player.transform.position, rotateLeft, powerBulletPool);
                 }
 
                 await UniTask.WaitForSeconds(bulletFireInterval); // 0.5f

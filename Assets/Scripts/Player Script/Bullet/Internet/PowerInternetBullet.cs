@@ -17,7 +17,11 @@ public class PowerInternetBulllet : PlayerBullet
 
     private WaitForSeconds waitForPush;
 
-    
+    private void Awake()
+    {
+        bulletLifeTime = 8f;
+        waitForPush = new WaitForSeconds(bulletLifeTime);
+    }
 
     private void OnEnable()
     {
@@ -28,9 +32,7 @@ public class PowerInternetBulllet : PlayerBullet
 
     void Start()
     {
-        bulletLifeTime = 8f;
         bulletSpeed = 5f;
-
 
         radiusBiggerRate = 0.5f;
         additionalRadius = 10f;
@@ -39,7 +41,7 @@ public class PowerInternetBulllet : PlayerBullet
 
         damageTimer = dotDamageTimeInterval;
 
-        waitForPush = new WaitForSeconds(bulletLifeTime);
+        
 
         bulletBiggerSize = new(bulletRadius, bulletRadius, 0f);
     }

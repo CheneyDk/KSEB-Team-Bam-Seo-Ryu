@@ -15,14 +15,17 @@ public class MiniCD : PlayerBullet
 
     private WaitForSeconds waitForPush;
 
+    private void Awake()
+    {
+        bulletLifeTime = 2f;
+        waitForPush = new(bulletLifeTime);
+    }
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-        bulletLifeTime = 2f;
-        waitForPush = new(bulletLifeTime);
 
         int chance = Random.Range(0, 100);
         if (chance > player.playerCritPer)
