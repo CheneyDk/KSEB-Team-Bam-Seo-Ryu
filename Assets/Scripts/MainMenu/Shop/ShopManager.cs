@@ -16,7 +16,7 @@ public class ShopManager : MonoBehaviour
 
     private List<(string, int)> itemList = new List<(string, int)>
     {
-        ("Mouse", 0),
+        ("Mouse", 500),
         ("Shield", 500),
         ("Elixir", 500),
         ("Pytorch", 500),

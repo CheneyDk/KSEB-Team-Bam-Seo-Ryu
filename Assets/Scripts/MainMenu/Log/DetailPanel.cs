@@ -24,7 +24,7 @@ public class DetailPanel : MonoBehaviour
         damage.text = ((int)data.totalDamage).ToString();
         dateTime.text = data.playDateTime.ToString();
 
-        int idx = 4;
+        int idx = setters.Length - 1;
         while (idx != 0)
         {
             setters[idx--].ResetAll();
