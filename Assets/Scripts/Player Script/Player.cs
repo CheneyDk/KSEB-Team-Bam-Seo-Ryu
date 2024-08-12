@@ -248,6 +248,11 @@ public class Player : MonoBehaviour
         playerCurHp -= damage;
         if (playerCurHp <= 0)
         {
+            if (ScoreManager.instance.recordData.isPet)
+            {
+                ScoreManager.instance.AddWeapon("Pet");
+                ScoreManager.instance.UpdateDamage("Pet", ScoreManager.instance.GetPetDamage());
+            }
             //Destroy(gameObject); // player destroy
             //gameObject.SetActive(false); // player obj disable
             GameManager.Instance.SetPlayerDead();

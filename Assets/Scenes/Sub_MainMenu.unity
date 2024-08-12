@@ -18071,34 +18071,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 125061004}
-    - target: {fileID: 193493006474324218, guid: c5dd0a6252b00b846944a46772370139, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenPanel
-      objectReference: {fileID: 0}
     - target: {fileID: 884247252326469732, guid: c5dd0a6252b00b846944a46772370139, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 125061004}
-    - target: {fileID: 884247252326469732, guid: c5dd0a6252b00b846944a46772370139, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ClosePanel
-      objectReference: {fileID: 0}
     - target: {fileID: 1157012929472133793, guid: c5dd0a6252b00b846944a46772370139, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 125061004}
-    - target: {fileID: 1157012929472133793, guid: c5dd0a6252b00b846944a46772370139, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenPanel
-      objectReference: {fileID: 0}
     - target: {fileID: 1252885257456073516, guid: c5dd0a6252b00b846944a46772370139, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 125061004}
-    - target: {fileID: 1252885257456073516, guid: c5dd0a6252b00b846944a46772370139, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenPanel
-      objectReference: {fileID: 0}
     - target: {fileID: 1570101952812848595, guid: c5dd0a6252b00b846944a46772370139, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -18107,62 +18091,30 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 125061004}
-    - target: {fileID: 1570101952812848595, guid: c5dd0a6252b00b846944a46772370139, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ClosePanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 1570101952812848595, guid: c5dd0a6252b00b846944a46772370139, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ClosePanel
-      objectReference: {fileID: 0}
     - target: {fileID: 1590056585351152224, guid: c5dd0a6252b00b846944a46772370139, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 125061004}
-    - target: {fileID: 1590056585351152224, guid: c5dd0a6252b00b846944a46772370139, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenPanel
-      objectReference: {fileID: 0}
     - target: {fileID: 2043250607168789360, guid: c5dd0a6252b00b846944a46772370139, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 125061004}
-    - target: {fileID: 2043250607168789360, guid: c5dd0a6252b00b846944a46772370139, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenPanel
-      objectReference: {fileID: 0}
     - target: {fileID: 3364998033075689520, guid: c5dd0a6252b00b846944a46772370139, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 125061004}
-    - target: {fileID: 3364998033075689520, guid: c5dd0a6252b00b846944a46772370139, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenPanel
-      objectReference: {fileID: 0}
     - target: {fileID: 3509228190405932572, guid: c5dd0a6252b00b846944a46772370139, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 125061004}
-    - target: {fileID: 3509228190405932572, guid: c5dd0a6252b00b846944a46772370139, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenPanel
-      objectReference: {fileID: 0}
     - target: {fileID: 3567295736282168906, guid: c5dd0a6252b00b846944a46772370139, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 125061004}
-    - target: {fileID: 3567295736282168906, guid: c5dd0a6252b00b846944a46772370139, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenPanel
-      objectReference: {fileID: 0}
     - target: {fileID: 4802881303109351195, guid: c5dd0a6252b00b846944a46772370139, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 125061004}
-    - target: {fileID: 4802881303109351195, guid: c5dd0a6252b00b846944a46772370139, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenPanel
-      objectReference: {fileID: 0}
     - target: {fileID: 6505980864327296140, guid: c5dd0a6252b00b846944a46772370139, type: 3}
       propertyPath: m_Name
       value: LogPage
@@ -18171,10 +18123,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 125061004}
-    - target: {fileID: 7323787048113171482, guid: c5dd0a6252b00b846944a46772370139, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenPanel
-      objectReference: {fileID: 0}
     - target: {fileID: 7870619485549790237, guid: c5dd0a6252b00b846944a46772370139, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

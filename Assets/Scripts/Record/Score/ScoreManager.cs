@@ -27,8 +27,8 @@ public class ScoreManager : MonoBehaviour
         {"LogicErrorDeafeated",0 }
     };
 
-    //private DateTime timer;
     private float timer;
+    private float petDamage;
 
     private void Awake()
     {
@@ -112,6 +112,8 @@ public class ScoreManager : MonoBehaviour
         {
             scoreData.character = "C";
         }
+
+        petDamage = 0;
     }
 
     public void UpdateEnemiesDeafeated(string type)
@@ -132,6 +134,8 @@ public class ScoreManager : MonoBehaviour
         {
             total += kvp.Value;
         }
+
+        total += petDamage;
 
         return total;
     }
@@ -182,5 +186,15 @@ public class ScoreManager : MonoBehaviour
     public void GetMoney(int money)
     {
         recordData.money += money;
+    }
+
+    public void UpdatePetDamage(float dmg)
+    {
+        petDamage += dmg;
+    }
+
+    public float GetPetDamage()
+    {
+        return petDamage;
     }
 }
