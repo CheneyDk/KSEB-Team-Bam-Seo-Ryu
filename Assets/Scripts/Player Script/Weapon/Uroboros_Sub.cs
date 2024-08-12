@@ -24,6 +24,10 @@ public class Uroboros_Sub : PlayerWeapon
     public Transform muzzleBotFront;
     public Transform muzzleBotBack;
 
+    private Transform parent;
+    [SerializeField] private GameObject subBulletPoolObj;
+    private BulletPool subBulletPool;
+
     private void Start()
     {
         // init stats
@@ -36,6 +40,19 @@ public class Uroboros_Sub : PlayerWeapon
         fireRateTimer = weaponFireRate;
 
         isPowerWeapon = ScoreManager.instance.recordData.isPythonUpgrade;
+
+        parent = GameObject.FindWithTag("PlayerBulletPool").transform;
+        InitPool();
+    }
+
+    private void InitPool()
+    {
+        var tempPool = Instantiate(bulletPoolObj, Vector3.zero, Quaternion.identity);
+        tempPool.transform.parent = parent;
+        bulletPool = tempPool.GetComponent<BulletPool>();
+        tempPool = Instantiate(subBulletPoolObj, Vector3.zero, Quaternion.identity);
+        tempPool.transform.parent = parent;
+        subBulletPool = tempPool.GetComponent<BulletPool>();
     }
 
     private void Update()
