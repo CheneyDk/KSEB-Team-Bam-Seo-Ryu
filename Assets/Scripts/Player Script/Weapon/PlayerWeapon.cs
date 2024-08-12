@@ -18,11 +18,9 @@ public abstract class PlayerWeapon : MonoBehaviour // abstract class·Î ÀüÈ¯! + ¾
 
     // muzzle position
     public Transform muzzle;
-    public Transform muzzle_sub;
 
     // weapon's bullet
     public GameObject bullet;
-    public GameObject bullet_sub;
 
     // Player class
     protected Player player;
