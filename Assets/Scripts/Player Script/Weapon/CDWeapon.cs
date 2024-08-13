@@ -36,30 +36,31 @@ public class CDWeapon : PlayerWeapon
 
     IEnumerator FireBullet()
     {
+        int critOccur;
+        float critDamage;
         while (true)
         {
-            int critOccur;
-            float critDamage;
+            yield return new WaitForSeconds(fireRate);
             if (!isPowerWeapon)
-            {   critOccur = IsCritOccur(player.playerCritPer);
+            {   
+                critOccur = IsCritOccur(player.playerCritPer);
                 critDamage = player.playerCritDmg * critOccur;
-                bullet.GetComponent<PlayerBullet>().ChangeSprite(normalWeaponSprite);
-                yield return new WaitForSeconds(fireRate);
                 var addBullet = bulletPool.GetBullet();
+                addBullet.GetComponent<PlayerBullet>().ChangeSprite(normalWeaponSprite);
                 addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
                     player.transform.position, Quaternion.identity, bulletPool);
                 addBullet.GetComponent<CDBullet>().PassSubPool(subBulletPool);
             }
             else if(isPowerWeapon)
             {
-                critOccur = IsCritOccur(player.playerCritPer);
-                critDamage = player.playerCritDmg * critOccur;
-                bullet.GetComponent<PlayerBullet>().ChangeSprite(powerWeaponSprite);
-                yield return new WaitForSeconds(fireRate);
+                
                 for (int i = 0; i < 3; i++)
                 {
+                    critOccur = IsCritOccur(player.playerCritPer);
+                    critDamage = player.playerCritDmg * critOccur;
                     float angle = i * ((360f / 4f) + 30);
-                    var addBullet = bulletPool.GetBullet(); ;
+                    var addBullet = bulletPool.GetBullet();
+                    addBullet.GetComponent<PlayerBullet>().ChangeSprite(powerWeaponSprite);
                     addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
                         player.transform.position, Quaternion.identity, bulletPool);
                     addBullet.GetComponent<CDBullet>().PassSubPool(subBulletPool);

@@ -39,24 +39,24 @@ public class USBWeapon : PlayerWeapon
             critDamage = player.playerCritDmg * critOccur;
             if (!isPowerWeapon)
             {
-                bullet.GetComponent<PlayerBullet>().ChangeSprite(normalWeaponSprite);
                 yield return new WaitForSeconds(fireRate);
                 for (int i = 0; i < 10; i++)
                 {
                     float angle = i * (360f / 10f);
                     var addBullet = bulletPool.GetBullet();
+                    addBullet.GetComponent<PlayerBullet>().ChangeSprite(normalWeaponSprite);
                     addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
                         transform.position, Quaternion.Euler(0, 0, angle), bulletPool);
                 }
             }
             else if (isPowerWeapon)
             {
-                bullet.GetComponent<PlayerBullet>().ChangeSprite(powerWeaponSprite);
                 yield return new WaitForSeconds(fireRate);
                 for (int i = 0; i < 10; i++)
                 {
                     float angle = i * (360f / 10f);
                     var addBullet = bulletPool.GetBullet();
+                    addBullet.GetComponent<PlayerBullet>().ChangeSprite(powerWeaponSprite);
                     addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
                         transform.position, Quaternion.Euler(0, 0, angle), bulletPool);
                 }
