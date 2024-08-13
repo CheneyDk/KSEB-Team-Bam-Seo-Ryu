@@ -82,8 +82,6 @@ public class UpgradeManager : MonoBehaviour
         }
         foreach (var passive in passiveDataList)
         {
-            Debug.Log(passive.curDesc);
-            Debug.Log(passive.itemDesc);
             passive.ResetToNew();
         }
     }

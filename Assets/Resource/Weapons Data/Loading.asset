@@ -15,10 +15,12 @@ MonoBehaviour:
   item: {fileID: 4130909573271536976, guid: 2fa3e3b671da083498ed6a05cf86f0c7, type: 3}
   itemImage: {fileID: 21300028, guid: 0fd21678280ad9c47aa2d32baf438c5d, type: 3}
   itemName: Loading
-  itemDesc: '{ Loading }'
+  itemDesc: "{ damge = player.damage }\nif ( Upgrade ) \n{ damage *= 0.5f }"
   powerImage: {fileID: 21300020, guid: 0fd21678280ad9c47aa2d32baf438c5d, type: 3}
   powerName: Faster Loading
-  powerDesc: '{ Faster Loading }'
+  powerDesc: 'if ( Power Weapon )
+
+    { loadingSpeed *= 2f }'
   curImage: {fileID: 21300028, guid: 0fd21678280ad9c47aa2d32baf438c5d, type: 3}
   curName: Loading
   curDesc: '{ Loading }'

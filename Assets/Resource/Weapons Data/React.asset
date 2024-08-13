@@ -15,10 +15,17 @@ MonoBehaviour:
   item: {fileID: 8376047406226453956, guid: fd30e36239e1d634fa5d9ef51a8895f6, type: 3}
   itemImage: {fileID: 21300000, guid: ba0f76d775c69a7489f4f13b8b9a7934, type: 3}
   itemName: React
-  itemDesc: '{ React }'
+  itemDesc: '{ lastingDamage = player.damage x 0.5f }
+
+    if ( Upgrade )
+
+    {
+    lastingDamage *= 0.1f }'
   powerImage: {fileID: 21300000, guid: cdfa135136584514cbb16cbb4e63f09b, type: 3}
   powerName: Power React
-  powerDesc: '{ Power React }'
+  powerDesc: 'if ( Power Weapom )
+
+    { fireRate /= 2f }'
   curImage: {fileID: 21300000, guid: ba0f76d775c69a7489f4f13b8b9a7934, type: 3}
   curName: React
   curDesc: '{ React }'

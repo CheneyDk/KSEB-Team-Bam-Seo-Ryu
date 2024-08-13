@@ -54,7 +54,7 @@ public class GameUI : MonoBehaviour
     {
         waveNumber.text = "WAVE : " + waveManager.curWave.ToString();
         waveTimer.text = waveManager.time.ToString("N0");
-        healthText.text = ($"{player.playerCurHp.ToString("N0")}GB free of {player.playerMaxExp}GB");
+        healthText.text = ($"{player.playerCurHp.ToString("N0")}GB free of {player.playerMaxHp}GB");
         expText.text = ($"{player.playerCurExp}BTC free of {player.playerMaxExp}BTC");
     }
 

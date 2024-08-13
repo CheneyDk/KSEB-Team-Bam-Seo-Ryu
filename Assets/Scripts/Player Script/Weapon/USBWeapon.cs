@@ -57,7 +57,7 @@ public class USBWeapon : PlayerWeapon
                     float angle = i * (360f / 10f);
                     var addBullet = bulletPool.GetBullet();
                     addBullet.GetComponent<PlayerBullet>().ChangeSprite(powerWeaponSprite);
-                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                    addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * (1f + critDamage), critOccur,
                         transform.position, Quaternion.Euler(0, 0, angle), bulletPool);
                 }
             }

@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 0
+  bulletPool: {fileID: 0}
   range: 10
   spriteRenderer: {fileID: 8669492328101336911}
   swiftParticle: {fileID: 5050115586290090445, guid: 382161eb5da32514b93f0be652609a6b, type: 3}

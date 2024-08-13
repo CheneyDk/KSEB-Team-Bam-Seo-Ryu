@@ -15,10 +15,17 @@ MonoBehaviour:
   item: {fileID: 7833966774808615141, guid: 71578d8bf5a02f84b946f24c11862299, type: 3}
   itemImage: {fileID: 21300000, guid: 60cf3e33622e9fd4285b6455b6582f13, type: 3}
   itemName: Swift
-  itemDesc: '{ Swift }'
+  itemDesc: '{ damge = player.damage }
+
+    if ( Upgrade )
+
+    { fireRate -= 0.5f
+    }'
   powerImage: {fileID: 21300000, guid: 9145f738d27ec5a44ad90f12010807b3, type: 3}
   powerName: Power Swift
-  powerDesc: '{ Power Swift }'
+  powerDesc: 'if ( Power Weapon )
+
+    { scale += 1f }'
   curImage: {fileID: 21300000, guid: 60cf3e33622e9fd4285b6455b6582f13, type: 3}
   curName: Swift
   curDesc: '{ Swift }'
