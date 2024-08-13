@@ -34,22 +34,23 @@ public class ReactWeapon : PlayerWeapon
         float critDamage;
         while (true)
         {
+            
             critOccur = IsCritOccur(player.playerCritPer);
             critDamage = player.playerCritDmg * critOccur;
             if (!isPowerWeapon)
             {
-                bullet.GetComponent<PlayerBullet>().ChangeSprite(normalWeaponSprite);
                 yield return new WaitForSeconds(fireRate);
                 var addBullet = bulletPool.GetBullet();
+                addBullet.GetComponent<PlayerBullet>().ChangeSprite(normalWeaponSprite);
                 addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
                     transform.position, Quaternion.identity, bulletPool);
 
             }
             else if (isPowerWeapon)
             {
-                bullet.GetComponent<PlayerBullet>().ChangeSprite(powerWeaponSprite);
                 yield return new WaitForSeconds(fireRate/2f);
                 var addBullet = bulletPool.GetBullet();
+                addBullet.GetComponent<PlayerBullet>().ChangeSprite(powerWeaponSprite);
                 addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
                     transform.position, Quaternion.identity.normalized, bulletPool);
             }

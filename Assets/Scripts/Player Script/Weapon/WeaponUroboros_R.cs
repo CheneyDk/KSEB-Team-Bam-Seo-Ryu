@@ -66,7 +66,7 @@ public class WeaponUroboros_R : PlayerWeapon
 
             var tempBullet_sub = subBulletPool.GetBullet();
             tempBullet_sub.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
-                tmp_sub, muzzle_sub.rotation, subBulletPool);
+                tmp, muzzle.rotation, subBulletPool);
 
             await UniTask.WaitForSeconds(weaponFireRate / player.playerAtkSpeed, cancellationToken: cancelFire.Token);
         }

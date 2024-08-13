@@ -5011,9 +5011,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNumber: {fileID: 514212862}
   waveTimer: {fileID: 2012950542}
-  healthBar: {fileID: 1664933505}
+  healthBar:
+  - {fileID: 0}
   healthText: {fileID: 1503263560}
-  expBar: {fileID: 1434426161}
+  expBar:
+  - {fileID: 0}
   expText: {fileID: 808827257}
   waveManager: {fileID: 1987470288}
   weaponIconList:
@@ -8734,6 +8736,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953258634}
   m_CullTransparentMesh: 1
+--- !u!1 &954115103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 954115104}
+  m_Layer: 0
+  m_Name: pythonBulletPowerFrontPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &954115104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954115103}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.1638436, y: -9.907463, z: -0.2334666}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &955154994
 GameObject:
   m_ObjectHideFlags: 0
@@ -8854,6 +8887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volumWindow: {fileID: 1841586518}
+  character: {fileID: 0}
   hpVal: {fileID: 1982954950}
   atkVal: {fileID: 356562287}
   atkSpeedVal: {fileID: 527731403}
@@ -16812,7 +16846,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1987470288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16831,6 +16865,7 @@ MonoBehaviour:
   waveInterval: 2
   time: 0
   magneticTime: 3
+  waveEndClip: {fileID: 0}
 --- !u!1 &1993164136
 GameObject:
   m_ObjectHideFlags: 0
@@ -17285,10 +17320,10 @@ MonoBehaviour:
   MeleeEnemyPrefab: {fileID: 4256284729351784842, guid: ba08024792f69f84ea79b19600248c7d, type: 3}
   RangeEnemyPrefab: {fileID: 2360296499876324244, guid: 41887659ad3be2749b0d51806e13d085, type: 3}
   HeavyEnemyPrefab: {fileID: 8426056131966608244, guid: 1c1dd7358eea0f44689489789463e457, type: 3}
+  midBossPrefab: {fileID: 0}
+  finalBossPrefab: {fileID: 0}
   WarningPrefab: {fileID: 5580843737553246376, guid: b823dbc49d3e44d4e8c8fe859c42b447, type: 3}
-  MaxMeleeEnemy: 3
-  MaxRangeEnemy: 2
-  MaxHeavyEnemy: 1
+  bossWarningPrefab: {fileID: 0}
   MESpawnRate: 1
   MESpawnStartTime: 1
   MESpawnNumber: 3
@@ -17306,6 +17341,8 @@ MonoBehaviour:
   warningTime: 1
   numberToPool: 20
   enemiesPoolingZone: {fileID: 646352766}
+  warningMarkPoolZone: {fileID: 0}
+  powerEnemyRate: 1
 --- !u!222 &2030385431
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18166,6 +18203,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2098414729}
   m_CullTransparentMesh: 1
+--- !u!1 &2143473939
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2143473940}
+  m_Layer: 0
+  m_Name: pythonBulletPowerBackPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2143473940
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143473939}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.1638436, y: -9.907463, z: -0.2334666}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8526855414060859164
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18412,3 +18480,5 @@ SceneRoots:
   - {fileID: 176680744}
   - {fileID: 1275563266}
   - {fileID: 8984207399391144338}
+  - {fileID: 2143473940}
+  - {fileID: 954115104}
