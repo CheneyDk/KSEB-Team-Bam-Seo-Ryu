@@ -1,5 +1,7 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -11,6 +13,7 @@ public class CDBullet : PlayerBullet
     public GameObject miniCD;
 
     private Vector2 direction;
+    private Vector2 targetPosition;
 
     public SpriteRenderer spriteRenderer;
 
@@ -27,21 +30,27 @@ public class CDBullet : PlayerBullet
     {
         bulletLifeTime = 7f;
         waitForPush = new(bulletLifeTime);
+        
     }
 
     private void Start()
     {
         bulletSpeed = 5f;
-        Vector2 targetPosition = MouseAim();
-
-        direction = (targetPosition - (Vector2)transform.position).normalized;
-
-        StartCoroutine("FireCD");
     }
 
     private void OnEnable()
     {
+        isInited = false;
+        targetPosition = MouseAim();
+        WaitForInit().Forget();
+        StartCoroutine("FireCD");
         StartCoroutine(PushToPool());
+    }
+
+    private async UniTask WaitForInit()
+    {
+        await UniTask.WaitUntil(() => isInited);
+        direction = (targetPosition - (Vector2)transform.position).normalized;
     }
 
     private void Update()

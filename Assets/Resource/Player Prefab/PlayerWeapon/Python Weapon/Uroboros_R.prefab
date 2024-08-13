@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4989714642196447966}
   - component: {fileID: 4350154071445316244}
-  - component: {fileID: 5312340608209776525}
+  - component: {fileID: -9205788533134039686}
   - component: {fileID: 4328201785060297109}
   m_Layer: 0
   m_Name: Uroboros_R
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5312340608209776525
+--- !u!114 &-9205788533134039686
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,11 +95,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 7562615359646552131}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ba4bed196390e0438211857a2412241, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ce7fd2e534f7384d9008681ed07118c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  muzzle: {fileID: 4989714642196447966}
-  bullet: {fileID: 3026141712982231763, guid: 02f9d57bf849c5d4a873fe494722fb99, type: 3}
+  weaponDamageRate: 0
+  weaponLevel: 1
+  isMaxLevel: 0
+  isPowerWeapon: 0
+  matchPassive: 
+  muzzle: {fileID: 0}
+  bullet: {fileID: 0}
+  normalWeaponSprite: {fileID: 21300000, guid: a6ea495b74bb9534c93aace5dc79a840, type: 3}
+  powerWeaponSprite: {fileID: 0}
+  bulletPoolObj: {fileID: 1634035985020617498, guid: 90b662efad7ab02489e070b73cb293d8, type: 3}
+  bulletFront: {fileID: 3026141712982231763, guid: 02f9d57bf849c5d4a873fe494722fb99, type: 3}
+  bulletBack: {fileID: 3675868750621725284, guid: 68ee2c4cfd67a094a9d3673661b2e532, type: 3}
+  bulletPowerFront: {fileID: 3026141712982231763, guid: 7ade33790ef79df429f7e5364e81463c, type: 3}
+  bulletPowerBack: {fileID: 3026141712982231763, guid: 19ba497e67858fb40afa960aee69735c, type: 3}
+  muzzleTopFront: {fileID: 0}
+  muzzleTopBack: {fileID: 0}
+  muzzleMidFront: {fileID: 0}
+  muzzleMidBack: {fileID: 0}
+  muzzleBotFront: {fileID: 0}
+  muzzleBotBack: {fileID: 0}
+  bulletPoolBackObj: {fileID: 8411031438228116658, guid: c0c285e7175eab04096593e93ac97260, type: 3}
+  powerBulletPoolFrontObj: {fileID: 8665948149733652264, guid: 2a97be807ce10a344b0a2afdf1a1e279, type: 3}
+  powerBulletPoolBackObj: {fileID: 48339376084321932, guid: c79105f3683da924d9141ae7fb4de2ab, type: 3}
 --- !u!114 &4328201785060297109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,8 +152,8 @@ MonoBehaviour:
     m_ActionName: playerMove/WASD[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5312340608209776525}
-        m_TargetAssemblyTypeName: WeaponUroboros, Assembly-CSharp
+      - m_Target: {fileID: -9205788533134039686}
+        m_TargetAssemblyTypeName: Uroboros_Sub, Assembly-CSharp
         m_MethodName: Fire
         m_Mode: 0
         m_Arguments:

@@ -46,7 +46,7 @@ public class Uroboros_Sub : PlayerWeapon
 
         isPowerWeapon = ScoreManager.instance.recordData.isPythonUpgrade;
 
-        parent = GameObject.FindWithTag("PlayerBulletPool").transform;
+        parent = GameObject.FindWithTag("Player").transform;
         InitPool();
     }
 
@@ -100,6 +100,8 @@ public class Uroboros_Sub : PlayerWeapon
         {
             if (isPowerWeapon)
             {
+                critOccur = IsCritOccur(player.playerCritPer);
+                critDamage = player.playerCritDmg * critOccur;
                 Vector3 midFront = muzzleMidFront.position + muzzleMidFront.right * 3f - muzzleMidFront.up;
                 Vector3 midBack = muzzleMidBack.position - muzzleMidBack.right * 3f + muzzleMidBack.up; ;
 
@@ -142,12 +144,10 @@ public class Uroboros_Sub : PlayerWeapon
                 var bulletMidFront = bulletPool.GetBullet();
                 bulletMidFront.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
                     midFront, muzzleMidFront.rotation, bulletPool) ;
-                bulletMidFront.transform.parent = player.transform;
 
                 var bulletMidBack = bulletPoolBack.GetBullet();
                 bulletMidBack.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
                     midBack, muzzleMidBack.rotation, bulletPoolBack);
-                bulletMidBack.transform.parent = player.transform;
             }
 
             await UniTask.WaitForSeconds(weaponFireRate / player.playerAtkSpeed, cancellationToken: cancelFire.Token);
