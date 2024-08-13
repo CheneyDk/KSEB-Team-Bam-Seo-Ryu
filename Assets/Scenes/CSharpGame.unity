@@ -1631,13 +1631,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e5b18c6f5617be843a9268bc415424d7, type: 2}
   - {fileID: 11400000, guid: 72bb6bd0af5b46140ad92abd4c2bc8fb, type: 2}
   weaponDataList:
-  - {fileID: 11400000, guid: bb76124ff3f39df4cb769b747c4a4628, type: 2}
-  - {fileID: 11400000, guid: ee9a8a2c816ac6c4892cd358f73edc97, type: 2}
-  - {fileID: 11400000, guid: e2c589d8e1bb2a4439b69c55f606065b, type: 2}
-  - {fileID: 11400000, guid: 82c01517ed2fe224f9fba5ffe233793b, type: 2}
-  - {fileID: 11400000, guid: e5b18c6f5617be843a9268bc415424d7, type: 2}
-  - {fileID: 11400000, guid: 72bb6bd0af5b46140ad92abd4c2bc8fb, type: 2}
-  - {fileID: 11400000, guid: 15dfa2e01bc95414b84594513b134e34, type: 2}
+  - {fileID: 11400000, guid: 1a22e1f82a8ef2a4b8f2fe08499e138e, type: 2}
+  - {fileID: 11400000, guid: dd7a116b12ad40a4c97efa6946f7c22e, type: 2}
+  - {fileID: 11400000, guid: 3ee98229c68a2bf4cb1d765a4e720f74, type: 2}
+  - {fileID: 11400000, guid: da60fa2d03366ef499ea716a0fafdb97, type: 2}
+  - {fileID: 11400000, guid: 652f39ce03533634cb5615c0edcb3b0f, type: 2}
+  - {fileID: 11400000, guid: e2ca484c3012f5d47a8ecaccac8fde41, type: 2}
+  - {fileID: 11400000, guid: b8dfaef2c368ab245bdc87d8135f63fd, type: 2}
   passiveDataList:
   - {fileID: 11400000, guid: df894a11d49451e47ae7752a547654f1, type: 2}
   - {fileID: 11400000, guid: e65068d2ee758074f89a22b8fcc44984, type: 2}
@@ -3621,6 +3621,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 803650980}
   - {fileID: 646352766}
   - {fileID: 733847896}
   - {fileID: 1902161469}
@@ -4824,11 +4825,11 @@ Transform:
   m_GameObject: {fileID: 803650979}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.949234, y: -2.9446678, z: 12.46003}
+  m_LocalPosition: {x: -3.1959324, y: -17.154743, z: 8.372927}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 671616493}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &812084185
 GameObject:
@@ -12602,7 +12603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08184e53d739a014c9edea96d9dd32e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveNumber: 10
+  waveNumber: 20
   curWave: 1
   waveTime: 30
   waveInterval: 2
@@ -13086,6 +13087,7 @@ MonoBehaviour:
   enemiesPoolingZone: {fileID: 646352766}
   warningMarkPoolZone: {fileID: 1226889797}
   powerEnemyRate: 1
+  bossIsAlive: 0
 --- !u!222 &2030385431
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14551,4 +14553,3 @@ SceneRoots:
   - {fileID: 671616493}
   - {fileID: 934351004}
   - {fileID: 8526855414060859164}
-  - {fileID: 803650980}

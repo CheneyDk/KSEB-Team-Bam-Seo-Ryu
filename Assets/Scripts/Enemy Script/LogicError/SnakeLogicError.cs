@@ -86,6 +86,8 @@ public class SnakeLogicError : Enemy
 
     private CancellationTokenSource snakeStop;
 
+    private EnemySpawner enemySpawner;
+
     private void Awake()
     {
         // YH - move some components to each parts
@@ -99,6 +101,9 @@ public class SnakeLogicError : Enemy
         InitSnakeObj().Forget();
         curTurnSpeed = slowTurnSpeed;
         snakeSpeed = normalSpeed;
+
+        enemySpawner = GameObject.FindAnyObjectByType<EnemySpawner>().GetComponent<EnemySpawner>();
+        enemySpawner.bossIsAlive = true;
     }
 
     private void Start()
@@ -365,6 +370,8 @@ public class SnakeLogicError : Enemy
         // each body part play dead motion on their own
         CallDeadFunc().Forget();
         snakeStop.Cancel();
+
+        enemySpawner.bossIsAlive = false;
 
         // StartCoroutine("SetActiveToFalse"); // YH - dead motion wait?
         DropEXP(dropExpNumber);

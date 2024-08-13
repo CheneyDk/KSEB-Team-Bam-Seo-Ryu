@@ -128,7 +128,7 @@ public class MeleeEnemy : Enemy
         StartCoroutine("SetActiveToFalse");
         audioManager.NormalEnemyDamagedClip();
         DropEXP(dropExpNumber);
-        ChanceToDropApple(1);
+        ChanceToDropApple(3);
         ChanceToDropRedBlue(0);
 
         ScoreManager.instance.UpdateEnemiesDeafeated("MeleeEnemyDefeated");
@@ -191,7 +191,7 @@ public class MeleeEnemy : Enemy
 
     private void ChanceToDropApple(int chance)
     {
-        var randomChance = Random.Range(1, 11);
+        var randomChance = Random.Range(1, 101);
         if (randomChance <= chance)
         {
             ItemPooling.Instance.GetApple(transform.position);

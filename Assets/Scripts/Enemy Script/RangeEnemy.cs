@@ -176,7 +176,7 @@ public class RangeEnemy : Enemy
         StartCoroutine("SetActiveToFalse");
         audioManager.NormalEnemyDamagedClip();
         DropEXP(dropExpNumber);
-        ChanceToDropApple(1);
+        ChanceToDropApple(3);
         ChanceToDropRedBlue(0);
         ScoreManager.instance.UpdateEnemiesDeafeated("RangeEnemyDefeated");
     }
@@ -238,7 +238,7 @@ public class RangeEnemy : Enemy
 
     private void ChanceToDropApple(int chance)
     {
-        var randomChance = Random.Range(1, 11);
+        var randomChance = Random.Range(1, 101);
         if (randomChance <= chance)
         {
             ItemPooling.Instance.GetApple(transform.position);

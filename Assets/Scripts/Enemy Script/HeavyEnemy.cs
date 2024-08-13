@@ -161,7 +161,7 @@ public class HeavyEnemy : Enemy
         audioManager.HeavyEnemyDamagedClip();
         DropEXP(dropExpNumber);
         ChanceToDropApple(1);
-        ChanceToDropRedBlue(0);
+        ChanceToDropRedBlue(5);
 
         ScoreManager.instance.UpdateEnemiesDeafeated("HeavyEnemyDefeated");
     }
@@ -208,7 +208,7 @@ public class HeavyEnemy : Enemy
     }
     private void ChanceToDropRedBlue(int chance)
     {
-        var randomChance = Random.Range(1, 11);
+        var randomChance = Random.Range(1, 101);
         if (randomChance <= chance)
         {
             ItemPooling.Instance.GetRedBlue(transform.position);

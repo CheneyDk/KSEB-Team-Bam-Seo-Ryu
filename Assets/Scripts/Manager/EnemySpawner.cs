@@ -67,6 +67,8 @@ public class EnemySpawner : MonoBehaviour
 
     public float powerEnemyRate = 1f;
 
+    public bool bossIsAlive = false;
+
     private void Awake()
     {
         waveManager = GetComponent<WaveManager>();
@@ -145,10 +147,12 @@ public class EnemySpawner : MonoBehaviour
             if (waveManager.curWave == 10)
             {
                 StartCoroutine(BossSpawn(midBossPrefab));
+                bossIsAlive = true;
             }
             else if (waveManager.curWave == 20)
             {
                 StartCoroutine(BossSpawn(finalBossPrefab));
+                bossIsAlive = true;
             }
         }
     }

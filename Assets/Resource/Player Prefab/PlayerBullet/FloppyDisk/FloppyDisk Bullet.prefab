@@ -104,6 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 10
+  bulletPool: {fileID: 0}
   range: 20
   damageRange: 2
   spriteRenderer: {fileID: 7939553711535033596}
@@ -181,7 +182,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: c851bb90ac2c45449964ab0a449c2170, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c4715867f8c259f41b69d59ee3e18050, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

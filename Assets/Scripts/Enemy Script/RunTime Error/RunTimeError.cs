@@ -66,8 +66,12 @@ public class RunTimeError : Enemy
     public GameObject rotationBulletSpawner;
     public Sprite destroySprite;
 
+    private EnemySpawner enemySpawner;
+
     private void Awake()
     {
+        enemySpawner = GameObject.FindAnyObjectByType<EnemySpawner>().GetComponent<EnemySpawner>();
+        enemySpawner.bossIsAlive = true;
         curSR = gameObject.GetComponent<SpriteRenderer>();
         originColor = curSR.color;
         RunTimeErrorCurtHP = RunTimeErrorMaxHp;
@@ -241,9 +245,10 @@ public class RunTimeError : Enemy
         runtimeAni.SetTrigger("isRuntimeErrorDead");
 
         curSR.sprite = destroySprite;
-        
+
 
         // need player win func in GameManger
+        enemySpawner.bossIsAlive = false;
 
         Destroy(gameObject, runtimeAni.GetCurrentAnimatorStateInfo(0).length + 4f);
         DropEXP(dropExpNumber);

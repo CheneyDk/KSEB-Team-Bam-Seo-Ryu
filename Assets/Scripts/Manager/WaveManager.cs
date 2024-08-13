@@ -48,8 +48,16 @@ public class WaveManager : MonoBehaviour
             GameInfoManager.Instance.DisplayGameInfo($"Wave {curWave} Start!");
             enemySpawner.StartSpawning();
             waveIsStarted = true;
-            yield return new WaitForSeconds(waveTime);
+            if (enemySpawner.bossIsAlive == true)
+            {
+                yield return new WaitForSeconds(waveTime + 15f);
+            }
+            else
+            {
+                yield return new WaitForSeconds(waveTime);
+            }
             waveIsStarted = false;
+            EndOfWaveBossIsAlive();
             enemySpawner.StopSpawning();
             DestroyAllEnemies();
 
@@ -64,7 +72,14 @@ public class WaveManager : MonoBehaviour
             {
                 GameInfoManager.Instance.DisplayGameInfo($"Wave {curWave} Loading...");
                 yield return new WaitForSeconds(waveInterval);
-                time = waveTime;
+                if (curWave == 10 || curWave == 20)
+                {
+                    time = waveTime + 15f;
+                }
+                else
+                {
+                    time = waveTime;
+                }
             }
         }
         GameInfoManager.Instance.DisplayGameInfo("All Wave Clear");
@@ -88,6 +103,14 @@ public class WaveManager : MonoBehaviour
         foreach (GameObject warn in warning)
         {
             warn.SetActive(false);
+        }
+    }
+
+    private void EndOfWaveBossIsAlive()
+    {
+        if (waveIsStarted == false && enemySpawner.bossIsAlive == true)
+        {
+            GameManager.Instance.player.TakeDamage(9999);
         }
     }
 }
