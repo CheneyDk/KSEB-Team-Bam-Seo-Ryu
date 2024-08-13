@@ -42,12 +42,12 @@ public class CDBullet : PlayerBullet
     {
         isInited = false;
         targetPosition = MouseAim();
-        waitForInit().Forget();
+        WaitForInit().Forget();
         StartCoroutine("FireCD");
         StartCoroutine(PushToPool());
     }
 
-    private async UniTask waitForInit()
+    private async UniTask WaitForInit()
     {
         await UniTask.WaitUntil(() => isInited);
         direction = (targetPosition - (Vector2)transform.position).normalized;

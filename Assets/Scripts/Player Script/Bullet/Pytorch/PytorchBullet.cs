@@ -29,10 +29,12 @@ public class PytorchBullet : PlayerBullet
     // vfx
     public ParticleSystem particle;
     private SpriteRenderer spriteRenderer;
+    private Color originColor;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        originColor = spriteRenderer.color;
     }
 
     private void OnEnable()
@@ -40,6 +42,7 @@ public class PytorchBullet : PlayerBullet
         bulletRiseTime = 0.5f;
         bulletFallTime = 0.5f;
         isDestroyed = false;
+        spriteRenderer.color = originColor;
         BulletOrbit().Forget();
     }
 
@@ -94,7 +97,9 @@ public class PytorchBullet : PlayerBullet
 
         // effects needed
         WaitVFXandDelayedDestroy().Forget();
+        if (isPowerWeapon) ClusterSpread();
 
+        if(isDestroyed) return;
         if (enemies != null)
         {
             foreach (var enemy in enemies)
@@ -104,7 +109,6 @@ public class PytorchBullet : PlayerBullet
                 // enemy.GetComponent<Enemy>().LastingDamage(bulletLastingDamage, 3, pytorchColor);
             }
         }
-        if (isPowerWeapon) ClusterSpread();
     }
 
     private void ClusterSpread()
@@ -130,6 +134,11 @@ public class PytorchBullet : PlayerBullet
         if (isDestroyed) return;
         isDestroyed = true;
         bulletPool.SetObj(this);
+    }
+
+    private void OnDisable()
+    {
+        isDestroyed = true;
     }
 
     private void OnDestroy()
