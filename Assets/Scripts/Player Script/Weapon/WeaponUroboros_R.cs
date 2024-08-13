@@ -61,12 +61,12 @@ public class WeaponUroboros_R : PlayerWeapon
             //Vector3 tmp_sub = muzzle_sub.position - muzzle_sub.right * 3.3f;
 
             var tempBullet = bulletPool.GetBullet();
-            tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
-                tmp, muzzle.rotation, bulletPool);
+            //tempBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                //tmp, muzzle.rotation, bulletPool);
 
             var tempBullet_sub = subBulletPool.GetBullet();
-            tempBullet_sub.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
-                tmp_sub, muzzle_sub.rotation, subBulletPool);
+            //tempBullet_sub.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                //tmp_sub, muzzle_sub.rotation, subBulletPool);
 
             await UniTask.WaitForSeconds(weaponFireRate / player.playerAtkSpeed, cancellationToken: cancelFire.Token);
         }

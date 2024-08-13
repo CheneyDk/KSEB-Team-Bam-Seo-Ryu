@@ -1639,12 +1639,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e5b18c6f5617be843a9268bc415424d7, type: 2}
   - {fileID: 11400000, guid: 72bb6bd0af5b46140ad92abd4c2bc8fb, type: 2}
   passiveDataList:
-  - {fileID: 11400000, guid: 69b0a4e22451f1448ab5e523346bf1f6, type: 2}
-  - {fileID: 11400000, guid: 5132c6530c67aaf43935e08a758b0882, type: 2}
-  - {fileID: 11400000, guid: 4b34eb5a4d08bdd4d9afc435f3ef0c44, type: 2}
-  - {fileID: 11400000, guid: e65068d2ee758074f89a22b8fcc44984, type: 2}
-  - {fileID: 11400000, guid: 13adf7aa9830564439ca00fd6997293f, type: 2}
   - {fileID: 11400000, guid: df894a11d49451e47ae7752a547654f1, type: 2}
+  - {fileID: 11400000, guid: e65068d2ee758074f89a22b8fcc44984, type: 2}
+  - {fileID: 11400000, guid: 5132c6530c67aaf43935e08a758b0882, type: 2}
+  - {fileID: 11400000, guid: 69b0a4e22451f1448ab5e523346bf1f6, type: 2}
+  - {fileID: 11400000, guid: 4b34eb5a4d08bdd4d9afc435f3ef0c44, type: 2}
+  - {fileID: 11400000, guid: 13adf7aa9830564439ca00fd6997293f, type: 2}
   - {fileID: 11400000, guid: bf27f4b7d137e2547badad8dfcbe3e09, type: 2}
   playerWeaponList: []
   playerPassiveList: []

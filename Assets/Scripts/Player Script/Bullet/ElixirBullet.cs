@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
-using VHierarchy.Libs;
 
 public class ElixirBullet : PlayerBullet
 {
@@ -144,7 +143,7 @@ public class ElixirBullet : PlayerBullet
         }
         await UniTask.WaitForSeconds(1f);
         if (isDestroyed) return;
-        tempParticle.gameObject.Destroy();
+        Destroy(tempParticle);
     }
 
     private async UniTask DelayedDestroy()

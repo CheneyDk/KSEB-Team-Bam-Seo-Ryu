@@ -293,7 +293,7 @@ public class RangeEnemy : Enemy
         RangeEnemyCurHP = RangeEnemyMaxHp * num;
         RangeEnemyCurAtk = RangeEnemyAtk * num;
         bulletPrefab.GetComponent<RangeEnemyBullet>().bulletDamage += ((int)num - 1) * 5;
-        originColor += ((num - 1) / 0.5f) * new Color(0, -0.1f, -0.1f);
+        originColor = Color.white + ((num - 1) / 0.5f) * new Color(0, -0.1f, -0.1f);
         curSR.color = originColor;
     }
 }

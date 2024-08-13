@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CSharpGame.unity
     guid: f4287e7a06d0a524aba77c5939472e83
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/UDD.unity
     guid: d4ce0e2e85b4dec4a92b585866e4e8f9
   m_configObjects:

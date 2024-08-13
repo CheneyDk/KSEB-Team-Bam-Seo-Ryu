@@ -15,10 +15,12 @@ MonoBehaviour:
   item: {fileID: 4028333344563559254, guid: daf8f92e840a1ca40ade22279a1d6eb4, type: 3}
   itemImage: {fileID: 21300000, guid: a59ff80d4561a964289687786c5b97bb, type: 3}
   itemName: SSD
-  itemDesc: '{ + Player Max HP }'
+  itemDesc: '{ + Player Max HP }
+
+    FloppyDisk CD'
   powerImage: {fileID: 0}
   powerName: 
   powerDesc: 
   curImage: {fileID: 21300000, guid: a59ff80d4561a964289687786c5b97bb, type: 3}
   curName: SSD
-  curDesc: 
+  curDesc: '{ + Player Max HP }'

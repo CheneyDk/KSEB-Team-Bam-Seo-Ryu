@@ -93,33 +93,33 @@ public class Uroboros_Sub : PlayerWeapon
                 Vector3 midBack = muzzleMidBack.position - muzzleMidBack.right * 3f + muzzleMidBack.up; ;
 
                 var bulletMidFront = Instantiate(bulletPowerFront, midFront, muzzleMidFront.rotation);
-                bulletMidFront.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage) * 0.5f, critOccur);
+                //bulletMidFront.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage) * 0.5f, critOccur);
                 bulletMidFront.transform.parent = player.transform;
 
                 var bulletMidBack = Instantiate(bulletPowerBack, midBack, muzzleMidBack.rotation);
-                bulletMidBack.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage) * 0.5f, critOccur);
+                //bulletMidBack.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage) * 0.5f, critOccur);
                 bulletMidBack.transform.parent = player.transform;
 
                 Vector3 topFront = muzzleTopFront.position + muzzleTopFront.right * 3f - muzzleTopFront.up * 2;
                 Vector3 topBack = muzzleTopBack.position - muzzleTopBack.right * 3f + muzzleTopBack.up * 2; ;
 
                 var bulletTopFront = Instantiate(bulletPowerFront, topFront, muzzleTopFront.rotation);
-                bulletTopFront.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage) * 0.5f, critOccur);
+                //bulletTopFront.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage) * 0.5f, critOccur);
                 bulletTopFront.transform.parent = player.transform;
 
                 var bulletTopBack = Instantiate(bulletPowerBack, topBack, muzzleTopBack.rotation);
-                bulletTopBack.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage) * 0.5f, critOccur);
+                //bulletTopBack.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage) * 0.5f, critOccur);
                 bulletTopBack.transform.parent = player.transform;
 
                 Vector3 botFront = muzzleBotFront.position + muzzleBotFront.right * 2.5f;
                 Vector3 botBack = muzzleBotBack.position - muzzleBotBack.right * 2.5f;
 
                 var bulletBotFront = Instantiate(bulletPowerFront, botFront, muzzleBotFront.rotation);
-                bulletBotFront.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage) * 0.5f, critOccur);
+               // bulletBotFront.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage) * 0.5f, critOccur);
                 bulletBotFront.transform.parent = player.transform;
 
                 var bulletBotBack = Instantiate(bulletPowerBack, botBack, muzzleBotBack.rotation);
-                bulletBotBack.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage) * 0.5f, critOccur);
+               // bulletBotBack.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage) * 0.5f, critOccur);
                 bulletBotBack.transform.parent = player.transform;
             }
 
@@ -129,11 +129,11 @@ public class Uroboros_Sub : PlayerWeapon
                 Vector3 midBack = muzzleMidBack.position - muzzleMidBack.right * 3.3f;
 
                 var bulletMidFront = Instantiate(bulletFront, midFront, muzzleMidFront.rotation);
-                bulletMidFront.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
+                //bulletMidFront.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
                 bulletMidFront.transform.parent = player.transform;
 
                 var bulletMidBack = Instantiate(bulletBack, midBack, muzzleMidBack.rotation);
-                bulletMidBack.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
+               // bulletMidBack.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur);
                 bulletMidBack.transform.parent = player.transform;
             }
 

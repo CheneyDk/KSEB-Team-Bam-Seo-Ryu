@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5ace50782c73e7449a6652b7ccfc883d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6edea9d716db277459b2d3b10166a3df, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 20
+  bulletPool: {fileID: 0}
   spriteRenderer: {fileID: 2128980399710686543}
   USBParticle: {fileID: 339284107043860550, guid: c30d66c52169812428e32f26a3ad209e, type: 3}
   audioSource: {fileID: 1637366045274084852}

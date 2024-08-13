@@ -57,7 +57,9 @@ public class UpgradeManager : MonoBehaviour
 
     private void Awake()
     {
-        foreach(var data in allWeaponDataList)
+        ResetDataBase();
+
+        foreach (var data in allWeaponDataList)
         {
             weaponDataDict.Add(data.name, data);
         }
@@ -72,11 +74,17 @@ public class UpgradeManager : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    private void Start()
+    private void ResetDataBase()
     {
-        foreach(var weapon in allWeaponDataList)
+        foreach (var weapon in allWeaponDataList)
         {
             weapon.ResetToNew();
+        }
+        foreach (var passive in passiveDataList)
+        {
+            Debug.Log(passive.curDesc);
+            Debug.Log(passive.itemDesc);
+            passive.ResetToNew();
         }
     }
 

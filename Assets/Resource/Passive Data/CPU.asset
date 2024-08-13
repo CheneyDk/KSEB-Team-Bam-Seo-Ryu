@@ -15,10 +15,14 @@ MonoBehaviour:
   item: {fileID: 4309293738989804150, guid: 62bb84369b6f7b44baa8198aadefa159, type: 3}
   itemImage: {fileID: 21300000, guid: c075b5ec5d76d6e4a8017331e5664d6e, type: 3}
   itemName: CPU
-  itemDesc: '{ + Player Crit % }'
+  itemDesc: '{ + Player Crit % }
+
+    Swift React'
   powerImage: {fileID: 0}
   powerName: 
   powerDesc: 
   curImage: {fileID: 21300000, guid: c075b5ec5d76d6e4a8017331e5664d6e, type: 3}
   curName: CPU
-  curDesc: '{ + Player Atk Speed }'
+  curDesc: '{ + Player Crit % agg }
+
+    Swift React'

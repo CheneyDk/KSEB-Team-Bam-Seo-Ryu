@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 8802644732269000983}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.139257, y: -5.1307387, z: 0.30319723}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46,12 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 0
+  bulletPool: {fileID: 0}
   range: 30
   player: {fileID: 0}
   CloudParticle: {fileID: 9171901159239501060, guid: 3184a0349fae14743aba9b22433a2df0, type: 3}
   powerCloudParticle: {fileID: 847862087572356100, guid: 1ed15be07a0b70849a67afa2910bf2b0, type: 3}
-  audioSource: {fileID: -1995819841409811131, guid: 3184a0349fae14743aba9b22433a2df0, type: 3}
-  audioClip: {fileID: 8300000, guid: 8721f1d872cbb6d409114c15eff7a9bb, type: 3}
 --- !u!82 &-5900420098015751325
 AudioSource:
   m_ObjectHideFlags: 0
