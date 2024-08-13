@@ -43,6 +43,7 @@ public class RotateBulletSpawner : MonoBehaviour
         while(!stopRotate.IsCancellationRequested)
         {
             transform.Rotate(0f, 0f, rotationSpeed);
+            await UniTask.WaitUntil(() => GameManager.Instance.isGameContinue);
             await UniTask.Yield(cancellationToken: stopRotate.Token);
         }
 
