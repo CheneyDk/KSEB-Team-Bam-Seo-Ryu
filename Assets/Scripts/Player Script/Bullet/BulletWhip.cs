@@ -10,15 +10,6 @@ public class BulletWhip : PlayerBullet
 
     private void Awake()
     {
-        bulletLifeTime = 0.3f;
-    }
-    private void OnEnable()
-    {
-        StartFadeOut();
-    }
-
-    private void Start()
-    {
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
@@ -27,8 +18,16 @@ public class BulletWhip : PlayerBullet
         else
         {
             Debug.LogError("SpriteRenderer component not found on the GameObject.");
-        } 
+        }
+
+        bulletLifeTime = fadeDuration;
     }
+    private void OnEnable()
+    {
+        StartFadeOut();
+    }
+
+    // private void Start(){}
 
     private void Update()
     {
@@ -38,6 +37,8 @@ public class BulletWhip : PlayerBullet
         timeCounter += Time.deltaTime;
         if (timeCounter > bulletLifeTime)
         {
+            spriteRenderer.color = originalColor;
+            timeCounter = 0f;
             bulletPool.SetObj(this);
         }
     }
@@ -81,7 +82,6 @@ public class BulletWhip : PlayerBullet
         // ������ �����ϰ� �Ǿ��� ��
         color.a = 0.0f;
         spriteRenderer.color = color;
-        gameObject.SetActive(false); // ������Ʈ�� ��Ȱ��ȭ
     }
 
     public override void ChangeSprite(Sprite powerWeapon)

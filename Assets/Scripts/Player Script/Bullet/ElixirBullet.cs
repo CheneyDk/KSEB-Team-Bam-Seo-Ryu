@@ -143,7 +143,7 @@ public class ElixirBullet : PlayerBullet
         }
         await UniTask.WaitForSeconds(1f);
         if (isDestroyed) return;
-        Destroy(tempParticle);
+        Destroy(tempParticle.gameObject);
     }
 
     private async UniTask DelayedDestroy()

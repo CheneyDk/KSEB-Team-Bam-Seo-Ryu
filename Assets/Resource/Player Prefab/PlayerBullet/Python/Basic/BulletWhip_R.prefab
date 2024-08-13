@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: -0.0005
+  bulletPool: {fileID: 0}
   fadeDuration: 0.3
 --- !u!61 &6762336043107413690
 BoxCollider2D:
