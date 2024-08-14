@@ -5,11 +5,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Timeline;
 using UnityEngine.UI;
+using VInspector;
 
 public class UpgradeManager : MonoBehaviour
 {
     // 선택지들에 UI
-    [Header("Upgrade UI")]
+    [Foldout("Upgrade UI")]
     public GameObject UpgradeUI;
     public Button[] optionButtons;
     public TextMeshProUGUI[] optionNameTexts;
@@ -17,7 +18,7 @@ public class UpgradeManager : MonoBehaviour
     public Image[] optionImages;
 
     // 전체 무기, 템들
-    [Header("Weapon and Passive")]
+    [Foldout("Weapon and Passive")]
     public List<WeaponData> allWeaponDataList;
     public List<WeaponData> weaponDataList;
     public List<WeaponData> passiveDataList;
@@ -27,7 +28,7 @@ public class UpgradeManager : MonoBehaviour
 
     // 템들을 뭘 선택했는지 알려주는 리스트(선택된 무기들 X)
     // 뭐 있는지만 알수 있어서 GameUI에 사용하는 용도
-    [Header("Player Weapon & Item Slot")]
+    [Foldout("Player Weapon & Item Slot")]
     public List<WeaponData> playerWeaponList = new List<WeaponData>();
     public List<WeaponData> playerPassiveList = new List<WeaponData>();
     public int maxItemNumber = 4;
@@ -36,7 +37,7 @@ public class UpgradeManager : MonoBehaviour
 
     // 실제 무기들이 있는 곳
     // 여기서 실제 무기들에 레벨을 알수 있고 실제 강화도 여기서
-    [Header("Player Weapon and Item")]
+    [Foldout("Player Weapon and Item")]
     public Transform playerWeaponBag;
     public Transform playerPassiveBag;
 
@@ -46,6 +47,7 @@ public class UpgradeManager : MonoBehaviour
     // 강화템중에 MaxLevel이 많아서 선택지의 나오는 템 수가 3개 아하때 나오는 템들
     [Header("Item for MaxLevel")]
     public List<WeaponData> maxLevelItemList = new List<WeaponData>();
+    [EndFoldout]
 
     // 템 선택수가 최대일때 선택지로 나타나는 템들
     private List<WeaponData> selectedPassiveList = new List<WeaponData>();

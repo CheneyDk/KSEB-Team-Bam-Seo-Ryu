@@ -28,6 +28,8 @@ public class MainMenuManager : MonoBehaviour
     [EndFoldout]
 
     public Texture2D normalCursor;
+    public Texture2D spaghettiCursor;
+    private bool isSpaghettiCursor = false;
 
     public LogManager logManager;
 
@@ -36,11 +38,16 @@ public class MainMenuManager : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip startMenuClip;
     public AudioClip mouseClickClip;
+    public AudioClip spaghettiMouseClickClip;
+    public AudioClip cursorChangeClip;
 
     public GameObject loadingWindow;
     public GameObject[] loadBarBlock;
 
     public Button donateButton;
+
+    public GameObject teamCreditWindow;
+    private bool openCredit = false;
 
     void Awake()
     {
@@ -53,6 +60,21 @@ public class MainMenuManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.PlayOneShot(startMenuClip);
         instance = this;
+    }
+
+    public void ChangeCursore()
+    {
+        isSpaghettiCursor = !isSpaghettiCursor;
+        if (isSpaghettiCursor)
+        {
+            audioSource.PlayOneShot(cursorChangeClip);
+            Cursor.SetCursor(spaghettiCursor, new Vector2(-50, 70), CursorMode.Auto);
+        }
+        else
+        {
+            audioSource.PlayOneShot(cursorChangeClip);
+            Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
+        }
     }
 
     private void Start()
@@ -239,9 +261,26 @@ public class MainMenuManager : MonoBehaviour
 
     public void MouseClickSound(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !isSpaghettiCursor)
         {
             audioSource.PlayOneShot(mouseClickClip);
+        }
+        else if (context.started && isSpaghettiCursor)
+        {
+            audioSource.PlayOneShot(spaghettiMouseClickClip);
+        }
+    }
+
+    public void OpenCredit()
+    {
+        openCredit = !openCredit;
+        if (openCredit)
+        {
+            teamCreditWindow.SetActive(true);
+        }
+        else
+        {
+            teamCreditWindow.SetActive(false);
         }
     }
 }
