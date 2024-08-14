@@ -10,45 +10,78 @@ public class BulletMySQL : PlayerBullet
     private Vector2 SQLVector; // new(-1f, 3f) - standard
     private float rotateSpeed = 1f;
 
+    // parabola vector
+    private Vector2 parabolaVector;
+    private float parabolaY;
+    private float parabolaSpeed;
+    private float parabolaYTimer;
+    private const float pi = Mathf.PI;
+
+    private float bulletFloatingTime;
+    private float parabolaHeight;
+
     // components
     private Rigidbody2D rigid;
 
     // flags
-    private bool isDestroy;
+    private bool isDestroyed;
 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         bulletLifeTime = 5f;
-        bulletSpeed = 1f;
+        bulletSpeed = 0.5f;
+        bulletVector = Vector2.zero;
     }
 
     private void OnEnable()
     {
-        rigid.simulated = true;
-        rigid.velocity = Vector2.zero;
+        parabolaVector = Vector2.zero;
+        bulletVector.x = Random.Range(-3f, -5f);
+        parabolaHeight = Random.Range(2f, 3f);
         rotateSpeed = Random.Range(0.8f, 1.2f);
-        
-        waitInitAndAddForce().Forget();
 
-        isDestroy = false;
+        isDestroyed = false;
+
+        ParabolaYFactor().Forget();
+        DolphineRotate().Forget();
+
         // Pooling
         ObjPoolingTimer().Forget();
     }
 
-    private async UniTask waitInitAndAddForce()
+    private async UniTask ParabolaYFactor()
     {
-        await UniTask.WaitUntil(() => isInited);
-        SQLVector = new Vector2(Random.Range(-2f, -4f), Random.Range(10f, 12f));
-        bulletVector = transform.TransformDirection(SQLVector);
+        parabolaYTimer = 0f;
+        while (parabolaYTimer < bulletFloatingTime)
+        {
+            await UniTask.Yield();
+            if (isDestroyed) return;
+            parabolaYTimer += Time.deltaTime;
+            parabolaY = Mathf.Cos(parabolaYTimer * pi / bulletFloatingTime);
+            parabolaVector = parabolaHeight * new Vector2(0f, parabolaY);
+        }
+        parabolaYTimer = bulletFloatingTime;
+    }
 
-        DolphineRotate().Forget();
-
-        // bullet move
-        rigid.AddForce(bulletVector * bulletSpeed * 50f);
+    private async UniTask DolphineRotate()
+    {
+        while (!isDestroyed)
+        {
+            await UniTask.Yield();
+            await UniTask.WaitUntil(() => GameManager.Instance.isGameContinue);
+            if (isDestroyed) return;
+            transform.Rotate(Vector3.forward, rotateSpeed);
+        }
     }
 
     // private void Start(){}
+
+    private void Update()
+    {
+        transform.Translate((parabolaVector + bulletVector) * bulletSpeed * Time.deltaTime);
+    }
+
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
@@ -64,34 +97,25 @@ public class BulletMySQL : PlayerBullet
         }
     }
 
-    private async UniTask DolphineRotate()
-    {
-        while (!isDestroy)
-        {
-            await UniTask.Yield();
-            await UniTask.WaitUntil(() => GameManager.Instance.isGameContinue);
-            if (isDestroy) return;
-            transform.Rotate(Vector3.forward, rotateSpeed);
-        }
-    }
+    
 
     private async UniTask ObjPoolingTimer()
     {
         await UniTask.WaitForSeconds(bulletLifeTime);
-        if(isDestroy) return;
-        isDestroy = true;
+        if(isDestroyed) return;
+        isDestroyed = true;
         bulletPool.SetObj(this);
     }
 
     private void OnDisable()
     {
         rigid.simulated = false;
-        isDestroy = true;
+        isDestroyed = true;
     }
 
     private void OnDestroy()
     {
-        isDestroy = true;
+        isDestroyed = true;
     }
 
     public override void ChangeSprite(Sprite powerWeapon)

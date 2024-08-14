@@ -21,13 +21,15 @@ public class PowerMySQLBullet : PlayerBullet
         bulletLifeTime = 5f;
         bulletSpeed = 1f;
         rigid = GetComponent<Rigidbody2D>();
+        bulletVector = Vector2.zero;
     }
 
     // private void Start(){}
 
     private void OnEnable()
     {
-        rigid.velocity = Vector2.zero;
+        bulletVector.x = Random.Range(-3f, -5f);
+
         rotateSpeed = Random.Range(0.8f, 1.2f);
 
         waitInitAndAddForce().Forget();
