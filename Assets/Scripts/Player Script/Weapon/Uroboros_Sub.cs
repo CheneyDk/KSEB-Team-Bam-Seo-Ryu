@@ -44,7 +44,7 @@ public class Uroboros_Sub : PlayerWeapon
         // player can fire imediately
         fireRateTimer = weaponFireRate;
 
-        isPowerWeapon = ScoreManager.instance.recordData.isPythonUpgrade;
+        isPowerWeapon = RE_SaveManager.instance.shopData.isPythonUpgrade;
 
         parent = GameObject.FindWithTag("Player").transform;
         InitPool();

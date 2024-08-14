@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public abstract class RE_SaveData
 {
-    private string fileName;
-    private string directory;
+    [SerializeField] private string fileName;
+    [SerializeField] private string directory;
 
     public RE_SaveData(string _fileName, string _directory)
     {
@@ -65,8 +65,8 @@ public class RecordDatA : RE_SaveData
     public int bestSurvived = 0;
     public int bestWaveReached = 0;
     public int bestLevelReached = 0;
-    public int bestEnemiesDeafeated = 0;
     public int bestTotalDamage = 0;
+    public int bestEnemiesDeafeated = 0;
     public int leastClearTime = int.MaxValue;
 
     public RecordDatA(string _fileName, string _directory) : base(_fileName, _directory)
@@ -87,6 +87,8 @@ public class GameRecord
 
     public List<weaponData> weaponDataList;
     public List<enemiesDeafeatedDatA> enemiesDeafeatedList;
+    public int totalDamage;
+    public int totalEnemiesDeafeated;
 
     public string playDateTime;
 
@@ -99,10 +101,13 @@ public class GameRecord
         isClear = false;
         weaponDataList = new List<weaponData>();
         enemiesDeafeatedList = new List<enemiesDeafeatedDatA>();
+        totalDamage = 0;
+        totalEnemiesDeafeated = 0;
         this.playDateTime = playDateTime;
     }
 }
 
+[System.Serializable]
 public class weaponData
 {
     public string weaponName;
@@ -115,6 +120,7 @@ public class weaponData
     }
 }
 
+[System.Serializable]
 public class enemiesDeafeatedDatA
 {
     public string enemyType;

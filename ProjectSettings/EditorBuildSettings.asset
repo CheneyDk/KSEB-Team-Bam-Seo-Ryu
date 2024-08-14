@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Python.unity
     guid: 410e12ad80eab3745b4618d11cb4ab7c
+  - enabled: 1
+    path: Assets/Scenes/[RE]MainMenuScene.unity
+    guid: f96fbbfe02083d34ba95bfdf58857415
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: c080f3b719729a348894d41ec80d1153, type: 2}

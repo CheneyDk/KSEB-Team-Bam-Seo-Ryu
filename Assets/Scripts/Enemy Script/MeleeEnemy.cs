@@ -112,7 +112,7 @@ public class MeleeEnemy : Enemy
         MeleeEnemyCurHP -= damage;
         if (elixirAdditionalDamageRate > 0)
         {
-            ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
+            RE_SaveManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
         }
         if (MeleeEnemyCurHP <= 0)
         {
@@ -131,7 +131,7 @@ public class MeleeEnemy : Enemy
         ChanceToDropApple(3);
         ChanceToDropRedBlue(0);
 
-        ScoreManager.instance.UpdateEnemiesDeafeated("MeleeEnemyDefeated");
+        RE_SaveManager.instance.EnemyDeafeat("MeleeEnemyDefeated");
     }
 
     private IEnumerator SetActiveToFalse()
@@ -179,7 +179,7 @@ public class MeleeEnemy : Enemy
             MeleeEnemyCurHP -= damage;
             damageTimer += 1f;
 
-            ScoreManager.instance.UpdateDamage("React", damage);
+            RE_SaveManager.instance.UpdateDamage("React", damage);
         }
 
         if (MeleeEnemyCurHP <= 0)

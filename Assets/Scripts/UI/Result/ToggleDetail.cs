@@ -23,10 +23,12 @@ public class ToggleDetail : MonoBehaviour
     public ResultSetter[] setters;
 
     private bool flag = true;
+    private GameRecord gameRecord;
 
     private void Awake()
     {
-        GameOvetText.text = ScoreManager.instance.GetCharacter() + ".exe has stopped working";
+        GameOvetText.text = RE_SaveManager.instance.GetGameRecord().character + ".exe has stopped working";
+        gameRecord = RE_SaveManager.instance.GetGameRecord();
     }
 
     public void Toggle()
@@ -40,12 +42,12 @@ public class ToggleDetail : MonoBehaviour
             flag = false;
             Image buttonImage = button.GetComponent<Image>();
 
-            survived.text = ScoreManager.instance.GetSurvived().ToString();
-            waveReached.text = ScoreManager.instance.GetWave().ToString();
-            levelReached.text = ScoreManager.instance.GetLevel().ToString();
-            enemiesDefeated.text = ScoreManager.instance.GetEnemiesDeafeated().ToString();
+            survived.text = gameRecord.survived.ToString();
+            waveReached.text = gameRecord.waveReached.ToString();
+            levelReached.text = gameRecord.levelReached.ToString();
+            enemiesDefeated.text = gameRecord.totalEnemiesDeafeated.ToString();
 
-            var weapons = ScoreManager.instance.WeaponDamages;
+            var weapons = RE_SaveManager.instance.readOnlyWeaponDataDict;
 
             int cnt = 0;
             foreach (KeyValuePair<string, float> kvp in weapons)

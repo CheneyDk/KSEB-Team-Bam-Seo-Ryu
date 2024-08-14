@@ -144,7 +144,7 @@ public class HeavyEnemy : Enemy
         HeavyEnemyCurHP -= damage;
         if (elixirAdditionalDamageRate > 0)
         {
-            ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
+            RE_SaveManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
         }
         if (HeavyEnemyCurHP <= 0)
         {
@@ -163,7 +163,7 @@ public class HeavyEnemy : Enemy
         ChanceToDropApple(1);
         ChanceToDropRedBlue(5);
 
-        ScoreManager.instance.UpdateEnemiesDeafeated("HeavyEnemyDefeated");
+        RE_SaveManager.instance.EnemyDeafeat("HeavyEnemyDefeated");
     }
 
     private IEnumerator SetActiveToFalse()
@@ -228,7 +228,7 @@ public class HeavyEnemy : Enemy
             HeavyEnemyCurHP -= damage;
             damageTimer += 1f;
 
-            ScoreManager.instance.UpdateDamage("React", damage);
+            RE_SaveManager.instance.UpdateDamage("React", damage);
         }
 
         if (HeavyEnemyCurHP <= 0)

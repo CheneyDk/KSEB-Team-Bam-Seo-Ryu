@@ -11,7 +11,7 @@ public class WeaponSetter : MonoBehaviour
     public TextMeshProUGUI damage;
     public Image graph;
 
-    public void SetAll(WeaponDamagesData data, int total, string charName)
+    public void SetAll(weaponData data, int total, string charName)
     {
         if (data.weaponName != "Basic")
         {
@@ -23,9 +23,9 @@ public class WeaponSetter : MonoBehaviour
         }
 
         weaponName.text = data.weaponName;
-        damage.text = ((int)data.damage).ToString();
+        damage.text = data.weaponDamage.ToString();
 
-        graph.GetComponent<RectTransform>().sizeDelta = new Vector2(data.damage / total * 270, 40);
+        graph.GetComponent<RectTransform>().sizeDelta = new Vector2(data.weaponDamage / total * 270, 40);
     }
 
     public void ResetAll()

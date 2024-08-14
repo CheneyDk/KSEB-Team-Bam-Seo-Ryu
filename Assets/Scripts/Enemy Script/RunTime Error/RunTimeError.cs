@@ -226,7 +226,7 @@ public class RunTimeError : Enemy
         RunTimeErrorCurtHP -= damage;
         if (elixirAdditionalDamageRate > 0)
         {
-            ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
+            RE_SaveManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
         }
         if (RunTimeErrorCurtHP <= 0)
         {
@@ -253,7 +253,7 @@ public class RunTimeError : Enemy
         Destroy(gameObject, runtimeAni.GetCurrentAnimatorStateInfo(0).length + 4f);
         DropEXP(dropExpNumber);
 
-            ScoreManager.instance.UpdateEnemiesDeafeated("RuntimeErrorDeafeated");
+            RE_SaveManager.instance.EnemyDeafeat("RuntimeErrorDeafeated");
     }
 
     public override void ResetEnemy(){}

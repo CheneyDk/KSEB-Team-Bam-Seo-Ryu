@@ -52,7 +52,7 @@ public class BulletWhip : PlayerBullet
             {
                 EnemyComponent.TakeDamage(bulletDamage, critOccur);
 
-                ScoreManager.instance.UpdateDamage("Basic", bulletDamage);
+                RE_SaveManager.instance.UpdateDamage("Basic", bulletDamage);
             }
         }
     }

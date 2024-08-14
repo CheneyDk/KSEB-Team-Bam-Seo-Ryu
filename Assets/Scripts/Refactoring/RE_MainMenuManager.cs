@@ -51,7 +51,7 @@ public class RE_MainMenuManager : MonoBehaviour
 
     private void Start()
     {
-        donateButton.onClick.AddListener(ScoreManager.instance.GetMoney);
+        donateButton.onClick.AddListener(RE_SaveManager.instance.EarnMoney);
     }
 
     public void Toggle(InputAction.CallbackContext context)
@@ -64,6 +64,10 @@ public class RE_MainMenuManager : MonoBehaviour
     public void Toggle()
     {
         window.SetActive(!window.activeSelf);
+    }
+    public void CloseWindow()
+    {
+        window.SetActive(false);
     }
 
     public void MoveScene(string sceneName)

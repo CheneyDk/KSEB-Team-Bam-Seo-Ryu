@@ -137,15 +137,6 @@ public class Player : MonoBehaviour
         sprintCoolDownTimer += Time.deltaTime;
     }
 
-    private void Start()
-    {
-        if (ScoreManager.instance.recordData.isPythonUpgrade && ScoreManager.instance.GetCharacter() == "Python")
-        {
-            //playerArm_1.gameObject.SetActive(true);
-            //playerArm_2.gameObject.SetActive(true);
-        }
-    }
-
     // magnetic item check
     private void CheckItemInRange()
     {
@@ -255,10 +246,10 @@ public class Player : MonoBehaviour
         playerCurHp -= damage;
         if (playerCurHp <= 0)
         {
-            if (ScoreManager.instance.recordData.isPet && isAdd)
+            if (RE_SaveManager.instance.shopData.isPetInstalled && isAdd)
             {
-                ScoreManager.instance.AddWeapon("Pet");
-                ScoreManager.instance.UpdateDamage("Pet", ScoreManager.instance.GetPetDamage());
+                RE_SaveManager.instance.AddWeapon("Pet");
+                RE_SaveManager.instance.UpdateDamage("Pet", RE_SaveManager.instance.GetPetDamage());
 
                 isAdd = false;
             }
@@ -290,7 +281,7 @@ public class Player : MonoBehaviour
         {
             PlayerLevelUp();
             Instantiate(levelUp, transform.position, Quaternion.identity);
-            ScoreManager.instance.UpdateLevel();
+            RE_SaveManager.instance.UpdateGameRecord("level");
         }
     }
 

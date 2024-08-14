@@ -61,7 +61,7 @@ public class UnityBullet : PlayerBullet
                 Instantiate(unityParticle, transform.position, Quaternion.identity);
                 audioSource.PlayOneShot(audioClip);
 
-                ScoreManager.instance.UpdateDamage("Unity", bulletDamage);
+                RE_SaveManager.instance.UpdateDamage("Unity", bulletDamage);
             }
         }
     }

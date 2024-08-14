@@ -12,11 +12,11 @@ public class RE_SaveManager : MonoBehaviour
 {
     public static RE_SaveManager instance;
 
-    private ShopData shopData;
-    private GameDataList gameDataList;
+    public ShopData shopData;
+    public GameDataList gameDataList;
     private RecordDatA recordData;
 
-    public GameRecord gameRecord;
+    private GameRecord gameRecord;
 
     private Dictionary<string, float> weaponDataDict = new Dictionary<string, float>();
     public IReadOnlyDictionary<string, float> readOnlyWeaponDataDict => weaponDataDict;
@@ -40,15 +40,16 @@ public class RE_SaveManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
 
-            shopData = RE_SaveLoader.Load<ShopData>("ShopData", "RecordData");
+            shopData = RE_SaveLoader.Load<ShopData>("ShopData", "SaveFile");
             shopData ??= new ShopData("ShopData", "SaveFile");
 
-            gameDataList = RE_SaveLoader.Load<GameDataList>("GameData", "RecordData");
+            gameDataList = RE_SaveLoader.Load<GameDataList>("GameData", "SaveFile");
             gameDataList ??= new GameDataList("GameData", "SaveFile");
 
-            recordData = RE_SaveLoader.Load<RecordDatA>("RecordData", "RecordData");
+            recordData = RE_SaveLoader.Load<RecordDatA>("RecordData", "SaveFile");
             recordData ??= new RecordDatA("RecordData", "SaveFile");
-            
+            Debug.Log(recordData.totalDamage);
+
             ResetData();
         }
         else
@@ -118,51 +119,57 @@ public class RE_SaveManager : MonoBehaviour
     public void UpdateRecordData(GameRecord gameRecord)
     {
         recordData.totalSurvived += gameRecord.survived;
-        recordData.totalDamage += CalcTotal(gameRecord, "damage");
-        recordData.totalEnemiesDeafeated += CalcTotal(gameRecord, "enemiesDeafeated");
+        recordData.totalDamage += gameRecord.totalDamage;
+        recordData.totalEnemiesDeafeated += gameRecord.totalEnemiesDeafeated;
         recordData.meleeEnemyDefeated += enemiesDeafeatedDict["MeleeEnemyDefeated"];
-        recordData.meleeEnemyDefeated += enemiesDeafeatedDict["RangeEnemyDefeated"];
-        recordData.meleeEnemyDefeated += enemiesDeafeatedDict["HeavyEnemyDefeated"];
-        recordData.meleeEnemyDefeated += enemiesDeafeatedDict["RuntimeErrorDeafeated"];
-        recordData.meleeEnemyDefeated += enemiesDeafeatedDict["LogicErrorDeafeated"];
+        recordData.rangeEnemyDefeated += enemiesDeafeatedDict["RangeEnemyDefeated"];
+        recordData.heavyEnemyDefeated += enemiesDeafeatedDict["HeavyEnemyDefeated"];
+        recordData.runtimeErrorDeafeated += enemiesDeafeatedDict["RuntimeErrorDeafeated"];
+        recordData.logicErrorDeafeated += enemiesDeafeatedDict["LogicErrorDeafeated"];
 
         recordData.bestSurvived = Math.Max(recordData.bestSurvived, gameRecord.survived);
         recordData.bestWaveReached = Math.Max(recordData.bestWaveReached, gameRecord.waveReached);
         recordData.bestLevelReached = Math.Max(recordData.bestLevelReached, gameRecord.levelReached);
-        recordData.bestTotalDamage = Math.Max(recordData.bestTotalDamage, CalcTotal(gameRecord, "damage"));
+        recordData.bestEnemiesDeafeated = Math.Max(recordData.bestEnemiesDeafeated, gameRecord.totalEnemiesDeafeated);
+        recordData.bestTotalDamage = Math.Max(recordData.bestTotalDamage, gameRecord.totalDamage);
         if (gameRecord.isClear)
         {
             recordData.leastClearTime = Math.Min(recordData.leastClearTime, gameRecord.survived);
         }
     }
     //getter
-    private int CalcTotal(GameRecord gameRecord, string record)
+    public GameRecord GetGameRecord()
     {
-        int totalDamage = 0, totalEnemiesDeafeated = 0;
-        foreach (var data in gameRecord.weaponDataList)
+        return gameRecord;
+    }
+    public int GetPetDamage()
+    {
+        return (int)petDamage;
+    }
+    public Dictionary<string, int> GetRecordData()
+    {
+        Dictionary<string, int> recordDataDict = new Dictionary<string, int>
         {
-            totalDamage += data.weaponDamage;
-        }
-        foreach (var data in gameRecord.enemiesDeafeatedList)
-        {
-            totalEnemiesDeafeated += data.deafeatedCount;
-        }
+            {"TotalSurvived", recordData.totalSurvived },
+            {"TotalEnemiesDeafeated", recordData.totalEnemiesDeafeated },
+            {"TotalDamage", recordData.totalDamage },
+            {"MeleeEnemyDefeated", recordData.meleeEnemyDefeated },
+            {"RangeEnemyDefeated", recordData.rangeEnemyDefeated },
+            {"HeavyEnemyDefeated", recordData.heavyEnemyDefeated },
+            {"RuntimeErrorDeafeated", recordData.runtimeErrorDeafeated },
+            {"LogicErrorDeafeated", recordData.logicErrorDeafeated },
+            {"BestSurvived", recordData.bestSurvived },
+            {"BestWaveReached", recordData.bestWaveReached },
+            {"BestLevelReached", recordData.bestLevelReached },
+            {"BestEnemiesDeafeated", recordData.bestEnemiesDeafeated },
+            {"BestTotalDamage", recordData.bestTotalDamage },
+            {"LeastClearTime", recordData.leastClearTime }
+        };
 
-        if (record == "damage")
-        {
-            return totalDamage;
-        }
-        else if (record == "enemiesDeafeated")
-        {
-            return totalEnemiesDeafeated;
-        }
-        else
-        {
-            return 0;
-        }
+        return recordDataDict;
     }
 
-    private void ResetData()
+    public void ResetData()
     {
         gameRecord = new GameRecord(SceneManager.GetActiveScene().name, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
@@ -180,17 +187,22 @@ public class RE_SaveManager : MonoBehaviour
         gameRecord.survived = (int)(Time.time - timer);
         gameRecord.isClear = isClear;
 
-        foreach (KeyValuePair<string, float> kvp in weaponDataDict)
+        foreach (var data in weaponDataDict)
         {
-            gameRecord.weaponDataList.Add(new weaponData(kvp.Key, (int)kvp.Value));
+            gameRecord.weaponDataList.Add(new weaponData(data.Key, (int)data.Value));
+            gameRecord.totalDamage += (int)data.Value;
         }
+        foreach (var data in enemiesDeafeatedDict)
+        {
+            gameRecord.totalEnemiesDeafeated += data.Value;
+        }
+
         gameDataList.gameRecordList.Add(gameRecord);
 
         RE_SaveLoader.Save(gameDataList);
 
         UpdateRecordData(gameRecord);
     }
-
     public void SaveAllData()
     {
         RE_SaveLoader.Save(shopData);
