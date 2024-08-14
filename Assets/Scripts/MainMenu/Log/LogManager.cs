@@ -9,6 +9,11 @@ public class LogManager : MonoBehaviour
     public ColumnManager[] logs;
     public DetailPanel detailPanel;
 
+    private void OnEnable()
+    {
+        SetStart();
+    }
+
     public void SetStart()
     {
         int idx = 0;
