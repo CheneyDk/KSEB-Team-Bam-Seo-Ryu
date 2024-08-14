@@ -13112,6 +13112,7 @@ MonoBehaviour:
   enemiesPoolingZone: {fileID: 646352766}
   warningMarkPoolZone: {fileID: 1226889797}
   powerEnemyRate: 1
+  bossIsAlive: 0
 --- !u!222 &2030385431
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13871,17 +13872,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6011838409572423702, guid: f4e7c543cbf75ef4ba747b6dda930185, type: 3}
-      propertyPath: isPowerWeapon
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6655021394114503263, guid: f4e7c543cbf75ef4ba747b6dda930185, type: 3}
       propertyPath: m_Name
       value: Player_Python
-      objectReference: {fileID: 0}
-    - target: {fileID: 8016675220104967417, guid: f4e7c543cbf75ef4ba747b6dda930185, type: 3}
-      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Fire
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

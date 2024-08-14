@@ -756,6 +756,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1069417129003999180}
     m_Modifications:
     - target: {fileID: -9205788533134039686, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
+      propertyPath: isPowerWeapon
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -9205788533134039686, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
       propertyPath: muzzleBotBack
       value: 
       objectReference: {fileID: 5137905607058869838}
