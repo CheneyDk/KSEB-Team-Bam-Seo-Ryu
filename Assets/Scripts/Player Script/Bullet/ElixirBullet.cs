@@ -13,6 +13,7 @@ public class ElixirBullet : PlayerBullet
     private const float pi = Mathf.PI;
 
     private float bulletFloatingTime;
+    private float bulletCurFloatingTime;
     private float parabolaHeight;
 
     private float bulletRoateSpeed;
@@ -26,32 +27,57 @@ public class ElixirBullet : PlayerBullet
     private bool isNotBounced;
 
     private bool isDestroyed;
+    private bool isSetted;
+    private bool stopRotate;
 
     public Sprite PowerBullet;
     private SpriteRenderer spriteRenderer;
     public ParticleSystem normalParticle;
     public ParticleSystem powerParticle;
     private Vector3 particleScale;
+    private Color originColor;
 
-    void Start()
+    private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        PowerSprite();
-        isDestroyed = false;
-        isNotBounced = true;
-        bulletRoateSpeed = 2f;
-        parabolaHeight = 4f;
-        bulletFloatingTime = 1f; // 2sec
+        originColor = new(1f, 1f, 1f, 1f);
 
         bulletRotateVec = new(0f, 0f, 1f);
 
-        particleScale = new(explodeRange * 2f / 5f, explodeRange * 2f / 5f, explodeRange * 2f / 5f);
-        normalParticle.transform.localScale = particleScale;
-        powerParticle.transform.localScale = particleScale;
+        bulletSpeed = 1f;
+        bulletRoateSpeed = 2f;
+        parabolaHeight = 3f;
+        bulletFloatingTime = 1f; // 1sec
+    }
+
+    private void OnEnable()
+    {
+        isDestroyed = false;
+        isSetted = false;
+        stopRotate = false;
+        isNotBounced = true;
+        bulletCurFloatingTime = bulletFloatingTime;
+
+        WaitForInit().Forget();
 
         ParabolaYFactor().Forget();
         BulletRotate().Forget();
         BottleExplode().Forget();
+    }
+
+    private async UniTask WaitForInit()
+    {
+        await UniTask.WaitUntil(() => isSetted);
+
+        PowerSprite();
+        spriteRenderer.color = originColor;
+    }
+
+    void Start()
+    {
+        particleScale = new(explodeRange * 2f / 5f, explodeRange * 2f / 5f, explodeRange * 2f / 5f);
+        normalParticle.transform.localScale = particleScale;
+        powerParticle.transform.localScale = particleScale; 
     }
 
     void Update()
@@ -62,15 +88,15 @@ public class ElixirBullet : PlayerBullet
     private async UniTask ParabolaYFactor()
     {
         parabolaYTimer = 0f;
-        while (parabolaYTimer < bulletFloatingTime)
+        while (parabolaYTimer < bulletCurFloatingTime)
         {
             await UniTask.Yield();
             if (isDestroyed) return;
             parabolaYTimer += Time.deltaTime;
-            parabolaY = Mathf.Cos(parabolaYTimer * pi / bulletFloatingTime);
+            parabolaY = Mathf.Cos(parabolaYTimer * pi / bulletCurFloatingTime);
             parabolaVector = parabolaHeight * new Vector2(0f, parabolaY);
         }
-        parabolaYTimer = bulletFloatingTime;
+        parabolaYTimer = bulletCurFloatingTime;
         parabolaVector = Vector2.zero;
     }
 
@@ -81,13 +107,14 @@ public class ElixirBullet : PlayerBullet
             await UniTask.Yield();
             await UniTask.WaitUntil(() => GameManager.Instance.isGameContinue);
             if (isDestroyed) return;
+            if (stopRotate) return;
             transform.Rotate(Vector3.forward, bulletRoateSpeed);
         }
     }
 
     private async UniTask BottleExplode()
     {
-        await UniTask.WaitUntil(() => parabolaYTimer == bulletFloatingTime);
+        await UniTask.WaitUntil(() => parabolaYTimer == bulletCurFloatingTime);
         if(isDestroyed) return;
 
         var enemies = Physics2D.OverlapCircleAll(transform.position, explodeRange, 1 << 8);
@@ -108,7 +135,7 @@ public class ElixirBullet : PlayerBullet
         {
             //bulletVector *= 0.7f;
             //parabolaHeight *= 0.7f;
-            bulletFloatingTime *= 0.5f;
+            bulletCurFloatingTime *= 0.5f;
 
             isNotBounced = false;
             ParabolaYFactor().Forget();
@@ -123,7 +150,7 @@ public class ElixirBullet : PlayerBullet
         if (!(isPowerWeapon && isNotBounced))
         {
             bulletVector = Vector3.zero;
-            isDestroyed = true; // to stop rotation
+            stopRotate = true; // to stop rotation
 
             var tempColor = spriteRenderer.color;
             tempColor.a = 0;
@@ -143,7 +170,7 @@ public class ElixirBullet : PlayerBullet
         }
         await UniTask.WaitForSeconds(1f);
         if (isDestroyed) return;
-        Destroy(tempParticle.gameObject);
+        // Destroy(tempParticle.gameObject);
     }
 
     private async UniTask DelayedDestroy()
@@ -165,6 +192,8 @@ public class ElixirBullet : PlayerBullet
         // but it can change in 2 or 3 sec
         bulletSpeed = bulletVector.magnitude;
         bulletVector.Normalize();
+
+        isSetted = true;
     }
 
     private void PowerSprite()
@@ -173,6 +202,11 @@ public class ElixirBullet : PlayerBullet
         {
             spriteRenderer.sprite = PowerBullet;
         }
+    }
+
+    private void OnDisable()
+    {
+        isDestroyed = true;
     }
 
     private void OnDestroy()
