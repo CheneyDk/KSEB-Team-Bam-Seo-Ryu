@@ -82,6 +82,8 @@ public class Player : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip levelUpClip;
 
+    bool isAdd;
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -116,6 +118,7 @@ public class Player : MonoBehaviour
         isEnergyDrinkActive = false;
 
         weaponList.Add("basic", 0);
+        isAdd = true;
     }
 
     private void Update()
@@ -252,10 +255,12 @@ public class Player : MonoBehaviour
         playerCurHp -= damage;
         if (playerCurHp <= 0)
         {
-            if (ScoreManager.instance.recordData.isPet)
+            if (ScoreManager.instance.recordData.isPet && isAdd)
             {
                 ScoreManager.instance.AddWeapon("Pet");
                 ScoreManager.instance.UpdateDamage("Pet", ScoreManager.instance.GetPetDamage());
+
+                isAdd = false;
             }
             //Destroy(gameObject); // player destroy
             //gameObject.SetActive(false); // player obj disable

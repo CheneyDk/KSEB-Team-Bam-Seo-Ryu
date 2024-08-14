@@ -69,6 +69,7 @@ public class CDBullet : PlayerBullet
                 Instantiate(CDParticle, transform.position, Quaternion.identity);
                 audioSource.PlayOneShot(audioClip);
                 enemyComponent.TakeDamage(bulletDamage, critOccur);
+                ScoreManager.instance.UpdateDamage("CD", bulletDamage);
             }
         }
     }
