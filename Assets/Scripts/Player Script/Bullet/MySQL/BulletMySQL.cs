@@ -16,6 +16,7 @@ public class BulletMySQL : PlayerBullet
     private float parabolaSpeed;
     private float parabolaYTimer;
     private const float pi = Mathf.PI;
+    private Vector2 additionalYVec;
 
     private float bulletFloatingTime;
     private float parabolaHeight;
@@ -29,16 +30,20 @@ public class BulletMySQL : PlayerBullet
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
-        bulletLifeTime = 5f;
-        bulletSpeed = 0.5f;
-        bulletVector = Vector2.zero;
+        bulletLifeTime = 2f;
+        bulletSpeed = 1.2f;
+        bulletVector = new(0f, -3f);
+
+        bulletFloatingTime = 1f;
     }
 
     private void OnEnable()
     {
+        isInited = false;
         parabolaVector = Vector2.zero;
-        bulletVector.x = Random.Range(-3f, -5f);
-        parabolaHeight = Random.Range(2f, 3f);
+        bulletVector.x = Random.Range(5f, 8f);
+        VectorXInverse().Forget();
+        parabolaHeight = Random.Range(20f, 24f);
         rotateSpeed = Random.Range(0.8f, 1.2f);
 
         isDestroyed = false;
@@ -48,6 +53,15 @@ public class BulletMySQL : PlayerBullet
 
         // Pooling
         ObjPoolingTimer().Forget();
+    }
+
+    private async UniTask VectorXInverse()
+    {
+        await UniTask.WaitUntil(() => isInited);
+        if (transform.rotation.eulerAngles.y < 1f)
+        {
+            bulletVector.x *= -1f;
+        }
     }
 
     private async UniTask ParabolaYFactor()
@@ -79,7 +93,7 @@ public class BulletMySQL : PlayerBullet
 
     private void Update()
     {
-        transform.Translate((parabolaVector + bulletVector) * bulletSpeed * Time.deltaTime);
+        transform.Translate((parabolaVector + bulletVector ) * bulletSpeed * Time.deltaTime, Space.World);
     }
 
 
@@ -103,7 +117,6 @@ public class BulletMySQL : PlayerBullet
     {
         await UniTask.WaitForSeconds(bulletLifeTime);
         if(isDestroyed) return;
-        isDestroyed = true;
         bulletPool.SetObj(this);
     }
 
