@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -39,6 +40,8 @@ public class MainMenuManager : MonoBehaviour
     public GameObject loadingWindow;
     public GameObject[] loadBarBlock;
 
+    public Button donateButton;
+
     void Awake()
     {
         loadingWindow.SetActive(false);
@@ -50,6 +53,11 @@ public class MainMenuManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.PlayOneShot(startMenuClip);
         instance = this;
+    }
+
+    private void Start()
+    {
+        donateButton.onClick.AddListener(ScoreManager.instance.GetMoney);
     }
 
     public void OnlyDisable()

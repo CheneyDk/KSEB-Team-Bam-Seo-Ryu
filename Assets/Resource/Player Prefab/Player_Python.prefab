@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 2615487855624723305}
   - component: {fileID: 3384030768185287080}
   - component: {fileID: 7533870658903091013}
+  - component: {fileID: 1120427462994726757}
   m_Layer: 0
   m_Name: Player_Python
   m_TagString: Player
@@ -237,8 +238,6 @@ MonoBehaviour:
   sprintCoolDown: 2
   playerAccelerate: 2.5
   playerArm: {fileID: 5702917001411892952}
-  playerArm_1: {fileID: 0}
-  playerArm_2: {fileID: 0}
   weapon: {fileID: 5107621405165049367}
   constText: {fileID: 2799498921057286685}
   energyDrinkTimer: 0
@@ -246,6 +245,7 @@ MonoBehaviour:
   damageNumber: {fileID: 850405986135239423, guid: 1ac856c4fab6fbf439c9afc37ab8dafa, type: 3}
   levelUp: {fileID: 8335586952449206777, guid: 97eb3258d86dffc4caa0d8b3d57db1ae, type: 3}
   hitUIAnimator: {fileID: 0}
+  levelUpClip: {fileID: 8300000, guid: 948ac9103cbdd6a4a907586cf7fa10a7, type: 3}
 --- !u!114 &3384030768185287080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,6 +360,102 @@ MonoBehaviour:
   normalStrength: 5
   normalSmoothing: 1
   computingNormal: 0
+--- !u!82 &1120427462994726757
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882131698887295749}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -8940581273229028357, guid: 25206e11a6499054baa26bdfa0e61ed9, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2799498921057286685
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,6 +773,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UroborosBotFront
       objectReference: {fileID: 0}
+    - target: {fileID: 7562615359646552131, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5312340608209776525, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
     m_RemovedGameObjects: []
@@ -717,6 +817,7 @@ MonoBehaviour:
   bullet: {fileID: 3026141712982231763, guid: 02f9d57bf849c5d4a873fe494722fb99, type: 3}
   normalWeaponSprite: {fileID: 21300000, guid: a6ea495b74bb9534c93aace5dc79a840, type: 3}
   powerWeaponSprite: {fileID: 21300000, guid: a6ea495b74bb9534c93aace5dc79a840, type: 3}
+  bulletPoolObj: {fileID: 0}
   bulletFront: {fileID: 0}
   bulletBack: {fileID: 0}
   bulletPowerFront: {fileID: 0}
@@ -727,6 +828,9 @@ MonoBehaviour:
   muzzleMidBack: {fileID: 0}
   muzzleBotFront: {fileID: 0}
   muzzleBotBack: {fileID: 0}
+  bulletPoolBackObj: {fileID: 0}
+  powerBulletPoolFrontObj: {fileID: 0}
+  powerBulletPoolBackObj: {fileID: 0}
 --- !u!1001 &3172442945326110595
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -821,10 +925,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5702917001411892952}
     m_Modifications:
+    - target: {fileID: -9205788533134039686, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
+      propertyPath: muzzleBotBack
+      value: 
+      objectReference: {fileID: 8476868722841255618}
+    - target: {fileID: -9205788533134039686, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
+      propertyPath: muzzleMidBack
+      value: 
+      objectReference: {fileID: 3625255512348310417}
+    - target: {fileID: -9205788533134039686, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
+      propertyPath: muzzleTopBack
+      value: 
+      objectReference: {fileID: 921493721820321871}
+    - target: {fileID: -9205788533134039686, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
+      propertyPath: muzzleBotFront
+      value: 
+      objectReference: {fileID: 5256665346973437383}
+    - target: {fileID: -9205788533134039686, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
+      propertyPath: muzzleMidFront
+      value: 
+      objectReference: {fileID: 7722867442002773130}
+    - target: {fileID: -9205788533134039686, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
+      propertyPath: muzzleTopFront
+      value: 
+      objectReference: {fileID: 8528957834610837469}
     - target: {fileID: 4328201785060297109, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
       propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 3353965251047889268}
+      objectReference: {fileID: 3327135486484439854}
     - target: {fileID: 4328201785060297109, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
       propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: Uroboros_Sub, Assembly-CSharp
@@ -897,21 +1025,12 @@ PrefabInstance:
     - {fileID: 5312340608209776525, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7562615359646552131, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3353965251047889268}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
---- !u!1 &5107621405165049367 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7562615359646552131, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
-  m_PrefabInstance: {fileID: 3319755469197542996}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3353965251047889268
+--- !u!114 &3327135486484439854 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: -9205788533134039686, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
+  m_PrefabInstance: {fileID: 3319755469197542996}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5107621405165049367}
   m_Enabled: 1
@@ -919,25 +1038,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ce7fd2e534f7384d9008681ed07118c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDamageRate: 0
-  weaponLevel: 1
-  isMaxLevel: 0
-  isPowerWeapon: 0
-  matchPassive: 
-  muzzle: {fileID: 0}
-  bullet: {fileID: 0}
-  normalWeaponSprite: {fileID: 21300000, guid: a6ea495b74bb9534c93aace5dc79a840, type: 3}
-  powerWeaponSprite: {fileID: 21300000, guid: a6ea495b74bb9534c93aace5dc79a840, type: 3}
-  bulletFront: {fileID: 3026141712982231763, guid: 02f9d57bf849c5d4a873fe494722fb99, type: 3}
-  bulletBack: {fileID: 3675868750621725284, guid: 68ee2c4cfd67a094a9d3673661b2e532, type: 3}
-  bulletPowerFront: {fileID: 0}
-  bulletPowerBack: {fileID: 0}
-  muzzleTopFront: {fileID: 8528957834610837469}
-  muzzleTopBack: {fileID: 921493721820321871}
-  muzzleMidFront: {fileID: 7722867442002773130}
-  muzzleMidBack: {fileID: 3625255512348310417}
-  muzzleBotFront: {fileID: 5256665346973437383}
-  muzzleBotBack: {fileID: 8476868722841255618}
+--- !u!1 &5107621405165049367 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7562615359646552131, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
+  m_PrefabInstance: {fileID: 3319755469197542996}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7722867442002773130 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4989714642196447966, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
@@ -1027,6 +1132,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UroborosTopFront
       objectReference: {fileID: 0}
+    - target: {fileID: 7562615359646552131, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5312340608209776525, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}
     m_RemovedGameObjects: []
@@ -1062,6 +1171,7 @@ MonoBehaviour:
   bullet: {fileID: 3026141712982231763, guid: 02f9d57bf849c5d4a873fe494722fb99, type: 3}
   normalWeaponSprite: {fileID: 21300000, guid: a6ea495b74bb9534c93aace5dc79a840, type: 3}
   powerWeaponSprite: {fileID: 21300000, guid: a6ea495b74bb9534c93aace5dc79a840, type: 3}
+  bulletPoolObj: {fileID: 0}
   bulletFront: {fileID: 0}
   bulletBack: {fileID: 0}
   bulletPowerFront: {fileID: 0}
@@ -1072,6 +1182,9 @@ MonoBehaviour:
   muzzleMidBack: {fileID: 0}
   muzzleBotFront: {fileID: 0}
   muzzleBotBack: {fileID: 0}
+  bulletPoolBackObj: {fileID: 0}
+  powerBulletPoolFrontObj: {fileID: 0}
+  powerBulletPoolBackObj: {fileID: 0}
 --- !u!4 &8528957834610837469 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4989714642196447966, guid: 8e86b446a3de4b9489ad49858df245e1, type: 3}

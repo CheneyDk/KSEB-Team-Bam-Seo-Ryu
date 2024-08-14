@@ -53,6 +53,7 @@ public class MiniCD : PlayerBullet
                 Instantiate(CDparticle, transform.position, Quaternion.identity);
                 audioSource.PlayOneShot(audioClip);
                 enemyComponent.TakeDamage(bulletDamage, critOccur);
+                ScoreManager.instance.UpdateDamage("CD", bulletDamage);
             }
 
         }

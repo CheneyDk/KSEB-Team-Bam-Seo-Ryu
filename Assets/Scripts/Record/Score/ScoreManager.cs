@@ -44,7 +44,7 @@ public class ScoreManager : MonoBehaviour
         }
         else
         {
-            return;
+            Destroy(gameObject);
         }
     }
 
@@ -103,16 +103,7 @@ public class ScoreManager : MonoBehaviour
         timer = Time.time;
 
         scoreData.character = SceneManager.GetActiveScene().name;
-        // 씬 이름 최종결정 시 삭제
-        if (scoreData.character == "UDD")
-        {
-            scoreData.character = "Python";
-        }
-        else if (scoreData.character == "CSharpGame")
-        {
-            scoreData.character = "C";
-        }
-
+        
         petDamage = 0;
     }
 
@@ -183,9 +174,9 @@ public class ScoreManager : MonoBehaviour
         return scoreData.survived;
     }
 
-    public void GetMoney(int money)
+    public void GetMoney()
     {
-        recordData.money += money;
+        recordData.money += 500;
     }
 
     public void UpdatePetDamage(float dmg)
