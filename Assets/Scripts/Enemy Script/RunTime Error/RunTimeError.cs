@@ -281,6 +281,7 @@ public class RunTimeError : Enemy
         DropEXP(dropExpNumber);
 
             RE_SaveManager.instance.EnemyDeafeat("RuntimeErrorDeafeated");
+        RE_SaveManager.instance.AddScore(30);
     }
 
     public override void ResetEnemy(){}

@@ -407,6 +407,7 @@ public class SnakeLogicError : Enemy
         DropEXP(dropExpNumber);
 
         RE_SaveManager.instance.EnemyDeafeat("LogicErrorDeafeated");
+        RE_SaveManager.instance.AddScore(100);
     }
 
     private async UniTask CallDeadFunc()
