@@ -303,6 +303,10 @@ public class UpgradeManager : MonoBehaviour
             {
                 ItemPooling.Instance.GetRedBlue(GameObject.FindGameObjectWithTag("Player").transform.position);
             }
+            else if (item.itemName == "BitCoin")
+            {
+                ItemPooling.Instance.GetBitCoin(GameObject.FindGameObjectWithTag("Player").transform.position);
+            }
         }
 
         // 레업이라 무기들 나오기

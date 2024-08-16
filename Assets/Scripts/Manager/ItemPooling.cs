@@ -14,6 +14,8 @@ public class ItemPooling : MonoBehaviour
     [SerializeField] 
     private GameObject redblue;
     [SerializeField]
+    private GameObject bitcoin;
+    [SerializeField]
     private Transform itemPoolingZone;
 
     public Queue<GameObject> EXPPool = new();
@@ -52,6 +54,15 @@ public class ItemPooling : MonoBehaviour
     private void GenerateRedBlue()
     {
         var tempItem = Instantiate(redblue);
+        tempItem.SetActive(false);
+        tempItem.transform.parent = itemPoolingZone;
+
+        redbluePool.Enqueue(tempItem);
+    }
+
+    private void GenerateBitCoin()
+    {
+        var tempItem = Instantiate(bitcoin);
         tempItem.SetActive(false);
         tempItem.transform.parent = itemPoolingZone;
 
@@ -103,6 +114,21 @@ public class ItemPooling : MonoBehaviour
         return item;
     }
 
+    public GameObject GetBitCoin(Vector3 spawnPos)
+    {
+        if (redbluePool.Count < 1)
+        {
+            GenerateBitCoin();
+        }
+        var item = redbluePool.Dequeue();
+
+        item.GetComponent<Item>().isDestroyed = false;
+        item.gameObject.layer = 6;
+        item.gameObject.SetActive(true);
+        item.transform.position = spawnPos;
+        return item;
+    }
+
     //오브젝트 넣어서 재활용
     public void ReturnEXP(GameObject item)
     {
@@ -119,6 +145,14 @@ public class ItemPooling : MonoBehaviour
         applePool.Enqueue(item);
     }
     public void ReturnRedBlue(GameObject item)
+    {
+        item.gameObject.SetActive(false);
+        item.transform.parent = itemPoolingZone;
+        item.GetComponent<Item>().isDestroyed = true;
+        redbluePool.Enqueue(item);
+    }
+
+    public void ReturnBitCoin(GameObject item)
     {
         item.gameObject.SetActive(false);
         item.transform.parent = itemPoolingZone;

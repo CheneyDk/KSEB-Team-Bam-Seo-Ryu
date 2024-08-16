@@ -230,6 +230,7 @@ MonoBehaviour:
   EXP: {fileID: 2828242351688375285, guid: 9f21b77202f043d45a40df1d9c28c4d8, type: 3}
   apple: {fileID: 256046693093680286, guid: 9b4d105ecc7ec8444a24bfdfbcc172d3, type: 3}
   redblue: {fileID: 9016300061562779816, guid: 47346b2d9ec8afd4ea20100a7c916bf2, type: 3}
+  bitcoin: {fileID: 0}
   itemPoolingZone: {fileID: 733847896}
 --- !u!1001 &103196731
 PrefabInstance:

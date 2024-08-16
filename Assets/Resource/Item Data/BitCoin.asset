@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eca71ca24a078264b9780d1aee7c37ec, type: 3}
-  m_Name: Apple 2
+  m_Name: BitCoin
   m_EditorClassIdentifier: 
-  item: {fileID: 256046693093680286, guid: 9b4d105ecc7ec8444a24bfdfbcc172d3, type: 3}
-  itemImage: {fileID: 21300000, guid: 94084c4cde9f1fa4aae2f93857e5165a, type: 3}
-  itemName: Apple
-  itemDesc: '{ HP + 10 }'
+  item: {fileID: 1872456878674636546, guid: 4f84bc5afa53eb0409c2cbfbb536f862, type: 3}
+  itemImage: {fileID: 21300000, guid: a0c7241cefe91a64da51627a685a4711, type: 3}
+  itemName: BitCoin
+  itemDesc: '{ + 50 Point }'
   powerImage: {fileID: 0}
   powerName: 
   powerDesc: 
