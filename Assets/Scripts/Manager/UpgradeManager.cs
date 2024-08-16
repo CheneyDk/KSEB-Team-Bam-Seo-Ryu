@@ -66,7 +66,7 @@ public class UpgradeManager : MonoBehaviour
             weaponDataDict.Add(data.name, data);
         }
 
-        foreach (string name in RE_SaveManager.instance.shopData.installedItemList)
+        foreach (string name in ScoreManager.instance.recordData.installedItems)
         {
             weaponDataList.Add(weaponDataDict[name]);
         }
@@ -110,7 +110,7 @@ public class UpgradeManager : MonoBehaviour
             isLevelUp = levelup;
             sourceDataList = listForWeapons;
             itemList = playerWeaponList;
-            CheckMaxLevelItem(playerWeaponBag);
+            CheckMaxLevelItem(playerWeaponBag); 
             ItemToSelectedItems(selectedItems, sourceDataList, itemList, selectedWeaponList);
         }
         else if (levelup == false)
@@ -367,7 +367,7 @@ public class UpgradeManager : MonoBehaviour
                 gameUI.WeaponIconList(itemList);
                 AddWeaponToPlayer(item.item);
                 gameUI.AddWeaponLevel(playerWeaponBag);
-                RE_SaveManager.instance.AddWeapon(item.itemName);
+                ScoreManager.instance.AddWeapon(item.itemName);
             }
             else if (itemList == playerPassiveList)
             {
