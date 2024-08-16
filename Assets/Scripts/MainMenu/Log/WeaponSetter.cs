@@ -25,7 +25,7 @@ public class WeaponSetter : MonoBehaviour
         weaponName.text = data.weaponName;
         damage.text = data.weaponDamage.ToString();
 
-        graph.GetComponent<RectTransform>().sizeDelta = new Vector2(data.weaponDamage / total * 270, 40);
+        graph.GetComponent<RectTransform>().sizeDelta = new Vector2((data.weaponDamage / (float)total) * 270, 40);
     }
 
     public void ResetAll()
