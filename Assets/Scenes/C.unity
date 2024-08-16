@@ -3421,7 +3421,7 @@ GameObject:
   m_Component:
   - component: {fileID: 646352766}
   m_Layer: 0
-  m_Name: EnemiesPooling Zone
+  m_Name: Enemies Pool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3925,7 +3925,7 @@ GameObject:
   m_Component:
   - component: {fileID: 733847896}
   m_Layer: 0
-  m_Name: ItemsPoolingZone
+  m_Name: Items Pool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4810,7 +4810,7 @@ GameObject:
   m_Component:
   - component: {fileID: 803650980}
   m_Layer: 0
-  m_Name: PlayerBulletPool
+  m_Name: PlayerBullet Pool
   m_TagString: PlayerBulletPool
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
