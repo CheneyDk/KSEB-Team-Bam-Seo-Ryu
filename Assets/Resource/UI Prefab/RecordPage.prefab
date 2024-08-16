@@ -1126,8 +1126,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1637228480376183806}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.14285713}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2825,9 +2825,9 @@ RectTransform:
   m_Father: {fileID: 9133140847419628040}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -17, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &4655984475802040390
 CanvasRenderer:
@@ -3063,14 +3063,14 @@ GameObject:
   - component: {fileID: 3618729595932871242}
   - component: {fileID: 9006317222996228494}
   - component: {fileID: 801362461140934170}
-  - component: {fileID: 4191687147835716546}
+  - component: {fileID: 4955850847927844542}
   m_Layer: 5
   m_Name: RecordPage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3618729595932871242
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3131,7 +3131,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4191687147835716546
+--- !u!114 &4955850847927844542
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3140,38 +3140,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 3524477290701687910}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33fc5b32d65bbd24990710b9b7ff91e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 091fc48bad2916746a67188f4cb00696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   texts:
-  - {fileID: 5438512963222849596}
-  - {fileID: 8956628589074391687}
-  - {fileID: 4332616731543004992}
-  - {fileID: 5306153096526943060}
-  - {fileID: 3838704531442172657}
-  - {fileID: 3543788715635454553}
-  - {fileID: 8573986608465782074}
-  - {fileID: 3458882413636429384}
-  - {fileID: 2958421085589675415}
-  - {fileID: 4336136317578336544}
-  - {fileID: 1061103087978452933}
-  - {fileID: 6679037765419699681}
-  - {fileID: 5381100979087083761}
-  - {fileID: 4764530349061965968}
   - {fileID: 3015622963252476838}
   - {fileID: 1459801641683705151}
   - {fileID: 7168669142489084198}
-  - {fileID: 468141286164250077}
-  - {fileID: 6947081319208652135}
   - {fileID: 5436690990923647119}
   - {fileID: 3757137565583359816}
   - {fileID: 6029043088966940982}
+  - {fileID: 468141286164250077}
+  - {fileID: 6947081319208652135}
   - {fileID: 5481878771082026194}
   - {fileID: 6094832307150651684}
   - {fileID: 1700423549275654446}
   - {fileID: 7144740968540169785}
   - {fileID: 1756034337678076295}
   - {fileID: 1776543647884690370}
+  - {fileID: 5438512963222849596}
+  - {fileID: 8956628589074391687}
+  - {fileID: 4332616731543004992}
+  - {fileID: 3543788715635454553}
+  - {fileID: 8573986608465782074}
+  - {fileID: 3458882413636429384}
+  - {fileID: 5306153096526943060}
+  - {fileID: 3838704531442172657}
+  - {fileID: 2958421085589675415}
+  - {fileID: 4336136317578336544}
+  - {fileID: 1061103087978452933}
+  - {fileID: 6679037765419699681}
+  - {fileID: 5381100979087083761}
+  - {fileID: 4764530349061965968}
 --- !u!1 &3563376143382792536
 GameObject:
   m_ObjectHideFlags: 0

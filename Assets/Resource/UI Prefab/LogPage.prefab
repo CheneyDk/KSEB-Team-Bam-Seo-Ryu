@@ -591,7 +591,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2982300352734673790
 RectTransform:
   m_ObjectHideFlags: 0
@@ -689,7 +689,7 @@ GameObject:
   - component: {fileID: 8348288590312449424}
   - component: {fileID: 2612779570213446416}
   - component: {fileID: 2713951003145497742}
-  - component: {fileID: 6886434525589315510}
+  - component: {fileID: 4861362977426728919}
   m_Layer: 5
   m_Name: Log10
   m_TagString: Untagged
@@ -760,7 +760,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6886434525589315510
+--- !u!114 &4861362977426728919
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -769,7 +769,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 241078877147970103}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a7b61a01c0054249a8fbd373cdad51c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a1783ec51eb40c419aafcfb6aa24fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wave: {fileID: 8454079471089557111}
@@ -2571,7 +2571,7 @@ GameObject:
   - component: {fileID: 6099299972270335154}
   - component: {fileID: 3995111176036451040}
   - component: {fileID: 7604816533037877615}
-  - component: {fileID: 9012828505914588422}
+  - component: {fileID: 6200533474037868318}
   m_Layer: 5
   m_Name: Log3
   m_TagString: Untagged
@@ -2642,7 +2642,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &9012828505914588422
+--- !u!114 &6200533474037868318
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2651,7 +2651,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 795908694986693407}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a7b61a01c0054249a8fbd373cdad51c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a1783ec51eb40c419aafcfb6aa24fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wave: {fileID: 13834603268220096}
@@ -2670,7 +2670,7 @@ GameObject:
   - component: {fileID: 8562674871327879913}
   - component: {fileID: 8809917435181959195}
   - component: {fileID: 3158795426456623645}
-  - component: {fileID: 3628555394856369128}
+  - component: {fileID: 4436510223985656776}
   m_Layer: 5
   m_Name: Log2
   m_TagString: Untagged
@@ -2741,7 +2741,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3628555394856369128
+--- !u!114 &4436510223985656776
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2750,7 +2750,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 839957747847004456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a7b61a01c0054249a8fbd373cdad51c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a1783ec51eb40c419aafcfb6aa24fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wave: {fileID: 4315578344482462878}
@@ -2880,19 +2880,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: OpenPanel
-        m_Mode: 5
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Detail
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 8788304473863904727}
-        m_TargetAssemblyTypeName: LogManager, Assembly-CSharp
+      - m_Target: {fileID: 4218845352964877365}
+        m_TargetAssemblyTypeName: RE_LogManager, Assembly-CSharp
         m_MethodName: SetDetails
         m_Mode: 3
         m_Arguments:
@@ -3732,19 +3732,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: OpenPanel
-        m_Mode: 5
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Detail
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 8788304473863904727}
-        m_TargetAssemblyTypeName: LogManager, Assembly-CSharp
+      - m_Target: {fileID: 4218845352964877365}
+        m_TargetAssemblyTypeName: RE_LogManager, Assembly-CSharp
         m_MethodName: SetDetails
         m_Mode: 3
         m_Arguments:
@@ -4011,19 +4011,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: OpenPanel
-        m_Mode: 5
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Detail
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 8788304473863904727}
-        m_TargetAssemblyTypeName: LogManager, Assembly-CSharp
+      - m_Target: {fileID: 4218845352964877365}
+        m_TargetAssemblyTypeName: RE_LogManager, Assembly-CSharp
         m_MethodName: SetDetails
         m_Mode: 3
         m_Arguments:
@@ -5319,19 +5319,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: OpenPanel
-        m_Mode: 5
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Detail
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 8788304473863904727}
-        m_TargetAssemblyTypeName: LogManager, Assembly-CSharp
+      - m_Target: {fileID: 4218845352964877365}
+        m_TargetAssemblyTypeName: RE_LogManager, Assembly-CSharp
         m_MethodName: SetDetails
         m_Mode: 3
         m_Arguments:
@@ -5354,7 +5354,7 @@ GameObject:
   - component: {fileID: 7152533468186236128}
   - component: {fileID: 1445928653522572767}
   - component: {fileID: 7478596977575787038}
-  - component: {fileID: 8788304473863904727}
+  - component: {fileID: 4218845352964877365}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -5420,7 +5420,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 19ce11489c0fa2f4d8891c87dbac4fba, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5445,7 +5445,7 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 3, y: 3}
   m_UseGraphicAlpha: 1
---- !u!114 &8788304473863904727
+--- !u!114 &4218845352964877365
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5454,20 +5454,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 2739989516863575087}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2712f62c730945f4a96a53d5493ba9d8, type: 3}
+  m_Script: {fileID: 11500000, guid: c3a2b4842b5820348a16c02379b56ce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   logs:
-  - {fileID: 8582051107313993967}
-  - {fileID: 3628555394856369128}
-  - {fileID: 9012828505914588422}
-  - {fileID: 627824632776086854}
-  - {fileID: 9133729072599668616}
-  - {fileID: 8150537690357265748}
-  - {fileID: 3077423049659288955}
-  - {fileID: 7603070119830117333}
-  - {fileID: 8315759498844508332}
-  - {fileID: 6886434525589315510}
+  - {fileID: 2435888663520759012}
+  - {fileID: 4436510223985656776}
+  - {fileID: 6200533474037868318}
+  - {fileID: 8207639162554022434}
+  - {fileID: 3161587853859373011}
+  - {fileID: 3599828717222664659}
+  - {fileID: 7836207808135689112}
+  - {fileID: 6824455913475656826}
+  - {fileID: 9133599750195884519}
+  - {fileID: 4861362977426728919}
   detailPanel: {fileID: 6922603968335034953}
 --- !u!1 &2799153895602815892
 GameObject:
@@ -6475,19 +6475,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: OpenPanel
-        m_Mode: 5
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Detail
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 8788304473863904727}
-        m_TargetAssemblyTypeName: LogManager, Assembly-CSharp
+      - m_Target: {fileID: 4218845352964877365}
+        m_TargetAssemblyTypeName: RE_LogManager, Assembly-CSharp
         m_MethodName: SetDetails
         m_Mode: 3
         m_Arguments:
@@ -7251,9 +7251,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 182226653828662740}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
+        m_MethodName: ClosePanel
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8747,7 +8747,7 @@ GameObject:
   - component: {fileID: 2931723184508233140}
   - component: {fileID: 4207572331648401168}
   - component: {fileID: 7405098402662659818}
-  - component: {fileID: 8150537690357265748}
+  - component: {fileID: 3599828717222664659}
   m_Layer: 5
   m_Name: Log6
   m_TagString: Untagged
@@ -8818,7 +8818,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8150537690357265748
+--- !u!114 &3599828717222664659
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8827,7 +8827,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4799999375072830144}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a7b61a01c0054249a8fbd373cdad51c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a1783ec51eb40c419aafcfb6aa24fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wave: {fileID: 4819329221524665469}
@@ -9091,19 +9091,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: OpenPanel
-        m_Mode: 5
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Detail
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 8788304473863904727}
-        m_TargetAssemblyTypeName: LogManager, Assembly-CSharp
+      - m_Target: {fileID: 4218845352964877365}
+        m_TargetAssemblyTypeName: RE_LogManager, Assembly-CSharp
         m_MethodName: SetDetails
         m_Mode: 3
         m_Arguments:
@@ -9468,7 +9468,7 @@ GameObject:
   - component: {fileID: 253162358745001378}
   - component: {fileID: 243276276309025115}
   - component: {fileID: 7455931859977058357}
-  - component: {fileID: 9133729072599668616}
+  - component: {fileID: 3161587853859373011}
   m_Layer: 5
   m_Name: Log5
   m_TagString: Untagged
@@ -9539,7 +9539,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &9133729072599668616
+--- !u!114 &3161587853859373011
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9548,7 +9548,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5022983624675506758}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a7b61a01c0054249a8fbd373cdad51c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a1783ec51eb40c419aafcfb6aa24fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wave: {fileID: 8146298352190852315}
@@ -11020,19 +11020,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: OpenPanel
-        m_Mode: 5
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Detail
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 8788304473863904727}
-        m_TargetAssemblyTypeName: LogManager, Assembly-CSharp
+      - m_Target: {fileID: 4218845352964877365}
+        m_TargetAssemblyTypeName: RE_LogManager, Assembly-CSharp
         m_MethodName: SetDetails
         m_Mode: 3
         m_Arguments:
@@ -11165,19 +11165,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: OpenPanel
-        m_Mode: 5
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Detail
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 8788304473863904727}
-        m_TargetAssemblyTypeName: LogManager, Assembly-CSharp
+      - m_Target: {fileID: 4218845352964877365}
+        m_TargetAssemblyTypeName: RE_LogManager, Assembly-CSharp
         m_MethodName: SetDetails
         m_Mode: 3
         m_Arguments:
@@ -11916,7 +11916,7 @@ GameObject:
   - component: {fileID: 9112983161412552533}
   - component: {fileID: 2745510166847022062}
   - component: {fileID: 1016682275066995613}
-  - component: {fileID: 627824632776086854}
+  - component: {fileID: 8207639162554022434}
   m_Layer: 5
   m_Name: Log4
   m_TagString: Untagged
@@ -11987,7 +11987,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &627824632776086854
+--- !u!114 &8207639162554022434
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11996,7 +11996,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6245510915370185978}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a7b61a01c0054249a8fbd373cdad51c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a1783ec51eb40c419aafcfb6aa24fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wave: {fileID: 8332895385066663049}
@@ -12195,7 +12195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7870619485549790237
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13345,7 +13345,7 @@ GameObject:
   - component: {fileID: 3244804919249384694}
   - component: {fileID: 4603253203593972302}
   - component: {fileID: 6347532404533036007}
-  - component: {fileID: 8315759498844508332}
+  - component: {fileID: 9133599750195884519}
   m_Layer: 5
   m_Name: Log9
   m_TagString: Untagged
@@ -13416,7 +13416,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8315759498844508332
+--- !u!114 &9133599750195884519
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13425,7 +13425,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7396892919381107824}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a7b61a01c0054249a8fbd373cdad51c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a1783ec51eb40c419aafcfb6aa24fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wave: {fileID: 575193560097764385}
@@ -13444,7 +13444,7 @@ GameObject:
   - component: {fileID: 1827087783961670185}
   - component: {fileID: 2995198872710020100}
   - component: {fileID: 2767461979804733980}
-  - component: {fileID: 3077423049659288955}
+  - component: {fileID: 7836207808135689112}
   m_Layer: 5
   m_Name: Log7
   m_TagString: Untagged
@@ -13515,7 +13515,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3077423049659288955
+--- !u!114 &7836207808135689112
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13524,14 +13524,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7426948832987757715}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a7b61a01c0054249a8fbd373cdad51c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a1783ec51eb40c419aafcfb6aa24fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wave: {fileID: 1100300361955874941}
-  level: {fileID: 6860744745212881503}
-  kills: {fileID: 5896857340438800134}
-  damage: {fileID: 190947713704939866}
-  dateTime: {fileID: 8371035373315812652}
+  level: {fileID: 5871190578138775076}
+  kills: {fileID: 7338620115987388825}
+  damage: {fileID: 8335183772736948904}
+  dateTime: {fileID: 6993651163100078197}
 --- !u!1 &7510535419160364400
 GameObject:
   m_ObjectHideFlags: 0
@@ -13788,19 +13788,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: OpenPanel
-        m_Mode: 5
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Detail
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 8788304473863904727}
-        m_TargetAssemblyTypeName: LogManager, Assembly-CSharp
+      - m_Target: {fileID: 4218845352964877365}
+        m_TargetAssemblyTypeName: RE_LogManager, Assembly-CSharp
         m_MethodName: SetDetails
         m_Mode: 3
         m_Arguments:
@@ -13913,7 +13913,7 @@ GameObject:
   - component: {fileID: 9034337386401161058}
   - component: {fileID: 7225371131506517928}
   - component: {fileID: 5845465765963305642}
-  - component: {fileID: 8582051107313993967}
+  - component: {fileID: 2435888663520759012}
   m_Layer: 5
   m_Name: Log1
   m_TagString: Untagged
@@ -13984,7 +13984,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8582051107313993967
+--- !u!114 &2435888663520759012
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13993,7 +13993,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7765567606739679220}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a7b61a01c0054249a8fbd373cdad51c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a1783ec51eb40c419aafcfb6aa24fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wave: {fileID: 3718570413567624634}
@@ -14659,19 +14659,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: OpenPanel
-        m_Mode: 5
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Detail
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 8788304473863904727}
-        m_TargetAssemblyTypeName: LogManager, Assembly-CSharp
+      - m_Target: {fileID: 4218845352964877365}
+        m_TargetAssemblyTypeName: RE_LogManager, Assembly-CSharp
         m_MethodName: SetDetails
         m_Mode: 3
         m_Arguments:
@@ -15095,7 +15095,7 @@ GameObject:
   - component: {fileID: 6210686252876664532}
   - component: {fileID: 1421224176408219969}
   - component: {fileID: 1563605582537969074}
-  - component: {fileID: 7603070119830117333}
+  - component: {fileID: 6824455913475656826}
   m_Layer: 5
   m_Name: Log8
   m_TagString: Untagged
@@ -15166,7 +15166,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7603070119830117333
+--- !u!114 &6824455913475656826
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15175,7 +15175,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8535993742958927216}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a7b61a01c0054249a8fbd373cdad51c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a1783ec51eb40c419aafcfb6aa24fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wave: {fileID: 8741497133708476582}

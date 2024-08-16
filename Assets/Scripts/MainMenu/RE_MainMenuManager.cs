@@ -9,31 +9,23 @@ using UnityEngine.UI;
 using VInspector;
 using static UnityEngine.UI.Image;
 
-public class MainMenuManager : MonoBehaviour
+public class RE_MainMenuManager : MonoBehaviour
 {
-    public static MainMenuManager instance;
+    public static RE_MainMenuManager instance;
 
     [Foldout("Icon")]
     public GameObject window;
-    public GameObject log;
-    public GameObject detail;
-    public GameObject record;
-    public GameObject shop;
     public Slider SoundSlider;
-    public GameObject I_100;
-    public GameObject I_66;
-    public GameObject I_33;
-    public GameObject I_0;
-    public GameObject I_Except;
+    public GameObject Icon100;
+    public GameObject Icon66;
+    public GameObject Icon33;
+    public GameObject Icon0;
+    public GameObject IconExcept;
     [EndFoldout]
 
     public Texture2D normalCursor;
     public Texture2D spaghettiCursor;
     private bool isSpaghettiCursor = false;
-
-    public LogManager logManager;
-
-    private float Origin = 100;
 
     private AudioSource audioSource;
     public AudioClip startMenuClip;
@@ -49,10 +41,12 @@ public class MainMenuManager : MonoBehaviour
     public GameObject teamCreditWindow;
     private bool openCredit = false;
 
+    private float originSoundValue = 100;
+
     void Awake()
     {
         loadingWindow.SetActive(false);
-        foreach(var item in loadBarBlock)
+        foreach (var item in loadBarBlock)
         {
             item.gameObject.SetActive(false);
         }
@@ -62,7 +56,7 @@ public class MainMenuManager : MonoBehaviour
         instance = this;
     }
 
-    public void ChangeCursore()
+    public void ChangeMouseCursor()
     {
         isSpaghettiCursor = !isSpaghettiCursor;
         if (isSpaghettiCursor)
@@ -79,15 +73,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void Start()
     {
-        donateButton.onClick.AddListener(ScoreManager.instance.GetMoney);
-    }
-
-    public void OnlyDisable()
-    {
-        if (window.activeSelf)
-        {
-            window.SetActive(false);
-        }
+        donateButton.onClick.AddListener(RE_SaveManager.instance.EarnMoney);
     }
 
     public void Toggle(InputAction.CallbackContext context)
@@ -100,6 +86,10 @@ public class MainMenuManager : MonoBehaviour
     public void Toggle()
     {
         window.SetActive(!window.activeSelf);
+    }
+    public void CloseWindow()
+    {
+        window.SetActive(false);
     }
 
     public void MoveScene(string sceneName)
@@ -137,38 +127,38 @@ public class MainMenuManager : MonoBehaviour
     }
 
 
-    public void ChangeIcon(float value)
+    public void ChangeSoundIcon(float value)
     {
         if (value >= 66)
         {
-            I_100.SetActive(true);
-            I_66.SetActive(false);
-            I_33.SetActive(false);
-            I_0.SetActive(false);
-            I_Except.SetActive(false);
+            Icon100.SetActive(true);
+            Icon66.SetActive(false);
+            Icon33.SetActive(false);
+            Icon0.SetActive(false);
+            IconExcept.SetActive(false);
         }
         else if (value >= 33)
         {
-            I_100.SetActive(false);
-            I_66.SetActive(true);
-            I_33.SetActive(false);
-            I_0.SetActive(false);
-            I_Except.SetActive(false);
+            Icon100.SetActive(false);
+            Icon66.SetActive(true);
+            Icon33.SetActive(false);
+            Icon0.SetActive(false);
+            IconExcept.SetActive(false);
         }
         else if (value > 0)
         {
-            I_100.SetActive(false);
-            I_66.SetActive(false);
-            I_33.SetActive(true);
-            I_0.SetActive(false);
-            I_Except.SetActive(false);
+            Icon100.SetActive(false);
+            Icon66.SetActive(false);
+            Icon33.SetActive(true);
+            Icon0.SetActive(false);
+            IconExcept.SetActive(false);
         }
         else if (value == 0)
         {
-            I_100.SetActive(false);
-            I_66.SetActive(false);
-            I_33.SetActive(false);
-            I_0.SetActive(true);
+            Icon100.SetActive(false);
+            Icon66.SetActive(false);
+            Icon33.SetActive(false);
+            Icon0.SetActive(true);
         }
     }
 
@@ -176,86 +166,32 @@ public class MainMenuManager : MonoBehaviour
     {
         if (SoundSlider.value == 0)
         {
-            if (I_0.activeSelf)
+            if (Icon0.activeSelf)
             {
-                I_0.SetActive(false);
-                I_Except.SetActive(true);
+                Icon0.SetActive(false);
+                IconExcept.SetActive(true);
             }
             else
             {
-                I_0.SetActive(true);
-                I_Except.SetActive(false);
+                Icon0.SetActive(true);
+                IconExcept.SetActive(false);
             }
         }
         else
         {
-            if (I_0.activeSelf)
+            if (Icon0.activeSelf)
             {
-                SoundSlider.value = Origin - 1;
+                SoundSlider.value = originSoundValue - 1;
                 SoundSlider.value++;
             }
             else
             {
-                Origin = SoundSlider.value;
-                I_0.SetActive(true);
-                I_100.SetActive(false);
-                I_66.SetActive(false);
-                I_33.SetActive(false);
+                originSoundValue = SoundSlider.value;
+                Icon0.SetActive(true);
+                Icon100.SetActive(false);
+                Icon66.SetActive(false);
+                Icon33.SetActive(false);
             }
-        }
-    }
-
-    public void QuitGame()
-    {
-        SaveLoadHelper.Save(ScoreManager.instance.recordData);
-
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
-    }
-
-    public void OpenPanel(string panel)
-    {
-        if (panel == "Log")
-        {
-            log.SetActive(true);
-            logManager.SetStart();
-        }
-        else if (panel == "Detail")
-        {
-            detail.SetActive(true);
-        }
-        else if (panel == "Record")
-        {
-            record.SetActive(true);
-            window.SetActive(false);
-            RecordManager.instance.Calc();
-        }
-        else if (panel == "Shop")
-        {
-            shop.SetActive(true);
-        }
-    }
-
-    public void ClosePanel(string panel)
-    {
-        if (panel == "Log")
-        {
-            log.SetActive(false);
-        }
-        else if (panel == "Detail")
-        {
-            detail.SetActive(false);
-        }
-        else if (panel == "Record")
-        {
-            record.SetActive(false);
-        }
-        else if (panel == "Shop")
-        {
-            shop.SetActive(false);
         }
     }
 
@@ -282,5 +218,16 @@ public class MainMenuManager : MonoBehaviour
         {
             teamCreditWindow.SetActive(false);
         }
+    }
+
+    public void QuitGame()
+    {
+        RE_SaveManager.instance.SaveAllData();
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }
