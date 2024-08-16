@@ -68,7 +68,7 @@ public class SnakeBody : SnakePart
         snakePartCurHp -= damage;
         if (elixirAdditionalDamageRate > 0)
         {
-            RE_SaveManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
+            SaveManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
         }
         snakeMain.TakeDamage(damage, -1); // just passing damage value, not actual take damage part
         if (snakePartCurHp <= 0)
@@ -90,7 +90,7 @@ public class SnakeBody : SnakePart
             snakeMain.TakeDamage(damage, -1);
             damageTimer += 1f;
 
-            RE_SaveManager.instance.UpdateDamage("React", damage);
+            SaveManager.instance.UpdateDamage("React", damage);
         }
 
         if (snakePartCurHp <= 0)

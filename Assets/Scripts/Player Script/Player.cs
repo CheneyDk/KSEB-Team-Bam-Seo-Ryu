@@ -246,10 +246,10 @@ public class Player : MonoBehaviour
         playerCurHp -= damage;
         if (playerCurHp <= 0)
         {
-            if (RE_SaveManager.instance.shopData.isPetInstalled && isAdd)
+            if (SaveManager.instance.shopData.isPetInstalled && isAdd)
             {
-                RE_SaveManager.instance.AddWeapon("Pet");
-                RE_SaveManager.instance.UpdateDamage("Pet", RE_SaveManager.instance.GetPetDamage());
+                SaveManager.instance.AddWeapon("Pet");
+                SaveManager.instance.UpdateDamage("Pet", SaveManager.instance.GetPetDamage());
 
                 isAdd = false;
             }
@@ -281,7 +281,7 @@ public class Player : MonoBehaviour
         {
             PlayerLevelUp();
             Instantiate(levelUp, transform.position, Quaternion.identity);
-            RE_SaveManager.instance.UpdateGameRecord("level");
+            SaveManager.instance.UpdateGameRecord("level");
         }
     }
 

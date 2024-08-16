@@ -87,7 +87,7 @@ public class PowerInternetBulllet : PlayerBullet
         foreach (var enemy in targetEnemies)
         {
             enemy.GetComponent<Enemy>().TakeDamage(bulletDamage, critOccur);
-            RE_SaveManager.instance.UpdateDamage("Internet", bulletDamage);
+            SaveManager.instance.UpdateDamage("Internet", bulletDamage);
         }
     }
 

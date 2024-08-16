@@ -44,7 +44,7 @@ public class ShieldWeapon : PlayerWeapon
                 critDamage = player.playerCritDmg * critOccur;
 
                 EnemyComponent.TakeDamage(damage * (1f + critDamage), critOccur);
-                RE_SaveManager.instance.UpdateDamage("Shield", damage * (1f + critDamage));
+                SaveManager.instance.UpdateDamage("Shield", damage * (1f + critDamage));
 
                 if (!isPowerWeapon)
                 {

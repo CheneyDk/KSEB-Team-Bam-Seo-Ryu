@@ -4,9 +4,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RE_LogManager : MonoBehaviour
+public class LogManager : MonoBehaviour
 {
-    public RE_ColumnManager[] logs;
+    public ColumnManager[] logs;
     public DetailPanel detailPanel;
 
     private void OnEnable()
@@ -17,7 +17,7 @@ public class RE_LogManager : MonoBehaviour
     public void SetStart()
     {
         int idx = 0;
-        foreach (var data in RE_SaveManager.instance.gameDataList.gameRecordList)
+        foreach (var data in SaveManager.instance.gameDataList.gameRecordList)
         {
             if (idx >= 10)
             {
@@ -33,6 +33,6 @@ public class RE_LogManager : MonoBehaviour
 
     public void SetDetails(int idx)
     {
-        detailPanel.SetPanel(RE_SaveManager.instance.gameDataList[idx]);
+        detailPanel.SetPanel(SaveManager.instance.gameDataList[idx]);
     }
 }

@@ -33,7 +33,7 @@ public class WeaponSharp : PlayerWeapon
         bulletNum = 3;
         weaponLevel = 1;
         isDestroyed = false;
-        isPowerWeapon = RE_SaveManager.instance.shopData.isCUpgrade;
+        isPowerWeapon = SaveManager.instance.shopData.isCUpgrade;
 
         // player can fire imediately
         fireRateTimer = weaponFireRate;

@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
 
-public class RE_ColumnManager : MonoBehaviour
+public class ColumnManager : MonoBehaviour
 {
     public TextMeshProUGUI wave;
     public TextMeshProUGUI level;

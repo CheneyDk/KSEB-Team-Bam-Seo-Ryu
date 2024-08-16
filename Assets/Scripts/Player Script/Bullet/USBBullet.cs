@@ -48,7 +48,7 @@ public class USBBullet : PlayerBullet
                 audioSource.PlayOneShot(audioClip);
 
                 enemyComponent.TakeDamage(bulletDamage, critOccur);
-                RE_SaveManager.instance.UpdateDamage("USB", bulletDamage);
+                SaveManager.instance.UpdateDamage("USB", bulletDamage);
             }
 
         }

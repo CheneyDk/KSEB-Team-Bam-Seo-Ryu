@@ -50,9 +50,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        RE_SaveManager.instance.ResetData();
+        SaveManager.instance.ResetData();
 
-        if (RE_SaveManager.instance.shopData.isPetInstalled)
+        if (SaveManager.instance.shopData.isPetInstalled)
         {
             pet.SetActive(true);
         }
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
         timeScaleProduct = 0f;
         if (isGameContinue) 
         {
-            RE_SaveManager.instance.SaveGameRecord(false);
+            SaveManager.instance.SaveGameRecord(false);
         }
         isGameContinue = false;
     }
@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         isGameContinue = true;
-        RE_SaveManager.instance.ResetData();
+        SaveManager.instance.ResetData();
     }
 
     public void GoMainMenu()
@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
         timeScaleProduct = 0f;
         isGameContinue = false;
 
-        RE_SaveManager.instance.UpdateGameRecord("wave");
+        SaveManager.instance.UpdateGameRecord("wave");
     }
 
     public void EndUpgrade()

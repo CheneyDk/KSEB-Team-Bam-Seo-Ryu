@@ -19,12 +19,12 @@ public class ResultSetter : MonoBehaviour
         }
         else
         {
-            icon.sprite = Resources.Load<Sprite>(RE_SaveManager.instance.GetGameRecord().character);
+            icon.sprite = Resources.Load<Sprite>(SaveManager.instance.GetGameRecord().character);
         }
 
         weaponName.text = name;
         weaponDamage.text = ((int)damage).ToString();
 
-        graph.GetComponent<RectTransform>().sizeDelta = new Vector2(damage / RE_SaveManager.instance.GetGameRecord().totalDamage * 160, 24);
+        graph.GetComponent<RectTransform>().sizeDelta = new Vector2(damage / SaveManager.instance.GetGameRecord().totalDamage * 160, 24);
     }
 }

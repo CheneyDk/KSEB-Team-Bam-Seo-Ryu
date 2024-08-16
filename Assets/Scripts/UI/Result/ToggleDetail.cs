@@ -28,8 +28,8 @@ public class ToggleDetail : MonoBehaviour
 
     private void Awake()
     {
-        GameOvetText.text = RE_SaveManager.instance.GetGameRecord().character + ".exe has stopped working";
-        gameRecord = RE_SaveManager.instance.GetGameRecord();
+        GameOvetText.text = SaveManager.instance.GetGameRecord().character + ".exe has stopped working";
+        gameRecord = SaveManager.instance.GetGameRecord();
     }
 
     public void Toggle()
@@ -49,7 +49,7 @@ public class ToggleDetail : MonoBehaviour
             levelReached.text = gameRecord.levelReached.ToString();
             enemiesDefeated.text = gameRecord.totalEnemiesDeafeated.ToString();
 
-            var weapons = RE_SaveManager.instance.readOnlyWeaponDataDict;
+            var weapons = SaveManager.instance.readOnlyWeaponDataDict;
 
             int cnt = 0;
             foreach (KeyValuePair<string, float> kvp in weapons)

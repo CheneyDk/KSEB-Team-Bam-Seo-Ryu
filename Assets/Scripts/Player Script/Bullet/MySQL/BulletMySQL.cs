@@ -106,7 +106,7 @@ public class BulletMySQL : PlayerBullet
             {
                 EnemyComponent.TakeDamage(bulletDamage, critOccur);
 
-                RE_SaveManager.instance.UpdateDamage("MySQL", bulletDamage);
+                SaveManager.instance.UpdateDamage("MySQL", bulletDamage);
             }
         }
     }

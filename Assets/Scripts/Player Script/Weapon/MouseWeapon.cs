@@ -59,13 +59,13 @@ public class MouseWeapon : PlayerWeapon
                 {
                     EnemyComponent.TakeDamage(damage * (1f + critDamage), critOccur);
                     audioSource.PlayOneShot(clip);
-                    RE_SaveManager.instance.UpdateDamage("Mouse", damage);
+                    SaveManager.instance.UpdateDamage("Mouse", damage);
                 }
                 else if (isPowerWeapon)
                 {
                     EnemyComponent.TakeDamage(player.playerAtk * (1f + critDamage), critOccur);
                     audioSource.PlayOneShot(clip);
-                    RE_SaveManager.instance.UpdateDamage("Mouse", player.playerAtk);
+                    SaveManager.instance.UpdateDamage("Mouse", player.playerAtk);
                 }
                 
             }

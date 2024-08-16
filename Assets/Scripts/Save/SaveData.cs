@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public abstract class RE_SaveData
+public abstract class SaveData
 {
     [SerializeField] private string fileName;
     [SerializeField] private string directory;
 
-    public RE_SaveData(string _fileName, string _directory)
+    public SaveData(string _fileName, string _directory)
     {
         fileName = _fileName;
         directory = _directory;
@@ -19,7 +19,7 @@ public abstract class RE_SaveData
     public string GetDirectory() => Application.persistentDataPath + "/" + directory;
 }
 
-public class ShopData : RE_SaveData
+public class ShopData : SaveData
 {
     public int money;
 
@@ -36,7 +36,7 @@ public class ShopData : RE_SaveData
     }
 }
 
-public class GameDataList : RE_SaveData
+public class GameDataList : SaveData
 {
     public List<GameRecord> gameRecordList = new List<GameRecord>();
 
@@ -52,7 +52,7 @@ public class GameDataList : RE_SaveData
     }
 }
 
-public class RecordDatA : RE_SaveData
+public class RecordData : SaveData
 {
     public int totalSurvived = 0;
     public int totalDamage = 0;
@@ -69,7 +69,7 @@ public class RecordDatA : RE_SaveData
     public int bestEnemiesDeafeated = 0;
     public int leastClearTime = int.MaxValue;
 
-    public RecordDatA(string _fileName, string _directory) : base(_fileName, _directory)
+    public RecordData(string _fileName, string _directory) : base(_fileName, _directory)
     {
 
     }
@@ -87,7 +87,7 @@ public class GameRecord
     public bool isClear;
 
     public List<weaponData> weaponDataList;
-    public List<enemiesDeafeatedDatA> enemiesDeafeatedList;
+    public List<enemiesDeafeatedData> enemiesDeafeatedList;
     public int totalDamage;
     public int totalEnemiesDeafeated;
 
@@ -102,7 +102,7 @@ public class GameRecord
         levelReached = 1;
         isClear = false;
         weaponDataList = new List<weaponData>();
-        enemiesDeafeatedList = new List<enemiesDeafeatedDatA>();
+        enemiesDeafeatedList = new List<enemiesDeafeatedData>();
         totalDamage = 0;
         totalEnemiesDeafeated = 0;
         this.playDateTime = playDateTime;
@@ -123,12 +123,12 @@ public class weaponData
 }
 
 [System.Serializable]
-public class enemiesDeafeatedDatA
+public class enemiesDeafeatedData
 {
     public string enemyType;
     public int deafeatedCount;
 
-    public enemiesDeafeatedDatA(string enemyType, int deafeatedCount)
+    public enemiesDeafeatedData(string enemyType, int deafeatedCount)
     {
         this.enemyType = enemyType;
         this.deafeatedCount = deafeatedCount;

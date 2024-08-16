@@ -9,13 +9,13 @@ using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class RE_SaveManager : MonoBehaviour
+public class SaveManager : MonoBehaviour
 {
-    public static RE_SaveManager instance;
+    public static SaveManager instance;
 
     public ShopData shopData;
     public GameDataList gameDataList;
-    private RecordDatA recordData;
+    private RecordData recordData;
 
     private GameRecord gameRecord;
 
@@ -41,14 +41,14 @@ public class RE_SaveManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
 
-            shopData = RE_SaveLoader.Load<ShopData>("ShopData", "SaveFile");
+            shopData = SaveLoader.Load<ShopData>("ShopData", "SaveFile");
             shopData ??= new ShopData("ShopData", "SaveFile");
 
-            gameDataList = RE_SaveLoader.Load<GameDataList>("GameData", "SaveFile");
+            gameDataList = SaveLoader.Load<GameDataList>("GameData", "SaveFile");
             gameDataList ??= new GameDataList("GameData", "SaveFile");
 
-            recordData = RE_SaveLoader.Load<RecordDatA>("RecordData", "SaveFile");
-            recordData ??= new RecordDatA("RecordData", "SaveFile");
+            recordData = SaveLoader.Load<RecordData>("RecordData", "SaveFile");
+            recordData ??= new RecordData("RecordData", "SaveFile");
 
             ResetData();
         }
@@ -209,15 +209,15 @@ public class RE_SaveManager : MonoBehaviour
 
         gameDataList.gameRecordList.Add(gameRecord);
 
-        RE_SaveLoader.Save(gameDataList);
+        SaveLoader.Save(gameDataList);
 
         UpdateRecordData(gameRecord);
         shopData.money += gameRecord.score / 100;
     }
     public void SaveAllData()
     {
-        RE_SaveLoader.Save(shopData);
-        RE_SaveLoader.Save(gameDataList);
-        RE_SaveLoader.Save(recordData);
+        SaveLoader.Save(shopData);
+        SaveLoader.Save(gameDataList);
+        SaveLoader.Save(recordData);
     }
 }
