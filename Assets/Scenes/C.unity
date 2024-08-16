@@ -320,6 +320,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4641088801433358358, guid: acdba784e6cba2a41829259e63dc2be1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939384395723959192, guid: acdba784e6cba2a41829259e63dc2be1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7334783506987992490, guid: acdba784e6cba2a41829259e63dc2be1, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 7450403442690012505, guid: acdba784e6cba2a41829259e63dc2be1, type: 3}
       propertyPath: gameOverClip
       value: 

@@ -80,6 +80,7 @@ public class GameRecord
 {
     public string character;
 
+    public int score;
     public int survived;
     public int waveReached;
     public int levelReached;
@@ -95,6 +96,7 @@ public class GameRecord
     public GameRecord(string character, string playDateTime)
     {
         this.character = character;
+        score = 0;
         survived = 0;
         waveReached = 1;
         levelReached = 1;

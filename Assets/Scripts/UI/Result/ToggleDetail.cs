@@ -15,6 +15,7 @@ public class ToggleDetail : MonoBehaviour
     public GameObject bottom;
     public Button button;
 
+    public TextMeshProUGUI score;
     public TextMeshProUGUI survived;
     public TextMeshProUGUI waveReached;
     public TextMeshProUGUI levelReached;
@@ -38,10 +39,11 @@ public class ToggleDetail : MonoBehaviour
         if (flag) 
         {
             window.transform.Translate(new Vector3(0, 80, 0));
-            bottom.transform.Translate(new Vector3(0, -220, 0));
+            bottom.transform.Translate(new Vector3(0, -240, 0));
             flag = false;
             Image buttonImage = button.GetComponent<Image>();
 
+            score.text = "Score : " + gameRecord.score.ToString();
             survived.text = gameRecord.survived.ToString();
             waveReached.text = gameRecord.waveReached.ToString();
             levelReached.text = gameRecord.levelReached.ToString();
@@ -62,7 +64,7 @@ public class ToggleDetail : MonoBehaviour
         else
         {
             window.transform.Translate(new Vector3(0, -80, 0));
-            bottom.transform.Translate(new Vector3(0, 220, 0));
+            bottom.transform.Translate(new Vector3(0, 240, 0));
             flag = true;
             Image buttonImage = button.GetComponent<Image>();
             Color color = buttonImage.color;

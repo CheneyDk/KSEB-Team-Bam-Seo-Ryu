@@ -132,6 +132,7 @@ public class MeleeEnemy : Enemy
         ChanceToDropRedBlue(0);
 
         RE_SaveManager.instance.EnemyDeafeat("MeleeEnemyDefeated");
+        RE_SaveManager.instance.AddScore(5);
     }
 
     private IEnumerator SetActiveToFalse()

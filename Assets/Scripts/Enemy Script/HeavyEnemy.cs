@@ -164,6 +164,7 @@ public class HeavyEnemy : Enemy
         ChanceToDropRedBlue(5);
 
         RE_SaveManager.instance.EnemyDeafeat("HeavyEnemyDefeated");
+        RE_SaveManager.instance.AddScore(10);
     }
 
     private IEnumerator SetActiveToFalse()

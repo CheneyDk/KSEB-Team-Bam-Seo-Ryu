@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class RE_SaveManager : MonoBehaviour
 {
@@ -87,6 +88,10 @@ public class RE_SaveManager : MonoBehaviour
         {
             shopData.installedItemList.Add(item);
         }
+    }
+    public void AddScore(int score)
+    {
+        gameRecord.score += score;
     }
     public void UpdateGameRecord(string record)
     {
@@ -196,11 +201,18 @@ public class RE_SaveManager : MonoBehaviour
             gameRecord.totalEnemiesDeafeated += data.Value;
         }
 
+        gameRecord.score += gameRecord.survived * 10;
+        gameRecord.score += gameRecord.waveReached * 1000;
+        gameRecord.score += gameRecord.levelReached * 1000;
+        gameRecord.score += gameRecord.totalDamage * 10;
+
+
         gameDataList.gameRecordList.Add(gameRecord);
 
         RE_SaveLoader.Save(gameDataList);
 
         UpdateRecordData(gameRecord);
+        shopData.money += gameRecord.score / 100;
     }
     public void SaveAllData()
     {
