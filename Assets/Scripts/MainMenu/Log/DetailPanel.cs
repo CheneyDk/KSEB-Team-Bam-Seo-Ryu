@@ -15,13 +15,13 @@ public class DetailPanel : MonoBehaviour
 
     public WeaponSetter[] setters;
 
-    public void SetPanel(ScoreData data)
+    public void SetPanel(GameRecord data)
     {
         survived.text = data.survived.ToString();
         wave.text = data.waveReached.ToString();
         level.text = data.levelReached.ToString();
-        kills.text = data.enemiesDeafeated.ToString();
-        damage.text = ((int)data.totalDamage).ToString();
+        kills.text = data.totalEnemiesDeafeated.ToString();
+        damage.text = data.totalDamage.ToString();
         dateTime.text = data.playDateTime.ToString();
 
         int idx = setters.Length - 1;
@@ -30,9 +30,9 @@ public class DetailPanel : MonoBehaviour
             setters[idx--].ResetAll();
         }
 
-        foreach(WeaponDamagesData damageData in data.weaponDamagesData)
+        foreach(weaponData damageData in data.weaponDataList)
         {
-            setters[idx++].SetAll(damageData, (int)data.totalDamage, data.character);
+            setters[idx++].SetAll(damageData, data.totalDamage, data.character);
         }
     }
 }

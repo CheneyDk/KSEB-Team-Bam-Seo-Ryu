@@ -39,7 +39,7 @@ public class SubPytorchBullet : PlayerBullet
                 EnemyComponent.TakeDamage(bulletDamage, critOccur);
                 bulletPool.SetObj(this);
 
-                ScoreManager.instance.UpdateDamage("Pytorch", bulletDamage);
+                RE_SaveManager.instance.UpdateDamage("Pytorch", bulletDamage);
             }
         }
     }

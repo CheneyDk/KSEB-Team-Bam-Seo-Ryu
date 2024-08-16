@@ -20,7 +20,7 @@ public class PauseWindow : MonoBehaviour
 
     private void Start()
     {
-        character.text = ScoreManager.instance.GetCharacter() + " Stats";
+        character.text = RE_SaveManager.instance.GetGameRecord().character + " Stats";
     }
 
     private void OnEnable()

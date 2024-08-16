@@ -4,9 +4,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LogManager : MonoBehaviour
+public class RE_LogManager : MonoBehaviour
 {
-    public ColumnManager[] logs;
+    public RE_ColumnManager[] logs;
     public DetailPanel detailPanel;
 
     private void OnEnable()
@@ -17,7 +17,7 @@ public class LogManager : MonoBehaviour
     public void SetStart()
     {
         int idx = 0;
-        foreach(ScoreData score in ScoreManager.instance.recordData.scoreDataList)
+        foreach (var data in RE_SaveManager.instance.gameDataList.gameRecordList)
         {
             if (idx >= 10)
             {
@@ -25,14 +25,14 @@ public class LogManager : MonoBehaviour
             }
 
             logs[idx].gameObject.SetActive(true);
-            logs[idx].setAll(score);
-            
+            logs[idx].setAll(data);
+
             idx++;
         }
     }
 
     public void SetDetails(int idx)
     {
-        //detailPanel.SetPanel(ScoreManager.instance.recordData[idx]);
+        detailPanel.SetPanel(RE_SaveManager.instance.gameDataList[idx]);
     }
 }

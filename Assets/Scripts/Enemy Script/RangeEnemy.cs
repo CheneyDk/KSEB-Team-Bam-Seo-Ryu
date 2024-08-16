@@ -160,7 +160,7 @@ public class RangeEnemy : Enemy
         RangeEnemyCurHP -= damage;
         if (elixirAdditionalDamageRate > 0)
         {
-            ScoreManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
+            RE_SaveManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
         }
         if (RangeEnemyCurHP <= 0)
         {
@@ -178,7 +178,7 @@ public class RangeEnemy : Enemy
         DropEXP(dropExpNumber);
         ChanceToDropApple(3);
         ChanceToDropRedBlue(0);
-        ScoreManager.instance.UpdateEnemiesDeafeated("RangeEnemyDefeated");
+        RE_SaveManager.instance.EnemyDeafeat("RangeEnemyDefeated");
     }
 
     private IEnumerator SetActiveToFalse()
@@ -226,7 +226,7 @@ public class RangeEnemy : Enemy
             RangeEnemyCurHP -= damage;
             damageTimer += 1f;
 
-            ScoreManager.instance.UpdateDamage("React", damage);
+            RE_SaveManager.instance.UpdateDamage("React", damage);
         }
 
         if (RangeEnemyCurHP <= 0)

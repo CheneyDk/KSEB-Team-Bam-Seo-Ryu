@@ -34,7 +34,7 @@ public class GithubWeapon : MonoBehaviour
 
     private void Start()
     {
-        if (ScoreManager.instance.recordData.isPetUpgrade)
+        if (RE_SaveManager.instance.shopData.isPetUpgrade)
         {
             isUpgraded = true;
         }
