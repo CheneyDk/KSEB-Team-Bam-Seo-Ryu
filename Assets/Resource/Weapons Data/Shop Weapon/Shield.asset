@@ -17,10 +17,10 @@ MonoBehaviour:
   itemName: Shield
   itemDesc: "{ damge = player.damage }\nif ( Upgrade ) \n{ damage *= 0.5f }"
   powerImage: {fileID: 21300000, guid: 8dac6c32c332a4848b83ace2e55f44aa, type: 3}
-  powerName: Power Shield
+  powerName: Shield++
   powerDesc: 'if ( Power Weapom )
 
     { shieldTime  /= 2f }'
   curImage: {fileID: 21300000, guid: 79831d8fb8682f7439578395ec0ec93e, type: 3}
   curName: Shield
-  curDesc: '{ Shield }'
+  curDesc: "{ damge = player.damage }\nif ( Upgrade ) \n{ damage *= 0.5f }"

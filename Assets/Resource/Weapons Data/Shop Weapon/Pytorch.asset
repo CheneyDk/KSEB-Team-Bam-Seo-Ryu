@@ -15,10 +15,17 @@ MonoBehaviour:
   item: {fileID: 5735838364107986111, guid: 3dda3ce8bd115b748b261adb9527ac97, type: 3}
   itemImage: {fileID: 21300000, guid: 2bac56dd8c539e140a7dd97a7e014725, type: 3}
   itemName: Pytorch
-  itemDesc: '{ Pytorch }'
+  itemDesc: '{ damge = player.damage x 0.8f }
+
+    if ( Upgrade )
+
+    { damage +=
+    0.075f }'
   powerImage: {fileID: 1972222978, guid: 46037a3ed3e8f5041b49f1fa91f3d241, type: 3}
   powerName: Pytorch++
-  powerDesc: '{ Libraries Enhanced ! }'
+  powerDesc: 'if ( Power Weapom )
+
+    { Libraries Enhanced ! }'
   curImage: {fileID: 21300000, guid: 2bac56dd8c539e140a7dd97a7e014725, type: 3}
   curName: Pytorch
   curDesc: '{ Pytorch }'

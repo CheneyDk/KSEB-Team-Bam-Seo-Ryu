@@ -22,13 +22,13 @@ MonoBehaviour:
     { fireRate -= 0.5f
     }'
   powerImage: {fileID: 21300000, guid: bbdc18e317c2c2044897bd6e10c3e08c, type: 3}
-  powerName: CD ++
+  powerName: CD++
   powerDesc: 'if ( Power Weapon )
 
     { bulletNumber = 3 }'
   curImage: {fileID: 21300000, guid: d5d00890c1a26ec4badc1a8c546619e0, type: 3}
   curName: CD
-  curDesc: '{ Damge = Player.Damage }
+  curDesc: '{ damge = player.damage }
 
     if ( Upgrade )
 

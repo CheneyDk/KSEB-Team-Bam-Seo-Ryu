@@ -22,10 +22,15 @@ MonoBehaviour:
     {
     lastingDamage *= 0.1f }'
   powerImage: {fileID: 21300000, guid: cdfa135136584514cbb16cbb4e63f09b, type: 3}
-  powerName: Power React
+  powerName: React ++
   powerDesc: 'if ( Power Weapom )
 
     { fireRate /= 2f }'
   curImage: {fileID: 21300000, guid: ba0f76d775c69a7489f4f13b8b9a7934, type: 3}
   curName: React
-  curDesc: '{ React }'
+  curDesc: '{ lastingDamage = player.damage x 0.5f }
+
+    if ( Upgrade )
+
+    { lastingDamage
+    *= 0.1f }'

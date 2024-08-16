@@ -17,10 +17,10 @@ MonoBehaviour:
   itemName: Unity
   itemDesc: "{ damge = player.damage }\nif ( Upgrade ) \n{ damage *= 0.2f }"
   powerImage: {fileID: 21300000, guid: a18831a534b49c74f8515aa5c66519e3, type: 3}
-  powerName: Power Unity
+  powerName: Unity++
   powerDesc: 'if ( Power Weapon )
 
     { bulletNumber = 3 }'
   curImage: {fileID: 21300000, guid: 196bc4e0b94f88f46a66a84fa6d3caba, type: 3}
   curName: Unity
-  curDesc: '{ Unity }'
+  curDesc: "{ damge = player.damage }\nif ( Upgrade ) \n{ damage *= 0.2f }"

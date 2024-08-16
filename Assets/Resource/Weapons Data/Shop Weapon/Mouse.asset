@@ -22,10 +22,15 @@ MonoBehaviour:
     { damage +=
     1f }'
   powerImage: {fileID: 21300000, guid: b8638f8723fdc0548ab58cccbd051acc, type: 3}
-  powerName: Power Mouse
+  powerName: Mouse++
   powerDesc: 'if ( Power Weapon )
 
     { damage = Player.damage }'
   curImage: {fileID: 21300000, guid: 986ca72cbf956354db2e9f46ab5573e5, type: 3}
   curName: Mouse
-  curDesc: '{ Mouse }'
+  curDesc: '{ damge = player.damage x 0.2f }
+
+    if ( Upgrade )
+
+    { damage +=
+    1f }'

@@ -22,15 +22,15 @@ MonoBehaviour:
     { fireRate -= 0.5f
     }'
   powerImage: {fileID: 21300000, guid: d3466b91a153f964f8f6c2572ecbf7ad, type: 3}
-  powerName: Power Cloud
+  powerName: Cloud++
   powerDesc: 'if ( Power Weapon )
 
     { target => allEnemies }'
   curImage: {fileID: 21300000, guid: c366002bfbdb5be49aa0ebcbbb63c3ea, type: 3}
   curName: Cloud
-  curDesc: '{ Cloud.Damage = Player.Damage }
+  curDesc: '{ damge = player.damage }
 
     if ( Upgrade )
 
-    { fireRate
-    -= 0.5f }'
+    { fireRate -= 0.5f
+    }'

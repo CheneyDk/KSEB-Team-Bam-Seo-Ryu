@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 7694730320990147644, guid: c1e72e6712ac1f14881c17f571b822d0, type: 3}
   itemImage: {fileID: 21300000, guid: 5ace50782c73e7449a6652b7ccfc883d, type: 3}
-  itemName: USB
+  itemName: USB 64GB
   itemDesc: '{ damge = player.damage x 0.5f }
 
     if ( Upgrade )
@@ -22,10 +22,15 @@ MonoBehaviour:
     { fireRate
     -= 0.5f }'
   powerImage: {fileID: 21300000, guid: 6edea9d716db277459b2d3b10166a3df, type: 3}
-  powerName: USB +
+  powerName: USB 256GB
   powerDesc: 'if ( Power Weapon )
 
     { damage = player.damage }'
   curImage: {fileID: 21300000, guid: 5ace50782c73e7449a6652b7ccfc883d, type: 3}
   curName: USB
-  curDesc: '{ USB 64G }'
+  curDesc: '{ damge = player.damage x 0.5f }
+
+    if ( Upgrade )
+
+    { fireRate
+    -= 0.5f }'

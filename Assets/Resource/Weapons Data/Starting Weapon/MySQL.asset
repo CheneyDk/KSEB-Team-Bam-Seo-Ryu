@@ -15,10 +15,13 @@ MonoBehaviour:
   item: {fileID: 1510536386484217596, guid: 05e319a9d203c45419ffec3f471dfc02, type: 3}
   itemImage: {fileID: 21300000, guid: 4d4e940847fdb2047aaf0ab2e7d1f132, type: 3}
   itemName: MySQL
-  itemDesc: '{ MySQL }'
+  itemDesc: "{ damge = player.damage x 1.5f }\nif ( Upgrade ) \n{ damage += 0.1f
+    }"
   powerImage: {fileID: 21300000, guid: 4a9cd4a1f2e19f6499b5d11092542c1c, type: 3}
   powerName: MyOrcale++
-  powerDesc: '{ Orca ! }'
+  powerDesc: 'if ( Power Weapon )
+
+    { Orca ! }'
   curImage: {fileID: 21300000, guid: 4d4e940847fdb2047aaf0ab2e7d1f132, type: 3}
   curName: MySQL
   curDesc: '{ MySQL }'

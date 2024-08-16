@@ -22,10 +22,15 @@ MonoBehaviour:
     { fireRate -= 0.5f
     }'
   powerImage: {fileID: 21300000, guid: 9145f738d27ec5a44ad90f12010807b3, type: 3}
-  powerName: Power Swift
+  powerName: Swift++
   powerDesc: 'if ( Power Weapon )
 
     { scale += 1f }'
   curImage: {fileID: 21300000, guid: 60cf3e33622e9fd4285b6455b6582f13, type: 3}
   curName: Swift
-  curDesc: '{ Swift }'
+  curDesc: '{ damge = player.damage }
+
+    if ( Upgrade )
+
+    { fireRate -= 0.5f
+    }'
