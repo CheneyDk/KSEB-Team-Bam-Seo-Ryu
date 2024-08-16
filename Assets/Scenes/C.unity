@@ -1341,7 +1341,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BGMClip:
   - {fileID: 8300000, guid: 25ba6ee79ee385942ae8641f0355a85a, type: 3}
-  - {fileID: 8300000, guid: 7af7990ea64ba5b42ad338256dcabc6d, type: 3}
   - {fileID: 8300000, guid: 7375cf4d81cd33b4ba836691e64303dd, type: 3}
   - {fileID: 8300000, guid: f991c4674a420954eb79018620f8a756, type: 3}
   - {fileID: 8300000, guid: fcec7648eb6f34447813ff2e201e9baf, type: 3}
@@ -1352,7 +1351,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f5338092cdc9cca4b92488aaa2c7e263, type: 3}
   - {fileID: 8300000, guid: 22dec0f60e4c7f945bdb3b8720d89a76, type: 3}
   - {fileID: 8300000, guid: 7d0857f75a79b764d823961d7b94a0e5, type: 3}
-  - {fileID: 8300000, guid: 75dbf558ab61cb346a59757de1338b45, type: 3}
   - {fileID: 8300000, guid: 0db668f1731410340945940f0315ddda, type: 3}
   - {fileID: 8300000, guid: 2df6d588f3198a542b570054fc4a7b96, type: 3}
   - {fileID: 8300000, guid: 948a01972ef1b2843ba616d66e0631c6, type: 3}

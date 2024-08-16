@@ -17,10 +17,12 @@ MonoBehaviour:
   itemName: SSD
   itemDesc: '{ + Player Max HP }
 
-    FloppyDisk CD'
+    { Upgrade Weapon = FloppyDisk, CD }'
   powerImage: {fileID: 0}
   powerName: 
   powerDesc: 
   curImage: {fileID: 21300000, guid: a59ff80d4561a964289687786c5b97bb, type: 3}
   curName: SSD
-  curDesc: '{ + Player Max HP }'
+  curDesc: '{ + Player Max HP }
+
+    FloppyDisk CD'

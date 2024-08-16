@@ -17,12 +17,12 @@ MonoBehaviour:
   itemName: CPU
   itemDesc: '{ + Player Crit % }
 
-    Swift React'
+    { Upgrade Weapon = Swift, React }'
   powerImage: {fileID: 0}
   powerName: 
   powerDesc: 
   curImage: {fileID: 21300000, guid: c075b5ec5d76d6e4a8017331e5664d6e, type: 3}
   curName: CPU
-  curDesc: '{ + Player Crit % agg }
+  curDesc: '{ + Player Crit % }
 
     Swift React'

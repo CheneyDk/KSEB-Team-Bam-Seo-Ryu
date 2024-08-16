@@ -17,10 +17,12 @@ MonoBehaviour:
   itemName: Wifi
   itemDesc: '{ + Player Speed }
 
-    Cloud Internet'
+    { Upgrade Weapon = Cloud, Internet }'
   powerImage: {fileID: 0}
   powerName: 
   powerDesc: 
   curImage: {fileID: 21300000, guid: 4cb23478a4e7b5e45bf777685fee8c12, type: 3}
   curName: Wifi
-  curDesc: '{ + Player Speed }'
+  curDesc: '{ + Player Speed }
+
+    Cloud Internet'

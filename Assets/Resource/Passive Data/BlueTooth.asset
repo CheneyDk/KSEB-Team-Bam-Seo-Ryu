@@ -17,12 +17,12 @@ MonoBehaviour:
   itemName: BlueTooth
   itemDesc: '{ + Magnetic Range }
 
-    USB Mouse'
+    { Upgrade Weapon = USB, Mouse }'
   powerImage: {fileID: 0}
   powerName: 
   powerDesc: 
   curImage: {fileID: 21300000, guid: 8f0059d0fe3cbc845a60690f56beefe4, type: 3}
   curName: BlueTooth
-  curDesc: '{ + Magnetic Range  sngls}
+  curDesc: '{ + Magnetic Range }
 
     USB Mouse'

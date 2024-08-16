@@ -927,7 +927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85e239db0300c340bcf806a79a4d0e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RunTimeErrorMaxHp: 500
+  RunTimeErrorMaxHp: 2000
   RunTimeErrorCurtHP: 0
   RunTimeErrorAtk: 50
   RunTimeErrorMoveSpeed: 10

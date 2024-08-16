@@ -861,7 +861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4652b2420752a2e459f74079baf486d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snakeMaxHp: 5000
+  snakeMaxHp: 10000
   snakeCurHP: 0
   snakeAtk: 30
   Exp: {fileID: 2828242351688375285, guid: 9f21b77202f043d45a40df1d9c28c4d8, type: 3}

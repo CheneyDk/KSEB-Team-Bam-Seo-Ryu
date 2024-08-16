@@ -17,12 +17,12 @@ MonoBehaviour:
   itemName: GPU
   itemDesc: '{ + Player Atk }
 
-    Unity Elixir'
+    { Upgrade Weapon = Unity, Elixir }'
   powerImage: {fileID: 0}
   powerName: 
   powerDesc: 
   curImage: {fileID: 21300000, guid: e0553cc702418b94ca00839822284e18, type: 3}
   curName: GPU
-  curDesc: '{ + Player Atk agag}
+  curDesc: '{ + Player Atk }
 
     Unity Elixir'
