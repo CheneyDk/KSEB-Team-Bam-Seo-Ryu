@@ -3,6 +3,7 @@ using DamageNumbersPro;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -68,6 +69,11 @@ public class RunTimeError : Enemy
 
     private EnemySpawner enemySpawner;
 
+    [SerializeField]
+    private GameObject[] healthBar;
+    [SerializeField]
+    private TextMeshProUGUI healthText;
+
     private void Awake()
     {
         enemySpawner = GameObject.FindAnyObjectByType<EnemySpawner>().GetComponent<EnemySpawner>();
@@ -84,6 +90,8 @@ public class RunTimeError : Enemy
         moveDistance = 5f;
         randomMoveVector = transform.position;
         randomChangeInterval = 5f; // initial wait
+
+        healthText.text = ($"{RunTimeErrorCurtHP.ToString("N0")}MB of {RunTimeErrorMaxHp}MB");
     }
 
     private void Start()
@@ -98,6 +106,25 @@ public class RunTimeError : Enemy
         if (!isDead)
         {
             EnemyMovement();
+        }
+
+        ChangeHPBar();
+    }
+
+    public void ChangeHPBar()
+    {
+        healthText.text = ($"{RunTimeErrorCurtHP.ToString("N0")}MB of {RunTimeErrorMaxHp}MB");
+
+        float maxHp = RunTimeErrorMaxHp;
+        float curHp = RunTimeErrorCurtHP;
+
+        float hpPerBar = maxHp / healthBar.Length;
+
+        int activeBars = Mathf.CeilToInt(curHp / hpPerBar);
+
+        for (int i = 0; i < healthBar.Length; i++)
+        {
+            healthBar[i].SetActive(i < activeBars);
         }
     }
 

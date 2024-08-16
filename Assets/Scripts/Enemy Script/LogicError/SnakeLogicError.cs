@@ -3,6 +3,7 @@ using DamageNumbersPro;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -88,6 +89,11 @@ public class SnakeLogicError : Enemy
 
     private EnemySpawner enemySpawner;
 
+    [SerializeField]
+    private GameObject[] healthBar;
+    [SerializeField]
+    private TextMeshProUGUI healthText;
+
     private void Awake()
     {
         // YH - move some components to each parts
@@ -104,6 +110,8 @@ public class SnakeLogicError : Enemy
 
         enemySpawner = GameObject.FindAnyObjectByType<EnemySpawner>().GetComponent<EnemySpawner>();
         enemySpawner.bossIsAlive = true;
+
+        healthText.text = ($"{snakeCurHP.ToString("N0")}MB of {snakeMaxHp}MB");
     }
 
     private void Start()
@@ -112,9 +120,31 @@ public class SnakeLogicError : Enemy
         SnakePatternCycle().Forget();
     }
 
+    private void Update()
+    {
+        ChangeHPBar();
+    }
+
     private void FixedUpdate()
     {
         SnakeMovement();
+    }
+
+    public void ChangeHPBar()
+    {
+        healthText.text = ($"{snakeCurHP.ToString("N0")}MB of {snakeMaxHp}MB");
+
+        float maxHp = snakeMaxHp;
+        float curHp = snakeCurHP;
+
+        float hpPerBar = maxHp / healthBar.Length;
+
+        int activeBars = Mathf.CeilToInt(curHp / hpPerBar);
+
+        for (int i = 0; i < healthBar.Length; i++)
+        {
+            healthBar[i].SetActive(i < activeBars);
+        }
     }
 
     // Initialize Snake Body Parts
