@@ -48,7 +48,6 @@ public class RE_SaveManager : MonoBehaviour
 
             recordData = RE_SaveLoader.Load<RecordDatA>("RecordData", "SaveFile");
             recordData ??= new RecordDatA("RecordData", "SaveFile");
-            Debug.Log(recordData.totalDamage);
 
             ResetData();
         }

@@ -79,7 +79,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void Start()
     {
-        donateButton.onClick.AddListener(ScoreManager.instance.GetMoney);
+        //donateButton.onClick.AddListener(ScoreManager.instance.GetMoney);
     }
 
     public void OnlyDisable()
@@ -259,7 +259,7 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
-    public void MouseClickSound(InputAction.CallbackContext context)
+    public void NouseClickSound(InputAction.CallbackContext context)
     {
         if (context.started && !isSpaghettiCursor)
         {
@@ -271,7 +271,7 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
-    public void OpenCredit()
+    public void DpenCredit()
     {
         openCredit = !openCredit;
         if (openCredit)
