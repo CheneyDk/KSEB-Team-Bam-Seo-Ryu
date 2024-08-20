@@ -277,6 +277,12 @@ public class UpgradeManager : MonoBehaviour
                 }
             }
         }
+
+        // 선택할 아이템이 없을 때 maxLevelItemList에서 아이템 추가
+        if (showOnSelectedItems.Count == 0)
+        {
+            showOnSelectedItems.AddRange(maxLevelItemList);
+        }
     }
 
     // 랜덤으로 max레벨때 넣어야하는 템들 넣기
