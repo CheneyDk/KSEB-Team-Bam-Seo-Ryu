@@ -73,7 +73,7 @@ public class GithubBullet : MonoBehaviour
             if (enemyComponent != null)
             {
                 enemyComponent.TakeDamage(bulletDamage, 0);
-                RE_SaveManager.instance.UpdatePetDamage(bulletDamage);
+                SaveManager.instance.UpdatePetDamage(bulletDamage);
                 audioSource.PlayOneShot(audioClip);
             }
         }

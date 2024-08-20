@@ -105,7 +105,7 @@ public class PytorchBullet : PlayerBullet
             foreach (var enemy in enemies)
             {
                 enemy.GetComponent<Enemy>().TakeDamage(bulletDamage, critOccur);
-                RE_SaveManager.instance.UpdateDamage("Pytorch", bulletDamage);
+                SaveManager.instance.UpdateDamage("Pytorch", bulletDamage);
                 // enemy.GetComponent<Enemy>().LastingDamage(bulletLastingDamage, 3, pytorchColor);
             }
         }

@@ -83,7 +83,7 @@ public class WaveManager : MonoBehaviour
             }
         }
         GameInfoManager.Instance.DisplayGameInfo("All Wave Clear");
-        RE_SaveManager.instance.SaveGameRecord(true);
+        SaveManager.instance.SaveGameRecord(true);
     }
 
     private void DestroyAllEnemies()

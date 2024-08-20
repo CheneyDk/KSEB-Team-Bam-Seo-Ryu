@@ -4,13 +4,13 @@ using UnityEngine;
 using System;
 using TMPro;
 
-public class RE_RecordManager : MonoBehaviour
+public class RecordManager : MonoBehaviour
 {
     public TextMeshProUGUI[] texts;
 
     private void OnEnable()
     {
-        Dictionary<string, int> data = RE_SaveManager.instance.GetRecordData();
+        Dictionary<string, int> data = SaveManager.instance.GetRecordData();
 
         for (int i = 0; i < texts.Length; i++)
         {

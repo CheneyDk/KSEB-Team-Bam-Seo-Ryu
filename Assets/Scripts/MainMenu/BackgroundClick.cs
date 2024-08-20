@@ -7,6 +7,6 @@ public class BackgroundClick : MonoBehaviour, IPointerClickHandler
 {
     public void OnPointerClick(PointerEventData eventData)
     {
-        RE_MainMenuManager.instance.CloseWindow();
+        MainMenuManager.instance.CloseWindow();
     }
 }

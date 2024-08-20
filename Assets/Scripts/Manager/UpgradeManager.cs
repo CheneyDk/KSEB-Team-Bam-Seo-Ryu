@@ -66,7 +66,7 @@ public class UpgradeManager : MonoBehaviour
             weaponDataDict.Add(data.name, data);
         }
 
-        foreach (string name in RE_SaveManager.instance.shopData.installedItemList)
+        foreach (string name in SaveManager.instance.shopData.installedItemList)
         {
             weaponDataList.Add(weaponDataDict[name]);
         }
@@ -371,7 +371,7 @@ public class UpgradeManager : MonoBehaviour
                 gameUI.WeaponIconList(itemList);
                 AddWeaponToPlayer(item.item);
                 gameUI.AddWeaponLevel(playerWeaponBag);
-                RE_SaveManager.instance.AddWeapon(item.itemName);
+                SaveManager.instance.AddWeapon(item.itemName);
             }
             else if (itemList == playerPassiveList)
             {

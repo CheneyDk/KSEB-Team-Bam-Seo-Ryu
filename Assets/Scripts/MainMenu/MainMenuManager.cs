@@ -9,9 +9,9 @@ using UnityEngine.UI;
 using VInspector;
 using static UnityEngine.UI.Image;
 
-public class RE_MainMenuManager : MonoBehaviour
+public class MainMenuManager : MonoBehaviour
 {
-    public static RE_MainMenuManager instance;
+    public static MainMenuManager instance;
 
     [Foldout("Icon")]
     public GameObject window;
@@ -73,7 +73,7 @@ public class RE_MainMenuManager : MonoBehaviour
 
     private void Start()
     {
-        donateButton.onClick.AddListener(RE_SaveManager.instance.EarnMoney);
+        donateButton.onClick.AddListener(SaveManager.instance.EarnMoney);
     }
 
     public void Toggle(InputAction.CallbackContext context)
@@ -222,7 +222,7 @@ public class RE_MainMenuManager : MonoBehaviour
 
     public void QuitGame()
     {
-        RE_SaveManager.instance.SaveAllData();
+        SaveManager.instance.SaveAllData();
 
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;

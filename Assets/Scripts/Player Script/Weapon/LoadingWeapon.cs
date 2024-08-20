@@ -66,7 +66,7 @@ public class LoadingWeapon : PlayerWeapon
                 EnemyComponent.TakeDamage(damage * (1f + critDamage), critOccur);
                 audioSource.PlayOneShot(audioClip);
 
-                RE_SaveManager.instance.UpdateDamage("Loading", damage);
+                SaveManager.instance.UpdateDamage("Loading", damage);
             }
         }
     }

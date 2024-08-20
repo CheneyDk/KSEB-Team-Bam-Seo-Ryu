@@ -72,7 +72,7 @@ public class SnakeHead : SnakePart
         snakePartCurHp -= damage;
         if (elixirAdditionalDamageRate > 0)
         {
-            RE_SaveManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
+            SaveManager.instance.UpdateDamage("Elixir", damage * elixirAdditionalDamageRate);
         }
         snakeMain.TakeDamage(damage, -1); // head dont need to got a damage
     }
@@ -90,7 +90,7 @@ public class SnakeHead : SnakePart
             snakeMain.TakeDamage(damage, -1);
             damageTimer += 1f;
 
-            RE_SaveManager.instance.UpdateDamage("React", damage);
+            SaveManager.instance.UpdateDamage("React", damage);
         }
         curSR.color = originColor;
     }

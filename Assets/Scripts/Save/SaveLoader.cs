@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public static class RE_SaveLoader
+public static class SaveLoader
 {
-    public static void Save<T>(T data) where T : RE_SaveData
+    public static void Save<T>(T data) where T : SaveData
     {
         if (!Directory.Exists(data.GetDirectory()))
         {
@@ -16,7 +16,7 @@ public static class RE_SaveLoader
         File.WriteAllText(data.GetFullPath(), json);
     }
 
-    public static T Load<T>(string fileName, string dir) where T : RE_SaveData
+    public static T Load<T>(string fileName, string dir) where T : SaveData
     {
         var fullPath = Application.persistentDataPath + "/" + dir + "/" + fileName + ".json";
 

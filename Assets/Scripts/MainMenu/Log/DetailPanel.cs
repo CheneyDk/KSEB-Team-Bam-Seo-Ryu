@@ -6,6 +6,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class DetailPanel : MonoBehaviour
 {
+    public TextMeshProUGUI score;
     public TextMeshProUGUI survived;
     public TextMeshProUGUI wave;
     public TextMeshProUGUI level;
@@ -17,12 +18,17 @@ public class DetailPanel : MonoBehaviour
 
     public void SetPanel(GameRecord data)
     {
+        score.text = data.score.ToString();
         survived.text = data.survived.ToString();
         wave.text = data.waveReached.ToString();
         level.text = data.levelReached.ToString();
         kills.text = data.totalEnemiesDeafeated.ToString();
         damage.text = data.totalDamage.ToString();
         dateTime.text = data.playDateTime.ToString();
+        if (data.isClear)
+        {
+            dateTime.text += "(clear)";
+        }
 
         int idx = setters.Length - 1;
         while (idx != 0)

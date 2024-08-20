@@ -65,7 +65,7 @@ public class SwiftBullet : PlayerBullet
                 Instantiate(swiftParticle, transform.position, Quaternion.identity);
                 audioSource.PlayOneShot(audioClip);
 
-                RE_SaveManager.instance.UpdateDamage("Swift", bulletDamage);
+                SaveManager.instance.UpdateDamage("Swift", bulletDamage);
             }
         }
     }

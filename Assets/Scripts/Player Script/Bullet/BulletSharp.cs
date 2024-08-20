@@ -56,7 +56,7 @@ public class BulletSharp : PlayerBullet
                 audioManager.SharpClip();
                 bulletPool.SetObj(this);
 
-                RE_SaveManager.instance.UpdateDamage("Basic", bulletDamage);
+                SaveManager.instance.UpdateDamage("Basic", bulletDamage);
             }
         }
     }
