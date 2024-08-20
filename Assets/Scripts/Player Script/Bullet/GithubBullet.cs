@@ -14,7 +14,7 @@ public class GithubBullet : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip audioClip;
 
-    private void Start()
+    private void OnEnable()
     {
         target = FindNearestEnemy();
         if (target == Vector2.zero)
