@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -9,30 +10,25 @@ public class LogManager : MonoBehaviour
     public ColumnManager[] logs;
     public DetailPanel detailPanel;
 
+    private List<GameRecord> gameRecordList;
+    
     private void OnEnable()
     {
+        gameRecordList = SaveManager.instance.gameDataList.gameRecordList;
         SetStart();
     }
 
     public void SetStart()
     {
-        int idx = 0;
-        foreach (var data in SaveManager.instance.gameDataList.gameRecordList)
+        for (int idx = 0; idx < Math.Min(logs.Length, gameRecordList.Count); idx++)
         {
-            if (idx >= 10)
-            {
-                break;
-            }
-
             logs[idx].gameObject.SetActive(true);
-            logs[idx].setAll(data);
-
-            idx++;
+            logs[idx].setAll(gameRecordList[gameRecordList.Count - idx - 1]);
         }
     }
 
     public void SetDetails(int idx)
     {
-        detailPanel.SetPanel(SaveManager.instance.gameDataList[idx]);
+        detailPanel.SetPanel(gameRecordList[gameRecordList.Count - idx - 1]);
     }
 }
