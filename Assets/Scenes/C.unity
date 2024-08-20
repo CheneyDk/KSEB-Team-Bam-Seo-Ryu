@@ -12627,7 +12627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08184e53d739a014c9edea96d9dd32e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveNumber: 20
+  waveNumber: 21
   curWave: 1
   waveTime: 30
   waveInterval: 2
@@ -13092,6 +13092,7 @@ MonoBehaviour:
   finalBossPrefab: {fileID: 3967779656545519921, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
   WarningPrefab: {fileID: 5580843737553246376, guid: b823dbc49d3e44d4e8c8fe859c42b447, type: 3}
   bossWarningPrefab: {fileID: 1215364935282573017, guid: fde8953c9ab35fa46a442c861d18b031, type: 3}
+  spaghettiMonster: {fileID: 3922255967003624319, guid: 794c34887140a9248a795a89deddee21, type: 3}
   MESpawnRate: 1
   MESpawnStartTime: 1
   MESpawnNumber: 3
@@ -13989,7 +13990,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7387099642690315914, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 944808390979848710, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}

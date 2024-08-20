@@ -82,7 +82,10 @@ public class WaveManager : MonoBehaviour
                 }
             }
         }
-        GameInfoManager.Instance.DisplayGameInfo("All Wave Clear");
+        if (curWave == 21)
+        {
+            GameInfoManager.Instance.DisplayGameInfo("All Wave Clear");
+        }
         SaveManager.instance.SaveGameRecord(true);
     }
 

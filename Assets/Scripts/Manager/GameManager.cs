@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
 
     public void SetPlayerDead()
     {
-        BGMAudio.GetComponent<AudioSource>().Stop();
+        BGMAudio.GetComponent<AudioSource>().volume = 0;
         GameoverUI.gameObject.SetActive(true);
         ChangeMouseCursor(normalCursor);
         timeScaleProduct = 0f;

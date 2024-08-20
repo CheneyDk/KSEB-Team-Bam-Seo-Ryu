@@ -19,6 +19,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject finalBossPrefab;
     public GameObject WarningPrefab;
     public GameObject bossWarningPrefab;
+    public GameObject spaghettiMonster;
     [EndFoldout]
 
     [Tab("Melee Enemy")]
@@ -153,6 +154,11 @@ public class EnemySpawner : MonoBehaviour
             {
                 StartCoroutine(BossSpawn(finalBossPrefab));
                 bossIsAlive = true;
+            }
+            else if (waveManager.curWave == 21)
+            {
+                StopAllCoroutines();
+                Instantiate(spaghettiMonster, new Vector3(50 , 50, 0), Quaternion.identity);
             }
         }
     }
