@@ -122,7 +122,6 @@ public class BulletMySQL : PlayerBullet
 
     private void OnDisable()
     {
-        rigid.simulated = false;
         isDestroyed = true;
     }
 
