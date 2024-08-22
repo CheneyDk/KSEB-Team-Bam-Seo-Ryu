@@ -13001,6 +13001,7 @@ MonoBehaviour:
   finalBossPrefab: {fileID: 3967779656545519921, guid: 4dc93a52301736c4fb5e4eec8a039d21, type: 3}
   WarningPrefab: {fileID: 5580843737553246376, guid: b823dbc49d3e44d4e8c8fe859c42b447, type: 3}
   bossWarningPrefab: {fileID: 1215364935282573017, guid: fde8953c9ab35fa46a442c861d18b031, type: 3}
+  spaghettiMonster: {fileID: 0}
   MESpawnRate: 1
   MESpawnStartTime: 1
   MESpawnNumber: 3
@@ -14003,7 +14004,11 @@ PrefabInstance:
     - target: {fileID: 3510744565938202247, guid: f762c3c74a1852c46904a89cee9b309a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 8766426790022767654}
+      objectReference: {fileID: 65655187}
+    - target: {fileID: 3510744565938202247, guid: f762c3c74a1852c46904a89cee9b309a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ContinueGame
+      objectReference: {fileID: 0}
     - target: {fileID: 4318107656566054789, guid: f762c3c74a1852c46904a89cee9b309a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
