@@ -179,7 +179,7 @@ public class RangeEnemy : Enemy
         ChanceToDropApple(3);
         ChanceToDropRedBlue(0);
         SaveManager.instance.EnemyDeafeat("RangeEnemyDefeated");
-        SaveManager.instance.AddScore(7);
+        SaveManager.instance.AddScore(3);
     }
 
     private IEnumerator SetActiveToFalse()
