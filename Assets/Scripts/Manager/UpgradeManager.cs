@@ -250,7 +250,7 @@ public class UpgradeManager : MonoBehaviour
         // 템 수가 max으면, 이미 선택한 템만 나오게
         else if (itemList.Count == maxItemNumber)
         {
-            if (itemListForSelected == listForWeapons)
+            if (itemListForSelected == listForWeapons && selectedItemsList.Count > 0)
             {
                 CheckPowerWeapon();
                 // 선택한 무기list에서 랜덤으로 선택지에 나오게 하기
@@ -265,7 +265,7 @@ public class UpgradeManager : MonoBehaviour
             }
 
             // passive템은 뺄 일이 없어서 그냥 이미 선택한거 중에서 랜덤으로 나타나게
-            else if (itemListForSelected == listForPassives)
+            else if (itemListForSelected == listForPassives && selectedItemsList.Count > 0)
             {
                 while (showOnSelectedItems.Count < 3 && selectedItemsList.Count > 0)
                 {
