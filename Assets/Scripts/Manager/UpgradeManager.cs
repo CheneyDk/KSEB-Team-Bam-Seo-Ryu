@@ -278,10 +278,15 @@ public class UpgradeManager : MonoBehaviour
             }
         }
 
-        // 선택할 아이템이 없을 때 maxLevelItemList에서 아이템 추가
-        if (showOnSelectedItems.Count == 0)
+        while (showOnSelectedItems.Count < 3)
         {
-            showOnSelectedItems.AddRange(maxLevelItemList);
+            foreach (var item in maxLevelItemList)
+            {
+                if (!showOnSelectedItems.Contains(item))
+                {
+                    showOnSelectedItems.Add(item);
+                }
+            }
         }
     }
 
