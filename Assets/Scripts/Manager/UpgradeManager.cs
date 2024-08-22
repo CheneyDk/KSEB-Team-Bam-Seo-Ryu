@@ -193,19 +193,16 @@ public class UpgradeManager : MonoBehaviour
             for (int i = 0; i < playerWeaponBag.childCount; i++)
             {
                 var playerWeapon = playerWeaponBag.GetComponentsInChildren<PlayerWeapon>()[i];
-                if (playerWeapon.isMaxLevel)
+                if (playerWeapon.isMaxLevel && !playerWeapon.isPowerWeapon)
                 {
                     // maxLevel 무기일 경우 선택지에서 빼기
-                    var findItem = listForWeapons.Find(i => i.item.name + ("(Clone)") == playerWeapon.name);
                     var findWeapon = selectedWeaponList.Find(i => i.item.name + ("(Clone)") == playerWeapon.name);
-                    if (findItem != null)
-                    {
-                        listForWeapons.Remove(findItem);
-                    }
+                    
                     if (findWeapon != null)
                     {
                         selectedWeaponList.Remove(findWeapon);
                     }
+                    
                 }
             }
         }
@@ -216,17 +213,14 @@ public class UpgradeManager : MonoBehaviour
                 var playerPassive = playerPassiveBag.GetComponentsInChildren<PlayerPassive>()[i];
                 if (playerPassive.isMaxLevel)
                 {
-                    var findItem = listForPassives.Find(i => i.item.name + ("(Clone)") == playerPassive.name);
                     var findPassive = selectedPassiveList.Find(i => i.item.name + ("(Clone)") == playerPassive.name);
-                    if (findItem != null)
-                    {
-                        listForPassives.Remove(findItem);
-                    }
                     if (findPassive != null)
                     {
                         selectedPassiveList.Remove(findPassive);
                     }
+                    
                 }
+                
             }
         }
     }
@@ -252,6 +246,7 @@ public class UpgradeManager : MonoBehaviour
         {
             if (itemListForSelected == listForWeapons && selectedItemsList.Count > 0)
             {
+        
                 CheckPowerWeapon();
                 // 선택한 무기list에서 랜덤으로 선택지에 나오게 하기
                 while (showOnSelectedItems.Count < 3 && selectedItemsList.Count > 0)
@@ -267,6 +262,17 @@ public class UpgradeManager : MonoBehaviour
             // passive템은 뺄 일이 없어서 그냥 이미 선택한거 중에서 랜덤으로 나타나게
             else if (itemListForSelected == listForPassives && selectedItemsList.Count > 0)
             {
+                while (selectedPassiveList.Count < 3)
+                {
+                    foreach (var item in maxLevelItemList)
+                    {
+                        if (!selectedPassiveList.Contains(item))
+                        {
+                            selectedPassiveList.Add(item);
+                        }
+                    }
+                }
+
                 while (showOnSelectedItems.Count < 3 && selectedItemsList.Count > 0)
                 {
                     WeaponData item = selectedItemsList[Random.Range(0, selectedItemsList.Count)];
@@ -274,17 +280,6 @@ public class UpgradeManager : MonoBehaviour
                     {
                         showOnSelectedItems.Add(item);
                     }
-                }
-            }
-        }
-
-        while (showOnSelectedItems.Count < 3)
-        {
-            foreach (var item in maxLevelItemList)
-            {
-                if (!showOnSelectedItems.Contains(item))
-                {
-                    showOnSelectedItems.Add(item);
                 }
             }
         }
@@ -324,6 +319,7 @@ public class UpgradeManager : MonoBehaviour
         else if (isLevelUp)
         {
             AddOrUpgradeItem(playerWeaponList, selectedWeaponList, playerWeaponBag, item);
+            RemovePowerWeaponInList();
         }
 
         // wave끝이라 passive템 나오기
@@ -337,10 +333,28 @@ public class UpgradeManager : MonoBehaviour
         isLevelUp = false;
     }
 
+    private void RemovePowerWeaponInList()
+    {
+        for (int i = 0; i < playerWeaponBag.childCount; i++)
+        {
+            var playerWeapon = playerWeaponBag.GetComponentsInChildren<PlayerWeapon>()[i];
+            if (playerWeapon.isPowerWeapon)
+            {
+                // maxLevel 무기일 경우 선택지에서 빼기
+                var findWeapon = selectedWeaponList.Find(i => i.item.name + ("(Clone)") == playerWeapon.name);
+
+                if (findWeapon != null)
+                {
+                    selectedWeaponList.Remove(findWeapon);
+                }
+
+            }
+        }
+    }
+
     // Add Item or Upgrade Item
     private void AddOrUpgradeItem(List<WeaponData> itemList, List<WeaponData> selectedList, Transform playerItemBag, WeaponData item)
     {
-
 
         var existingItem = itemList.Find(i => i.itemName == item.itemName);
         if (existingItem != null)

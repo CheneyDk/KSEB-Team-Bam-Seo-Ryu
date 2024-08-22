@@ -145,12 +145,12 @@ public class EnemySpawner : MonoBehaviour
 
 
 
-            if (waveManager.curWave == 10)
+            if (waveManager.curWave == 50)
             {
                 StartCoroutine(BossSpawn(midBossPrefab));
                 bossIsAlive = true;
             }
-            else if (waveManager.curWave == 20)
+            else if (waveManager.curWave == 60)
             {
                 StartCoroutine(BossSpawn(finalBossPrefab));
                 bossIsAlive = true;
