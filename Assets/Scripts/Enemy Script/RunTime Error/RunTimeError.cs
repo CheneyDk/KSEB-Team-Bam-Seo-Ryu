@@ -280,8 +280,8 @@ public class RunTimeError : Enemy
         Destroy(gameObject, runtimeAni.GetCurrentAnimatorStateInfo(0).length + 4f);
         DropEXP(dropExpNumber);
 
-            SaveManager.instance.EnemyDeafeat("RuntimeErrorDeafeated");
-        SaveManager.instance.AddScore(30);
+        SaveManager.instance.EnemyDeafeat("RuntimeErrorDeafeated");
+        SaveManager.instance.AddScore(500);
     }
 
     public override void ResetEnemy(){}

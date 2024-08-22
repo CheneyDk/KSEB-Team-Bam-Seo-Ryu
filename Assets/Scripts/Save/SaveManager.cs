@@ -202,9 +202,9 @@ public class SaveManager : MonoBehaviour
         }
 
         gameRecord.score += gameRecord.survived * 10;
-        gameRecord.score += gameRecord.waveReached * 100;
-        gameRecord.score += gameRecord.levelReached * 100;
-        gameRecord.score += gameRecord.totalDamage * 10;
+        gameRecord.score += gameRecord.waveReached * 50;
+        gameRecord.score += gameRecord.levelReached * 50;
+        gameRecord.score += gameRecord.totalDamage;
 
 
         gameDataList.gameRecordList.Add(gameRecord);
