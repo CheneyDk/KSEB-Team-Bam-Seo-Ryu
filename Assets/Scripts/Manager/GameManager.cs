@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
         timeScaleProduct = 0f;
         if (isGameContinue) 
         {
-            SaveManager.instance.SaveGameRecord(false);
+            SaveManager.instance.SaveGameRecord();
         }
         isGameContinue = false;
     }

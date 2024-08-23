@@ -86,7 +86,8 @@ public class WaveManager : MonoBehaviour
         {
             GameInfoManager.Instance.DisplayGameInfo("All Wave Clear");
         }
-        SaveManager.instance.SaveGameRecord(true);
+        // 21라운드에서 isGameContinue가 꺼진다면 그대로 안꺼진다면 삭제
+        //SaveManager.instance.SaveGameRecord(true);
     }
 
     private void DestroyAllEnemies()

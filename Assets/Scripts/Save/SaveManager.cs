@@ -186,11 +186,16 @@ public class SaveManager : MonoBehaviour
         petDamage = 0;
     }
 
-    public void SaveGameRecord(bool isClear)
+    public void SaveGameRecord()
     {
         gameRecord.survived = (int)(Time.time - timer);
-        gameRecord.isClear = isClear;
 
+        if (gameRecord.waveReached == 21)
+        {
+            gameRecord.isClear = true;
+            gameRecord.waveReached = 20;
+        }
+        
         foreach (var data in weaponDataDict)
         {
             gameRecord.weaponDataList.Add(new weaponData(data.Key, (int)data.Value));
