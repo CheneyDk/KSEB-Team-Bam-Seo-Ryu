@@ -180,9 +180,10 @@ public class SnakeLogicError : Enemy
         if (snakeBody.Count < 1) return;
         for (int i = 1; i < snakeBody.Count; i++)
         {
+            if (isDead) return;
+
             var movement = snakeBody[i - 1].GetComponent<SnakeMovement>();
 
-            // Lerp neeeeed
             // YH - how can I make distance shorter.
             snakeBody[i].transform.position = SnakePosLerp(movement.movementList[8].position, movement.movementList[0].position);
             snakeBody[i].transform.rotation = SnakeRotLerp(movement.movementList[8].rotation, movement.movementList[0].rotation);
