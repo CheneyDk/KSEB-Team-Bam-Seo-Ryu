@@ -145,21 +145,21 @@ public class EnemySpawner : MonoBehaviour
 
 
 
-            if (waveManager.curWave == 10)
-            {
-                StartCoroutine(BossSpawn(midBossPrefab));
-                bossIsAlive = true;
-            }
-            else if (waveManager.curWave == 20)
-            {
-                StartCoroutine(BossSpawn(finalBossPrefab));
-                bossIsAlive = true;
-            }
-            else if (waveManager.curWave == 21)
-            {
-                StopAllCoroutines();
-                Instantiate(spaghettiMonster, new Vector3(50 , 50, 0), Quaternion.identity);
-            }
+            //if (waveManager.curWave == 10)
+            //{
+            //    StartCoroutine(BossSpawn(midBossPrefab));
+            //    bossIsAlive = true;
+            //}
+            //else if (waveManager.curWave == 20)
+            //{
+            //    StartCoroutine(BossSpawn(finalBossPrefab));
+            //    bossIsAlive = true;
+            //}
+            //else if (waveManager.curWave == 21)
+            //{
+            //    StopAllCoroutines();
+            //    Instantiate(spaghettiMonster, new Vector3(50 , 50, 0), Quaternion.identity);
+            //}
         }
     }
 
