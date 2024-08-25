@@ -7,9 +7,9 @@ using UnityEngine.Timeline;
 using UnityEngine.UI;
 using VInspector;
 
-public class UpgradeManager : MonoBehaviour
+public class RE_um : MonoBehaviour
 {
-    // ì„ íƒì§€ë“¤ì— UI
+    // ¼±ÅÃÁöµé¿¡ UI
     [Foldout("Upgrade UI")]
     public GameObject UpgradeUI;
     public Button[] optionButtons;
@@ -17,45 +17,45 @@ public class UpgradeManager : MonoBehaviour
     public TextMeshProUGUI[] optionDescTexts;
     public Image[] optionImages;
 
-    // ì „ì²´ ë¬´ê¸°, í…œë“¤
+    // ÀüÃ¼ ¹«±â, ÅÛµé
     [Foldout("Weapon and Passive")]
     public List<WeaponData> allWeaponDataList;
-    public List<WeaponData> weaponDataList;
+    public List<WeaponData> myWeaponDataList;
     public List<WeaponData> passiveDataList;
-    // ì„ íƒì§€ë¡œ ë‚˜ì˜¤ëŠ” í…œë“¤ (Maxí…œì´ ìˆìœ¼ë©´ ì œê±° í• ë¼ëŠ” ìš©ë„)
-    private List<WeaponData> listForWeapons;
-    private List<WeaponData> listForPassives;
+    // ¼±ÅÃÁö·Î ³ª¿À´Â ÅÛµé (MaxÅÛÀÌ ÀÖÀ¸¸é Á¦°Å ÇÒ¶ó´Â ¿ëµµ)
+    private List<WeaponData> candidateWeaponList;
+    private List<WeaponData> candidatePassiveList;
 
-    // í…œë“¤ì„ ë­˜ ì„ íƒí–ˆëŠ”ì§€ ì•Œë ¤ì£¼ëŠ” ë¦¬ìŠ¤íŠ¸(ì„ íƒëœ ë¬´ê¸°ë“¤ X)
-    // ë­ ìˆëŠ”ì§€ë§Œ ì•Œìˆ˜ ìˆì–´ì„œ GameUIì— ì‚¬ìš©í•˜ëŠ” ìš©ë„
+    // ÅÛµéÀ» ¹» ¼±ÅÃÇß´ÂÁö ¾Ë·ÁÁÖ´Â ¸®½ºÆ®(¼±ÅÃµÈ ¹«±âµé X)
+    // ¹¹ ÀÖ´ÂÁö¸¸ ¾Ë¼ö ÀÖ¾î¼­ GameUI¿¡ »ç¿ëÇÏ´Â ¿ëµµ
     [Foldout("Player Weapon & Item Slot")]
-    public List<WeaponData> playerWeaponList = new List<WeaponData>();
-    public List<WeaponData> playerPassiveList = new List<WeaponData>();
-    public int maxItemNumber = 4;
+    public List<WeaponData> playerSelectedWeaponList = new List<WeaponData>();
+    public List<WeaponData> playerSelectedPassiveList = new List<WeaponData>();
+    private int maxItemNumber = 4;
 
-    private bool isLevelUp = false;
+    private bool LvUpFlag = false;
 
-    // ì‹¤ì œ ë¬´ê¸°ë“¤ì´ ìˆëŠ” ê³³
-    // ì—¬ê¸°ì„œ ì‹¤ì œ ë¬´ê¸°ë“¤ì— ë ˆë²¨ì„ ì•Œìˆ˜ ìˆê³  ì‹¤ì œ ê°•í™”ë„ ì—¬ê¸°ì„œ
+    // ½ÇÁ¦ ¹«±âµéÀÌ ÀÖ´Â °÷
+    // ¿©±â¼­ ½ÇÁ¦ ¹«±âµé¿¡ ·¹º§À» ¾Ë¼ö ÀÖ°í ½ÇÁ¦ °­È­µµ ¿©±â¼­
     [Foldout("Player Weapon and Item")]
     public Transform playerWeaponBag;
     public Transform playerPassiveBag;
 
-    // ê²Œì„ì˜ UI
+    // °ÔÀÓÀÇ UI
     public GameUI gameUI;
 
-    // ê°•í™”í…œì¤‘ì— MaxLevelì´ ë§ì•„ì„œ ì„ íƒì§€ì˜ ë‚˜ì˜¤ëŠ” í…œ ìˆ˜ê°€ 3ê°œ ì•„í•˜ë•Œ ë‚˜ì˜¤ëŠ” í…œë“¤
-    [Header("Item for MaxLevel")]
-    public List<WeaponData> maxLevelItemList = new List<WeaponData>();
+    // °­È­ÅÛÁß¿¡ MaxLevelÀÌ ¸¹¾Æ¼­ ¼±ÅÃÁöÀÇ ³ª¿À´Â ÅÛ ¼ö°¡ 3°³ ¾ÆÇÏ¶§ ³ª¿À´Â ÅÛµé
+    [Header("Extra Item")]
+    public List<WeaponData> extraItemList = new List<WeaponData>();
     [EndFoldout]
 
-    // í…œ ì„ íƒìˆ˜ê°€ ìµœëŒ€ì¼ë•Œ ì„ íƒì§€ë¡œ ë‚˜íƒ€ë‚˜ëŠ” í…œë“¤
+    // ÅÛ ¼±ÅÃ¼ö°¡ ÃÖ´ëÀÏ¶§ ¼±ÅÃÁö·Î ³ªÅ¸³ª´Â ÅÛµé
     private List<WeaponData> selectedPassiveList = new List<WeaponData>();
     private List<WeaponData> selectedWeaponList = new List<WeaponData>();
 
     private Animator animator;
 
-    public Dictionary<string, WeaponData> weaponDataDict = new Dictionary<string, WeaponData>();
+    private Dictionary<string, WeaponData> weaponDataDict = new Dictionary<string, WeaponData>();
 
     private void Awake()
     {
@@ -68,11 +68,11 @@ public class UpgradeManager : MonoBehaviour
 
         foreach (string name in SaveManager.instance.shopData.installedItemList)
         {
-            weaponDataList.Add(weaponDataDict[name]);
+            myWeaponDataList.Add(weaponDataDict[name]);
         }
 
-        listForWeapons = new (weaponDataList);
-        listForPassives = new (passiveDataList);
+        candidateWeaponList = new(myWeaponDataList);
+        candidatePassiveList = new(passiveDataList);
         animator = GetComponent<Animator>();
     }
 
@@ -81,10 +81,6 @@ public class UpgradeManager : MonoBehaviour
         foreach (var weapon in allWeaponDataList)
         {
             weapon.ResetToNew();
-        }
-        foreach (var passive in passiveDataList)
-        {
-            passive.ResetToNew();
         }
     }
 
@@ -96,7 +92,7 @@ public class UpgradeManager : MonoBehaviour
 
 
     // Upgrade UI
-    public void OnUpgrade(bool levelup)
+    public void OnUpgrade(bool isLevelup)
     {
         UpgradeUI.SetActive(true);
         StartCoroutine(OpenUI(true));
@@ -105,19 +101,19 @@ public class UpgradeManager : MonoBehaviour
         List<WeaponData> sourceDataList = null;
         List<WeaponData> itemList = null;
 
-        if (levelup == true)
+        if (isLevelup == true)
         {
-            isLevelUp = levelup;
-            sourceDataList = listForWeapons;
-            itemList = playerWeaponList;
-            CheckMaxLevelItem(playerWeaponBag); 
+            LvUpFlag = isLevelup;
+            sourceDataList = candidateWeaponList;
+            itemList = playerSelectedWeaponList;
+            CheckMaxLevelItem(playerWeaponBag);
             ItemToSelectedItems(selectedItems, sourceDataList, itemList, selectedWeaponList);
         }
-        else if (levelup == false)
+        else if (isLevelup == false)
         {
-            isLevelUp = levelup;
-            sourceDataList = listForPassives;
-            itemList = playerPassiveList;
+            LvUpFlag = isLevelup;
+            sourceDataList = candidatePassiveList;
+            itemList = playerSelectedPassiveList;
             CheckMaxLevelItem(playerPassiveBag);
             ItemToSelectedItems(selectedItems, sourceDataList, itemList, selectedPassiveList);
         }
@@ -146,20 +142,20 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
-    // ë¬´ê¸°ê°€ Maxì´ê³  ê°•í™”ë„ ê°€ëŠ¥ í•œì§€ í™•ì¸ í•˜ê³  ê°€ëŠ¥ í•˜ë©´ ì„ íƒì§€ì— ì¶”ê°€
+    // ¹«±â°¡ MaxÀÌ°í °­È­µµ °¡´É ÇÑÁö È®ÀÎ ÇÏ°í °¡´É ÇÏ¸é ¼±ÅÃÁö¿¡ Ãß°¡
     private void CheckPowerWeapon()
     {
         for (int i = 0; i < playerWeaponBag.childCount; i++)
         {
             var playerWeapon = playerWeaponBag.GetComponentsInChildren<PlayerWeapon>()[i];
 
-            // ë¬´ê¸°ì¤‘ì—ì„œ maxLevelì´ ìˆëŠ”ì§€ í™•ì¸
+            // ¹«±âÁß¿¡¼­ maxLevelÀÌ ÀÖ´ÂÁö È®ÀÎ
             if (playerWeapon.isMaxLevel && !playerWeapon.isPowerWeapon)
             {
 
-                // maxLevel ë¬´ê¸° ì¤‘ì— ê·¸ì˜ ë§ëŠ” passiveí…œì´ ìˆëŠ”ì§€ í™•ì¸
+                // maxLevel ¹«±â Áß¿¡ ±×ÀÇ ¸Â´Â passiveÅÛÀÌ ÀÖ´ÂÁö È®ÀÎ
                 bool hasMatchingPassive = false;
-                foreach (var passive in playerPassiveList)
+                foreach (var passive in playerSelectedPassiveList)
                 {
                     if (playerWeapon.matchPassive == passive.itemName)
                     {
@@ -168,11 +164,11 @@ public class UpgradeManager : MonoBehaviour
                     }
                 }
 
-                // ê·¸ì˜ ë§ëŠ” passiveí…œì´ ìˆìœ¼ë©´ ë‹¤ì‹œ ì„ íƒì§€ì— powerWeaponìœ¼ë¡œ ì¶”ê°€
+                // ±×ÀÇ ¸Â´Â passiveÅÛÀÌ ÀÖÀ¸¸é ´Ù½Ã ¼±ÅÃÁö¿¡ powerWeaponÀ¸·Î Ãß°¡
 
                 if (hasMatchingPassive)
                 {
-                    var findItem = weaponDataList.Find(i => i.item.name + ("(Clone)") == playerWeapon.name);
+                    var findItem = myWeaponDataList.Find(i => i.item.name + ("(Clone)") == playerWeapon.name);
                     findItem.curImage = findItem.powerImage;
                     findItem.curName = findItem.powerName;
                     findItem.curDesc = findItem.powerDesc;
@@ -181,11 +177,11 @@ public class UpgradeManager : MonoBehaviour
             }
         }
 
-        // ë§Œì•½ì— ë‹¤ ë§Œë©ì´ë¼ ë‹¤ ë¹ ì§€ê³  ë‹¤ë¥¸ ì•„ì´í…œë“¤ ì¶”ê°€
+        // ¸¸¾à¿¡ ´Ù ¸¸·¦ÀÌ¶ó ´Ù ºüÁö°í ´Ù¸¥ ¾ÆÀÌÅÛµé Ãß°¡
         AddRandomMaxLevelItem(selectedWeaponList);
     }
 
-    // í…œ ì„ íƒìˆ˜ê°€ ìµœëŒ€ê°€ ì•„ë¦¬ê³  í…œì´ Maxë ˆë²¨ì¸ì§€ í™•ì¸, Maxì´ë©´ ì„ íƒì§€ì— ì•ˆ ë‚˜ì˜¤ê°œ í•˜ê¸°
+    // ÅÛ ¼±ÅÃ¼ö°¡ ÃÖ´ë°¡ ¾Æ¸®°í ÅÛÀÌ Max·¹º§ÀÎÁö È®ÀÎ, MaxÀÌ¸é ¼±ÅÃÁö¿¡ ¾È ³ª¿À°³ ÇÏ±â
     private void CheckMaxLevelItem(Transform itemBag)
     {
         if (itemBag == playerWeaponBag)
@@ -195,14 +191,14 @@ public class UpgradeManager : MonoBehaviour
                 var playerWeapon = playerWeaponBag.GetComponentsInChildren<PlayerWeapon>()[i];
                 if (playerWeapon.isMaxLevel && !playerWeapon.isPowerWeapon)
                 {
-                    // maxLevel ë¬´ê¸°ì¼ ê²½ìš° ì„ íƒì§€ì—ì„œ ë¹¼ê¸°
+                    // maxLevel ¹«±âÀÏ °æ¿ì ¼±ÅÃÁö¿¡¼­ »©±â
                     var findWeapon = selectedWeaponList.Find(i => i.item.name + ("(Clone)") == playerWeapon.name);
-                    
+
                     if (findWeapon != null)
                     {
                         selectedWeaponList.Remove(findWeapon);
                     }
-                    
+
                 }
             }
         }
@@ -218,9 +214,9 @@ public class UpgradeManager : MonoBehaviour
                     {
                         selectedPassiveList.Remove(findPassive);
                     }
-                    
+
                 }
-                
+
             }
         }
     }
@@ -228,7 +224,7 @@ public class UpgradeManager : MonoBehaviour
     // Put Items in to select windows
     private void ItemToSelectedItems(List<WeaponData> showOnSelectedItems, List<WeaponData> itemListForSelected, List<WeaponData> itemList, List<WeaponData> selectedItemsList)
     {
-        // í…œ ì†Œì§€ìˆ˜ê°€ maxì•„ë‹ˆë©´ ê·¸ dataì— ìˆëŠ”ê±°ì—ì„œ ëœë¤ìœ¼ë¡œ ì¶”ê°€
+        // ÅÛ ¼ÒÁö¼ö°¡ max¾Æ´Ï¸é ±× data¿¡ ÀÖ´Â°Å¿¡¼­ ·£´ıÀ¸·Î Ãß°¡
         if (itemList.Count != maxItemNumber)
         {
             while (showOnSelectedItems.Count < 3 && itemListForSelected.Count > 0)
@@ -241,14 +237,14 @@ public class UpgradeManager : MonoBehaviour
             }
         }
 
-        // í…œ ìˆ˜ê°€ maxìœ¼ë©´, ì´ë¯¸ ì„ íƒí•œ í…œë§Œ ë‚˜ì˜¤ê²Œ
+        // ÅÛ ¼ö°¡ maxÀ¸¸é, ÀÌ¹Ì ¼±ÅÃÇÑ ÅÛ¸¸ ³ª¿À°Ô
         else if (itemList.Count == maxItemNumber)
         {
-            if (itemListForSelected == listForWeapons && selectedItemsList.Count > 0)
+            if (itemListForSelected == candidateWeaponList && selectedItemsList.Count > 0)
             {
-        
+
                 CheckPowerWeapon();
-                // ì„ íƒí•œ ë¬´ê¸°listì—ì„œ ëœë¤ìœ¼ë¡œ ì„ íƒì§€ì— ë‚˜ì˜¤ê²Œ í•˜ê¸°
+                // ¼±ÅÃÇÑ ¹«±âlist¿¡¼­ ·£´ıÀ¸·Î ¼±ÅÃÁö¿¡ ³ª¿À°Ô ÇÏ±â
                 while (showOnSelectedItems.Count < 3 && selectedItemsList.Count > 0)
                 {
                     WeaponData item = selectedItemsList[Random.Range(0, selectedItemsList.Count)];
@@ -259,12 +255,12 @@ public class UpgradeManager : MonoBehaviour
                 }
             }
 
-            // passiveí…œì€ ëº„ ì¼ì´ ì—†ì–´ì„œ ê·¸ëƒ¥ ì´ë¯¸ ì„ íƒí•œê±° ì¤‘ì—ì„œ ëœë¤ìœ¼ë¡œ ë‚˜íƒ€ë‚˜ê²Œ
-            else if (itemListForSelected == listForPassives && selectedItemsList.Count > 0)
+            // passiveÅÛÀº »¬ ÀÏÀÌ ¾ø¾î¼­ ±×³É ÀÌ¹Ì ¼±ÅÃÇÑ°Å Áß¿¡¼­ ·£´ıÀ¸·Î ³ªÅ¸³ª°Ô
+            else if (itemListForSelected == candidatePassiveList && selectedItemsList.Count > 0)
             {
                 while (selectedPassiveList.Count < 3)
                 {
-                    foreach (var item in maxLevelItemList)
+                    foreach (var item in extraItemList)
                     {
                         if (!selectedPassiveList.Contains(item))
                         {
@@ -285,26 +281,23 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
-    // ëœë¤ìœ¼ë¡œ maxë ˆë²¨ë•Œ ë„£ì–´ì•¼í•˜ëŠ” í…œë“¤ ë„£ê¸°
+    // ·£´ıÀ¸·Î max·¹º§¶§ ³Ö¾î¾ßÇÏ´Â ÅÛµé ³Ö±â
     private void AddRandomMaxLevelItem(List<WeaponData> list)
     {
-        while (list.Count < 3)
+        var random = Random.Range(0, 3);
+        if (list.Count < 3 && !list.Contains(extraItemList[random]))
         {
-            var random = Random.Range(0, 3);
-            if (!list.Contains(maxLevelItemList[random]))
-            {
-                list.Add(maxLevelItemList[random]);
-            }
+            list.Add(extraItemList[random]);
         }
     }
 
-    // ì„ íƒí•œ í…œì´ ë¬´ê¸°ì¸ì§€, passiveí…œì¸ì§€, maxLevelí…œì¸ì§€ êµ¬ë¶„í•˜ê¸°
+    // ¼±ÅÃÇÑ ÅÛÀÌ ¹«±âÀÎÁö, passiveÅÛÀÎÁö, maxLevelÅÛÀÎÁö ±¸ºĞÇÏ±â
     private void OnItemSelected(WeaponData item)
     {
-        // maxLevelí…œ
+        // maxLevelÅÛ
         if (item.item.tag == "Item")
         {
-            if(item.itemName == "Apple")
+            if (item.itemName == "Apple")
             {
                 ItemPooling.Instance.GetApple(GameObject.FindGameObjectWithTag("Player").transform.position);
             }
@@ -318,22 +311,22 @@ public class UpgradeManager : MonoBehaviour
             }
         }
 
-        // ë ˆì—…ì´ë¼ ë¬´ê¸°ë“¤ ë‚˜ì˜¤ê¸°
-        else if (isLevelUp)
+        // ·¹¾÷ÀÌ¶ó ¹«±âµé ³ª¿À±â
+        else if (LvUpFlag)
         {
-            AddOrUpgradeItem(playerWeaponList, selectedWeaponList, playerWeaponBag, item);
+            AddOrUpgradeItem(playerSelectedWeaponList, selectedWeaponList, playerWeaponBag, item);
             RemovePowerWeaponInList();
         }
 
-        // waveëì´ë¼ passiveí…œ ë‚˜ì˜¤ê¸°
-        else if (!isLevelUp)
+        // wave³¡ÀÌ¶ó passiveÅÛ ³ª¿À±â
+        else if (!LvUpFlag)
         {
-            AddOrUpgradeItem(playerPassiveList, selectedPassiveList, playerPassiveBag, item);
+            AddOrUpgradeItem(playerSelectedPassiveList, selectedPassiveList, playerPassiveBag, item);
         }
 
         StartCoroutine(OpenUI(false));
         GameManager.Instance.EndUpgrade();
-        isLevelUp = false;
+        LvUpFlag = false;
     }
 
     private void RemovePowerWeaponInList()
@@ -343,7 +336,7 @@ public class UpgradeManager : MonoBehaviour
             var playerWeapon = playerWeaponBag.GetComponentsInChildren<PlayerWeapon>()[i];
             if (playerWeapon.isPowerWeapon)
             {
-                // maxLevel ë¬´ê¸°ì¼ ê²½ìš° ì„ íƒì§€ì—ì„œ ë¹¼ê¸°
+                // maxLevel ¹«±âÀÏ °æ¿ì ¼±ÅÃÁö¿¡¼­ »©±â
                 var findWeapon = selectedWeaponList.Find(i => i.item.name + ("(Clone)") == playerWeapon.name);
 
                 if (findWeapon != null)
@@ -368,7 +361,7 @@ public class UpgradeManager : MonoBehaviour
             var upgradeItemName = playerItemBag.Find(existingItem.item.name + ("(Clone)"));
             var upgradeWeapon = upgradeItemName.GetComponent<PlayerWeapon>();
             var upgradePassive = upgradeItemName.GetComponent<PlayerPassive>();
-            if (isLevelUp)
+            if (LvUpFlag)
             {
                 if (upgradeWeapon.isMaxLevel == true)
                 {
@@ -383,7 +376,7 @@ public class UpgradeManager : MonoBehaviour
                     gameUI.AddWeaponLevel(playerWeaponBag);
                 }
             }
-            else if (!isLevelUp)
+            else if (!LvUpFlag)
             {
                 upgradePassive.Upgrade();
                 gameUI.AddPassiveLevel(playerPassiveBag);
@@ -394,14 +387,14 @@ public class UpgradeManager : MonoBehaviour
             // Add Weapon or Item to itemList
             itemList.Add(item);
             selectedList.Add(item);
-            if (itemList == playerWeaponList)
+            if (itemList == playerSelectedWeaponList)
             {
                 gameUI.WeaponIconList(itemList);
                 AddWeaponToPlayer(item.item);
                 gameUI.AddWeaponLevel(playerWeaponBag);
                 SaveManager.instance.AddWeapon(item.itemName);
             }
-            else if (itemList == playerPassiveList)
+            else if (itemList == playerSelectedPassiveList)
             {
                 gameUI.PassiveIconList(itemList);
                 AddItemToPlayer(item.item);

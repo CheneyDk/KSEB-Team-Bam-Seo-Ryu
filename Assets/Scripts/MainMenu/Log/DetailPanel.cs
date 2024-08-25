@@ -27,7 +27,7 @@ public class DetailPanel : MonoBehaviour
         dateTime.text = data.playDateTime.ToString();
         if (data.isClear)
         {
-            dateTime.text += "(clear)";
+            dateTime.text += " (clear)";
         }
 
         int idx = setters.Length - 1;
