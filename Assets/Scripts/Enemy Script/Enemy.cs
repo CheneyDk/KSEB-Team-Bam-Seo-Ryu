@@ -8,6 +8,38 @@ public abstract class Enemy : MonoBehaviour
     protected float elixirLastingTime;
     protected float elixirAdditionalDamageRate = 0f;
     protected bool isDestroyed = false;
+    public Player player;
+
+    private void Awake()
+    {
+        player = FindAnyObjectByType<Player>();
+    }
+
+    public interface IEnemyState
+    {
+        void EnterState();
+        void UpdateState();
+        void ExitState();
+    }
+
+    public class StateMachine
+    {
+        private IEnemyState currentState;
+
+        public void SetState(IEnemyState newState)
+        {
+            currentState?.ExitState();
+            currentState = newState;
+            currentState.EnterState();
+        }
+
+        public void Update()
+        {
+            currentState?.UpdateState();
+        }
+    }
+
+
 
     public abstract void EnemyMovement();
     public abstract void TakeDamage(float damage, int critOccur);
