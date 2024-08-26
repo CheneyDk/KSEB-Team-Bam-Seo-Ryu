@@ -101,11 +101,18 @@ public class SnakeLogicError : Enemy
     private BossState nextState;
 
     private BossState idleState;
-    private BossState fireState;
     private BossState slowZigZagState;
     private BossState singleChargeState;
     private BossState multiChargeState;
     private BossState struggleState;
+
+    private bool isTransit;
+    private int idleCase; // idle or slow zigzag
+    private float chargeTimer; // minus
+    private float chargeTime = 0f;
+    private float idleTimer; // plus
+    private float idleTime = 5f;
+    private int chargeCase;
 
     private void Awake()
     {
@@ -126,48 +133,93 @@ public class SnakeLogicError : Enemy
 
         healthText.text = ($"{snakeCurHP.ToString("N0")}MB of {snakeMaxHp}MB");
 
+        isTransit = false;
         StateInit();
     }
 
     private void StateInit()
     {
-        idleState = new BossState(null, null, null);
-        fireState = new BossState(null, null, null);
+        idleState = new BossState(IdleEnter, null, null);
         slowZigZagState = new BossState(null, null, null);
         singleChargeState = new BossState(null, null, null);
         multiChargeState = new BossState(null, null,null);
+
+        curState = slowZigZagState;
     }
 
     private bool TransitCheck()
     {
-        if (curState == idleState)
+        if (curState == struggleState)
         {
-
+            nextState = idleState;
+            return true;
         }
 
-        if (curState == fireState)
+        if (curState == idleState)
         {
+            idleTimer += Time.deltaTime;
 
+            if (idleTimer > idleTime)
+            {
+                chargeCase = Random.Range(0, 10);
+
+                if (chargeCase > 4)
+                {
+                    nextState = singleChargeState;
+                    return true;
+                }
+                else
+                {
+                    nextState = multiChargeState;
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         if (curState == slowZigZagState)
         {
-            
+            nextState = idleState;
+            return true;
         }
 
         if (curState == singleChargeState)
         {
+            idleCase = Random.Range(0, 10);
 
+            if (idleCase > 3)
+            {
+                nextState = idleState;
+                return true;
+            }
+            else
+            {
+                nextState = slowZigZagState;
+                return true;
+            }
         }
 
         if (curState == multiChargeState)
         {
+            idleCase = Random.Range(0, 10);
 
+            if (idleCase > 7)
+            {
+                nextState = idleState;
+                return true;
+            }
+            else
+            {
+                nextState = slowZigZagState;
+                return true;
+            }
         }
 
         if (curState == struggleState)
         {
-
+            nextState = idleState;
+            return true;
         }
 
         return false;
@@ -176,12 +228,22 @@ public class SnakeLogicError : Enemy
     private void Start()
     {
         isDead = false;
-        SnakePatternCycle().Forget();
     }
 
     private void Update()
     {
+        if (player == null) { return; }
+        
+        if (isTransit)
+        {
+            curState = nextState;
+            curState.OnEnter?.Invoke();
+            isTransit = false;
+        }
 
+        isTransit = TransitCheck();
+
+        if (isTransit) curState.OnExit?.Invoke();
 
         ChangeHPBar();
     }
@@ -284,6 +346,15 @@ public class SnakeLogicError : Enemy
         }
     }
 
+    private void IdleEnter()
+    {
+        idleTimer = 0f;
+    }
+
+    private void SlowZigZagEnter()
+    {
+        SnakeSlowZigZag().Forget();
+    }
 
     private async UniTask SnakeSlowZigZag()
     {
@@ -310,6 +381,11 @@ public class SnakeLogicError : Enemy
         curTurnSpeed = slowTurnSpeed;
     }
 
+    private void MultiChargeEnter()
+    {
+        SnakeChargeStraight().Forget();
+    }
+
     private async UniTask SnakeChargeStraight()
     {
         for (int i = 0; i < 3; i++) 
@@ -323,6 +399,11 @@ public class SnakeLogicError : Enemy
             await SpeedGraduallySlowDown(5f, 15f);
             Debug.Log("slow down end");
         }
+    }
+
+    private void SingleChargeEnter()
+    {
+        SnakeChargeZigZag().Forget();
     }
 
     private async UniTask SnakeChargeZigZag()
