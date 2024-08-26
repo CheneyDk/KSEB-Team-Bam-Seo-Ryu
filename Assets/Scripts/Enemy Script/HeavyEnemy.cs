@@ -52,7 +52,7 @@ public class HeavyEnemy : Enemy
     private SpriteRenderer curSR;
     private Color originColor;
 
-    private bool isDead = false;
+    public bool isDead = false;
 
     private AudioManager audioManager;
 
