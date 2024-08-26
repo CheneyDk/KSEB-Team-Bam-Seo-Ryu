@@ -79,6 +79,7 @@ public class RunTimeError : Enemy
     private BossState idleState;
     private BossState movingState;
     private BossState fireState;
+    private BossState struggleState; // Bal Akk Pattern
 
     [SerializeField] private BossState curState;
     private BossState nextState;
@@ -87,6 +88,11 @@ public class RunTimeError : Enemy
     private float idleTimer;
     private float fireTime = 5f;
     private float fireTimer;
+    private float struggleWaitTime = 3f;
+    private float struggleWaitTimer = 0f;
+    private bool canStruggle = true;
+
+    public GameObject bossWarningPrefab;
 
     private bool isTransit = false;
 
@@ -144,6 +150,8 @@ public class RunTimeError : Enemy
         idleState = new BossState(idleEnter, null, null);
         movingState = new BossState(EnemyMovement, null, null);
         fireState = new BossState(DirectFire, null, null);
+        struggleState = new BossState(StruggleEnter, null, null);
+
         curState = idleState;
     }
 
@@ -194,7 +202,8 @@ public class RunTimeError : Enemy
     private void DirectFire()
     {
         if(isDead) return;
-
+        if (fireTime > fireTimer) return;
+        fireTimer = 0f;
         FireBullet().Forget();
     }
 
@@ -203,8 +212,6 @@ public class RunTimeError : Enemy
     private async UniTask FireBullet()
     {
         dircetionFireCancelSource = new CancellationTokenSource();
-        await UniTask.WaitUntil(() => fireTime < fireTimer, cancellationToken: dircetionFireCancelSource.Token);
-        fireTimer = 0f;
 
         var direction = player.transform.position - transform.position;
         direction.Normalize();
@@ -219,6 +226,33 @@ public class RunTimeError : Enemy
             tempBullet.GetComponent<RunTimeErrorBullet>().Init(bulletSpeed, direction);
             await UniTask.WaitForSeconds(0.3f, cancellationToken: dircetionFireCancelSource.Token);
         }
+    }
+
+    private void StruggleEnter()
+    {
+        StrugglePattern().Forget();
+    }
+
+    private async UniTask StrugglePattern()
+    {
+        var warning = Instantiate(bossWarningPrefab, Vector3.zero, Quaternion.identity);
+        warning.transform.SetParent(transform, false);
+
+        while (struggleWaitTime > struggleWaitTimer)
+        {
+            struggleWaitTimer += Time.deltaTime;
+            await UniTask.Yield();
+        }
+
+        Destroy(warning);
+
+        for (int i = 0; i < 20; i++)
+        {
+            FireBullet().Forget();
+            await UniTask.WaitForSeconds(0.1f);
+        }
+
+        
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -314,6 +348,14 @@ public class RunTimeError : Enemy
     // FSM func
     private bool TransitCheck()
     {
+        // struggle
+        if (RunTimeErrorCurtHP / RunTimeErrorMaxHp < 0.2f && canStruggle)
+        {
+            nextState = struggleState;
+            canStruggle = false;
+            return true;
+        }
+
         // idle
         if (curState == idleState)
         {
@@ -343,6 +385,12 @@ public class RunTimeError : Enemy
 
         // fire
         if (curState == fireState)
+        {
+            nextState = idleState;
+            return true;
+        }
+
+        if (curState == struggleState)
         {
             nextState = idleState;
             return true;

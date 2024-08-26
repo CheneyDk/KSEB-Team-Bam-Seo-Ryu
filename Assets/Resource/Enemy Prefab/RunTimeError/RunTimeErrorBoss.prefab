@@ -940,6 +940,7 @@ MonoBehaviour:
   rotateBullet: {fileID: 6193504377320133229, guid: d8d4958a034201c4ebc6e96b15fe4ee1, type: 3}
   rotateBulletSpeed: 0
   rotateBulletNum: 0
+  fireRange: 20
   rotationBulletSpawner: {fileID: 7489818124013458593}
   destroySprite: {fileID: -1115704315, guid: f8473cd5299e27344be74620a11c4ded, type: 3}
   healthBar:
@@ -964,6 +965,7 @@ MonoBehaviour:
   - {fileID: 1529844614642355614}
   - {fileID: 1761321522420477079}
   healthText: {fileID: 78574925291469312}
+  bossWarningPrefab: {fileID: 1215364935282573017, guid: fde8953c9ab35fa46a442c861d18b031, type: 3}
 --- !u!58 &7851675844547211640
 CircleCollider2D:
   m_ObjectHideFlags: 0
