@@ -60,6 +60,9 @@ public class RangeEnemy : Enemy
 
     public List<GameObject> pooledEnemyBullet = new List<GameObject>();
 
+    public Player player;
+
+
     private void Awake()
     {
         curSR = this.GetComponent<SpriteRenderer>();
@@ -69,11 +72,12 @@ public class RangeEnemy : Enemy
         RangeEnemyCurHP = RangeEnemyMaxHp;
         rangeAni = GetComponent<Animator>();
         rangeCollider = GetComponent<CircleCollider2D>();
+        player = FindAnyObjectByType<Player>();
 
         bulletPrefab.GetComponent<RangeEnemyBullet>().Init(5);
 
         stateMachine = new StateMachine();
-        stateMachine.SetState(new RangeEnemyIdleState(this));  // 기본 상태를 설정
+        stateMachine.SetState(new RangeEnemyMoveState(this));
     }
 
     private void Start()
@@ -86,6 +90,11 @@ public class RangeEnemy : Enemy
     {
         if (player == null) return;
         stateMachine.Update();
+
+        Vector2 direction = (player.transform.position - transform.position).normalized;
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+        float angle = Mathf.LerpAngle(transform.eulerAngles.z, targetAngle, Time.deltaTime * rotationSpeed);
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     public override void EnemyMovement()
@@ -230,38 +239,6 @@ public class RangeEnemy : Enemy
 }
 
 
-// 상태 구현
-public class RangeEnemyIdleState : IEnemyState
-{
-    private RangeEnemy enemy;
-
-    public RangeEnemyIdleState(RangeEnemy enemy)
-    {
-        this.enemy = enemy;
-    }
-
-    public void EnterState()
-    {
-    }
-
-    public void UpdateState()
-    {
-        // 플레이어와의 거리에 따라 이동 또는 공격 상태로 전환
-        if (Vector2.Distance(enemy.transform.position, enemy.player.transform.position) > enemy.playerEnemyRange)
-        {
-            enemy.stateMachine.SetState(new RangeEnemyMoveState(enemy));
-        }
-        else
-        {
-            enemy.stateMachine.SetState(new RangeEnemyAttackState(enemy));
-        }
-    }
-
-    public void ExitState()
-    {
-    }
-}
-
 public class RangeEnemyMoveState : IEnemyState
 {
     private RangeEnemy enemy;
@@ -279,8 +256,7 @@ public class RangeEnemyMoveState : IEnemyState
     {
         if (enemy.player == null) return;
 
-        // 플레이어에게 이동
-        float distanceToPlayer = Vector2.Distance(enemy.transform.position, enemy.player.position);
+        float distanceToPlayer = Vector2.Distance(enemy.transform.position, enemy.player.transform.position);
         if (distanceToPlayer > enemy.playerEnemyRange)
         {
             enemy.transform.Translate(Vector2.up * enemy.RangeEnemyMoveSpeed * Time.deltaTime);
@@ -289,12 +265,6 @@ public class RangeEnemyMoveState : IEnemyState
         {
             enemy.stateMachine.SetState(new RangeEnemyAttackState(enemy));
         }
-
-        // 회전
-        Vector2 direction = (enemy.player.transform.position - enemy.transform.position).normalized;
-        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
-        float angle = Mathf.LerpAngle(enemy.transform.eulerAngles.z, targetAngle, Time.deltaTime * enemy.rotationSpeed);
-        enemy.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     public void ExitState()

@@ -3,16 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using VInspector;
+using static Enemy;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class HeavyEnemy : Enemy
 {
+    public StateMachine stateMachine;
+
     [Foldout("Enemy Information")]
-    [SerializeField]
-    private float HeavyEnemyMaxHp = 40f;
-    [SerializeField]
-    private float HeavyEnemyAtk = 10f;
-    [SerializeField]
-    private float HeavyEnemyMoveSpeed = 5f;
+    public float HeavyEnemyMaxHp = 40f;
+    public float HeavyEnemyAtk = 10f;
+    public float HeavyEnemyMoveSpeed = 5f;
     [SerializeField] private float HeavyEnemyCurHP;
     [SerializeField] private float HeavyEnemyCurAtk;
     [EndFoldout]
@@ -22,10 +23,8 @@ public class HeavyEnemy : Enemy
     public float dashRange = 15f;
     public float dashDelay = 1f;
 
-    private float playerEnemyRange = 8f;
-    private bool canDash = false;
-
-    private Transform player;
+    public float playerEnemyRange = 8f;
+    public bool canDash = false;
 
     [Header("Exp")]
     [SerializeField]
@@ -59,6 +58,7 @@ public class HeavyEnemy : Enemy
 
     private EnemySpawner enemySpawner;
 
+    public Player player;
 
     private void OnEnable()
     {
@@ -73,60 +73,24 @@ public class HeavyEnemy : Enemy
         enemySpawner = FindAnyObjectByType<EnemySpawner>();
         originColor = curSR.color;
         HeavyEnemyCurHP = HeavyEnemyMaxHp;
+        player = FindAnyObjectByType<Player>();
 
         heavyAni = GetComponent<Animator>();
         heavyCollider = GetComponent<CircleCollider2D>();
 
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        stateMachine = new StateMachine();
+        stateMachine.SetState(new HeavyEnemyMoveState(this));
     }
 
 
     private void Update()
     {
-        if (player == null) { return; }
-        if (!canDash && !isDead)
-        {
-            EnemyMovement();
-        }
+        if (player == null) return;
+        stateMachine.Update();
     }
 
     public override void EnemyMovement()
     {
-        if (player != null)
-        {
-            float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-            if (distanceToPlayer > playerEnemyRange)
-            {
-                Vector2 direction = (player.position - transform.position).normalized;
-                transform.Translate(direction * HeavyEnemyMoveSpeed * Time.deltaTime);
-            }
-            else
-            {
-                StartCoroutine(Dash());
-            }
-        }
-    }
-
-    private IEnumerator Dash()
-    {
-        canDash = true;
-        yield return new WaitForSeconds(dashDelay);
-        Vector3 dashTarget = player.position;
-
-        Vector3 startPosition = transform.position;
-        Vector3 direction = (dashTarget - startPosition).normalized;
-        float dashDistance = 0f;
-
-        while (dashDistance < dashRange)
-        {
-            float dashStep = dashSpeed * Time.deltaTime;
-            transform.Translate(direction * dashStep, Space.World);
-            dashDistance += dashStep;
-            yield return null;
-        }
-
-        canDash = false;
-        EnemyMovement();
     }
 
     public override void TakeDamage(float damage, int critOccur)
@@ -254,5 +218,88 @@ public class HeavyEnemy : Enemy
         HeavyEnemyCurAtk = HeavyEnemyAtk * num;
         originColor = Color.white + ((num - 1) / 0.5f) * new Color(0, -0.1f, -0.1f);
         curSR.color = originColor;
+    }
+}
+
+public class HeavyEnemyMoveState : IEnemyState
+{
+    private HeavyEnemy enemy;
+
+    public HeavyEnemyMoveState(HeavyEnemy enemy)
+    {
+        this.enemy = enemy;
+    }
+
+    public void EnterState()
+    {
+    }
+
+    public void ExitState()
+    {
+    }
+
+    public void UpdateState()
+    {
+        if (enemy.player == null) return;
+
+        float distanceToPlayer = Vector2.Distance(enemy.transform.position, enemy.player.transform.position);
+        if (distanceToPlayer > enemy.playerEnemyRange)
+        {
+            Vector2 direction = (enemy.player.transform.position - enemy.transform.position).normalized;
+            enemy.transform.Translate(direction * enemy.HeavyEnemyMoveSpeed * Time.deltaTime);
+        }
+        else
+        {
+            enemy.stateMachine.SetState(new HeavyEnemyDashState(enemy));
+        }
+    }
+}
+
+public class HeavyEnemyDashState : IEnemyState
+{
+    private HeavyEnemy enemy;
+
+    public HeavyEnemyDashState(HeavyEnemy enemy)
+    {
+        this.enemy = enemy;
+    }
+
+    public void EnterState()
+    {
+        enemy.StartCoroutine(Dash());
+    }
+
+    public void ExitState()
+    {
+        enemy.StopCoroutine(Dash());
+    }
+
+    public void UpdateState()
+    {
+        if (Vector2.Distance(enemy.transform.position, enemy.player.transform.position) > enemy.playerEnemyRange)
+        {
+            enemy.stateMachine.SetState(new HeavyEnemyMoveState(enemy));
+        }
+    }
+
+    private IEnumerator Dash()
+    {
+        enemy.canDash = true;
+        yield return new WaitForSeconds(enemy.dashDelay);
+        Vector3 dashTarget = enemy.player.transform.position;
+
+        Vector3 startPosition = enemy.transform.position;
+        Vector3 direction = (dashTarget - startPosition).normalized;
+        float dashDistance = 0f;
+
+        while (dashDistance < enemy.dashRange)
+        {
+            float dashStep = enemy.dashSpeed * Time.deltaTime;
+            enemy.transform.Translate(direction * dashStep, Space.World);
+            dashDistance += dashStep;
+            yield return null;
+        }
+
+        enemy.canDash = false;
     }
 }

@@ -8,12 +8,7 @@ public abstract class Enemy : MonoBehaviour
     protected float elixirLastingTime;
     protected float elixirAdditionalDamageRate = 0f;
     protected bool isDestroyed = false;
-    public Player player;
-
-    private void Awake()
-    {
-        player = FindAnyObjectByType<Player>();
-    }
+    
 
     public interface IEnemyState
     {

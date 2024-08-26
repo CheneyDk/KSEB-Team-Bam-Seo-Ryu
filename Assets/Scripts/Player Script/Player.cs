@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using VInspector;
 
 public class Player : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class Player : MonoBehaviour
     // readonly.
     
     // Player Stats
-    [Header("- Player")]
+    [Foldout("- Player")]
     public float playerMaxHp;
     public float playerCurHp;
     public int playerLevel;
@@ -36,6 +37,7 @@ public class Player : MonoBehaviour
     public float sprintCoolDown = 2f;
     private float sprintCoolDownTimer = 2f;
     public float playerAccelerate = 2.5f;
+    [EndFoldout]
 
     // invincible time
     private WaitForSeconds invincibleWait = new WaitForSeconds(1f);
@@ -48,10 +50,12 @@ public class Player : MonoBehaviour
     private bool isInvincible = false;
 
     // GameObjects
-    [Header("- GameObjects")]
+    [Foldout("- GameObjects")]
     public Transform playerArm;
     public GameObject weapon; // list needed
     public GameObject constText;
+    public GameObject wing;
+    [EndFoldout]
 
     // Input System
     private PlayerInput playerInput;
@@ -60,11 +64,12 @@ public class Player : MonoBehaviour
     // upgrades
 
     // Energy Drinks
-    [Header("-EnergyDrink")]
+    [Foldout("-EnergyDrink")]
     public float energyDrinkTimer = 0f;
     public float energyDrinkDuration = 10f;
     private float energyDrinkSprintCDDecrease = 1.25f;
     private bool isEnergyDrinkActive;
+    [EndFoldout]
 
     [SerializeField, Header("-Spawn Damage Number")]
     private DamageNumber damageNumber;
@@ -314,6 +319,7 @@ public class Player : MonoBehaviour
     public void GetEnergyDrink(float value)
     {
         audioManager.RedBlueClip();
+        wing.SetActive(true);
         GetHigh(value).Forget();
     }
 
@@ -336,6 +342,7 @@ public class Player : MonoBehaviour
         playerMoveSpeed /= value;
         sprintCoolDown += energyDrinkSprintCDDecrease;
         isEnergyDrinkActive = false;
+        wing.SetActive(false);
     }
 
     private async UniTask EnergyDrinkTimer()
