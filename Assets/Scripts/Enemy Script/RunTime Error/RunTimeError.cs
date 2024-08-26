@@ -55,14 +55,13 @@ public class RunTimeError : Enemy
 
     // random move
     private Vector2 randomMoveVector;
-    private float moveDistance;
-    private float mapSize = 23f;
+    // private float moveDistance;
+    // private float mapSize = 23f;
 
     // direct fire
-    private float randomChangeInterval;
     private int directFireBulletNum = 3;
     private CancellationTokenSource dircetionFireCancelSource;
-    private float fireRange = 20f;
+    [SerializeField] private float fireRange = 20f;
 
     // rotation bullet
     public GameObject rotationBulletSpawner;
@@ -81,7 +80,7 @@ public class RunTimeError : Enemy
     private BossState movingState;
     private BossState fireState;
 
-    private BossState curState;
+    [SerializeField] private BossState curState;
     private BossState nextState;
 
     private float idleTime = 1f;
@@ -104,9 +103,7 @@ public class RunTimeError : Enemy
         runtimeAni = GetComponent<Animator>();
         runtimeCollider = GetComponent<CircleCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        moveDistance = 5f;
         randomMoveVector = transform.position;
-        randomChangeInterval = 5f; // initial wait
 
         healthText.text = ($"{RunTimeErrorCurtHP.ToString("N0")}MB of {RunTimeErrorMaxHp}MB");
 
@@ -136,6 +133,9 @@ public class RunTimeError : Enemy
 
         if(isTransit) curState.OnExit?.Invoke();
 
+        // move
+        transform.position = Vector2.MoveTowards(transform.position, randomMoveVector, RunTimeErrorMoveSpeed * Time.deltaTime);
+        
         ChangeHPBar();
     }
 
@@ -144,6 +144,7 @@ public class RunTimeError : Enemy
         idleState = new BossState(idleEnter, null, null);
         movingState = new BossState(EnemyMovement, null, null);
         fireState = new BossState(DirectFire, null, null);
+        curState = idleState;
     }
 
     public void ChangeHPBar()
@@ -179,17 +180,13 @@ public class RunTimeError : Enemy
         // if (player is null) return;
 
         RandomMoveVector();
-        transform.position = Vector2.MoveTowards(transform.position, randomMoveVector, RunTimeErrorMoveSpeed * Time.deltaTime);
     }
 
     private void RandomMoveVector()
     {
         // 23 == map size, if map changed, this literal needed to change too.
-        randomMoveVector = new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
-        RunTimeErrorMoveSpeed = Random.Range(6f, 8f);
-        randomChangeInterval = moveDistance / RunTimeErrorMoveSpeed;
-
-        randomMoveVector = Vector2.zero;
+        randomMoveVector = new Vector2(Random.Range(-15f, 15f), Random.Range(-15f, 15f));
+        RunTimeErrorMoveSpeed = Random.Range(5f, 7f);
     }
 
 
@@ -207,6 +204,7 @@ public class RunTimeError : Enemy
     {
         dircetionFireCancelSource = new CancellationTokenSource();
         await UniTask.WaitUntil(() => fireTime < fireTimer, cancellationToken: dircetionFireCancelSource.Token);
+        fireTimer = 0f;
 
         var direction = player.transform.position - transform.position;
         direction.Normalize();
@@ -319,9 +317,9 @@ public class RunTimeError : Enemy
         // idle
         if (curState == idleState)
         {
-            idleTime += Time.deltaTime;
+            idleTimer += Time.deltaTime;
 
-            if (idleTime > idleTimer)
+            if (idleTime < idleTimer)
             {
                 nextState = movingState;
                 return true;
@@ -357,7 +355,7 @@ public class RunTimeError : Enemy
     {
         var distance = player.transform.position - transform.position;
 
-        if (distance.magnitude > fireRange)
+        if (distance.magnitude < fireRange)
         {
             nextState = fireState;
             return true;
@@ -369,6 +367,7 @@ public class RunTimeError : Enemy
     private void idleEnter()
     {
         idleTimer = 0f;
+        randomMoveVector = Vector2.zero;
     }
 
     public override void ResetEnemy(){}
