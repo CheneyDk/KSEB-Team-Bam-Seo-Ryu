@@ -6,6 +6,7 @@ using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static UnityEditor.PlayerSettings;
 
 public class RunTimeError : Enemy
 {
@@ -59,9 +60,9 @@ public class RunTimeError : Enemy
 
     // direct fire
     private float randomChangeInterval;
-    private float directFireRate = 5f;
     private int directFireBulletNum = 3;
     private CancellationTokenSource dircetionFireCancelSource;
+    private float fireRange = 20f;
 
     // rotation bullet
     public GameObject rotationBulletSpawner;
@@ -73,6 +74,22 @@ public class RunTimeError : Enemy
     private GameObject[] healthBar;
     [SerializeField]
     private TextMeshProUGUI healthText;
+
+
+    // FSM Vars
+    private BossState idleState;
+    private BossState movingState;
+    private BossState fireState;
+
+    private BossState curState;
+    private BossState nextState;
+
+    private float idleTime = 1f;
+    private float idleTimer;
+    private float fireTime = 5f;
+    private float fireTimer;
+
+    private bool isTransit = false;
 
     private void Awake()
     {
@@ -92,23 +109,41 @@ public class RunTimeError : Enemy
         randomChangeInterval = 5f; // initial wait
 
         healthText.text = ($"{RunTimeErrorCurtHP.ToString("N0")}MB of {RunTimeErrorMaxHp}MB");
+
+        StateInit();
     }
 
     private void Start()
     {
-        RandomMoveVector().Forget();
-        DirectFire().Forget();
+        fireTimer = 0f;
+        idleTimer = 0f;
     }
 
     private void Update()
     {
         if (player == null) { return; }
-        if (!isDead)
+
+        fireTimer += Time.deltaTime;
+
+        if (isTransit)
         {
-            EnemyMovement();
+            curState = nextState;
+            curState.OnEnter?.Invoke();
+            isTransit = false;
         }
+        
+        isTransit = TransitCheck();
+
+        if(isTransit) curState.OnExit?.Invoke();
 
         ChangeHPBar();
+    }
+
+    private void StateInit()
+    {
+        idleState = new BossState(idleEnter, null, null);
+        movingState = new BossState(EnemyMovement, null, null);
+        fireState = new BossState(DirectFire, null, null);
     }
 
     public void ChangeHPBar()
@@ -143,54 +178,48 @@ public class RunTimeError : Enemy
         // random move with random speed
         // if (player is null) return;
 
+        RandomMoveVector();
         transform.position = Vector2.MoveTowards(transform.position, randomMoveVector, RunTimeErrorMoveSpeed * Time.deltaTime);
-
     }
 
-    private async UniTask RandomMoveVector()
+    private void RandomMoveVector()
     {
-        while (!isDead)
-        {
-            await UniTask.WaitForSeconds(randomChangeInterval + 5f);
+        // 23 == map size, if map changed, this literal needed to change too.
+        randomMoveVector = new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
+        RunTimeErrorMoveSpeed = Random.Range(6f, 8f);
+        randomChangeInterval = moveDistance / RunTimeErrorMoveSpeed;
 
-            // 23 == map size, if map changed, this literal needed to change too.
-            randomMoveVector = new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
-            RunTimeErrorMoveSpeed = Random.Range(6f, 8f);
-            randomChangeInterval = moveDistance / RunTimeErrorMoveSpeed;
-
-            await UniTask.WaitForSeconds(randomChangeInterval);
-
-            randomMoveVector = Vector2.zero;
-        }
-        
+        randomMoveVector = Vector2.zero;
     }
 
 
     // Enemy shot
-    private async UniTask DirectFire()
+    private void DirectFire()
+    {
+        if(isDead) return;
+
+        FireBullet().Forget();
+    }
+
+    // UniTask is not void type.
+    // so I wrap this func with the func above (DirectFire)
+    private async UniTask FireBullet()
     {
         dircetionFireCancelSource = new CancellationTokenSource();
+        await UniTask.WaitUntil(() => fireTime < fireTimer, cancellationToken: dircetionFireCancelSource.Token);
 
-        await UniTask.WaitForSeconds(randomChangeInterval);
+        var direction = player.transform.position - transform.position;
+        direction.Normalize();
 
-        while (!dircetionFireCancelSource.IsCancellationRequested)
+        var pos = transform.position;
+
+        var bulletSpeed = Random.Range(20f, 30f);
+
+        for (int i = 0; i < directFireBulletNum; i++)
         {
-            
-            await UniTask.WaitForSeconds(directFireRate, cancellationToken: dircetionFireCancelSource.Token);
-
-            var direction = player.transform.position - transform.position;
-            direction.Normalize();
-
-            var pos = transform.position;
-
-            var bulletSpeed = Random.Range(10f, 30f);
-
-            for (int i = 0; i < directFireBulletNum; i++)
-            {
-                var tempBullet = GameObject.Instantiate(bulletPrefab, pos, Quaternion.identity);
-                tempBullet.GetComponent<RunTimeErrorBullet>().Init(bulletSpeed, direction);
-                await UniTask.WaitForSeconds(0.3f, cancellationToken: dircetionFireCancelSource.Token);
-            }
+            var tempBullet = GameObject.Instantiate(bulletPrefab, pos, Quaternion.identity);
+            tempBullet.GetComponent<RunTimeErrorBullet>().Init(bulletSpeed, direction);
+            await UniTask.WaitForSeconds(0.3f, cancellationToken: dircetionFireCancelSource.Token);
         }
     }
 
@@ -282,6 +311,64 @@ public class RunTimeError : Enemy
 
         SaveManager.instance.EnemyDeafeat("RuntimeErrorDeafeated");
         SaveManager.instance.AddScore(500);
+    }
+
+    // FSM func
+    private bool TransitCheck()
+    {
+        // idle
+        if (curState == idleState)
+        {
+            idleTime += Time.deltaTime;
+
+            if (idleTime > idleTimer)
+            {
+                nextState = movingState;
+                return true;
+            }
+
+            return IsPlayerInRange();
+        }
+
+        // moving
+        if (curState == movingState)
+        {
+            var distance = (randomMoveVector - (Vector2)transform.position).magnitude;
+            if (distance < 0.5f)
+            {
+                nextState = idleState;
+                return true;
+            }
+
+            return IsPlayerInRange();
+        }
+
+        // fire
+        if (curState == fireState)
+        {
+            nextState = idleState;
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool IsPlayerInRange()
+    {
+        var distance = player.transform.position - transform.position;
+
+        if (distance.magnitude > fireRange)
+        {
+            nextState = fireState;
+            return true;
+        }
+
+        return false;
+    }
+
+    private void idleEnter()
+    {
+        idleTimer = 0f;
     }
 
     public override void ResetEnemy(){}
