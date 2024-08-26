@@ -94,6 +94,19 @@ public class SnakeLogicError : Enemy
     [SerializeField]
     private TextMeshProUGUI healthText;
 
+    public GameObject bossWarningPrefab;
+
+    // FSM
+    private BossState curState;
+    private BossState nextState;
+
+    private BossState idleState;
+    private BossState fireState;
+    private BossState slowZigZagState;
+    private BossState singleChargeState;
+    private BossState multiChargeState;
+    private BossState struggleState;
+
     private void Awake()
     {
         // YH - move some components to each parts
@@ -112,6 +125,52 @@ public class SnakeLogicError : Enemy
         enemySpawner.bossIsAlive = true;
 
         healthText.text = ($"{snakeCurHP.ToString("N0")}MB of {snakeMaxHp}MB");
+
+        StateInit();
+    }
+
+    private void StateInit()
+    {
+        idleState = new BossState(null, null, null);
+        fireState = new BossState(null, null, null);
+        slowZigZagState = new BossState(null, null, null);
+        singleChargeState = new BossState(null, null, null);
+        multiChargeState = new BossState(null, null,null);
+    }
+
+    private bool TransitCheck()
+    {
+        if (curState == idleState)
+        {
+
+        }
+
+        if (curState == fireState)
+        {
+
+        }
+
+        if (curState == slowZigZagState)
+        {
+            
+        }
+
+        if (curState == singleChargeState)
+        {
+
+        }
+
+        if (curState == multiChargeState)
+        {
+
+        }
+
+        if (curState == struggleState)
+        {
+
+        }
+
+        return false;
     }
 
     private void Start()
@@ -122,6 +181,8 @@ public class SnakeLogicError : Enemy
 
     private void Update()
     {
+
+
         ChangeHPBar();
     }
 

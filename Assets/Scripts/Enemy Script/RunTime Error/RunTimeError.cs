@@ -55,14 +55,13 @@ public class RunTimeError : Enemy
 
     // random move
     private Vector2 randomMoveVector;
-    private float moveDistance;
-    private float mapSize = 23f;
+    // private float moveDistance;
+    // private float mapSize = 23f;
 
     // direct fire
-    private float randomChangeInterval;
     private int directFireBulletNum = 3;
     private CancellationTokenSource dircetionFireCancelSource;
-    private float fireRange = 20f;
+    [SerializeField] private float fireRange = 20f;
 
     // rotation bullet
     public GameObject rotationBulletSpawner;
@@ -80,14 +79,20 @@ public class RunTimeError : Enemy
     private BossState idleState;
     private BossState movingState;
     private BossState fireState;
+    private BossState struggleState; // Bal Akk Pattern
 
-    private BossState curState;
+    [SerializeField] private BossState curState;
     private BossState nextState;
 
     private float idleTime = 1f;
     private float idleTimer;
     private float fireTime = 5f;
     private float fireTimer;
+    private float struggleWaitTime = 3f;
+    private float struggleWaitTimer = 0f;
+    private bool canStruggle = true;
+
+    public GameObject bossWarningPrefab;
 
     private bool isTransit = false;
 
@@ -104,9 +109,7 @@ public class RunTimeError : Enemy
         runtimeAni = GetComponent<Animator>();
         runtimeCollider = GetComponent<CircleCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        moveDistance = 5f;
         randomMoveVector = transform.position;
-        randomChangeInterval = 5f; // initial wait
 
         healthText.text = ($"{RunTimeErrorCurtHP.ToString("N0")}MB of {RunTimeErrorMaxHp}MB");
 
@@ -136,6 +139,9 @@ public class RunTimeError : Enemy
 
         if(isTransit) curState.OnExit?.Invoke();
 
+        // move
+        transform.position = Vector2.MoveTowards(transform.position, randomMoveVector, RunTimeErrorMoveSpeed * Time.deltaTime);
+        
         ChangeHPBar();
     }
 
@@ -144,6 +150,9 @@ public class RunTimeError : Enemy
         idleState = new BossState(idleEnter, null, null);
         movingState = new BossState(EnemyMovement, null, null);
         fireState = new BossState(DirectFire, null, null);
+        struggleState = new BossState(StruggleEnter, null, null);
+
+        curState = idleState;
     }
 
     public void ChangeHPBar()
@@ -179,17 +188,13 @@ public class RunTimeError : Enemy
         // if (player is null) return;
 
         RandomMoveVector();
-        transform.position = Vector2.MoveTowards(transform.position, randomMoveVector, RunTimeErrorMoveSpeed * Time.deltaTime);
     }
 
     private void RandomMoveVector()
     {
         // 23 == map size, if map changed, this literal needed to change too.
-        randomMoveVector = new Vector2(Random.Range(-mapSize, mapSize), Random.Range(-mapSize, mapSize));
-        RunTimeErrorMoveSpeed = Random.Range(6f, 8f);
-        randomChangeInterval = moveDistance / RunTimeErrorMoveSpeed;
-
-        randomMoveVector = Vector2.zero;
+        randomMoveVector = new Vector2(Random.Range(-15f, 15f), Random.Range(-15f, 15f));
+        RunTimeErrorMoveSpeed = Random.Range(5f, 7f);
     }
 
 
@@ -197,7 +202,8 @@ public class RunTimeError : Enemy
     private void DirectFire()
     {
         if(isDead) return;
-
+        if (fireTime > fireTimer) return;
+        fireTimer = 0f;
         FireBullet().Forget();
     }
 
@@ -206,7 +212,6 @@ public class RunTimeError : Enemy
     private async UniTask FireBullet()
     {
         dircetionFireCancelSource = new CancellationTokenSource();
-        await UniTask.WaitUntil(() => fireTime < fireTimer, cancellationToken: dircetionFireCancelSource.Token);
 
         var direction = player.transform.position - transform.position;
         direction.Normalize();
@@ -221,6 +226,33 @@ public class RunTimeError : Enemy
             tempBullet.GetComponent<RunTimeErrorBullet>().Init(bulletSpeed, direction);
             await UniTask.WaitForSeconds(0.3f, cancellationToken: dircetionFireCancelSource.Token);
         }
+    }
+
+    private void StruggleEnter()
+    {
+        StrugglePattern().Forget();
+    }
+
+    private async UniTask StrugglePattern()
+    {
+        var warning = Instantiate(bossWarningPrefab, Vector3.zero, Quaternion.identity);
+        warning.transform.SetParent(transform, false);
+
+        while (struggleWaitTime > struggleWaitTimer)
+        {
+            struggleWaitTimer += Time.deltaTime;
+            await UniTask.Yield();
+        }
+
+        Destroy(warning);
+
+        for (int i = 0; i < 20; i++)
+        {
+            FireBullet().Forget();
+            await UniTask.WaitForSeconds(0.1f);
+        }
+
+        
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -316,12 +348,20 @@ public class RunTimeError : Enemy
     // FSM func
     private bool TransitCheck()
     {
+        // struggle
+        if (RunTimeErrorCurtHP / RunTimeErrorMaxHp < 0.2f && canStruggle)
+        {
+            nextState = struggleState;
+            canStruggle = false;
+            return true;
+        }
+
         // idle
         if (curState == idleState)
         {
-            idleTime += Time.deltaTime;
+            idleTimer += Time.deltaTime;
 
-            if (idleTime > idleTimer)
+            if (idleTime < idleTimer)
             {
                 nextState = movingState;
                 return true;
@@ -350,6 +390,12 @@ public class RunTimeError : Enemy
             return true;
         }
 
+        if (curState == struggleState)
+        {
+            nextState = idleState;
+            return true;
+        }
+
         return false;
     }
 
@@ -357,7 +403,7 @@ public class RunTimeError : Enemy
     {
         var distance = player.transform.position - transform.position;
 
-        if (distance.magnitude > fireRange)
+        if (distance.magnitude < fireRange)
         {
             nextState = fireState;
             return true;
@@ -369,6 +415,7 @@ public class RunTimeError : Enemy
     private void idleEnter()
     {
         idleTimer = 0f;
+        randomMoveVector = Vector2.zero;
     }
 
     public override void ResetEnemy(){}
