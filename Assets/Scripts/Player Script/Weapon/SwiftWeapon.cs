@@ -40,7 +40,6 @@ public class SwiftWeapon : PlayerWeapon
             critDamage = player.playerCritDmg * critOccur;
             if (!isPowerWeapon)
             {
-                bullet.transform.localScale = new Vector3(1f, 1f, 1f);
                 var addBullet = bulletPool.GetBullet();
                 addBullet.GetComponent<PlayerBullet>().ChangeSprite(normalWeaponSprite);
                 addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
@@ -48,10 +47,9 @@ public class SwiftWeapon : PlayerWeapon
             }
             else if (isPowerWeapon)
             {
-                bullet.transform.localScale = new Vector3(2f, 2f, 1f);
                 var addBullet = bulletPool.GetBullet();
                 addBullet.GetComponent<PlayerBullet>().ChangeSprite(powerWeaponSprite);
-                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * weaponDamageRate * (1f + critDamage), critOccur,
+                addBullet.GetComponent<PlayerBullet>().Init(player.playerAtk * 1.5f * (1f + critDamage), critOccur,
                     transform.position, Quaternion.identity, bulletPool);
             }
         }
