@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Timeline;
 using UnityEngine.UI;
@@ -20,20 +21,20 @@ public class UpgradeManager : MonoBehaviour
     // 전체 무기, 템들
     [Foldout("Weapon and Passive")]
     public List<WeaponData> allWeaponDataList;
-    public List<WeaponData> weaponDataList;
+    public List<WeaponData> myWeaponDataList;
     public List<WeaponData> passiveDataList;
     // 선택지로 나오는 템들 (Max템이 있으면 제거 할라는 용도)
-    private List<WeaponData> listForWeapons;
-    private List<WeaponData> listForPassives;
+    private List<WeaponData> candidateWeaponList;
+    private List<WeaponData> candidatePassiveList;
 
     // 템들을 뭘 선택했는지 알려주는 리스트(선택된 무기들 X)
     // 뭐 있는지만 알수 있어서 GameUI에 사용하는 용도
     [Foldout("Player Weapon & Item Slot")]
-    public List<WeaponData> playerWeaponList = new List<WeaponData>();
-    public List<WeaponData> playerPassiveList = new List<WeaponData>();
-    public int maxItemNumber = 4;
+    public List<WeaponData> playerSelectedWeaponList = new List<WeaponData>();
+    public List<WeaponData> playerSelectedPassiveList = new List<WeaponData>();
+    private int maxItemNumber = 4;
 
-    private bool isLevelUp = false;
+    private bool LvUpFlag = false;
 
     // 실제 무기들이 있는 곳
     // 여기서 실제 무기들에 레벨을 알수 있고 실제 강화도 여기서
@@ -45,21 +46,17 @@ public class UpgradeManager : MonoBehaviour
     public GameUI gameUI;
 
     // 강화템중에 MaxLevel이 많아서 선택지의 나오는 템 수가 3개 아하때 나오는 템들
-    [Header("Item for MaxLevel")]
-    public List<WeaponData> maxLevelItemList = new List<WeaponData>();
+    [Header("Extra Item")]
+    public List<WeaponData> extraItemList = new List<WeaponData>();
     [EndFoldout]
-
-    // 템 선택수가 최대일때 선택지로 나타나는 템들
-    private List<WeaponData> selectedPassiveList = new List<WeaponData>();
-    private List<WeaponData> selectedWeaponList = new List<WeaponData>();
 
     private Animator animator;
 
-    public Dictionary<string, WeaponData> weaponDataDict = new Dictionary<string, WeaponData>();
+    private Dictionary<string, WeaponData> weaponDataDict = new Dictionary<string, WeaponData>();
 
     private void Awake()
     {
-        ResetDataBase();
+        ResetEvolIcon();
 
         foreach (var data in allWeaponDataList)
         {
@@ -68,23 +65,19 @@ public class UpgradeManager : MonoBehaviour
 
         foreach (string name in SaveManager.instance.shopData.installedItemList)
         {
-            weaponDataList.Add(weaponDataDict[name]);
+            myWeaponDataList.Add(weaponDataDict[name]);
         }
 
-        listForWeapons = new (weaponDataList);
-        listForPassives = new (passiveDataList);
+        candidateWeaponList = new(myWeaponDataList);
+        candidatePassiveList = new(passiveDataList);
         animator = GetComponent<Animator>();
     }
 
-    private void ResetDataBase()
+    private void ResetEvolIcon()
     {
         foreach (var weapon in allWeaponDataList)
         {
             weapon.ResetToNew();
-        }
-        foreach (var passive in passiveDataList)
-        {
-            passive.ResetToNew();
         }
     }
 
@@ -96,43 +89,48 @@ public class UpgradeManager : MonoBehaviour
 
 
     // Upgrade UI
-    public void OnUpgrade(bool levelup)
+    public void OnUpgrade(bool isLevelup)
     {
         UpgradeUI.SetActive(true);
         StartCoroutine(OpenUI(true));
 
-        List<WeaponData> selectedItems = new List<WeaponData>();
-        List<WeaponData> sourceDataList = null;
-        List<WeaponData> itemList = null;
+        LvUpFlag = isLevelup;
 
-        if (levelup == true)
+        List<WeaponData> UIAppearItemList = new List<WeaponData>();
+        List<WeaponData> candidateItemList = LvUpFlag ? candidateWeaponList : candidatePassiveList;
+        List<WeaponData> playerSelectedItemList = LvUpFlag ? playerSelectedWeaponList : playerSelectedPassiveList;
+
+        if (playerSelectedItemList.Count == maxItemNumber)
         {
-            isLevelUp = levelup;
-            sourceDataList = listForWeapons;
-            itemList = playerWeaponList;
-            CheckMaxLevelItem(playerWeaponBag); 
-            ItemToSelectedItems(selectedItems, sourceDataList, itemList, selectedWeaponList);
-        }
-        else if (levelup == false)
-        {
-            isLevelUp = levelup;
-            sourceDataList = listForPassives;
-            itemList = playerPassiveList;
-            CheckMaxLevelItem(playerPassiveBag);
-            ItemToSelectedItems(selectedItems, sourceDataList, itemList, selectedPassiveList);
+            candidateItemList.Clear();
+            foreach (var item in playerSelectedItemList)
+            {
+                candidateItemList.Add(item);
+            }
         }
 
-        if (sourceDataList != null && itemList != null)
+        CheckMaxLevelItem();
+
+        if (LvUpFlag)
+        {
+            ItemToSelectedItems(UIAppearItemList, candidateItemList, playerSelectedItemList);
+        }
+        else
+        {
+            ItemToSelectedItems(UIAppearItemList, candidateItemList, playerSelectedItemList);
+        }
+
+        if (candidateItemList != null && playerSelectedItemList != null)
         {
             for (int i = 0; i < optionButtons.Length; i++)
             {
-                if (i < selectedItems.Count)
+                if (i < UIAppearItemList.Count)
                 {
-                    optionNameTexts[i].text = selectedItems[i].curName;
-                    optionDescTexts[i].text = selectedItems[i].curDesc;
-                    optionImages[i].sprite = selectedItems[i].curImage;
+                    optionNameTexts[i].text = UIAppearItemList[i].curName;
+                    optionDescTexts[i].text = UIAppearItemList[i].curDesc;
+                    optionImages[i].sprite = UIAppearItemList[i].curImage;
                     optionButtons[i].onClick.RemoveAllListeners();
-                    WeaponData selectedItem = selectedItems[i];
+                    WeaponData selectedItem = UIAppearItemList[i];
                     optionButtons[i].onClick.AddListener(() => OnItemSelected(selectedItem));
                 }
                 else
@@ -156,10 +154,9 @@ public class UpgradeManager : MonoBehaviour
             // 무기중에서 maxLevel이 있는지 확인
             if (playerWeapon.isMaxLevel && !playerWeapon.isPowerWeapon)
             {
-
                 // maxLevel 무기 중에 그의 맞는 passive템이 있는지 확인
                 bool hasMatchingPassive = false;
-                foreach (var passive in playerPassiveList)
+                foreach (var passive in playerSelectedPassiveList)
                 {
                     if (playerWeapon.matchPassive == passive.itemName)
                     {
@@ -169,131 +166,113 @@ public class UpgradeManager : MonoBehaviour
                 }
 
                 // 그의 맞는 passive템이 있으면 다시 선택지에 powerWeapon으로 추가
-
                 if (hasMatchingPassive)
                 {
-                    var findItem = weaponDataList.Find(i => i.item.name + ("(Clone)") == playerWeapon.name);
+                    var findItem = myWeaponDataList.Find(i => i.item.name + ("(Clone)") == playerWeapon.name);
                     findItem.curImage = findItem.powerImage;
                     findItem.curName = findItem.powerName;
                     findItem.curDesc = findItem.powerDesc;
-                    selectedWeaponList.Add(findItem);
+                    candidateWeaponList.Add(findItem);
                 }
             }
         }
-
-        // 만약에 다 만랩이라 다 빠지고 다른 아이템들 추가
-        AddRandomMaxLevelItem(selectedWeaponList);
     }
 
-    // 템 선택수가 최대가 아리고 템이 Max레벨인지 확인, Max이면 선택지에 안 나오개 하기
-    private void CheckMaxLevelItem(Transform itemBag)
+    private void CheckMaxLevelItem()
     {
-        if (itemBag == playerWeaponBag)
+        if (LvUpFlag)
         {
             for (int i = 0; i < playerWeaponBag.childCount; i++)
             {
                 var playerWeapon = playerWeaponBag.GetComponentsInChildren<PlayerWeapon>()[i];
-                if (playerWeapon.isMaxLevel && !playerWeapon.isPowerWeapon)
+                if (playerWeapon.isMaxLevel)
                 {
                     // maxLevel 무기일 경우 선택지에서 빼기
-                    var findWeapon = selectedWeaponList.Find(i => i.item.name + ("(Clone)") == playerWeapon.name);
-                    
-                    if (findWeapon != null)
+                    var maxLvWeapon = candidateWeaponList.Find(i => i.item.name + ("(Clone)") == playerWeapon.name);
+
+                    if (maxLvWeapon != null)
                     {
-                        selectedWeaponList.Remove(findWeapon);
+                        candidateWeaponList.Remove(maxLvWeapon);
                     }
-                    
+
                 }
             }
         }
-        else if (itemBag == playerPassiveBag)
+        else
         {
             for (int i = 0; i < playerPassiveBag.childCount; i++)
             {
                 var playerPassive = playerPassiveBag.GetComponentsInChildren<PlayerPassive>()[i];
                 if (playerPassive.isMaxLevel)
                 {
-                    var findPassive = selectedPassiveList.Find(i => i.item.name + ("(Clone)") == playerPassive.name);
-                    if (findPassive != null)
+                    var maxLvPassive = candidatePassiveList.Find(i => i.item.name + ("(Clone)") == playerPassive.name);
+                    if (maxLvPassive != null)
                     {
-                        selectedPassiveList.Remove(findPassive);
+                        candidatePassiveList.Remove(maxLvPassive);
                     }
-                    
                 }
-                
             }
         }
     }
 
     // Put Items in to select windows
-    private void ItemToSelectedItems(List<WeaponData> showOnSelectedItems, List<WeaponData> itemListForSelected, List<WeaponData> itemList, List<WeaponData> selectedItemsList)
+    private void ItemToSelectedItems(List<WeaponData> UIAppearItemList, List<WeaponData> candidateItemList, List<WeaponData> playerSelectedItemList)
     {
         // 템 소지수가 max아니면 그 data에 있는거에서 랜덤으로 추가
-        if (itemList.Count != maxItemNumber)
+        if (playerSelectedItemList.Count < maxItemNumber)
         {
-            while (showOnSelectedItems.Count < 3 && itemListForSelected.Count > 0)
+            while (UIAppearItemList.Count < 3 && candidateItemList.Count > 0)
             {
-                WeaponData item = itemListForSelected[Random.Range(0, itemListForSelected.Count)];
-                if (!showOnSelectedItems.Contains(item))
+                WeaponData item = candidateItemList[Random.Range(0, candidateItemList.Count)];
+                if (!UIAppearItemList.Contains(item))
                 {
-                    showOnSelectedItems.Add(item);
+                    UIAppearItemList.Add(item);
                 }
             }
         }
 
-        // 템 수가 max으면, 이미 선택한 템만 나오게
-        else if (itemList.Count == maxItemNumber)
+        // playerSelectedItemList.Count == maxItemNumber
+        else
         {
-            if (itemListForSelected == listForWeapons && selectedItemsList.Count > 0)
+            AddExtraItem(candidateItemList);
+
+            if (LvUpFlag)
             {
-        
                 CheckPowerWeapon();
                 // 선택한 무기list에서 랜덤으로 선택지에 나오게 하기
-                while (showOnSelectedItems.Count < 3 && selectedItemsList.Count > 0)
+                while (UIAppearItemList.Count < 3 && candidateItemList.Count > 0)
                 {
-                    WeaponData item = selectedItemsList[Random.Range(0, selectedItemsList.Count)];
-                    if (!showOnSelectedItems.Contains(item))
+                    WeaponData item = candidateItemList[Random.Range(0, candidateItemList.Count)];
+                    if (!UIAppearItemList.Contains(item))
                     {
-                        showOnSelectedItems.Add(item);
+                        UIAppearItemList.Add(item);
                     }
                 }
             }
 
-            // passive템은 뺄 일이 없어서 그냥 이미 선택한거 중에서 랜덤으로 나타나게
-            else if (itemListForSelected == listForPassives && selectedItemsList.Count > 0)
+            // passive
+            else
             {
-                while (selectedPassiveList.Count < 3)
+                while (UIAppearItemList.Count < 3 && candidateItemList.Count > 0)
                 {
-                    foreach (var item in maxLevelItemList)
+                    WeaponData item = candidateItemList[Random.Range(0, candidateItemList.Count)];
+                    if (!UIAppearItemList.Contains(item))
                     {
-                        if (!selectedPassiveList.Contains(item))
-                        {
-                            selectedPassiveList.Add(item);
-                        }
-                    }
-                }
-
-                while (showOnSelectedItems.Count < 3 && selectedItemsList.Count > 0)
-                {
-                    WeaponData item = selectedItemsList[Random.Range(0, selectedItemsList.Count)];
-                    if (!showOnSelectedItems.Contains(item))
-                    {
-                        showOnSelectedItems.Add(item);
+                        UIAppearItemList.Add(item);
                     }
                 }
             }
         }
     }
 
-    // 랜덤으로 max레벨때 넣어야하는 템들 넣기
-    private void AddRandomMaxLevelItem(List<WeaponData> list)
+    private void AddExtraItem(List<WeaponData> list)
     {
         while (list.Count < 3)
         {
-            var random = Random.Range(0, 3);
-            if (!list.Contains(maxLevelItemList[random]))
+            var random = Random.Range(0, extraItemList.Count);
+            if (!list.Contains(extraItemList[random]))
             {
-                list.Add(maxLevelItemList[random]);
+                list.Add(extraItemList[random]);
             }
         }
     }
@@ -304,7 +283,7 @@ public class UpgradeManager : MonoBehaviour
         // maxLevel템
         if (item.item.tag == "Item")
         {
-            if(item.itemName == "Apple")
+            if (item.itemName == "Apple")
             {
                 ItemPooling.Instance.GetApple(GameObject.FindGameObjectWithTag("Player").transform.position);
             }
@@ -318,48 +297,29 @@ public class UpgradeManager : MonoBehaviour
             }
         }
 
-        // 레업이라 무기들 나오기
-        else if (isLevelUp)
+        else
         {
-            AddOrUpgradeItem(playerWeaponList, selectedWeaponList, playerWeaponBag, item);
-            RemovePowerWeaponInList();
-        }
-
-        // wave끝이라 passive템 나오기
-        else if (!isLevelUp)
-        {
-            AddOrUpgradeItem(playerPassiveList, selectedPassiveList, playerPassiveBag, item);
+            if (LvUpFlag)
+            {
+                AddOrUpgradeItem(playerSelectedWeaponList, candidateWeaponList, playerWeaponBag, item);
+            }
+            else
+            {
+                AddOrUpgradeItem(playerSelectedPassiveList, candidatePassiveList, playerPassiveBag, item);
+            }
         }
 
         StartCoroutine(OpenUI(false));
         GameManager.Instance.EndUpgrade();
-        isLevelUp = false;
-    }
-
-    private void RemovePowerWeaponInList()
-    {
-        for (int i = 0; i < playerWeaponBag.childCount; i++)
-        {
-            var playerWeapon = playerWeaponBag.GetComponentsInChildren<PlayerWeapon>()[i];
-            if (playerWeapon.isPowerWeapon)
-            {
-                // maxLevel 무기일 경우 선택지에서 빼기
-                var findWeapon = selectedWeaponList.Find(i => i.item.name + ("(Clone)") == playerWeapon.name);
-
-                if (findWeapon != null)
-                {
-                    selectedWeaponList.Remove(findWeapon);
-                }
-
-            }
-        }
+        LvUpFlag = false;
     }
 
     // Add Item or Upgrade Item
-    private void AddOrUpgradeItem(List<WeaponData> itemList, List<WeaponData> selectedList, Transform playerItemBag, WeaponData item)
+    private void AddOrUpgradeItem(List<WeaponData> playerSelectedItemList, List<WeaponData> candidateItemList, Transform playerItemBag, WeaponData item)
     {
+        var existingItem = playerSelectedItemList.Find(i => i.itemName == item.itemName);
 
-        var existingItem = itemList.Find(i => i.itemName == item.itemName);
+        // Upgrade(Lv Up) Item
         if (existingItem != null)
         {
             GameInfoManager.Instance.DisplayGameInfo($"{item.itemName} upgrade.");
@@ -368,14 +328,14 @@ public class UpgradeManager : MonoBehaviour
             var upgradeItemName = playerItemBag.Find(existingItem.item.name + ("(Clone)"));
             var upgradeWeapon = upgradeItemName.GetComponent<PlayerWeapon>();
             var upgradePassive = upgradeItemName.GetComponent<PlayerPassive>();
-            if (isLevelUp)
+            if (LvUpFlag)
             {
                 if (upgradeWeapon.isMaxLevel == true)
                 {
                     upgradeWeapon.isPowerWeapon = true;
                     gameUI.ChangePowerWeaponIcon(playerItemBag);
-                    WeaponData removeWeapon = selectedList.Find(i => i.name == upgradeWeapon.name);
-                    selectedList.Remove(removeWeapon);
+                    WeaponData removeWeapon = candidateWeaponList.Find(i => i.name == upgradeWeapon.name);
+                    candidateWeaponList.Remove(removeWeapon);
                 }
                 else
                 {
@@ -383,27 +343,27 @@ public class UpgradeManager : MonoBehaviour
                     gameUI.AddWeaponLevel(playerWeaponBag);
                 }
             }
-            else if (!isLevelUp)
+            else
             {
                 upgradePassive.Upgrade();
                 gameUI.AddPassiveLevel(playerPassiveBag);
             }
         }
+
+        // Add Item
         else
         {
-            // Add Weapon or Item to itemList
-            itemList.Add(item);
-            selectedList.Add(item);
-            if (itemList == playerWeaponList)
+            playerSelectedItemList.Add(item);
+            if (LvUpFlag)
             {
-                gameUI.WeaponIconList(itemList);
+                gameUI.WeaponIconList(playerSelectedItemList);
                 AddWeaponToPlayer(item.item);
                 gameUI.AddWeaponLevel(playerWeaponBag);
                 SaveManager.instance.AddWeapon(item.itemName);
             }
-            else if (itemList == playerPassiveList)
+            else
             {
-                gameUI.PassiveIconList(itemList);
+                gameUI.PassiveIconList(playerSelectedItemList);
                 AddItemToPlayer(item.item);
                 gameUI.AddPassiveLevel(playerPassiveBag);
             }
@@ -422,5 +382,4 @@ public class UpgradeManager : MonoBehaviour
     {
         Instantiate(item, playerPassiveBag);
     }
-
 }
