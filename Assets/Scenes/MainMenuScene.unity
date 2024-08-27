@@ -848,49 +848,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 994427033}
     m_Modifications:
-    - target: {fileID: 1649322774349799246, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1649322774349799246, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 839adabbc5de26041bac66450214a831, type: 3}
-    - target: {fileID: 1649322774349799246, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
-      propertyPath: m_Color.b
-      value: 0.6603774
-      objectReference: {fileID: 0}
-    - target: {fileID: 1649322774349799246, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
-      propertyPath: m_Color.g
-      value: 0.6603774
-      objectReference: {fileID: 0}
-    - target: {fileID: 1649322774349799246, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
-      propertyPath: m_Color.r
-      value: 0.6603774
-      objectReference: {fileID: 0}
-    - target: {fileID: 3338894586047857469, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3338894586047857469, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: -9
-      objectReference: {fileID: 0}
-    - target: {fileID: 3338894586047857469, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -9
-      objectReference: {fileID: 0}
-    - target: {fileID: 3338894586047857469, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 3.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3524477290701687910, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
       propertyPath: m_Name
       value: RecordPage
-      objectReference: {fileID: 0}
-    - target: {fileID: 3524477290701687910, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3618729595932871242, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
       propertyPath: m_Pivot.x
@@ -971,56 +931,6 @@ PrefabInstance:
     - target: {fileID: 3618729595932871242, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4611365185144396176, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
-      propertyPath: m_Horizontal
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5554222490220940250, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5554222490220940250, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5554222490220940250, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7305133605619365738, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7305133605619365738, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7305133605619365738, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7880414563018948515, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
-      propertyPath: m_text
-      value: "Bamseooryu<R> MS-DOS<R> Ver 2.0.24\n                    <C> SnakeDocument
-        Corporation. All rights reserved."
-      objectReference: {fileID: 0}
-    - target: {fileID: 8247878318316580537, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
-      propertyPath: m_Color.b
-      value: 0.5169811
-      objectReference: {fileID: 0}
-    - target: {fileID: 8247878318316580537, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
-      propertyPath: m_Color.g
-      value: 0.5169811
-      objectReference: {fileID: 0}
-    - target: {fileID: 8247878318316580537, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
-      propertyPath: m_Color.r
-      value: 0.5169811
-      objectReference: {fileID: 0}
-    - target: {fileID: 8427487052613604869, guid: 515683c5309d7a74599a0cf5756842b2, type: 3}
-      propertyPath: m_text
-      value: "Bamseooryu<R> MS-DOS<R> Ver 2.0.24\n                    <C> SnakeDocument
-        Corporation. All rights reserved."
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -59,8 +59,10 @@ public class ShopManager : MonoBehaviour
 
     private void Update()
     {
-        curMoney[0].text = SaveManager.instance.shopData.money.ToString();
-        curMoney[1].text = SaveManager.instance.shopData.money.ToString();
+        foreach (var text in curMoney)
+        {
+            text.text = SaveManager.instance.shopData.money.ToString("N0");
+        }
     }
 
     public void InstallCommunalWeapon(int idx)
