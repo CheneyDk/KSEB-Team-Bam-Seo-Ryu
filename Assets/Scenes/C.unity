@@ -12610,7 +12610,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6260638533341849288, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
       propertyPath: playerMaxHp
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6260638533341849288, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
       propertyPath: damageNumber

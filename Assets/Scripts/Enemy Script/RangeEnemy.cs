@@ -239,6 +239,8 @@ public class RangeEnemy : Enemy
 }
 
 
+
+
 public class RangeEnemyMoveState : IEnemyState
 {
     private RangeEnemy enemy;
@@ -311,8 +313,6 @@ public class RangeEnemyAttackState : IEnemyState
         }
     }
 
-
-
     public void UpdateState()
     {
         if (Vector2.Distance(enemy.transform.position, enemy.player.transform.position) > enemy.playerEnemyRange)
@@ -326,6 +326,12 @@ public class RangeEnemyAttackState : IEnemyState
         enemy.StopCoroutine(AttackRoutine());
     }
 }
+
+
+
+
+
+
 
 // 이전 FSM없는 RangeEnemy
 
