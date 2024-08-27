@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Python.unity
     guid: b74ab908a53c8ec4cb779bf03491ded5
+  - enabled: 1
+    path: Assets/Scenes/Java.unity
+    guid: 5eb5e09f66930bd4190e3f84cd08d9c0
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: c080f3b719729a348894d41ec80d1153, type: 2}
