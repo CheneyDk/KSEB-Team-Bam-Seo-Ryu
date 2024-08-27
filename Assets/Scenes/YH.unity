@@ -194,6 +194,7 @@ MonoBehaviour:
   GameoverUI: {fileID: 1727424790}
   PauseUI: {fileID: 955154994}
   UpgradeUI: {fileID: 283899587}
+  LvText: {fileID: 0}
   isGameContinue: 1
   player: {fileID: 8766426790022767654}
   pet: {fileID: 112604038}
@@ -1631,14 +1632,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 82c01517ed2fe224f9fba5ffe233793b, type: 2}
   - {fileID: 11400000, guid: e5b18c6f5617be843a9268bc415424d7, type: 2}
   - {fileID: 11400000, guid: 72bb6bd0af5b46140ad92abd4c2bc8fb, type: 2}
-  weaponDataList:
-  - {fileID: 11400000, guid: bb76124ff3f39df4cb769b747c4a4628, type: 2}
-  - {fileID: 11400000, guid: ee9a8a2c816ac6c4892cd358f73edc97, type: 2}
-  - {fileID: 11400000, guid: da60fa2d03366ef499ea716a0fafdb97, type: 2}
-  - {fileID: 11400000, guid: e2c589d8e1bb2a4439b69c55f606065b, type: 2}
-  - {fileID: 11400000, guid: 82c01517ed2fe224f9fba5ffe233793b, type: 2}
-  - {fileID: 11400000, guid: e5b18c6f5617be843a9268bc415424d7, type: 2}
-  - {fileID: 11400000, guid: 72bb6bd0af5b46140ad92abd4c2bc8fb, type: 2}
+  myWeaponDataList: []
   passiveDataList:
   - {fileID: 11400000, guid: df894a11d49451e47ae7752a547654f1, type: 2}
   - {fileID: 11400000, guid: e65068d2ee758074f89a22b8fcc44984, type: 2}
@@ -1647,16 +1641,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4b34eb5a4d08bdd4d9afc435f3ef0c44, type: 2}
   - {fileID: 11400000, guid: 13adf7aa9830564439ca00fd6997293f, type: 2}
   - {fileID: 11400000, guid: bf27f4b7d137e2547badad8dfcbe3e09, type: 2}
-  playerWeaponList: []
-  playerPassiveList: []
-  maxItemNumber: 4
+  playerSelectedWeaponList: []
+  playerSelectedPassiveList: []
   playerWeaponBag: {fileID: 897920589}
   playerPassiveBag: {fileID: 786815904}
   gameUI: {fileID: 577996783}
-  maxLevelItemList:
-  - {fileID: 11400000, guid: be3e7941fd558ee4cae31883e37dce3f, type: 2}
-  - {fileID: 11400000, guid: 7f2b43d45034f7f4295ebf24798b038d, type: 2}
-  - {fileID: 11400000, guid: 9f2efd4a8743ab0479c4211afbdb6bfd, type: 2}
+  extraItemList: []
 --- !u!95 &283899594
 Animator:
   serializedVersion: 5
