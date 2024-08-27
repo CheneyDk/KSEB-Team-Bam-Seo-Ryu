@@ -6,7 +6,6 @@ using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
-using static UnityEditor.PlayerSettings;
 
 public class RunTimeError : Enemy
 {
