@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class JavaWeapon : MonoBehaviour
 {
-    public JavaPlayer player;
+    public Player player;
 
     public float damageRate = 1f;  
     public float damageRange = 5f; 

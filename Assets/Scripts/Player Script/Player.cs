@@ -52,6 +52,8 @@ public class Player : MonoBehaviour
     // GameObjects
     [Foldout("- GameObjects")]
     public Transform playerArm;
+    public GameObject weaponN;
+    public GameObject weaponP;
     public GameObject weapon; // list needed
     public GameObject constText;
     public GameObject wing;
@@ -89,6 +91,9 @@ public class Player : MonoBehaviour
 
     bool isAdd;
 
+    public bool isJava = false;
+    public bool isJavaUpgrade = false;
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -124,6 +129,23 @@ public class Player : MonoBehaviour
 
         weaponList.Add("basic", 0);
         isAdd = true;
+
+        if (weaponN == null || weaponP == null)
+        {
+            return;
+        }
+        else
+        {
+            if (isJava == true)
+            {
+                CheckWeapon();
+            }
+            else if (isJava == false)
+            {
+                weaponN.SetActive(false);
+                weaponP.SetActive(false);
+            }
+        }
     }
 
     private void Update()
@@ -140,6 +162,20 @@ public class Player : MonoBehaviour
         CheckItemInRange();
 
         sprintCoolDownTimer += Time.deltaTime;
+    }
+
+    private void CheckWeapon()
+    {
+        if (isJavaUpgrade == false)
+        {
+            weaponN.SetActive(true);
+            weaponP.SetActive(false);
+        }
+        else if (isJavaUpgrade == true)
+        {
+            weaponN.SetActive(false);
+            weaponP.SetActive(true);
+        }
     }
 
     // magnetic item check
