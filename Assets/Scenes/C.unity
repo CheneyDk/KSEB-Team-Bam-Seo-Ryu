@@ -193,7 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameoverUI: {fileID: 1727424790}
   PauseUI: {fileID: 955154994}
-  UpgradeUI: {fileID: 0}
+  UpgradeUI: {fileID: 1245445736}
   isGameContinue: 1
   player: {fileID: 8766426790022767654}
   pet: {fileID: 112604038}
@@ -6761,6 +6761,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1229432779}
   m_CullTransparentMesh: 1
+--- !u!1 &1245445736 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5102675631484597254, guid: 9793ea9741a276f4c97ecb374b0589cc, type: 3}
+  m_PrefabInstance: {fileID: 446069569}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1245929413
 GameObject:
   m_ObjectHideFlags: 0
