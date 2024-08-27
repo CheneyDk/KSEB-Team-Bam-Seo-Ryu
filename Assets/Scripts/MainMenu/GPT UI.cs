@@ -38,7 +38,7 @@ public class GPTUI : MonoBehaviour
     {
         foreach (var text in moneyText)
         {
-            text.text = SaveManager.instance.shopData.money.ToString();
+            text.text = SaveManager.instance.shopData.money.ToString("N0");
         }
         upgradePrice = 2000 + SaveManager.instance.shopData.GPTLv * 500;
         upgradePriceText.text = upgradePrice.ToString();

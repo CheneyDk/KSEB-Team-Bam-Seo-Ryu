@@ -329,6 +329,7 @@ public class Player : MonoBehaviour
     public void PlayerLevelUp()
     {
         playerLevel += 1;
+        GameManager.Instance.LvText.text = "Lv." + playerLevel.ToString("D2");
         audioSource.PlayOneShot(levelUpClip);
         // LevelUp func needed // from GM
         playerCurExp -= playerMaxExp;
