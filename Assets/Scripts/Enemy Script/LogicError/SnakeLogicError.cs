@@ -104,7 +104,6 @@ public class SnakeLogicError : Enemy
     private BossState slowZigZagState;
     private BossState singleChargeState;
     private BossState multiChargeState;
-    private BossState struggleState;
 
     private bool isTransit;
     private int idleCase; // idle or slow zigzag
@@ -113,6 +112,7 @@ public class SnakeLogicError : Enemy
     private float idleTimer; // plus
     private float idleTime = 5f;
     private int chargeCase;
+    private bool canStruggle;
 
     private void Awake()
     {
@@ -134,32 +134,28 @@ public class SnakeLogicError : Enemy
         healthText.text = ($"{snakeCurHP.ToString("N0")}MB of {snakeMaxHp}MB");
 
         isTransit = false;
+        canStruggle = true;
+        chargeTimer = 0f;
         StateInit();
     }
 
     private void StateInit()
     {
         idleState = new BossState(IdleEnter, null, null);
-        slowZigZagState = new BossState(null, null, null);
-        singleChargeState = new BossState(null, null, null);
-        multiChargeState = new BossState(null, null,null);
+        slowZigZagState = new BossState(SlowZigZagEnter, null, null);
+        singleChargeState = new BossState(SingleChargeEnter, null, null);
+        multiChargeState = new BossState(MultiChargeEnter, null,null);
 
         curState = slowZigZagState;
     }
 
     private bool TransitCheck()
     {
-        if (curState == struggleState)
-        {
-            nextState = idleState;
-            return true;
-        }
-
         if (curState == idleState)
         {
             idleTimer += Time.deltaTime;
 
-            if (idleTimer > idleTime)
+            if (idleTimer > idleTime && chargeTimer < 0f)
             {
                 chargeCase = Random.Range(0, 10);
 
@@ -216,12 +212,6 @@ public class SnakeLogicError : Enemy
             }
         }
 
-        if (curState == struggleState)
-        {
-            nextState = idleState;
-            return true;
-        }
-
         return false;
     }
 
@@ -233,7 +223,9 @@ public class SnakeLogicError : Enemy
     private void Update()
     {
         if (player == null) { return; }
-        
+
+        chargeTimer -= Time.deltaTime;
+
         if (isTransit)
         {
             curState = nextState;
@@ -383,6 +375,7 @@ public class SnakeLogicError : Enemy
 
     private void MultiChargeEnter()
     {
+        chargeTimer = 30f;
         SnakeChargeStraight().Forget();
     }
 
@@ -403,6 +396,7 @@ public class SnakeLogicError : Enemy
 
     private void SingleChargeEnter()
     {
+        chargeTimer = 15f;
         SnakeChargeZigZag().Forget();
     }
 
