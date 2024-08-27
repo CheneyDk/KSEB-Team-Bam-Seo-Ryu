@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading;
 using TMPro;
 using UnityEngine;
+using VInspector.Libs;
 
 /// <summary>
 /// 
@@ -94,8 +95,6 @@ public class SnakeLogicError : Enemy
     [SerializeField]
     private TextMeshProUGUI healthText;
 
-    public GameObject bossWarningPrefab;
-
     // FSM
     private BossState curState;
     private BossState nextState;
@@ -112,7 +111,6 @@ public class SnakeLogicError : Enemy
     private float idleTimer; // plus
     private float idleTime = 5f;
     private int chargeCase;
-    private bool canStruggle;
 
     private void Awake()
     {
@@ -133,8 +131,7 @@ public class SnakeLogicError : Enemy
 
         healthText.text = ($"{snakeCurHP.ToString("N0")}MB of {snakeMaxHp}MB");
 
-        isTransit = false;
-        canStruggle = true;
+        isTransit = true;
         chargeTimer = 0f;
         StateInit();
     }
@@ -147,6 +144,7 @@ public class SnakeLogicError : Enemy
         multiChargeState = new BossState(MultiChargeEnter, null,null);
 
         curState = slowZigZagState;
+        nextState = slowZigZagState;
     }
 
     private bool TransitCheck()
@@ -155,7 +153,7 @@ public class SnakeLogicError : Enemy
         {
             idleTimer += Time.deltaTime;
 
-            if (idleTimer > idleTime && chargeTimer < 0f)
+            if (idleTimer > idleTime && chargeTimer < chargeTime)
             {
                 chargeCase = Random.Range(0, 10);
 
@@ -424,6 +422,9 @@ public class SnakeLogicError : Enemy
 
     private async UniTask ChargeCasting()
     {
+        var head = snakeBody[0].GetComponent<SnakeHead>();
+        head.warnigPrefab.SetActive(true);
+
         float timer = 0f;
         snakeSpeed = 8f;
 
@@ -434,6 +435,8 @@ public class SnakeLogicError : Enemy
             timer += Time.deltaTime;
             await UniTask.Yield();
         }
+
+        head.warnigPrefab.SetActive(false);
     }
 
     private void LookAtPlayer()

@@ -6,6 +6,7 @@ using UnityEngine;
 public class SnakeHead : SnakePart
 {
     private const float Pi = Mathf.PI;
+    public GameObject warnigPrefab;
 
     private void Start()
     {
