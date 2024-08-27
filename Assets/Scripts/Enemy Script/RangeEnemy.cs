@@ -85,7 +85,6 @@ public class RangeEnemy : Enemy
         PutBulletsToPool(pooledEnemyBullet, bulletPrefab);
     }
 
-
     private void Update()
     {
         if (player == null) return;
@@ -103,6 +102,8 @@ public class RangeEnemy : Enemy
 
     public override void TakeDamage(float damage, int critOccur)
     {
+        if (isDead) return;
+
         Instantiate(hitParticle, transform.position, Quaternion.identity);
         damage *= (1f + elixirAdditionalDamageRate);
         if (critOccur == 1)
@@ -147,6 +148,8 @@ public class RangeEnemy : Enemy
 
     public override IEnumerator LastingDamage(float damage, int totalDamageTime, Color color)
     {
+        if (isDead) yield break;
+
         curSR.color = color;
         var damageTimer = 0f;
 
@@ -159,6 +162,8 @@ public class RangeEnemy : Enemy
             damageTimer += 1f;
 
             SaveManager.instance.UpdateDamage("React", damage);
+
+            if (RangeEnemyCurHP <= 0) break;
         }
 
         if (RangeEnemyCurHP <= 0)

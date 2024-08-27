@@ -99,6 +99,8 @@ public class MeleeEnemy : Enemy
 
     public override void TakeDamage(float damage, int critOccur)
     {
+        if (isDead) return;
+
         Instantiate(hitParticle, transform.position, Quaternion.identity);
         damage *= (1f + elixirAdditionalDamageRate);
         if (critOccur == 1)
@@ -169,6 +171,8 @@ public class MeleeEnemy : Enemy
 
     public override IEnumerator LastingDamage(float damage, int totalDamageTime, Color color)
     {
+        if (isDead) yield break;
+
         curSR.color = color;
         var damageTimer = 0f;
 
@@ -181,6 +185,8 @@ public class MeleeEnemy : Enemy
             damageTimer += 1f;
 
             SaveManager.instance.UpdateDamage("React", damage);
+
+            if (MeleeEnemyCurHP <= 0) break;
         }
 
         if (MeleeEnemyCurHP <= 0)
