@@ -25,6 +25,7 @@ public class ShopManager : MonoBehaviour
         ("Internet", 500),
         ("C", 700),
         ("Python", 700),
+        ("Java", 700),
         ("Pet", 700)
     };
 
@@ -49,12 +50,14 @@ public class ShopManager : MonoBehaviour
         itemSetter[8].Set(itemList[8].Item1, itemList[8].Item2);
         if (SaveManager.instance.shopData.isPythonUpgrade) { itemSetter[8].Installed(); }
         itemSetter[9].Set(itemList[9].Item1, itemList[9].Item2);
+        if (SaveManager.instance.shopData.isJavaUpgrade) { itemSetter[9].Installed(); }
+        itemSetter[10].Set(itemList[10].Item1, itemList[10].Item2);
         if (SaveManager.instance.shopData.isPetInstalled)
-        { 
-            itemSetter[9].ChangeUpdatePage();
-            itemList[9] = ("PowerPet", 1000);
+        {
+            itemSetter[10].ChangeUpdatePage();
+            itemList[10] = ("PowerPet", 1000);
         }
-        if (SaveManager.instance.shopData.isPetUpgrade) { itemSetter[9].Installed(); }
+        if (SaveManager.instance.shopData.isPetUpgrade) { itemSetter[10].Installed(); }
     }
 
     private void Update()

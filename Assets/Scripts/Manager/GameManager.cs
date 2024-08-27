@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,6 +15,8 @@ public class GameManager : MonoBehaviour
     public GameObject GameoverUI;
     public GameObject PauseUI;
     public GameObject UpgradeUI;
+
+    public TextMeshProUGUI LvText; 
 
     [Header("- System")]
     // public GameObject WaveManager;
