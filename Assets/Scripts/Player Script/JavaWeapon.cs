@@ -27,7 +27,8 @@ public class JavaWeapon : MonoBehaviour
                 Enemy enemy = enemyCollider.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                    enemy.TakeDamage(player.playerAtk/2, 0);  
+                    enemy.TakeDamage(player.playerAtk/2, 0);
+                    SaveManager.instance.UpdateDamage("Basic", player.playerAtk / 2);
                 }
             }
 

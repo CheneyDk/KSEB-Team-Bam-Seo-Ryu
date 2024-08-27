@@ -14,7 +14,6 @@ public class EXP : Item
     {
         if(collision.CompareTag("Player"))
         {
-            SaveManager.instance.AddScore(5000);
             var playerObj = collision.GetComponent<Player>();
             playerObj.GetExp(value);
             isDestroyed = true;

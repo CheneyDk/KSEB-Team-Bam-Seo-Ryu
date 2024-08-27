@@ -9,7 +9,7 @@ public class BitCoin : Item
     {
         if (collision.CompareTag("Player"))
         {
-            //RE_SaveManager.instance.enabled = true;
+            SaveManager.instance.AddScore(5000);
             isDestroyed = true;
             ItemPooling.Instance.ReturnBitCoin(gameObject);
         }

@@ -779,6 +779,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &291155824 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7068091009612426093, guid: d107eda58b5b41a4abe76f2cfbcf02e9, type: 3}
+  m_PrefabInstance: {fileID: 291155822}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &340531099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3936,7 +3941,7 @@ PrefabInstance:
     - target: {fileID: 6260638533341849288, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
       propertyPath: hitUIAnimator
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 291155824}
     - target: {fileID: 6260638533341849288, guid: 01f76c5a5c6cc524e826a88189a7196e, type: 3}
       propertyPath: playerMagneticRange
       value: 5

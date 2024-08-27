@@ -96,6 +96,7 @@ public class SaveManager : MonoBehaviour
     public void AddScore(int score)
     {
         gameRecord.score += score;
+        Debug.Log(gameRecord.score);
     }
     public void UpdateGameRecord(string record)
     {
@@ -214,7 +215,7 @@ public class SaveManager : MonoBehaviour
         gameRecord.score += gameRecord.waveReached * 50;
         gameRecord.score += gameRecord.levelReached * 50;
         gameRecord.score += gameRecord.totalDamage;
-
+        Debug.Log(gameRecord.score);
 
         gameDataList.gameRecordList.Add(gameRecord);
 
