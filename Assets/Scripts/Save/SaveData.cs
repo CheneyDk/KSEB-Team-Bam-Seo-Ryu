@@ -29,6 +29,8 @@ public class ShopData : SaveData
     public bool isPetInstalled;
     public bool isPetUpgrade;
 
+    public int GPTLv = 0;
+
     public List<string> installedItemList = new List<string>();
 
     public ShopData(string _fileName, string _directory) : base(_fileName, _directory)

@@ -2,26 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using VInspector;
 
 public class GPTUI : MonoBehaviour
 {
-    [SerializeField]
-    private TextMeshProUGUI levelText;
-    [SerializeField]
-    private TextMeshProUGUI HPText;
-    [SerializeField]
-    private TextMeshProUGUI ATKText;
+    [Header("Text UI")]
+    public TextMeshProUGUI levelText;
+    public TextMeshProUGUI HPText;
+    public TextMeshProUGUI ATKText;
+    public TextMeshProUGUI[] moneyText;
+    public TextMeshProUGUI upgradePriceText;
+    [EndFoldout]
 
     [SerializeField]
     private List<GameObject> upgradeBox;
-
-    public int upgradeLevel = 0;
 
     private AudioSource audioSource;
     public AudioClip upgradeClip;
     public AudioClip noMoneyClip;
 
-    public int money;
+    private int upgradePrice;
 
     private void Awake()
     {
@@ -34,13 +34,23 @@ public class GPTUI : MonoBehaviour
         UpdateText();
     }
 
+    private void Update()
+    {
+        foreach (var text in moneyText)
+        {
+            text.text = SaveManager.instance.shopData.money.ToString();
+        }
+        upgradePrice = 2000 + SaveManager.instance.shopData.GPTLv * 500;
+        upgradePriceText.text = upgradePrice.ToString();
+    }
+
     public void AddUpgradeLevel()
     {
-        if (money >= 2000 && upgradeLevel < 6)
+        if (SaveManager.instance.shopData.money >= upgradePrice && SaveManager.instance.shopData.GPTLv < 6)
         {
             audioSource.PlayOneShot(upgradeClip);
-            money -= 2000;
-            upgradeLevel += 1;
+            SaveManager.instance.shopData.money -= upgradePrice;
+            SaveManager.instance.shopData.GPTLv += 1;
             UpgradeBoxAdd();
             UpdateText();
         }
@@ -53,7 +63,7 @@ public class GPTUI : MonoBehaviour
 
     void UpgradeBoxAdd()
     {
-        for (int i = 0; i < upgradeLevel; i++)
+        for (int i = 0; i < SaveManager.instance.shopData.GPTLv; i++)
         {
             upgradeBox[i].SetActive(true);
         }
@@ -61,8 +71,8 @@ public class GPTUI : MonoBehaviour
 
     void UpdateText()
     {
-        levelText.text = ($"Level {upgradeLevel.ToString()}");
-        HPText.text = ($"Add {upgradeLevel + 1}0% debugging HP");
-        ATKText.text = ($"Add {upgradeLevel + 1}0% debugging ATK");
+        levelText.text = $"Level {SaveManager.instance.shopData.GPTLv}";
+        HPText.text = ($"Add {SaveManager.instance.shopData.GPTLv + 1}0% debugging HP");
+        ATKText.text = ($"Add {SaveManager.instance.shopData.GPTLv + 1}0% debugging ATK");
     }
 }
