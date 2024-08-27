@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class JavaWeapon : MonoBehaviour
 {
-    public Player player;
+    public JavaPlayer player;
 
-    public float damage = 10f;     
     public float damageRate = 1f;  
     public float damageRange = 5f; 
 
@@ -28,7 +27,7 @@ public class JavaWeapon : MonoBehaviour
                 Enemy enemy = enemyCollider.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                    enemy.TakeDamage(damage, 0);  
+                    enemy.TakeDamage(player.playerAtk, 0);  
                 }
             }
 
