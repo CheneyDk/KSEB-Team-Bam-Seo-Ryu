@@ -25,6 +25,7 @@ public class ShopData : SaveData
 
     public bool isCUpgrade;
     public bool isPythonUpgrade;
+    public bool isJavaUpgrade;
     public bool isPetInstalled;
     public bool isPetUpgrade;
 

@@ -73,6 +73,10 @@ public class SaveManager : MonoBehaviour
         {
             shopData.isPythonUpgrade = true;
         }
+        else if (item == "JAVA")
+        {
+            shopData.isJavaUpgrade = true;
+        }
         else if (item == "pet")
         {
             shopData.isPetUpgrade = true;
