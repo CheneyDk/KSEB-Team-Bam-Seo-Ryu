@@ -244,8 +244,14 @@ public class SnakeLogicError : Enemy
 
     public void ChangeHPBar()
     {
-        healthText.text = ($"{snakeCurHP.ToString("N0")}MB of {snakeMaxHp}MB");
-
+        if (snakeCurHP > 0)
+        {
+            healthText.text = ($"{snakeCurHP.ToString("N0")}MB of {snakeMaxHp}MB");
+        }
+        else if(snakeCurHP <= 0)
+        {
+            healthText.text = ($"0MB of {snakeMaxHp}MB");
+        }
         float maxHp = snakeMaxHp;
         float curHp = snakeCurHP;
 

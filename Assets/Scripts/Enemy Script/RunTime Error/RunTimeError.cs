@@ -156,9 +156,16 @@ public class RunTimeError : Enemy
 
     public void ChangeHPBar()
     {
-        healthText.text = ($"{RunTimeErrorCurtHP.ToString("N0")}MB of {RunTimeErrorMaxHp}MB");
+        if (RunTimeErrorCurtHP > 0)
+        {
+            healthText.text = ($"{RunTimeErrorCurtHP.ToString("N0")}MB of {RunTimeErrorCurtHP}MB");
+        }
+        else if (RunTimeErrorCurtHP <= 0)
+        {
+            healthText.text = ($"0MB of {RunTimeErrorCurtHP}MB");
+        }
 
-        float maxHp = RunTimeErrorMaxHp;
+        float maxHp = RunTimeErrorCurtHP;
         float curHp = RunTimeErrorCurtHP;
 
         float hpPerBar = maxHp / healthBar.Length;

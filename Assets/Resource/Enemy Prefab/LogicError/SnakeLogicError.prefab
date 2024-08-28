@@ -898,7 +898,6 @@ MonoBehaviour:
   - {fileID: 6861092479495767299}
   - {fileID: 6073181809509344468}
   healthText: {fileID: 218934919399994025}
-  bossWarningPrefab: {fileID: 1215364935282573017, guid: fde8953c9ab35fa46a442c861d18b031, type: 3}
 --- !u!1 &4947405009756773982
 GameObject:
   m_ObjectHideFlags: 0
