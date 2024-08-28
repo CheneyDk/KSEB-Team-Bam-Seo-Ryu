@@ -263,6 +263,8 @@ public class SnakeLogicError : Enemy
     // 
     private async UniTask InitSnakeObj()
     {
+        snakeStop = new CancellationTokenSource();
+
         // need to fix
         int bodytype = 0;
 
@@ -275,12 +277,13 @@ public class SnakeLogicError : Enemy
             tempBodypart.GetComponent<SnakePart>().InitSnakeBodypart(snakeAtk);
             snakeBody.Add(tempBodypart);
 
-            await UniTask.WaitForSeconds(distanceBetween);
+            await UniTask.WaitForSeconds(distanceBetween, cancellationToken: snakeStop.Token);
         }
     }
 
     public void SnakeMovement() 
     {
+        if (isDead) return;
         // SnakeMovement
 
         // Head Movement
@@ -317,23 +320,23 @@ public class SnakeLogicError : Enemy
         return Quaternion.Lerp(front, back, ratio);
     }
 
-    private async UniTask SnakePatternCycle()
-    {
-        snakeStop = new CancellationTokenSource();
+    //private async UniTask SnakePatternCycle()
+    //{
+    //    snakeStop = new CancellationTokenSource();
 
-        while (!snakeStop.IsCancellationRequested)
-        {
-            await UniTask.WaitForSeconds(3f, cancellationToken: snakeStop.Token);
+    //    while (!snakeStop.IsCancellationRequested)
+    //    {
+    //        await UniTask.WaitForSeconds(3f, cancellationToken: snakeStop.Token);
 
-            await SnakeSlowZigZag();
-            await UniTask.WaitForSeconds(3f, cancellationToken: snakeStop.Token);
+    //        await SnakeSlowZigZag();
+    //        await UniTask.WaitForSeconds(3f, cancellationToken: snakeStop.Token);
 
-            await SnakeChargeZigZag();
-            await UniTask.WaitForSeconds(3f, cancellationToken: snakeStop.Token);
+    //        await SnakeChargeZigZag();
+    //        await UniTask.WaitForSeconds(3f, cancellationToken: snakeStop.Token);
 
-            await SnakeChargeStraight();
-        }
-    }
+    //        await SnakeChargeStraight();
+    //    }
+    //}
 
     private void IdleEnter()
     {
@@ -358,9 +361,9 @@ public class SnakeLogicError : Enemy
         // zigzag
         for (int i = 0; i < zigzagRepeat; i++)
         {
-            await UniTask.WaitForSeconds(0.5f);
+            await UniTask.WaitForSeconds(0.5f, cancellationToken: snakeStop.Token);
             await TurningSnake(170, -1);
-            await UniTask.WaitForSeconds(0.5f);
+            await UniTask.WaitForSeconds(0.5f, cancellationToken: snakeStop.Token);
             await TurningSnake(170, 1);
         }
 
@@ -385,7 +388,7 @@ public class SnakeLogicError : Enemy
 
             // start
             snakeSpeed = chargeSpeed;
-            await UniTask.WaitForSeconds(1.5f);
+            await UniTask.WaitForSeconds(1.5f, cancellationToken: snakeStop.Token);
             await SpeedGraduallySlowDown(5f, 15f);
             Debug.Log("slow down end");
         }
@@ -406,15 +409,15 @@ public class SnakeLogicError : Enemy
         snakeSpeed = chargeSpeed;
         curTurnSpeed = fastTurnSpeed;
         await TurningSnake(20, 1);
-        await UniTask.WaitForSeconds(0.2f);
+        await UniTask.WaitForSeconds(0.2f, cancellationToken: snakeStop.Token);
 
         curTurnSpeed = slowTurnSpeed;
         await TurningSnake(15, -1);
-        await UniTask.WaitForSeconds(0.4f);
+        await UniTask.WaitForSeconds(0.4f, cancellationToken: snakeStop.Token);
         await TurningSnake(15, 1);
 
         curTurnSpeed = slowTurnSpeed;
-        await UniTask.WaitForSeconds(0.2f);
+        await UniTask.WaitForSeconds(0.2f, cancellationToken: snakeStop.Token);
         await TurningSnake(20, -1);
         await SpeedGraduallySlowDown(5f, 15f);
     }
@@ -432,7 +435,7 @@ public class SnakeLogicError : Enemy
         {
             LookAtPlayer();
             timer += Time.deltaTime;
-            await UniTask.Yield();
+            await UniTask.Yield(cancellationToken: snakeStop.Token);
         }
 
         head.warnigPrefab.SetActive(false);
@@ -460,7 +463,7 @@ public class SnakeLogicError : Enemy
         {
             snakeBody[0].transform.Rotate(turningVector * curTurnSpeed * Time.deltaTime *  dir);
             timer += Time.deltaTime;
-            await UniTask.Yield();
+            await UniTask.Yield(cancellationToken: snakeStop.Token);
         }
 
         // need to correct angle in int value
@@ -472,7 +475,7 @@ public class SnakeLogicError : Enemy
         while (snakeSpeed > underLine)
         {
             snakeSpeed -= decRate * Time.deltaTime;
-            await UniTask.Yield();
+            await UniTask.Yield(cancellationToken: snakeStop.Token);
             if (isDead) return;
         }
         snakeSpeed = normalSpeed;
@@ -486,12 +489,12 @@ public class SnakeLogicError : Enemy
         while (snakeSpeed < 0f)
         {
             snakeSpeed += incRate * Time.deltaTime;
-            await UniTask.Yield();
+            await UniTask.Yield(cancellationToken: snakeStop.Token);
         }
         while (snakeSpeed < chargeSpeed)
         {
             snakeSpeed += incRate * 2 * Time.deltaTime;
-            await UniTask.Yield();
+            await UniTask.Yield(cancellationToken: snakeStop.Token);
         }
     }
 
@@ -532,13 +535,14 @@ public class SnakeLogicError : Enemy
 
     private void SnakeDead()
     {
+        if (isDead) return;
         isDead = true;
-        // snakeAni.SetBool("isDead", true); // YH - animations
+        snakeStop.Cancel();
+        
 
         // call all parts' dead func
-        // each body part play dead motion on their own
         CallDeadFunc().Forget();
-        snakeStop.Cancel();
+    
 
         enemySpawner.bossIsAlive = false;
 
@@ -556,6 +560,8 @@ public class SnakeLogicError : Enemy
             part.GetComponent<SnakePart>().PartDead();
             await UniTask.WaitForSeconds(0.1f);
         }
+
+        Destroy(gameObject);
     }
 
     public override void DropEXP(int itemNumber)

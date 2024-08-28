@@ -43,8 +43,7 @@ public abstract class SnakePart : Enemy
 
     public void PartDead()
     {
-        snakePartCollider.enabled = false;
-        gameObject.SetActive(false);
+        Destroy(gameObject);
         // need dead motion
 
     }
